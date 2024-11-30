@@ -33,7 +33,11 @@ jobs:
              ${{ runner.os }}-cargo-tarpaulin-
       - name: Install cargo-tarpaulin
         run: |
-          cargo install cargo-tarpaulin
+          if ! command -v cargo-tarpaulin &> /dev/null; then
+            cargo install cargo-tarpaulin
+          else
+            echo "cargo-tarpaulin is already installed"
+          fi
       - name: coverage
         run: |
           cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --coveralls ${{ secrets.COVERALLS_TOKEN }}
