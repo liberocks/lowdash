@@ -21,4 +21,8 @@ jobs:
         with:
           toolchain: ${{ matrix.version }}
       - name: coverage
-        run: cargo tarpaulin --engine llvm --follow-exec --post-test-delay 10 --coveralls ${{ secrets.COVERALLS_TOKEN }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev pkg-config zlib1g-dev
+          cargo install cargo-tarpaulin
+          cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --coveralls ${{ secrets.COVERALLS_TOKEN }}
