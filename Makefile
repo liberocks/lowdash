@@ -5,9 +5,9 @@ CARGO = cargo
 
 
 # Targets
-.PHONY: all test build-dev build-release format coverage
+.PHONY: all test build-dev build-release format coverage clippy
 
-all: test build-dev build-release format coverage
+all: test build-dev build-release format coverage clippy
 
 test:
 	$(CARGO) test
@@ -23,3 +23,6 @@ format:
 
 coverage:
 	cargo-tarpaulin
+
+clippy:
+	$(CARGO) clippy

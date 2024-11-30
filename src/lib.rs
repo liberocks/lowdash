@@ -1,3 +1,5 @@
+mod earliest;
+mod earliest_by;
 mod find;
 mod find_duplicates;
 mod find_duplicates_by;
@@ -10,8 +12,13 @@ mod find_uniques;
 mod find_uniques_by;
 mod index_of;
 mod last_index_of;
+mod max;
+mod max_by;
 mod min;
+mod min_by;
 
+pub use earliest::earliest;
+pub use earliest_by::earliest_by;
 pub use find::find;
 pub use find_duplicates::find_duplicates;
 pub use find_duplicates_by::find_duplicates_by;
@@ -24,4 +31,7 @@ pub use find_uniques::find_uniques;
 pub use find_uniques_by::find_uniques_by;
 pub use index_of::index_of;
 pub use last_index_of::last_index_of;
+pub use max::max;
+pub use max_by::max_by;
 pub use min::min;
+pub use min_by::min_by;
