@@ -7,3 +7,16 @@
 [![License](https://img.shields.io/github/license/liberocks/lowdash)](./LICENSE)
 
 **liberocks/lowdash** is a utility library to manipulate array and object
+
+## ⚠️ Disclaimer
+This project is still in heavy development and not ready for production use.
+
+## 🚀 Installation
+```bash
+cargo add lowdash
+```
+
+This library has no dependencies outside the Rust standard library.
+
+## 🫡 Acknowledgement
+This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
