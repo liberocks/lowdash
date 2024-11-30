@@ -26,3 +26,5 @@ coverage:
 
 clippy:
 	$(CARGO) clippy
+
+check: format test coverage clippy
