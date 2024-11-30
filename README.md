@@ -18,5 +18,8 @@ cargo add lowdash
 
 This library has no dependencies outside the Rust standard library.
 
+## 📚 Documentation
+You can find the generated documentation [here](https://docs.rs/lowdash)
+
 ## 🫡 Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
