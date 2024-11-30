@@ -151,4 +151,15 @@ mod tests {
         let not_found = find_last_index_of(&people, |p| p.age > 40);
         assert_eq!(not_found, None);
     }
+
+    #[test]
+    fn test_find_last_index_of_floats() {
+        let floats = vec![1.1, 2.2, 3.3, 4.4, 5.5, 4.4];
+        let predicate = |x: &f64| *x > 3.0;
+        let result = find_last_index_of(&floats, predicate);
+        assert_eq!(result, Some((&4.4, 5)));
+
+        let not_found = find_last_index_of(&floats, |x| *x > 6.0);
+        assert_eq!(not_found, None);
+    }
 }

@@ -140,4 +140,11 @@ mod tests {
         let result = find_duplicates_by(&numbers, |_| 1);
         assert_eq!(result, vec![2, 3, 4]); // All except first are duplicates
     }
+
+    #[test]
+    fn test_find_duplicates_by_floats() {
+        let floats = vec![1.1, 2.2, 3.3, 2.2, 4.4, 1.1];
+        let result = find_duplicates_by(&floats, |x: &f64| (*x).to_bits());
+        assert_eq!(result, vec![2.2, 1.1]);
+    }
 }

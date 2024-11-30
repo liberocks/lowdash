@@ -141,4 +141,39 @@ mod tests {
         let not_found = find(&people, |p| p.age > 40);
         assert_eq!(not_found, None);
     }
+
+    #[test]
+    fn test_find_with_floats() {
+        let float_collection = vec![1.1, 2.2, 3.3, 4.4];
+        let predicate = |x: &f64| *x > 2.0;
+        let result = find(&float_collection, predicate);
+        assert_eq!(result, Some(&2.2));
+
+        let not_found = find(&float_collection, |x| *x > 5.0);
+        assert_eq!(not_found, None);
+    }
+
+    #[test]
+    fn test_find_with_negative_floats() {
+        let float_collection = vec![-3.5, -2.2, -1.1, 0.0, 1.1];
+        let predicate = |x: &f64| *x < 0.0;
+        let result = find(&float_collection, predicate);
+        assert_eq!(result, Some(&-3.5));
+    }
+
+    #[test]
+    fn test_find_with_nan_floats() {
+        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let predicate = |x: &f64| x.is_nan();
+        let result = find(&float_collection, predicate);
+        assert!(result.unwrap().is_nan());
+    }
+
+    #[test]
+    fn test_find_with_multiple_matching_floats() {
+        let float_collection = vec![1.1, 2.2, 2.2, 3.3, 4.4];
+        let predicate = |x: &f64| *x == 2.2;
+        let result = find(&float_collection, predicate);
+        assert_eq!(result, Some(&2.2));
+    }
 }

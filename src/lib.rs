@@ -10,6 +10,7 @@ mod find_uniques;
 mod find_uniques_by;
 mod index_of;
 mod last_index_of;
+mod min;
 
 pub use find::find;
 pub use find_duplicates::find_duplicates;
@@ -23,3 +24,4 @@ pub use find_uniques::find_uniques;
 pub use find_uniques_by::find_uniques_by;
 pub use index_of::index_of;
 pub use last_index_of::last_index_of;
+pub use min::min;

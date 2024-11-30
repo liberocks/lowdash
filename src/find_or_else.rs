@@ -146,4 +146,15 @@ mod tests {
             }
         );
     }
+
+    #[test]
+    fn test_find_or_else_with_floats() {
+        let floats = vec![1.1, 2.2, 3.3, 4.4, 5.5];
+        let fallback = 0.0;
+        let result = find_or_else(&floats, &fallback, |x| *x > 3.0);
+        assert_eq!(result, &3.3);
+
+        let not_found = find_or_else(&floats, &fallback, |x| *x > 6.0);
+        assert_eq!(not_found, &0.0);
+    }
 }

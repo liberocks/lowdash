@@ -69,4 +69,12 @@ mod tests {
         assert_eq!(last_index_of(&collection, "banana"), 3);
         assert_eq!(last_index_of(&collection, "orange"), -1);
     }
+
+    #[test]
+    fn test_last_index_of_floats() {
+        let floats = vec![1.1, 2.2, 3.3, 4.4, 5.5, 4.4];
+        assert_eq!(last_index_of(&floats, 4.4), 5);
+        assert_eq!(last_index_of(&floats, 3.3), 2);
+        assert_eq!(last_index_of(&floats, 6.6), -1);
+    }
 }

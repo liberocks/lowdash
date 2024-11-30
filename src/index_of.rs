@@ -66,4 +66,11 @@ mod tests {
         assert_eq!(index_of(&collection, "banana"), 1);
         assert_eq!(index_of(&collection, "orange"), -1);
     }
+
+    #[test]
+    fn test_index_of_floats() {
+        let collection = vec![1.1, 2.2, 3.3, 4.4, 5.5];
+        assert_eq!(index_of(&collection, 3.3), 2);
+        assert_eq!(index_of(&collection, 6.6), -1);
+    }
 }
