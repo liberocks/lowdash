@@ -20,9 +20,19 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.version }}
-      - name: coverage
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libssl-dev pkg-config zlib1g-dev
-          cargo install cargo-tarpaulin
+      - name: Cache cargo-tarpaulin
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/bin/cargo-tarpaulin
+          key: ${{ runner.os }}-cargo-tarpaulin-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+             ${{ runner.os }}-cargo-tarpaulin-
+      - name: Install cargo-tarpaulin
+        run: cargo install cargo-tarpaulin
+      - name: coverage
+        run: |
           cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --coveralls ${{ secrets.COVERALLS_TOKEN }}
