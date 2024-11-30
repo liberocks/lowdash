@@ -41,6 +41,10 @@ where
         return None;
     }
 
+    if collection.len() == 1 {
+        return Some(collection[0].clone());
+    }
+
     let mut max = collection[0].clone();
 
     for item in &collection[1..] {
@@ -55,7 +59,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::time::{Duration, SystemTime};
 
     #[test]
     fn test_max_by_age() {
@@ -195,5 +198,26 @@ mod tests {
                 name: "Carol".to_string()
             })
         );
+    }
+
+    #[test]
+    fn test_max_by_floats() {
+        let float_collection = vec![1.1, 2.2, 3.3, 4.4];
+        let result = max_by(&float_collection, |a, b| a > b);
+        assert_eq!(result, Some(4.4));
+
+        let more_floats = vec![5.5, 3.3, 5.5, 2.2];
+        let result_duplicate = max_by(&more_floats, |a, b| a > b);
+        assert_eq!(result_duplicate, Some(5.5));
+
+        let negative_floats = vec![-1.1, -2.2, -0.5, -3.3];
+        let result_negatives = max_by(&negative_floats, |a, b| a > b);
+        assert_eq!(result_negatives, Some(-0.5));
+
+        let all_nan = vec![std::f64::NAN, std::f64::NAN];
+        let result_all_nan = max_by(&all_nan, |a, b| a > b);
+        // The first NaN will remain as max since NaN > NaN is false
+        // Hence, the result should be the first NaN
+        assert!(result_all_nan.unwrap().is_nan());
     }
 }

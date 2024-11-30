@@ -47,12 +47,7 @@ pub fn find<T, F>(collection: &[T], predicate: F) -> Option<&T>
 where
     F: Fn(&T) -> bool,
 {
-    for item in collection {
-        if predicate(item) {
-            return Some(item);
-        }
-    }
-    None
+    collection.iter().find(|&item| predicate(item))
 }
 
 #[cfg(test)]

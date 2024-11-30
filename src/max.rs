@@ -1,4 +1,5 @@
-use std::any::TypeId;
+#![allow(clippy::eq_op)]
+use crate::common;
 
 /// Find the maximum element in a collection.
 /// If the collection is empty, returns `None`.
@@ -56,17 +57,18 @@ pub fn max<T>(collection: &[T]) -> Option<T>
 where
     T: PartialOrd + Clone + 'static,
 {
-    let is_float =
-        TypeId::of::<T>() == TypeId::of::<f32>() || TypeId::of::<T>() == TypeId::of::<f64>();
-
     if collection.is_empty() {
         None
-    } else if is_float {
+    } else if common::is_collection_float(
+        &collection
+            .iter()
+            .map(|item| Box::new(item.clone()) as Box<dyn std::any::Any>)
+            .collect::<Vec<_>>(),
+    ) {
         let mut max = collection[0].clone();
         for item in &collection[1..] {
-            if item > &max {
-                max = item.clone();
-            } else if max != max {
+            if item > &max || max != max {
+                // note: NaN != NaN is true because NaN is not equal to itself
                 max = item.clone();
             }
         }
