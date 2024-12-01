@@ -45,7 +45,7 @@ where
         // Combine seeds
         let seed = (seed1 ^ seed2).wrapping_add(i as u64);
 
-        let index = common::random_index_with_seed(copy_length, seed);
+        let index = common::random_usize_with_seed(copy_length, seed);
         results.push(copy[index].clone());
         copy.swap(index, copy_length - 1);
         copy.truncate(copy_length - 1);

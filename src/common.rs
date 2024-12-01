@@ -37,10 +37,10 @@ pub fn is_floats<T: 'static>() -> bool {
 /// # Returns
 /// * `usize` - A pseudo-random index from 0 to n-1.
 #[allow(dead_code)]
-pub fn random_index(n: usize) -> usize {
+pub fn random_usize(maximum: usize) -> usize {
     static COUNTER: AtomicU64 = AtomicU64::new(0);
 
-    if n == 0 {
+    if maximum == 0 {
         return 0;
     }
 
@@ -68,7 +68,7 @@ pub fn random_index(n: usize) -> usize {
         ^ counter;
 
     // Calculate the random index within bounds
-    (mixed % (n as u64)) as usize
+    (mixed % (maximum as u64)) as usize
 }
 
 /// Returns a pseudo-random index from the collection using a seed.
@@ -80,7 +80,7 @@ pub fn random_index(n: usize) -> usize {
 /// # Returns
 /// * `usize` - A pseudo-random index from 0 to n-1.
 #[allow(dead_code)]
-pub fn random_index_with_seed(n: usize, seed: u64) -> usize {
+pub fn random_usize_with_seed(n: usize, seed: u64) -> usize {
     static COUNTER: AtomicU64 = AtomicU64::new(0);
 
     if n == 0 {
@@ -267,14 +267,14 @@ mod tests {
     }
 
     #[test]
-    fn test_random_index_uniqueness() {
+    fn test_random_usize_uniqueness() {
         let n = 100;
         let iterations = 1000;
         let mut results = HashSet::new();
 
         for _ in 0..iterations {
-            let index = random_index(n);
-            assert!(index < n, "random_index({}) returned {}", n, index);
+            let index = random_usize(n);
+            assert!(index < n, "random_usize({}) returned {}", n, index);
             results.insert(index);
         }
 
@@ -283,48 +283,48 @@ mod tests {
     }
 
     #[test]
-    fn test_random_index_range() {
+    fn test_random_usize_range() {
         let n = 50;
         for _ in 0..1000 {
-            let index = random_index(n);
-            assert!(index < n, "random_index({}) returned {}", n, index);
+            let index = random_usize(n);
+            assert!(index < n, "random_usize({}) returned {}", n, index);
         }
     }
 
     #[test]
-    fn test_random_index_zero() {
+    fn test_random_usize_zero() {
         let n = 0;
-        let index = random_index(n);
-        assert_eq!(index, 0, "random_index(0) should return 0, got {}", index);
+        let index = random_usize(n);
+        assert_eq!(index, 0, "random_usize(0) should return 0, got {}", index);
     }
 
     #[test]
-    fn test_random_index_variety() {
+    fn test_random_usize_variety() {
         let n = 10;
-        let mut previous = random_index(n);
+        let mut previous = random_usize(n);
         for _ in 0..100 {
-            let current = random_index(n);
+            let current = random_usize(n);
             // It's possible to get the same index; ensure not always the same
             if current != previous {
                 return;
             }
             previous = current;
         }
-        panic!("random_index should produce varied results");
+        panic!("random_usize should produce varied results");
     }
 
     #[test]
-    fn test_random_index_with_seed_uniqueness() {
+    fn test_random_usize_with_seed_uniqueness() {
         let n = 100;
         let seed = 42;
         let iterations = 1000;
         let mut results = HashSet::new();
 
         for _ in 0..iterations {
-            let index = random_index_with_seed(n, seed);
+            let index = random_usize_with_seed(n, seed);
             assert!(
                 index < n,
-                "random_index_with_seed({}, {}) returned {}",
+                "random_usize_with_seed({}, {}) returned {}",
                 n,
                 seed,
                 index
@@ -340,14 +340,14 @@ mod tests {
     }
 
     #[test]
-    fn test_random_index_with_seed_range() {
+    fn test_random_usize_with_seed_range() {
         let n = 50;
         let seed = 12345;
         for _ in 0..1000 {
-            let index = random_index_with_seed(n, seed);
+            let index = random_usize_with_seed(n, seed);
             assert!(
                 index < n,
-                "random_index_with_seed({}, {}) returned {}",
+                "random_usize_with_seed({}, {}) returned {}",
                 n,
                 seed,
                 index
@@ -356,31 +356,31 @@ mod tests {
     }
 
     #[test]
-    fn test_random_index_with_seed_zero() {
+    fn test_random_usize_with_seed_zero() {
         let n = 0;
         let seed = 42;
-        let index = random_index_with_seed(n, seed);
+        let index = random_usize_with_seed(n, seed);
         assert_eq!(
             index, 0,
-            "random_index_with_seed({}, {}) should return 0, got {}",
+            "random_usize_with_seed({}, {}) should return 0, got {}",
             n, seed, index
         );
     }
 
     #[test]
-    fn test_random_index_with_seed_variety() {
+    fn test_random_usize_with_seed_variety() {
         let n = 10;
         let seed = 999;
-        let mut previous = random_index_with_seed(n, seed);
+        let mut previous = random_usize_with_seed(n, seed);
         for _ in 0..100 {
-            let current = random_index_with_seed(n, seed);
+            let current = random_usize_with_seed(n, seed);
             // It's possible to get the same index; ensure not always the same
             if current != previous {
                 return;
             }
             previous = current;
         }
-        panic!("random_index_with_seed should produce varied results");
+        panic!("random_usize_with_seed should produce varied results");
     }
 
     #[test]

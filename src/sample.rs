@@ -30,7 +30,7 @@ where
         return T::default();
     }
 
-    let index = common::random_index(size);
+    let index = common::random_usize(size);
 
     collection[index].clone()
 }

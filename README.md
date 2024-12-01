@@ -51,6 +51,31 @@ Utility functions for array:
 - [nth](#nth)
 - [sample](#sample)
 - [samples](#samples)
+- [reject](#reject)
+- [filter](#filter)
+- [map](#map)
+- [filter_map](#filter_map)
+- [flat_map](#flat_map)
+- [reduce](#reduce)
+- [reduce_right](#reduce_right)
+- [foreach](#foreach)
+- [foreach_while](#foreach_while)
+- [times](#times)
+- [uniq](#uniq)
+- [uniq_by](#uniq_by)
+- [group_by](#group_by)
+- [chunk](#chunk)
+- [partition_by](#partition_by)
+- [flatten](#flatten)
+- [interleave](#interleave)
+- [shuffle](#shuffle)
+- [reverse](#reverse)
+- [fill](#fill)
+- [repeat](#repeat)
+- [repeat_by](#repeat_by)
+- [key_by](#key_by)
+- [associate](#associate)
+- [slice_to_map](#slice_to_map)
 
 Utility functions for string manipulation:
 - [camel_case](#camel_case)
@@ -1104,6 +1129,884 @@ assert_eq!(result, vec!["hello", "world"]);
 let result = words("fooBarBazHello");
 assert_eq!(result, vec!["foo", "Bar", "Baz", "Hello"]);
 ```
+
+### reject
+Reject items from a collection that satisfy a predicate.
+
+```rust
+use lowdash::reject;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = reject(&numbers, |x, _| *x % 2 == 0);
+assert_eq!(result, vec![&1, &3, &5]);
+```
+
+### filter
+Filter items from a collection that satisfy a predicate.
+
+```rust
+use lowdash::filter;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = filter(&numbers, |x, _| *x % 2 == 0);
+assert_eq!(result, vec![&2, &4]);
+```
+
+```rust
+use lowdash::filter;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let result = filter(&people, |p, _| p.age > 30);
+assert_eq!(result, vec![&people[2]]);
+```
+
+### map
+Apply a function to each item in a collection, producing a new collection of results.
+
+```rust
+use lowdash::map;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = map(&numbers, |x, _| x * 2);
+assert_eq!(result, vec![2, 4, 6, 8, 10]);
+```
+
+```rust
+use lowdash::map;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let names: Vec<String> = map(&people, |p, _| p.name.clone());
+assert_eq!(names, vec!["Alice", "Bob", "Carol"]);
+```
+
+### filter_map
+Apply a function to each item in a collection, filtering and transforming items based on a callback.
+
+```rust
+use lowdash::filter_map;
+let numbers = vec![1, 2, 3, 4, 5];
+// Double even numbers
+let result = filter_map(&numbers, |x, _| {
+    if *x % 2 == 0 {
+        (x * 2, true)
+    } else {
+        (0, false)
+    }
+});
+assert_eq!(result, vec![4, 8]);
+```
+
+```rust
+use lowdash::filter_map;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+// Extract names of people older than 28
+let names: Vec<String> = filter_map(&people, |p, _| {
+    if p.age > 28 {
+        (p.name.clone(), true)
+    } else {
+        (String::new(), false)
+    }
+});
+assert_eq!(names, vec!["Bob".to_string(), "Carol".to_string()]);
+```
+
+### flat_map
+Apply a function to each item in a collection, flattening the results based on a callback.
+
+```rust
+use lowdash::flat_map;
+let numbers = vec![1, 2, 3];
+// For each number, generate a vector containing the number and its double
+let result = flat_map(&numbers, |x, _| vec![*x, *x * 2]);
+assert_eq!(result, vec![1, 2, 2, 4, 3, 6]);
+```
+
+```rust
+use lowdash::flat_map;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    hobbies: Vec<String>,
+}
+
+let people = vec![
+    Person {
+        name: "Alice".to_string(),
+        hobbies: vec!["Reading".to_string(), "Cycling".to_string()],
+    },
+    Person {
+        name: "Bob".to_string(),
+        hobbies: vec!["Cooking".to_string()],
+    },
+];
+
+// Extract all hobbies from the list of people
+let all_hobbies: Vec<String> = flat_map(&people, |person, _| person.hobbies.clone());
+assert_eq!(
+    all_hobbies,
+    vec![
+        "Reading".to_string(),
+        "Cycling".to_string(),
+        "Cooking".to_string()
+    ]
+);
+```
+
+### reduce
+Apply a function to each item in a collection, accumulating a single result.
+
+```rust
+use lowdash::reduce;
+let numbers = vec![1, 2, 3, 4, 5];
+// Sum of all numbers
+let sum = reduce(&numbers, |acc, x, _| acc + x, 0);
+assert_eq!(sum, 15);
+```
+
+```rust
+use lowdash::reduce;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+// Concatenate all names
+let all_names = reduce(&people, |acc, person, _| format!("{} {}", acc, person.name), String::new());
+assert_eq!(all_names.trim(), "Alice Bob Carol");
+```
+
+### reduce_right
+Apply a function to each item in a collection, accumulating a single result from right to left.
+
+```rust
+use lowdash::reduce_right;
+let numbers = vec![1, 2, 3, 4, 5];
+// Sum of all numbers using reduce_right
+let sum = reduce_right(&numbers, |acc, x, _| acc + x, 0);
+assert_eq!(sum, 15);
+```
+
+```rust
+use lowdash::reduce_right;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+// Concatenate all names in reverse order
+let all_names = reduce_right(&people, |acc, person, _| {
+    if acc.is_empty() {
+        person.name.clone()
+    } else {
+        format!("{} {}", acc, person.name)
+    }
+}, String::new());
+assert_eq!(all_names, "Carol Bob Alice");
+```
+
+### foreach
+Execute a function on each item in a collection.
+
+```rust
+use lowdash::foreach;
+let numbers = vec![1, 2, 3, 4, 5];
+let mut sum = 0;
+foreach(&numbers, |x, _| sum += x);
+assert_eq!(sum, 15);
+```
+
+```rust
+use lowdash::foreach;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let mut names = Vec::new();
+foreach(&people, |p, _| names.push(p.name.clone()));
+assert_eq!(names, vec!["Alice", "Bob", "Carol"]);
+```
+
+### foreach_while
+Execute a function on each item in a collection until the iteratee returns `false`.
+
+```rust
+use lowdash::foreach_while;
+let numbers = vec![1, 2, 3, 4, 5];
+let mut sum = 0;
+foreach_while(&numbers, |x, _| {
+    sum += x;
+    true
+});
+assert_eq!(sum, 15);
+```
+
+```rust
+use lowdash::foreach_while;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let mut names = Vec::new();
+foreach_while(&people, |p, _| {
+    names.push(p.name.clone());
+    true
+});
+assert_eq!(names, vec!["Alice", "Bob", "Carol"]);
+```
+
+```rust
+use lowdash::foreach_while;
+
+let numbers = vec![10, 20, 30, 40, 50];
+let mut collected = Vec::new();
+foreach_while(&numbers, |x, index| {
+    if *x < 35 {
+        collected.push((*x, index));
+        true
+    } else {
+        false
+    }
+});
+assert_eq!(collected, vec![(10, 0), (20, 1), (30, 2)]);
+```
+
+### times
+Generates a collection by invoking the provided function `iteratee` a specified number of times.
+
+```rust
+use lowdash::times;
+let result = times(5, |i| i * 2);
+assert_eq!(result, vec![0, 2, 4, 6, 8]);
+```
+
+```rust
+use lowdash::times;
+let result = times(3, |i| format!("Item {}", i));
+assert_eq!(result, vec!["Item 0", "Item 1", "Item 2"]);
+```
+
+### uniq
+Remove duplicate elements from a collection, preserving the order of their first occurrence.
+
+```rust
+use lowdash::uniq;
+let numbers = vec![1, 2, 2, 3, 4, 3, 5];
+let unique_numbers = uniq(&numbers);
+assert_eq!(unique_numbers, vec![1, 2, 3, 4, 5]);
+```
+
+```rust
+use lowdash::uniq;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let unique_people = uniq(&people);
+assert_eq!(unique_people, vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+]);
+```
+
+### uniq_by
+Remove duplicate elements from a collection based on a key extracted by a provided function,
+preserving the order of their first occurrence.
+
+```rust
+use lowdash::uniq_by;
+let numbers = vec![1, 2, 2, 3, 4, 3, 5];
+let unique_numbers = uniq_by(&numbers, |x| *x);
+assert_eq!(unique_numbers, vec![1, 2, 3, 4, 5]);
+```
+
+```rust
+use lowdash::uniq_by;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let unique_people = uniq_by(&people, |p| p.name.clone());
+assert_eq!(unique_people, vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+]);
+```
+
+### group_by
+Group elements of a collection based on a key extracted by a provided function,
+preserving the order of their first occurrence.
+
+```rust
+use lowdash::group_by;
+
+let numbers = vec![1, 2, 2, 3, 4, 3, 5];
+let grouped = group_by(&numbers, |x| *x % 2 == 0);
+
+assert_eq!(grouped.get(&false), Some(&vec![1, 3, 3, 5]));
+assert_eq!(grouped.get(&true), Some(&vec![2, 2, 4]));
+```
+
+```rust
+use lowdash::group_by;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 25 },
+];
+
+let grouped = group_by(&people, |p| p.age);
+
+assert_eq!(grouped.get(&25), Some(&vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 25 },
+]));
+assert_eq!(grouped.get(&30), Some(&vec![
+    Person { name: "Bob".to_string(), age: 30 },
+]));
+```
+
+### chunk
+Divide a collection into smaller chunks of a specified size,
+preserving the order of elements.
+
+```rust
+use lowdash::chunk;
+
+let numbers = vec![1, 2, 3, 4, 5, 6, 7];
+let chunks = chunk(&numbers, 3);
+assert_eq!(
+    chunks,
+    vec![vec![1, 2, 3], vec![4, 5, 6], vec![7]]
+);
+```
+
+```rust
+use lowdash::chunk;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+    Person { name: "Dave".to_string(), age: 40 },
+];
+
+let chunks = chunk(&people, 2);
+assert_eq!(
+    chunks,
+    vec![
+        vec![
+            Person { name: "Alice".to_string(), age: 25 },
+            Person { name: "Bob".to_string(), age: 30 },
+        ],
+        vec![
+            Person { name: "Carol".to_string(), age: 35 },
+            Person { name: "Dave".to_string(), age: 40 },
+        ],
+    ]
+);
+```
+
+### partition_by
+Divide a collection into partitions based on a key extracted by a provided function,
+preserving the order of elements and the order of partitions as they first appear.
+
+```rust
+use lowdash::partition_by;
+
+let numbers = vec![1, 2, 2, 3, 4, 3, 5];
+let partitions = partition_by(&numbers, |x| *x);
+assert_eq!(
+    partitions,
+    vec![vec![1], vec![2, 2], vec![3, 3], vec![4], vec![5]]
+);
+```
+
+```rust
+use lowdash::partition_by;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let partitions = partition_by(&people, |p| p.age);
+assert_eq!(
+    partitions,
+    vec![
+        vec![
+            Person { name: "Alice".to_string(), age: 25 },
+            Person { name: "Alice".to_string(), age: 25 },
+        ],
+        vec![
+            Person { name: "Bob".to_string(), age: 30 },
+        ],
+        vec![
+            Person { name: "Carol".to_string(), age: 35 },
+        ],
+    ]
+);
+```
+
+### flatten
+Flatten a collection of slices into a single vector, preserving the order of elements.
+
+```rust
+use lowdash::flatten;
+
+let nested = vec![vec![1, 2], vec![3, 4], vec![5]];
+let flat = flatten(&nested);
+assert_eq!(flat, vec![1, 2, 3, 4, 5]);
+```
+
+```rust
+use lowdash::flatten;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people_groups = vec![
+    vec![
+        Person { name: "Alice".to_string(), age: 25 },
+        Person { name: "Bob".to_string(), age: 30 },
+    ],
+    vec![
+        Person { name: "Carol".to_string(), age: 35 },
+        Person { name: "Dave".to_string(), age: 40 },
+    ],
+];
+
+let flat_people = flatten(&people_groups);
+assert_eq!(
+    flat_people,
+    vec![
+        Person { name: "Alice".to_string(), age: 25 },
+        Person { name: "Bob".to_string(), age: 30 },
+        Person { name: "Carol".to_string(), age: 35 },
+        Person { name: "Dave".to_string(), age: 40 },
+    ]
+);
+```
+
+### interleave
+Interleave multiple collections into a single vector, preserving the order of elements.
+
+```rust
+use lowdash::interleave;
+
+let a = vec![1, 2, 3];
+let b = vec![4, 5, 6, 7];
+let c = vec![8, 9];
+
+let result = interleave(&[&a[..], &b[..], &c[..]]);
+assert_eq!(result, vec![1, 4, 8, 2, 5, 9, 3, 6, 7]);
+```
+
+```rust
+use lowdash::interleave;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let group1 = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+];
+
+let group2 = vec![
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let group3 = vec![
+    Person { name: "Dave".to_string(), age: 40 },
+    Person { name: "Eve".to_string(), age: 45 },
+    Person { name: "Frank".to_string(), age: 50 },
+];
+
+let interleaved = interleave(&[&group1[..], &group2[..], &group3[..]]);
+assert_eq!(
+    interleaved,
+    vec![
+        Person { name: "Alice".to_string(), age: 25 },
+        Person { name: "Carol".to_string(), age: 35 },
+        Person { name: "Dave".to_string(), age: 40 },
+        Person { name: "Bob".to_string(), age: 30 },
+        Person { name: "Eve".to_string(), age: 45 },
+        Person { name: "Frank".to_string(), age: 50 },
+    ]
+);
+```
+
+### shuffle
+Shuffle a collection, returning a new vector with the elements in random order.
+
+```rust
+use lowdash::shuffle;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let shuffled = shuffle(&numbers);
+assert_eq!(shuffled.len(), numbers.len());
+assert!(shuffled.contains(&1));
+assert!(shuffled.contains(&2));
+assert!(shuffled.contains(&3));
+assert!(shuffled.contains(&4));
+assert!(shuffled.contains(&5));
+```
+
+### reverse
+Reverse a collection, returning a new vector with the elements in reverse order.
+
+```rust
+use lowdash::reverse;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let reversed = reverse(&numbers);
+assert_eq!(reversed, vec![5, 4, 3, 2, 1]);
+```
+
+```rust
+use lowdash::reverse;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let reversed_people = reverse(&people);
+assert_eq!(reversed_people, vec![
+    Person { name: "Carol".to_string(), age: 35 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+]);
+```
+
+### fill
+Fill a collection with a specified value, returning a new vector with all elements set to the initial value.
+
+```rust
+use lowdash::fill;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let filled = fill(&numbers, 0);
+assert_eq!(filled, vec![0, 0, 0, 0, 0]);
+```
+
+```rust
+use lowdash::fill;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let filled_people = fill(&people, Person { name: "Dave".to_string(), age: 40 });
+assert_eq!(
+    filled_people,
+    vec![
+        Person { name: "Dave".to_string(), age: 40 },
+        Person { name: "Dave".to_string(), age: 40 },
+        Person { name: "Dave".to_string(), age: 40 },
+    ]
+);
+```
+
+### repeat
+Fill a collection with a specified value, returning a new vector with all elements set to the initial value.
+
+```rust
+use lowdash::repeat;
+
+let filled = repeat(5, 0);
+assert_eq!(filled, vec![0, 0, 0, 0, 0]);
+```
+
+```rust
+use lowdash::repeat;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let filled_people = repeat(3, Person { name: "Dave".to_string(), age: 40 });
+assert_eq!(
+    filled_people,
+    vec![
+        Person { name: "Dave".to_string(), age: 40 },
+        Person { name: "Dave".to_string(), age: 40 },
+        Person { name: "Dave".to_string(), age: 40 },
+    ]
+);
+```
+
+### repeat_by
+Repeat a specified value `count` times by applying a predicate function to each index, returning a new vector with the generated elements.
+
+```rust
+use lowdash::repeat_by;
+
+let filled = repeat_by(5, |i| i * 2);
+assert_eq!(filled, vec![0, 2, 4, 6, 8]);
+```
+
+```rust
+use lowdash::repeat_by;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let filled_people = repeat_by(3, |i| Person {
+    name: format!("Person {}", i + 1),
+    age: 20 + i as u32 * 5,
+});
+assert_eq!(
+    filled_people,
+    vec![
+        Person { name: "Person 1".to_string(), age: 20 },
+        Person { name: "Person 2".to_string(), age: 25 },
+        Person { name: "Person 3".to_string(), age: 30 },
+    ]
+);
+```
+
+### key_by
+Creates a `HashMap` by mapping each element in a collection to a key using an iteratee function.
+
+```rust
+use lowdash::key_by;
+use std::collections::HashMap;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let map = key_by(&numbers, |&x| x % 2);
+let mut expected = HashMap::new();
+expected.insert(1, 5); // Last odd number
+expected.insert(0, 4); // Last even number
+assert_eq!(map, expected);
+```
+
+```rust
+use lowdash::key_by;
+use std::collections::HashMap;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Charlie".to_string(), age: 35 },
+];
+
+let map = key_by(&people, |person| person.name.clone());
+let mut expected = HashMap::new();
+expected.insert("Alice".to_string(), people[0].clone());
+expected.insert("Bob".to_string(), people[1].clone());
+expected.insert("Charlie".to_string(), people[2].clone());
+assert_eq!(map, expected);
+```
+
+```rust
+use lowdash::key_by;
+use std::collections::HashMap;
+
+let strings = vec!["apple", "banana", "apricot", "blueberry"];
+let map = key_by(&strings, |s| s.chars().next().unwrap());
+let mut expected = HashMap::new();
+expected.insert('a', "apricot");
+expected.insert('b', "blueberry");
+assert_eq!(map, expected);
+```
+
+### associate
+Creates a `HashMap` by transforming each element in a collection into a key-value pair using a provided function.
+
+```rust
+use lowdash::associate;
+use std::collections::HashMap;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let map = associate(&numbers, |&x| (x, x * x));
+let mut expected = HashMap::new();
+expected.insert(1, 1);
+expected.insert(2, 4);
+expected.insert(3, 9);
+expected.insert(4, 16);
+expected.insert(5, 25);
+assert_eq!(map, expected);
+```
+
+```rust
+use lowdash::associate;
+use std::collections::HashMap;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Charlie".to_string(), age: 35 },
+];
+
+let map = associate(&people, |person| (person.name.clone(), person.age));
+let mut expected = HashMap::new();
+expected.insert("Alice".to_string(), 25);
+expected.insert("Bob".to_string(), 30);
+expected.insert("Charlie".to_string(), 35);
+assert_eq!(map, expected);
+```
+
+```rust
+use lowdash::associate;
+use std::collections::HashMap;
+
+let strings = vec!["apple", "banana", "apricot", "blueberry"];
+let map = associate(&strings, |s| (s.chars().next().unwrap(), s.len()));
+let mut expected = HashMap::new();
+expected.insert('a', 7); // "apricot" has 7 characters
+expected.insert('b', 9); // "blueberry" has 9 characters
+assert_eq!(map, expected);
+```
+
+### slice_to_map
 
 ## 🫡 Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
