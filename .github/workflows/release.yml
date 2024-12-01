@@ -5,18 +5,6 @@ on:
     tags:
       - '[0-9]+.*'
 jobs:
-  create-release:
-    name: "Create GitHub release"
-    # only publish from the origin repository
-    if: github.repository_owner == 'liberocks'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: taiki-e/create-gh-release-action@v1
-        with:
-          changelog: CHANGELOG.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   crates:
     runs-on: ubuntu-latest
     steps:
