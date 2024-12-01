@@ -11,7 +11,6 @@
 /// * `isize` - The index of the last occurrence of the element, or -1 if not found.
 ///
 /// # Examples
-///
 /// ```rust
 /// use lowdash::last_index_of;
 /// let collection = vec![1, 2, 3, 2, 1];

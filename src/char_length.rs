@@ -7,7 +7,7 @@
 /// * `usize` - The number of Unicode characters in the string
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::char_length;
 ///
 /// assert_eq!(char_length("hello"), 5);

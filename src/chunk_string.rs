@@ -13,6 +13,14 @@
 ///
 /// # Panics
 /// Panics if the chunk size is less than or equal to 0
+/// 
+/// # Examples
+/// ```rust
+/// use lowdash::chunk_string;
+/// 
+/// let result = chunk_string("hello", 2);
+/// assert_eq!(result, vec!["he", "ll", "o"]);
+/// ```
 pub fn chunk_string(str_input: &str, size: i32) -> Vec<String> {
     if size <= 0 {
         panic!("chunk_string: Size parameter must be greater than 0");
