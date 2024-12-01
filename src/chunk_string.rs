@@ -13,11 +13,11 @@
 ///
 /// # Panics
 /// Panics if the chunk size is less than or equal to 0
-/// 
+///
 /// # Examples
 /// ```rust
 /// use lowdash::chunk_string;
-/// 
+///
 /// let result = chunk_string("hello", 2);
 /// assert_eq!(result, vec!["he", "ll", "o"]);
 /// ```
