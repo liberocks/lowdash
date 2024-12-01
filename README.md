@@ -227,7 +227,6 @@ assert_eq!(result, vec![
 ### find_duplicates
 Find all duplicate elements in a collection (elements that appear more than once).
 
-# Examples
 ```rust
 use lowdash::find_duplicates;
 let numbers = vec![1, 2, 2, 3, 3, 4];
