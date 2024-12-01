@@ -13,7 +13,7 @@ use crate::common;
 /// * `Vec<T>` - A vector containing the sampled elements
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::samples;
 ///
 /// let numbers = vec![1, 2, 3, 4, 5];

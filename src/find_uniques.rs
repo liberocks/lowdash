@@ -7,21 +7,21 @@
 /// * `Vec<T>` - A vector containing only the elements that appear exactly once in the input.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_uniques;
 /// let numbers = vec![1, 2, 2, 3, 3, 4];
 /// let result = find_uniques(&numbers);
 /// assert_eq!(result, vec![1, 4]);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_uniques;
 /// let words = vec!["apple", "banana", "apple", "cherry"];
 /// let result = find_uniques(&words);
 /// assert_eq!(result, vec!["banana", "cherry"]);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_uniques;
 ///
 /// #[derive(Debug, Clone, PartialEq, Eq, Hash)]

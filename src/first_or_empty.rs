@@ -11,7 +11,7 @@ use crate::first::first;
 ///         If the collection is empty, returns `T::default()`.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::first_or_empty;
 ///
 /// let numbers = vec![1, 2, 3];
@@ -23,7 +23,7 @@ use crate::first::first;
 /// assert_eq!(first_num, 0); // i32::default() is 0
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::first_or_empty;
 ///
 /// #[derive(Debug, PartialEq, Clone, Default)]

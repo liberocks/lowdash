@@ -12,21 +12,21 @@ use crate::common;
 /// * `Option<T>` - The minimum item in the collection, or `None` if the collection is empty.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::min;
 /// let numbers = vec![5, 3, 8, 1, 4];
 /// let result = min(&numbers);
 /// assert_eq!(result, Some(1));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::min;
 /// let strings = vec!["apple", "banana", "cherry"];
 /// let result = min(&strings);
 /// assert_eq!(result, Some("apple"));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::min;
 ///
 /// #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
@@ -48,7 +48,7 @@ use crate::common;
 /// );
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::min;
 /// let collection = vec![3.14, 2.71, -1.0, 0.0];
 /// let result = min(&collection);

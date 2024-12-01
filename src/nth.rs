@@ -27,7 +27,7 @@ impl Error for NthError {}
 /// * `Err(NthError)` - If the index is out of bounds
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::nth;
 ///
 /// let numbers = vec![1, 2, 3, 4, 5];

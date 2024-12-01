@@ -9,7 +9,7 @@
 /// * `Option<T>` - The minimum item in the collection based on the comparison function, or `None` if the collection is empty.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::min_by;
 ///
 /// let numbers = vec![5, 3, 8, 1, 4];

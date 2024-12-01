@@ -9,14 +9,14 @@
 /// * `Vec<T>` - A vector containing only the elements whose generated keys appear exactly once.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_uniques_by;
 /// let numbers = vec![1, 2, 3, 4];
 /// let result = find_uniques_by(&numbers, |x| x % 2);  // Group by even/odd
 /// assert_eq!(result, vec![]);  // No unique remainders
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_uniques_by;
 ///
 /// #[derive(Debug, Clone, PartialEq)]

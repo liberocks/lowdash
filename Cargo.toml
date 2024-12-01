@@ -1,11 +1,11 @@
 [package]
 name = "lowdash"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Tirtadwipa Manunggal <tirtadwipa.manunggal@gmail.com>"]
 description = "A Lodash inspired utility library to manipulate array and object"
 repository = "https://github.com/liberocks/lowdash"
 readme = "README.md"
-license = "MIT OR Apache-2.0"
+license = "MIT"
 categories = ["rust-patterns"]
 keywords = ["rust-lodash", "lodash", "utility", "js", "javascript"]
 edition = "2021"

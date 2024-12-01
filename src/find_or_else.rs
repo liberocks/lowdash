@@ -10,7 +10,7 @@
 /// * `&T` - Either the first item that satisfies the predicate or the fallback value.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_or_else;
 /// let numbers = vec![1, 2, 3, 4, 5];
 /// let predicate = |x: &i32| *x == 3;
@@ -18,14 +18,14 @@
 /// assert_eq!(result, &3);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_or_else;
 /// let numbers = vec![10, 20, 30, 40];
 /// let result = find_or_else(&numbers, &0, |x| *x > 50);
 /// assert_eq!(result, &0);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_or_else;
 ///
 /// #[derive(Debug, PartialEq)]

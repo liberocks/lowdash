@@ -13,7 +13,7 @@ use std::time::SystemTime;
 ///
 /// # Examples
 ///
-/// ```
+/// ```rust
 /// use std::time::{SystemTime, Duration};
 /// use lowdash::earliest;
 ///

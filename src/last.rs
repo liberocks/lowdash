@@ -9,7 +9,7 @@
 ///                If the collection is empty, returns `(T::default(), false)`.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::last;
 ///
 /// let numbers = vec![1, 2, 3];
@@ -23,7 +23,7 @@
 /// assert!(!exists);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::last;
 ///
 /// #[derive(Debug, PartialEq, Clone, Default)]
