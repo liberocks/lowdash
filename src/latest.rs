@@ -11,7 +11,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 /// * If no arguments are provided, returns `SystemTime::UNIX_EPOCH`.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use std::time::{SystemTime, Duration};
 /// use lowdash::latest;
 ///

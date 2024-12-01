@@ -10,7 +10,7 @@
 /// * `String` - The converted string in PascalCase
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::pascal_case;
 ///
 /// assert_eq!(pascal_case("hello world"), "HelloWorld");

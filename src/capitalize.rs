@@ -7,7 +7,7 @@
 /// * `String` - The capitalized string
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::capitalize;
 ///
 /// assert_eq!(capitalize("hello"), "Hello");

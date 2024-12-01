@@ -10,7 +10,7 @@
 /// * `String` - The converted string in kebab-case
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::kebab_case;
 ///
 /// assert_eq!(kebab_case("hello world"), "hello-world");

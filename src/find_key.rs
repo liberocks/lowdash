@@ -9,7 +9,7 @@
 /// * `Option<K>` - The key that corresponds to the value, or None if no key corresponds to the value.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_key;
 /// let mut map = std::collections::HashMap::new();
 /// map.insert("a", 1);
@@ -19,7 +19,7 @@
 /// assert_eq!(result, Some(&"b"));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_key;
 /// let mut map = std::collections::HashMap::new();
 /// map.insert("a", 1);
@@ -29,7 +29,7 @@
 /// assert_eq!(result, None);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_key;
 ///
 /// #[derive(Debug, PartialEq, Eq, Hash)]

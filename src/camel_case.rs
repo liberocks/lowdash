@@ -13,7 +13,7 @@ use crate::pascal_case;
 /// * `String` - The converted string in camelCase
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::camel_case;
 ///
 /// assert_eq!(camel_case("hello world"), "helloWorld");

@@ -12,21 +12,21 @@
 ///
 /// # Examples
 ///
-/// ```
+/// ```rust
 /// use lowdash::last_index_of;
 /// let collection = vec![1, 2, 3, 2, 1];
 /// let index = last_index_of(&collection, 2);
 /// assert_eq!(index, 3);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::last_index_of;
 /// let collection = vec!["apple", "banana", "cherry", "banana"];
 /// let index = last_index_of(&collection, "banana");
 /// assert_eq!(index, 3);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::last_index_of;
 /// let collection = vec![1, 2, 3, 4, 5];
 /// let index = last_index_of(&collection, 6);

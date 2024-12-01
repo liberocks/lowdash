@@ -9,14 +9,14 @@
 /// * `Vec<T>` - A vector containing all duplicate elements beyond their first occurrence.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_duplicates_by;
 /// let numbers = vec![1, 2, 3, 4];
 /// let result = find_duplicates_by(&numbers, |x| x % 2);
 /// assert_eq!(result, vec![3, 4]); // Second occurrences of duplicated keys
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_duplicates_by;
 ///
 /// #[derive(Debug, Clone, PartialEq)]

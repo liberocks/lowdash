@@ -9,7 +9,7 @@
 /// * `Option<(&T, usize)>` - A tuple containing the last item in the collection that satisfies the predicate and its index, or None if no item satisfies the predicate.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_last_index_of;
 /// let numbers = vec![1, 2, 3, 4, 5, 3];
 /// let predicate = |x: &i32| *x == 3;
@@ -17,14 +17,14 @@
 /// assert_eq!(result, Some((&3, 5)));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_last_index_of;
 /// let numbers = vec![10, 20, 30, 40, 30];
 /// let result = find_last_index_of(&numbers, |x| *x > 25);
 /// assert_eq!(result, Some((&30, 4)));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_last_index_of;
 ///
 /// #[derive(Debug, PartialEq)]

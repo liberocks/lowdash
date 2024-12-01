@@ -10,7 +10,7 @@
 /// * `None` - If no item satisfies the predicate.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find;
 /// let numbers = vec![1, 2, 3, 4, 5];
 /// let predicate = |x: &i32| *x == 3;
@@ -18,14 +18,14 @@
 /// assert_eq!(result, Some(&3));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find;
 /// let numbers = vec![10, 20, 30, 40];
 /// let result = find(&numbers, |x| *x > 25);
 /// assert_eq!(result, Some(&30));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find;
 ///
 /// #[derive(Debug, PartialEq)]

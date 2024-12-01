@@ -10,7 +10,7 @@
 /// * `Vec<String>` - A vector of words extracted from the input string
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::words;
 ///
 /// let result = words("Int8Value");

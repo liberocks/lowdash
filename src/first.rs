@@ -9,7 +9,7 @@
 ///                If the collection is empty, returns `(T::default(), false)`.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::first;
 ///
 /// let numbers = vec![1, 2, 3];

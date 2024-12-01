@@ -8,21 +8,21 @@
 /// * `Vec<T>` - A vector containing one instance of each duplicate element.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_duplicates;
 /// let numbers = vec![1, 2, 2, 3, 3, 4];
 /// let result = find_duplicates(&numbers);
 /// assert_eq!(result, vec![2, 3]);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_duplicates;
 /// let words = vec!["apple", "banana", "apple", "cherry", "banana"];
 /// let result = find_duplicates(&words);
 /// assert_eq!(result, vec!["apple", "banana"]);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_duplicates;
 ///
 /// #[derive(Debug, Clone, PartialEq, Eq, Hash)]

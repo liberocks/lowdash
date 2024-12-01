@@ -10,7 +10,7 @@ use crate::common;
 /// * `T` - A pseudo-randomly selected item from the collection or the default value if empty
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::sample;
 ///
 /// let numbers = vec![1, 2, 3, 4, 5];

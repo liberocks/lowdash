@@ -21,5 +21,23 @@ This library has no dependencies outside the Rust standard library.
 ## 📚 Documentation
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
+Utility functions for array:
+
+Utility functions for string manipulation:
+- [camel_case](#camelcase)
+
+### camel_case
+Converts a string to camelCase.
+
+```rust
+use lowdash::camel_case;
+
+assert_eq!(camel_case("hello world"), "helloWorld");
+assert_eq!(camel_case("foo-bar"), "fooBar");
+assert_eq!(camel_case("lorem_ipsum"), "loremIpsum");
+assert_eq!(camel_case("FooBarBazHello"), "fooBarBazHello");
+```
+
+
 ## 🫡 Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)

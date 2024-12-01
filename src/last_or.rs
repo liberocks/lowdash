@@ -11,7 +11,7 @@ use crate::last::last;
 /// * `T` - The last item in the collection or the fallback value if empty.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::last_or;
 ///
 /// let numbers = vec![1, 2, 3];

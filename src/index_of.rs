@@ -9,21 +9,21 @@
 /// * `isize` - The index of the first occurrence of the element, or -1 if not found.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::index_of;
 /// let collection = vec![1, 2, 3, 4, 5];
 /// let index = index_of(&collection, 3);
 /// assert_eq!(index, 2);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::index_of;
 /// let collection = vec!["apple", "banana", "cherry"];
 /// let index = index_of(&collection, "banana");
 /// assert_eq!(index, 1);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::index_of;
 /// let collection = vec![1, 2, 3, 4, 5];
 /// let index = index_of(&collection, 6);

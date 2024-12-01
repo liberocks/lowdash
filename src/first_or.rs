@@ -10,7 +10,7 @@
 ///         If the collection is empty, returns the `fallback` value.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::first_or;
 ///
 /// let numbers = vec![1, 2, 3];
@@ -22,7 +22,7 @@
 /// assert_eq!(first_num, 10);
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::first_or;
 ///
 /// #[derive(Debug, PartialEq, Clone)]

@@ -11,7 +11,7 @@ use crate::last::last;
 ///         If the collection is empty, returns `T::default()`.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::last_or_empty;
 ///
 /// let numbers = vec![1, 2, 3];
@@ -23,7 +23,7 @@ use crate::last::last;
 /// assert_eq!(last_num, 0); // i32::default() is 0
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::last_or_empty;
 ///
 /// #[derive(Debug, PartialEq, Clone, Default)]

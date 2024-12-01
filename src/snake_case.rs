@@ -10,7 +10,7 @@
 /// * `String` - The converted string in snake_case
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::snake_case;
 ///
 /// assert_eq!(snake_case("hello world"), "hello_world");

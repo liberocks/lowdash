@@ -9,7 +9,7 @@
 /// * `Option<&K>` - The key that satisfies the predicate, or None if no key satisfies the predicate.
 ///
 /// # Examples
-/// ```
+/// ```rust
 /// use lowdash::find_key_by;
 /// let mut map = std::collections::HashMap::new();
 /// map.insert("a", 1);
@@ -19,7 +19,7 @@
 /// assert_eq!(result, Some(&"b"));
 /// ```
 ///
-/// ```
+/// ```rust
 /// use lowdash::find_key_by;
 /// let mut map = std::collections::HashMap::new();
 /// map.insert("a", 1);

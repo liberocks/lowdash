@@ -17,7 +17,7 @@
 ///
 /// # Examples
 ///
-/// ```
+/// ```rust
 /// use lowdash::ellipsis;
 ///
 /// let result = ellipsis("Hello, World!", 10);
