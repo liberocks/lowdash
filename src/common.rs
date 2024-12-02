@@ -1,8 +1,26 @@
+use std::hash::{Hash, Hasher};
 use std::{
     any::TypeId,
     sync::atomic::{AtomicU64, Ordering},
     time::SystemTime,
 };
+
+#[derive(Clone, Debug)]
+pub struct Float(pub f64);
+
+impl PartialEq for Float {
+    fn eq(&self, other: &Self) -> bool {
+        self.0.to_bits() == other.0.to_bits()
+    }
+}
+
+impl Eq for Float {}
+
+impl Hash for Float {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.0.to_bits().hash(state);
+    }
+}
 
 /// Determines if the collection contains floating-point numbers (`f32` or `f64`).
 ///

@@ -22,60 +22,79 @@ This library has no dependencies outside the Rust standard library.
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
-- [earliest_by](#earliest_by)
+- [associate](#associate)
+- [chunk](#chunk)
+- [compact](#compact)
+- [count](#count)
+- [count_by](#count_by)
+- [count_values](#count_values)
+- [count_values_by](#count_values_by)
+- [drop](#drop)
+- [drop_right](#drop_right)
+- [drop_right_while](#drop_right_while)
+- [drop_while](#drop_while)
 - [earliest](#earliest)
-- [find_duplicates_by](#find_duplicates_by)
+- [earliest_by](#earliest_by)
+- [fill](#fill)
+- [filter](#filter)
+- [filter_map](#filter_map)
+- [filter_reject](#filter_reject)
+- [find](#find)
 - [find_duplicates](#find_duplicates)
+- [find_duplicates_by](#find_duplicates_by)
 - [find_index_of](#find_index_of)
-- [find_key_by](#find_key_by)
 - [find_key](#find_key)
+- [find_key_by](#find_key_by)
 - [find_last_index_of](#find_last_index_of)
 - [find_or_else](#find_or_else)
-- [find_uniques_by](#find_uniques_by)
 - [find_uniques](#find_uniques)
-- [find](#find)
-- [first_or_empty](#first_or_empty)
-- [first_or](#first_or)
+- [find_uniques_by](#find_uniques_by)
 - [first](#first)
-- [index_of](#index_of)
-- [last_index_of](#last_index_of)
-- [last_or_empty](#last_or_empty)
-- [last_or](#last_or)
-- [last](#last)
-- [latest_by](#latest_by)
-- [latest](#latest)
-- [max_by](#max_by)
-- [max](#max)
-- [min_by](#min_by)
-- [min](#min)
-- [nth](#nth)
-- [sample](#sample)
-- [samples](#samples)
-- [reject](#reject)
-- [filter](#filter)
-- [map](#map)
-- [filter_map](#filter_map)
+- [first_or](#first_or)
+- [first_or_empty](#first_or_empty)
 - [flat_map](#flat_map)
-- [reduce](#reduce)
-- [reduce_right](#reduce_right)
+- [flatten](#flatten)
 - [foreach](#foreach)
 - [foreach_while](#foreach_while)
+- [group_by](#group_by)
+- [index_of](#index_of)
+- [interleave](#interleave)
+- [is_sorted](#is_sorted)
+- [is_sorted_by_key](#is_sorted_by_key)
+- [key_by](#key_by)
+- [last](#last)
+- [last_index_of](#last_index_of)
+- [last_or](#last_or)
+- [last_or_empty](#last_or_empty)
+- [latest](#latest)
+- [latest_by](#latest_by)
+- [map](#map)
+- [max](#max)
+- [max_by](#max_by)
+- [min](#min)
+- [min_by](#min_by)
+- [nth](#nth)
+- [partition_by](#partition_by)
+- [reduce](#reduce)
+- [reduce_right](#reduce_right)
+- [reject](#reject)
+- [reject_map](#reject_map)
+- [repeat](#repeat)
+- [repeat_by](#repeat_by)
+- [replace](#replace)
+- [replace_all](#replace_all)
+- [reverse](#reverse)
+- [sample](#sample)
+- [samples](#samples)
+- [shuffle](#shuffle)
+- [slice](#slice)
+- [slice_to_map](#slice_to_map)
+- [splice](#splice)
+- [subset](#subset)
 - [times](#times)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
-- [group_by](#group_by)
-- [chunk](#chunk)
-- [partition_by](#partition_by)
-- [flatten](#flatten)
-- [interleave](#interleave)
-- [shuffle](#shuffle)
-- [reverse](#reverse)
-- [fill](#fill)
-- [repeat](#repeat)
-- [repeat_by](#repeat_by)
-- [key_by](#key_by)
-- [associate](#associate)
-- [slice_to_map](#slice_to_map)
+= [drop_by_index](#drop_by_index)
 
 Utility functions for string manipulation:
 - [camel_case](#camel_case)
@@ -2007,6 +2026,719 @@ assert_eq!(map, expected);
 ```
 
 ### slice_to_map
+Transforms a slice of items into a `HashMap` by applying a provided function to each item.
+
+```rust
+use lowdash::slice_to_map;
+use std::collections::HashMap;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let map = slice_to_map(&numbers, |&x| (x, x * x));
+let mut expected = HashMap::new();
+expected.insert(1, 1);
+expected.insert(2, 4);
+expected.insert(3, 9);
+expected.insert(4, 16);
+expected.insert(5, 25);
+assert_eq!(map, expected);
+```
+
+```rust
+use lowdash::slice_to_map;
+use std::collections::HashMap;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Charlie".to_string(), age: 35 },
+];
+
+let map = slice_to_map(&people, |person| (person.name.clone(), person.age));
+let mut expected = HashMap::new();
+expected.insert("Alice".to_string(), 25);
+expected.insert("Bob".to_string(), 30);
+expected.insert("Charlie".to_string(), 35);
+assert_eq!(map, expected);
+```
+
+```rust
+use lowdash::slice_to_map;
+use std::collections::HashMap;
+
+let strings = vec!["apple", "banana", "apricot", "blueberry"];
+let map = slice_to_map(&strings, |s| (s.chars().next().unwrap(), s.len()));
+let mut expected = HashMap::new();
+expected.insert('a', 7); // "apricot" has 7 characters
+expected.insert('b', 9); // "blueberry" has 9 characters
+assert_eq!(map, expected);
+```
+
+### drop
+Removes the first `n` elements from a collection and returns the remaining elements.
+
+```rust
+use lowdash::drop;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = drop(&numbers, 2);
+assert_eq!(result, vec![3, 4, 5]);
+```
+
+```rust
+use lowdash::drop;
+
+let letters = vec!['a', 'b', 'c', 'd'];
+let result = drop(&letters, 10);
+assert_eq!(result, vec![]);
+```
+
+### drop_right
+Removes the last `n` elements from a collection and returns the remaining elements.
+
+```rust
+use lowdash::drop_right;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = drop_right(&numbers, 2);
+assert_eq!(result, vec![1, 2, 3]);
+```
+
+```rust
+use lowdash::drop_right;
+
+let letters = vec!['a', 'b', 'c', 'd'];
+let result = drop_right(&letters, 10);
+assert_eq!(result, vec![]);
+```
+
+### drop_while
+Removes elements from the beginning of a collection as long as a predicate returns `true`, and returns the remaining elements. As soon as the predicate returns `false`, the function stops dropping elements.
+
+
+```rust
+use lowdash::drop_while;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = drop_while(&numbers, |&x| x < 3);
+assert_eq!(result, vec![3, 4, 5]);
+```
+
+```rust
+use lowdash::drop_while;
+
+let letters = vec!['a', 'b', 'c', 'd'];
+let result = drop_while(&letters, |&c| c < 'c');
+assert_eq!(result, vec!['c', 'd']);
+```
+
+### drop_right_while
+Removes elements from the end of a collection as long as a predicate returns `true`, and returns the remaining elements. As soon as the predicate returns `false`, the function stops dropping elements.
+
+
+```rust
+use lowdash::drop_right_while;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = drop_right_while(&numbers, |&x| x > 3);
+assert_eq!(result, vec![1, 2, 3]);
+```
+
+```rust
+use lowdash::drop_right_while;
+
+let letters = vec!['a', 'b', 'c', 'd', 'e'];
+let result = drop_right_while(&letters, |&c| c != 'c');
+assert_eq!(result, vec!['a', 'b', 'c']);
+```
+
+### drop_by_index
+Removes elements from a collection at the specified indices.
+Supports negative indices which count from the end of the collection.
+Indices that are out of bounds are ignored.
+
+```rust
+use lowdash::drop_by_index;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = drop_by_index(&numbers, &[1, 3]);
+assert_eq!(result, vec![1, 3, 5]);
+```
+
+```rust
+use lowdash::drop_by_index;
+
+let letters = vec!['a', 'b', 'c', 'd', 'e'];
+let result = drop_by_index(&letters, &[0, -1]);
+assert_eq!(result, vec!['b', 'c', 'd']);
+```
+
+### reject_map
+Applies a callback function to each item in a collection along with its index and collects the results where the callback returns `false`.
+
+```rust
+use lowdash::reject_map;
+
+let numbers = vec![1, 2, 3, 4, 5];
+// Collect squares of odd numbers
+let result = reject_map(&numbers, |&x, _| (x * x, x % 2 == 0));
+assert_eq!(result, vec![1, 9, 25]);
+```
+
+```rust
+use lowdash::reject_map;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+// Collect names of people who are not above 30
+let result = reject_map(&people, |person, _| (person.name.clone(), person.age > 30));
+assert_eq!(result, vec!["Alice".to_string(), "Bob".to_string()]);
+```
+
+### filter_reject
+Filters a collection into two separate vectors based on a predicate function.
+
+```rust
+use lowdash::filter_reject;
+
+let numbers = vec![1, 2, 3, 4, 5];
+// Separate even and odd numbers
+let (evens, odds) = filter_reject(&numbers, |&x, _| x % 2 == 0);
+assert_eq!(evens, vec![2, 4]);
+assert_eq!(odds, vec![1, 3, 5]);
+```
+
+```rust
+use lowdash::filter_reject;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+// Separate people who are at least 30 years old
+let (adults, juniors) = filter_reject(&people, |person, _| person.age >= 30);
+assert_eq!(adults, vec![
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+]);
+assert_eq!(juniors, vec![
+    Person { name: "Alice".to_string(), age: 25 },
+]);
+```
+
+### count
+Counts the number of occurrences of a specific value in a collection.
+
+```rust
+use lowdash::count;
+
+let numbers = vec![1, 2, 2, 3, 4, 2];
+let result = count(&numbers, 2);
+assert_eq!(result, 3);
+```
+
+```rust
+use lowdash::count;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+];
+
+let count_alice = count(&people, Person { name: "Alice".to_string(), age: 25 });
+assert_eq!(count_alice, 2);
+```
+
+### count_by 
+Counts the number of elements in a collection that satisfy a given predicate.
+
+```rust
+use lowdash::count_by;
+
+let numbers = vec![1, 2, 3, 4, 5];
+// Count even numbers
+let result = count_by(&numbers, |&x| x % 2 == 0);
+assert_eq!(result, 2);
+```
+
+```rust
+use lowdash::count_by;
+
+#[derive(Debug, PartialEq)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+    Person { name: "Dave".to_string(), age: 30 },
+];
+
+// Count people who are at least 30 years old
+let count_adults = count_by(&people, |p| p.age >= 30);
+assert_eq!(count_adults, 3);
+```
+
+### count_values
+Counts the number of occurrences of each value in a collection.
+
+```rust
+use lowdash::count_values;
+use std::collections::HashMap;
+
+let numbers = vec![1, 2, 2, 3, 4, 3, 5];
+let result = count_values(&numbers);
+let mut expected = HashMap::new();
+expected.insert(1, 1);
+expected.insert(2, 2);
+expected.insert(3, 2);
+expected.insert(4, 1);
+expected.insert(5, 1);
+assert_eq!(result, expected);
+```
+
+```rust
+use lowdash::count_values;
+use std::collections::HashMap;
+
+#[derive(Debug, PartialEq, Eq, Hash, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let result = count_values(&people);
+let mut expected = HashMap::new();
+expected.insert(
+    Person { name: "Alice".to_string(), age: 25 },
+    2
+);
+expected.insert(
+    Person { name: "Bob".to_string(), age: 30 },
+    1
+);
+expected.insert(
+    Person { name: "Carol".to_string(), age: 35 },
+    1
+);
+assert_eq!(result, expected);
+```
+
+### count_values_by
+Counts the number of occurrences of each value in a collection after applying a mapper function.
+
+```rust
+use lowdash::count_values_by;
+use std::collections::HashMap;
+
+let chars = vec!['a', 'b', 'a', 'c', 'b', 'd'];
+let result = count_values_by(&chars, |x| x.clone());
+let mut expected = HashMap::new();
+expected.insert('a', 2);
+expected.insert('b', 2);
+expected.insert('c', 1);
+expected.insert('d', 1);
+assert_eq!(result, expected);
+```
+
+```rust
+use lowdash::count_values_by;
+use std::collections::HashMap;
+
+ let numbers = vec![1, 2, 2, 3, 4, 3, 5];
+let result = count_values_by(&numbers, |x| *x);
+let mut expected = HashMap::new();
+expected.insert(1, 1);
+expected.insert(2, 2);
+expected.insert(3, 2);
+expected.insert(4, 1);
+expected.insert(5, 1);
+assert_eq!(result, expected);
+```
+
+### subset
+Returns a subset of the collection based on the provided offset and length.
+
+```rust
+use lowdash::subset;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = subset(&numbers, 1, 3);
+assert_eq!(result, vec![2, 3, 4]);
+```
+
+### slice
+Returns a subset of the collection based on the provided start and end indices.
+
+```rust
+use lowdash::slice;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = slice(&numbers, 1, 3);
+assert_eq!(result, vec![2, 3]);
+```
+
+```rust
+use lowdash::slice;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = slice(&numbers, -3, -1);
+assert_eq!(result, vec![3, 4]);
+```
+
+```rust
+use lowdash::slice;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+    Person { name: "Dave".to_string(), age: 40 },
+];
+
+let result = slice(&people, 1, 3);
+assert_eq!(
+    result,
+    vec![
+        Person { name: "Bob".to_string(), age: 30 },
+        Person { name: "Carol".to_string(), age: 35 },
+    ]
+);
+```
+
+### replace
+Replaces occurrences of a specified value in a collection with a new value, up to a maximum number of replacements.
+
+```rust
+use lowdash::replace;
+
+let numbers = vec![1, 2, 2, 3, 4, 2, 5];
+let result = replace(&numbers, 2, 9, 2);
+assert_eq!(result, vec![1, 9, 9, 3, 4, 2, 5]);
+```
+
+```rust
+use lowdash::replace;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let new_person = Person { name: "Dave".to_string(), age: 40 };
+let result = replace(&people, people[0].clone(), new_person.clone(), 1);
+assert_eq!(result, vec![new_person, people[1].clone(), people[2].clone(), people[3].clone()]);
+```
+
+### replace_all
+Replaces all occurrences of a specified value in a collection with a new value.
+
+```rust
+use lowdash::replace_all;
+
+let numbers = vec![1, 2, 2, 3, 4, 2, 5];
+let result = replace_all(&numbers, 2, 9);
+assert_eq!(result, vec![1, 9, 9, 3, 4, 9, 5]);
+```
+
+```rust
+use lowdash::replace_all;
+
+#[derive(Debug, PartialEq, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+
+let dave = Person { name: "Dave".to_string(), age: 40 };
+let result = replace_all(&people, people[0].clone(), dave.clone());
+assert_eq!(
+    result,
+    vec![
+        dave.clone(),
+        people[1].clone(),
+        dave.clone(),
+        people[3].clone(),
+    ]
+);
+```
+
+### compact
+Removes all zero-valued elements from a collection, preserving the order of non-zero elements.
+
+This function iterates over a slice of items, removing each element that is equal to the zero value.
+The zero value is determined by the `Default` trait implementation for the type `T`.
+The function preserves the order of the remaining elements and does not modify the original collection.
+
+**Time Complexity:** O(n), where n is the number of elements in the collection.
+
+# Arguments
+
+* `collection` - A slice of items from which to remove zero-valued elements.
+
+# Type Parameters
+
+* `T` - The type of elements in the collection. Must implement `PartialEq`, `Clone`, and `Default`.
+
+# Returns
+
+* `Vec<T>` - A new vector containing only the non-zero elements from the input collection.
+
+# Examples
+
+```rust
+use lowdash::compact;
+
+let numbers = vec![0, 1, 0, 2, 3, 0, 4];
+let compacted = compact(&numbers);
+assert_eq!(compacted, vec![1, 2, 3, 4]);
+```
+
+```rust
+use lowdash::compact;
+
+#[derive(Debug, PartialEq, Clone, Default)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "".to_string(), age: 0 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "".to_string(), age: 0 },
+    Person { name: "Dave".to_string(), age: 40 },
+];
+
+let compacted = compact(&people);
+assert_eq!(
+    compacted,
+    vec![
+        Person { name: "Bob".to_string(), age: 30 },
+        Person { name: "Dave".to_string(), age: 40 },
+    ]
+);
+```
+
+```rust
+use lowdash::compact;
+
+let floats = vec![0.0, 1.1, 0.0, 2.2, 3.3, 0.0, 4.4];
+let compacted = compact(&floats);
+assert_eq!(compacted, vec![1.1, 2.2, 3.3, 4.4]);
+```
+
+### is_sorted
+Determines if a collection is sorted in ascending order.
+
+```rust
+use lowdash::is_sorted;
+
+let numbers = vec![1, 2, 3, 4, 5];
+assert_eq!(is_sorted(&numbers), true);
+```
+
+```rust
+use lowdash::is_sorted;
+
+let numbers = vec![5, 4, 3, 2, 1];
+assert_eq!(is_sorted(&numbers), false);
+```
+
+```rust
+use lowdash::is_sorted;
+
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+assert_eq!(is_sorted(&people), true);
+```
+
+```rust
+use lowdash::is_sorted;
+
+let floats = vec![1.1, 2.2, 3.3, 4.4];
+assert_eq!(is_sorted(&floats), true);
+```
+
+```rust
+use lowdash::is_sorted;
+
+let floats = vec![1.1, std::f64::NAN, 3.3];
+// Note: Any comparison with NaN returns false, so the slice is not considered sorted.
+assert_eq!(is_sorted(&floats), false);
+```
+
+### is_sorted_by_key
+Determines if a collection is sorted in ascending order based on a specified key.
+
+```rust
+use lowdash::is_sorted_by_key;
+
+let numbers = vec![
+    (1, "a"),
+    (2, "b"),
+    (3, "c"),
+    (4, "d"),
+];
+let result = is_sorted_by_key(&numbers, |item| item.0);
+assert_eq!(result, true);
+```
+
+```rust
+use lowdash::is_sorted_by_key;
+
+let numbers = vec![
+    (1, "a"),
+    (3, "b"),
+    (2, "c"),
+    (4, "d"),
+];
+let result = is_sorted_by_key(&numbers, |item| item.0);
+assert_eq!(result, false);
+```
+
+```rust
+use lowdash::is_sorted_by_key;
+
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+let people = vec![
+    Person { name: "Alice".to_string(), age: 25 },
+    Person { name: "Bob".to_string(), age: 30 },
+    Person { name: "Carol".to_string(), age: 35 },
+];
+let result = is_sorted_by_key(&people, |p| p.age);
+assert_eq!(result, true);
+```
+
+```rust
+use lowdash::is_sorted_by_key;
+
+let floats = vec![
+    (1.1, "apple"),
+    (2.2, "banana"),
+    (3.3, "cherry"),
+    (4.4, "date"),
+];
+let result = is_sorted_by_key(&floats, |item| item.0);
+assert_eq!(result, true);
+```
+
+### splice
+Inserts elements into a collection at a specified index, handling negative indices and overflow.
+
+```rust
+use lowdash::splice;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let elements = vec![99, 100];
+let result = splice(&numbers, 2, &elements);
+assert_eq!(result, vec![1, 2, 99, 100, 3, 4, 5]);
+```
+
+```rust
+use lowdash::splice;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let elements = vec![99, 100];
+// Insert at the end
+let result = splice(&numbers, 10, &elements);
+assert_eq!(result, vec![1, 2, 3, 4, 5, 99, 100]);
+```
+
+```rust
+use lowdash::splice;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let elements = vec![99];
+// Insert at negative index (-2 means len - 2 = 3)
+let result = splice(&numbers, -2, &elements);
+assert_eq!(result, vec![1, 2, 3, 99, 4, 5]);
+```
+
+```rust
+use lowdash::splice;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let elements = vec![99];
+// Negative index beyond the start, insert at beginning
+let result = splice(&numbers, -10, &elements);
+assert_eq!(result, vec![99, 1, 2, 3, 4, 5]);
+```
 
 ## 🫡 Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
