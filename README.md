@@ -94,7 +94,7 @@ Utility functions for array:
 - [times](#times)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
-= [drop_by_index](#drop_by_index)
+- [drop_by_index](#drop_by_index)
 
 Utility functions for string manipulation:
 - [camel_case](#camel_case)
