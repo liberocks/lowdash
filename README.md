@@ -2740,5 +2740,8 @@ let result = splice(&numbers, -10, &elements);
 assert_eq!(result, vec![99, 1, 2, 3, 4, 5]);
 ```
 
+## 🔥 Benchmark
+You can find the benchmark result in `report` directory. All the benchmark was generated in Macbook Air M2 with 16GB RAM. 
+
 ## 🫡 Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
