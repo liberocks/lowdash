@@ -109,6 +109,30 @@ Utility functions for string manipulation:
 - [substring](#substring)
 - [words](#words)
 
+Utility functions for object manipulation:
+- [assign](#assign)
+- [entries](#entries)
+- [from_entries](#from_entries)
+- [from_pairs](#from_pairs)
+- [has_key](#has_key)
+- [invert](#invert)
+- [keys](#keys)
+- [map_entries](#map_entries)
+- [map_keys](#map_keys)
+- [map_to_slice](#map_to_slice)
+- [map_values](#map_values)
+- [omit_by](#omit_by)
+- [omit_by_keys](#omit_by_keys)
+- [omit_by_values](#omit_by_values)
+- [pick_by](#pick_by)
+- [pick_by_keys](#pick_by_keys)
+- [pick_by_values](#pick_by_values)
+- [to_pairs](#to_pairs)
+- [uniq_keys](#uniq_keys)
+- [uniq_values](#uniq_values)
+- [value_or](#value_or)
+- [values](#values)
+
 Utility functions for math:
 - [nearest_power_of_two](#nearest_power_of_two)
 
@@ -2740,7 +2764,444 @@ let result = splice(&numbers, -10, &elements);
 assert_eq!(result, vec![99, 1, 2, 3, 4, 5]);
 ```
 
-## 🔥 Benchmark
+### keys
+Collects all keys from one or more maps into a single vector.
+
+```rust
+use lowdash::keys;
+use std::collections::HashMap;
+
+let mut map1 = HashMap::new();
+map1.insert(1, "a");
+map1.insert(2, "b");
+
+let mut map2 = HashMap::new();
+map2.insert(3, "c");
+map2.insert(4, "d");
+
+let result = keys(&[&map1, &map2]);
+assert_eq!(result.len(), 4);
+assert!(result.contains(&1));
+assert!(result.contains(&2));
+assert!(result.contains(&3));
+assert!(result.contains(&4));
+```
+
+### uniq_keys
+Collects all unique keys from one or more maps into a single vector.
+
+```rust
+use lowdash::uniq_keys;
+use std::collections::HashMap;
+
+let mut map1 = HashMap::new();
+map1.insert("a", 1);
+map1.insert("b", 2);
+
+let mut map2 = HashMap::new();
+map2.insert("b", 3);
+map2.insert("c", 4);
+
+let result = uniq_keys(&[&map1, &map2]);
+assert_eq!(result.len(), 3);
+assert!(result.contains(&"a"));
+assert!(result.contains(&"b"));
+assert!(result.contains(&"c"));
+```
+
+### has_key
+Checks if a map contains a specific key.
+
+```rust
+use lowdash::has_key;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+
+assert!(has_key(&map, &"a"));
+assert!(!has_key(&map, &"c"));
+```
+
+### values
+Collects all values from one or more maps into a single vector.
+
+```rust
+use lowdash::values;
+use std::collections::HashMap;
+
+let mut map1 = HashMap::new();
+map1.insert("a", 1);
+map1.insert("b", 2);
+
+let mut map2 = HashMap::new();
+map2.insert("c", 3);
+map2.insert("d", 4);
+
+let result = values(&[&map1, &map2]);
+assert_eq!(result.len(), 4);
+assert!(result.contains(&1));
+assert!(result.contains(&2));
+assert!(result.contains(&3));
+assert!(result.contains(&4));
+```
+
+### uniq_values
+Collects all unique values from one or more maps into a single vector.
+
+```rust
+use lowdash::uniq_values;
+use std::collections::HashMap;
+
+let mut map1 = HashMap::new();
+map1.insert("a", 1);
+map1.insert("b", 2);
+
+let mut map2 = HashMap::new();
+map2.insert("c", 2);
+map2.insert("d", 3);
+
+let result = uniq_values(&[&map1, &map2]);
+assert_eq!(result.len(), 3);
+assert!(result.contains(&1));
+assert!(result.contains(&2));
+assert!(result.contains(&3));
+```
+
+### value_or
+Returns a value from a map for a given key, or a fallback value if the key doesn't exist.
+
+```rust
+use lowdash::value_or;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+
+assert_eq!(value_or(&map, &"a", 42), 1);
+assert_eq!(value_or(&map, &"b", 42), 42);
+```
+
+### pick_by
+Filters a map by applying a predicate to its key-value pairs.
+
+```rust
+use lowdash::pick_by;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let result = pick_by(&map, |_, v| *v > 1);
+assert_eq!(result.len(), 2);
+assert!(result.contains_key("b"));
+assert!(result.contains_key("c"));
+```
+
+### pick_by_keys
+Filters a map by selecting only the specified keys.
+
+```rust
+use lowdash::pick_by_keys;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let keys = vec!["a", "c", "d"];
+let result = pick_by_keys(&map, &keys);
+assert_eq!(result.len(), 2);
+assert!(result.contains_key("a"));
+assert!(result.contains_key("c"));
+```
+
+### pick_by_values
+Filters a map by selecting only the specified values.
+
+```rust
+use lowdash::pick_by_values;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let values = vec![1, 3];
+let result = pick_by_values(&map, &values);
+assert_eq!(result.len(), 2);
+assert!(result.contains_key("a"));
+assert!(result.contains_key("c"));
+```
+
+### omit_by
+Filters a map by omitting key-value pairs that satisfy a predicate.
+
+```rust
+use lowdash::omit_by;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let result = omit_by(&map, |_, v| *v > 1);
+assert_eq!(result.len(), 1);
+assert!(result.contains_key("a"));
+assert!(!result.contains_key("b"));
+assert!(!result.contains_key("c"));
+```
+
+### omit_by_keys
+Filters a map by omitting specified keys.
+
+```rust
+use lowdash::omit_by_keys;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let keys = vec!["b", "d"];
+let result = omit_by_keys(&map, &keys);
+assert_eq!(result.len(), 2);
+assert!(result.contains_key("a"));
+assert!(result.contains_key("c"));
+assert!(!result.contains_key("b"));
+```
+
+### omit_by_values
+Filters a map by omitting key-value pairs that have values present in the provided values slice.
+
+```rust
+use lowdash::omit_by_values;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let values = vec![2, 4];
+let result = omit_by_values(&map, &values);
+assert_eq!(result.len(), 2);
+assert!(result.contains_key("a"));
+assert!(result.contains_key("c"));
+assert!(!result.contains_key("b"));
+```
+
+### entries
+Collects all entries from a map into a vector of `Entry` structs.
+
+```rust
+use lowdash::{Entry, entries};
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+
+let result = entries(&map);
+let expected = vec![
+    Entry { key: "a", value: 1 },
+    Entry { key: "b", value: 2 },
+];
+
+let mut sorted_result = result.clone();
+sorted_result.sort_by(|a, b| a.key.cmp(&b.key));
+
+let mut sorted_expected = expected.clone();
+sorted_expected.sort_by(|a, b| a.key.cmp(&b.key));
+
+assert_eq!(sorted_result, sorted_expected);
+```
+
+### to_pairs
+Collects all entries from a map into a vector of `Entry` structs.
+
+```rust
+use lowdash::{Entry, to_pairs};
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+
+let result = to_pairs(&map);
+let expected = vec![
+    Entry { key: "a", value: 1 },
+    Entry { key: "b", value: 2 },
+];
+
+let mut sorted_result = result.clone();
+sorted_result.sort_by(|a, b| a.key.cmp(&b.key));
+
+let mut sorted_expected = expected.clone();
+sorted_expected.sort_by(|a, b| a.key.cmp(&b.key));
+
+assert_eq!(sorted_result, sorted_expected);
+```
+
+### from_entries
+Constructs a `HashMap` from a slice of `Entry` structs.
+
+```rust
+use lowdash::{Entry, from_entries};
+use std::collections::HashMap;
+
+let entries = vec![
+    Entry { key: "a", value: 1 },
+    Entry { key: "b", value: 2 },
+];
+
+let result = from_entries(&entries);
+let mut expected = HashMap::new();
+expected.insert("a", 1);
+expected.insert("b", 2);
+
+assert_eq!(result.len(), expected.len());
+for (key, value) in &expected {
+   assert_eq!(result.get(key), Some(value));
+}
+```
+
+### from_pairs
+Constructs a `HashMap` from a slice of `Entry` structs.
+
+```rust
+use lowdash::{Entry, from_pairs};
+use std::collections::HashMap;
+
+let entries = vec![
+    Entry { key: "a", value: 1 },
+    Entry { key: "b", value: 2 },
+];
+
+let result = from_pairs(&entries);
+let mut expected = HashMap::new();
+expected.insert("a", 1);
+expected.insert("b", 2);
+
+assert_eq!(result.len(), expected.len());
+for (key, value) in &expected {
+   assert_eq!(result.get(key), Some(value));
+}
+```
+
+### invert
+Constructs a `HashMap` by inverting the keys and values of the input map.
+
+```rust
+use lowdash::{invert, Entry};
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+map.insert("c", 3);
+
+let result = invert(&map);
+let mut expected = HashMap::new();
+expected.insert(1, "a");
+expected.insert(2, "b");
+expected.insert(3, "c");
+
+assert_eq!(result.len(), expected.len());
+for (key, value) in &expected {
+   assert_eq!(result.get(key), Some(value));
+}
+```
+
+### assign
+Merges multiple maps into a single map. If the same key exists in multiple maps, the value from the last map is used.
+
+```rust
+use lowdash::assign;
+use std::collections::HashMap;
+
+
+let mut map1 = HashMap::new();
+map1.insert("a", 1);
+let mut map2 = HashMap::new();
+map2.insert("b", 2);
+
+let merged = assign(&[map1, map2]);
+assert_eq!(merged.get("a"), Some(&1));
+assert_eq!(merged.get("b"), Some(&2));
+```
+
+### map_values
+Transforms the values of a map using a provided function.
+
+```
+use lowdash::map_values;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+
+let transformed = map_values(&map, |&v, _k| v * 10);
+assert_eq!(transformed.get("a"), Some(&10));
+assert_eq!(transformed.get("b"), Some(&20));
+```
+
+### map_keys
+Transforms the keys of a map using a provided function.
+
+```rust
+use lowdash::map_keys;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+let transformed = map_keys(&map, |&v, &k| format!("key_{}", k));
+assert_eq!(transformed.get("key_a"), Some(&1));
+assert_eq!(transformed.get("key_b"), Some(&2));
+```
+
+### map_entries
+Transforms the entries of a map using a provided function.
+
+```rust
+use lowdash::map_entries;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+
+let transformed = map_entries(&map, |k, v| (k.to_uppercase(), v * 10));
+assert_eq!(transformed.get("A"), Some(&10));
+assert_eq!(transformed.get("B"), Some(&20));
+```
+
+### map_to_slice
+Transforms the entries of a map into a slice using a provided function.
+
+```rust
+use lowdash::map_to_slice;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 2);
+
+let transformed = map_to_slice(&map, |k, v| format!("{}:{}", k, v));
+assert!(transformed.contains(&"a:1".to_string()));
+assert!(transformed.contains(&"b:2".to_string()));
+```
+
+## 🔥 Benchmark (experimental)
 You can find the benchmark result in `report` directory. All the benchmark was generated in Macbook Air M2 with 16GB RAM. 
 
 ## 🫡 Acknowledgement
