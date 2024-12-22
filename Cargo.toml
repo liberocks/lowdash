@@ -1,6 +1,6 @@
 [package]
 name = "lowdash"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Tirtadwipa Manunggal <tirtadwipa.manunggal@gmail.com>"]
 description = "A Lodash inspired utility library to manipulate array and object"
 repository = "https://github.com/liberocks/lowdash"
@@ -10,4 +10,9 @@ categories = ["rust-patterns"]
 keywords = ["rust-lodash", "lodash", "utility", "js", "javascript"]
 edition = "2021"
 
-[dependencies]
+[dev-dependencies]
+criterion = { version = "0.5.1", features = ["html_reports"] }
+
+[[bench]]
+name = "benchmark"
+harness = false
