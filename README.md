@@ -148,6 +148,7 @@ Utility functions for array:
     - [mean](#mean)
     - [mean\_by](#mean_by)
     - [percentile](#percentile)
+    - [median](#median)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -201,6 +202,7 @@ Utility functions for math:
 - [mean](#mean)
 - [mean_by](#mean_by)
 - [percentile](#percentile)
+- [median](#median)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3473,6 +3475,25 @@ use lowdash::percentile;
 let numbers = vec![1, 2, 3, 4];
 let result = percentile(&numbers, 75.0);
 assert!((result.unwrap() - 3.25).abs() < f64::EPSILON);
+```
+
+### median
+Calculate the median value of a collection.
+The median is the 50th percentile of a collection.
+For collections with an even number of elements, the median is the average of the two middle values. The collection will be sorted before calculation.
+
+```rust
+use lowdash::median;
+let numbers = vec![1, 3, 5, 2, 4];
+let result = median(&numbers);
+assert!((result.unwrap() - 3.0).abs() < f64::EPSILON);
+```
+
+```rust
+use lowdash::median;
+let numbers = vec![1, 2, 3, 4];
+let result = median(&numbers);
+assert!((result.unwrap() - 2.5).abs() < f64::EPSILON);
 ```
 
 ## 🔥 Benchmark (experimental)
