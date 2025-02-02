@@ -10,19 +10,18 @@
 /// # Examples
 /// ```rust
 /// use lowdash::sum;
-/// 
+///
 /// // Integer sum
 /// assert_eq!(sum(&[1, 2, 3, 4, 5]), 15);
-/// 
+///
 /// // Float sum
 /// assert_eq!(sum(&[1.1, 2.2, 3.3]), 6.6);
 /// ```
-pub fn sum<T>(collection: &[T]) -> T 
+pub fn sum<T>(collection: &[T]) -> T
 where
     T: std::ops::Add<Output = T> + Copy + Default,
 {
-    collection.iter()
-        .fold(T::default(), |acc, &x| acc + x)
+    collection.iter().fold(T::default(), |acc, &x| acc + x)
 }
 
 #[cfg(test)]
@@ -41,7 +40,7 @@ mod tests {
     fn test_sum_floats() {
         let result: f64 = sum(&[1.1, 2.2, 3.3]);
         assert!((result - 6.6).abs() < EPSILON);
-        
+
         let result: f64 = sum(&[-1.5, 2.5, -3.5]);
         assert!((result - (-2.5)).abs() < EPSILON);
     }
@@ -57,6 +56,4 @@ mod tests {
         assert_eq!(sum(&[42]), 42);
         assert_eq!(sum(&[3.14]), 3.14);
     }
-
-   
 }

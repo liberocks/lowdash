@@ -24,11 +24,19 @@ pub fn range_from<T>(start: T, element_num: i32) -> Vec<T>
 where
     T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + From<i32>,
 {
-    let length = if element_num < 0 { -element_num } else { element_num } as usize;
-    let step: T = if element_num < 0 { (-1).into() } else { 1.into() };
+    let length = if element_num < 0 {
+        -element_num
+    } else {
+        element_num
+    } as usize;
+    let step: T = if element_num < 0 {
+        (-1).into()
+    } else {
+        1.into()
+    };
     let mut result = Vec::with_capacity(length);
     let mut current = start;
-    
+
     for _ in 0..length {
         result.push(current);
         current = current + step;

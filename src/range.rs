@@ -20,7 +20,11 @@
 /// assert_eq!(result, vec![0, -1, -2, -3, -4]);
 /// ```
 pub fn range(element_num: i32) -> Vec<i32> {
-    let length = if element_num < 0 { -element_num } else { element_num } as usize;
+    let length = if element_num < 0 {
+        -element_num
+    } else {
+        element_num
+    } as usize;
     let step = if element_num < 0 { -1 } else { 1 };
     let mut result = Vec::with_capacity(length);
     for i in 0..length {
