@@ -149,6 +149,7 @@ Utility functions for array:
     - [mean\_by](#mean_by)
     - [percentile](#percentile)
     - [median](#median)
+    - [interpolate](#interpolate)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -203,6 +204,7 @@ Utility functions for math:
 - [mean_by](#mean_by)
 - [percentile](#percentile)
 - [median](#median)
+- [interpolate](#interpolate)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3494,6 +3496,22 @@ use lowdash::median;
 let numbers = vec![1, 2, 3, 4];
 let result = median(&numbers);
 assert!((result.unwrap() - 2.5).abs() < f64::EPSILON);
+```
+
+### interpolate
+Performs linear interpolation between two values.
+
+```rust
+use lowdash::interpolate;
+let lerp = interpolate(0.0, 10.0);
+assert_eq!(lerp(0.5), 5.0);
+```
+
+```rust
+use lowdash::interpolate;
+let lerp = interpolate(-10.0, 10.0);
+assert_eq!(lerp(0.25), -5.0);
+assert_eq!(lerp(0.75), 5.0);
 ```
 
 ## 🔥 Benchmark (experimental)
