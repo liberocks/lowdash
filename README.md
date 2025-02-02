@@ -147,6 +147,7 @@ Utility functions for array:
     - [product\_by](#product_by)
     - [mean](#mean)
     - [mean\_by](#mean_by)
+    - [percentile](#percentile)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -199,6 +200,7 @@ Utility functions for math:
 - [product_by](#product_by)
 - [mean](#mean)
 - [mean_by](#mean_by)
+- [percentile](#percentile)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3451,6 +3453,26 @@ assert!((mean - 2.0).abs() < f64::EPSILON);
 // Calculate mean of y coordinates
 let mean_y = mean_by(&objects, |&(_, y)| y as f64);
 assert!((mean_y - 6.0).abs() < f64::EPSILON);
+```
+
+### percentile
+Calculates the specified percentile of a collection.
+The percentile should be a value between 0 and 100.
+The collection will be sorted before calculation.
+Uses linear interpolation between closest ranks for non-integer results.
+ 
+```rust
+use lowdash::percentile;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = percentile(&numbers, 50.0);
+assert!((result.unwrap() - 3.0).abs() < f64::EPSILON);
+```
+ 
+```rust
+use lowdash::percentile;
+let numbers = vec![1, 2, 3, 4];
+let result = percentile(&numbers, 75.0);
+assert!((result.unwrap() - 3.25).abs() < f64::EPSILON);
 ```
 
 ## 🔥 Benchmark (experimental)
