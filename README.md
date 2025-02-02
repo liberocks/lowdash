@@ -8,9 +8,6 @@
 
 **liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
 
-## ⚠️ Disclaimer
-This project is still in heavy development and not ready for production use.
-
 ## 🚀 Installation
 ```bash
 cargo add lowdash
