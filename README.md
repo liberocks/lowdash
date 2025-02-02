@@ -22,79 +22,139 @@ This library has no dependencies outside the Rust standard library.
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
-- [associate](#associate)
-- [chunk](#chunk)
-- [compact](#compact)
-- [count](#count)
-- [count_by](#count_by)
-- [count_values](#count_values)
-- [count_values_by](#count_values_by)
-- [drop](#drop)
-- [drop_right](#drop_right)
-- [drop_right_while](#drop_right_while)
-- [drop_while](#drop_while)
-- [earliest](#earliest)
-- [earliest_by](#earliest_by)
-- [fill](#fill)
-- [filter](#filter)
-- [filter_map](#filter_map)
-- [filter_reject](#filter_reject)
-- [find](#find)
-- [find_duplicates](#find_duplicates)
-- [find_duplicates_by](#find_duplicates_by)
-- [find_index_of](#find_index_of)
-- [find_key](#find_key)
-- [find_key_by](#find_key_by)
-- [find_last_index_of](#find_last_index_of)
-- [find_or_else](#find_or_else)
-- [find_uniques](#find_uniques)
-- [find_uniques_by](#find_uniques_by)
-- [first](#first)
-- [first_or](#first_or)
-- [first_or_empty](#first_or_empty)
-- [flat_map](#flat_map)
-- [flatten](#flatten)
-- [foreach](#foreach)
-- [foreach_while](#foreach_while)
-- [group_by](#group_by)
-- [index_of](#index_of)
-- [interleave](#interleave)
-- [is_sorted](#is_sorted)
-- [is_sorted_by_key](#is_sorted_by_key)
-- [key_by](#key_by)
-- [last](#last)
-- [last_index_of](#last_index_of)
-- [last_or](#last_or)
-- [last_or_empty](#last_or_empty)
-- [latest](#latest)
-- [latest_by](#latest_by)
-- [map](#map)
-- [max](#max)
-- [max_by](#max_by)
-- [min](#min)
-- [min_by](#min_by)
-- [nth](#nth)
-- [partition_by](#partition_by)
-- [reduce](#reduce)
-- [reduce_right](#reduce_right)
-- [reject](#reject)
-- [reject_map](#reject_map)
-- [repeat](#repeat)
-- [repeat_by](#repeat_by)
-- [replace](#replace)
-- [replace_all](#replace_all)
-- [reverse](#reverse)
-- [sample](#sample)
-- [samples](#samples)
-- [shuffle](#shuffle)
-- [slice](#slice)
-- [slice_to_map](#slice_to_map)
-- [splice](#splice)
-- [subset](#subset)
-- [times](#times)
-- [uniq](#uniq)
-- [uniq_by](#uniq_by)
-- [drop_by_index](#drop_by_index)
+- [Lowdash](#lowdash)
+  - [⚠️ Disclaimer](#️-disclaimer)
+  - [🚀 Installation](#-installation)
+  - [📚 Documentation](#-documentation)
+    - [camel\_case](#camel_case)
+    - [capitalize](#capitalize)
+    - [char\_length](#char_length)
+    - [chunk\_string](#chunk_string)
+    - [earliest\_by](#earliest_by)
+    - [earliest](#earliest)
+    - [ellipsis](#ellipsis)
+    - [find\_duplicates\_by](#find_duplicates_by)
+    - [find\_duplicates](#find_duplicates)
+    - [find\_index\_of](#find_index_of)
+    - [find\_key\_by](#find_key_by)
+    - [find\_key](#find_key)
+    - [find\_last\_index\_of](#find_last_index_of)
+    - [find\_or\_else](#find_or_else)
+    - [find\_uniques](#find_uniques)
+    - [find\_uniques\_by](#find_uniques_by)
+    - [find](#find)
+    - [first\_or\_empty](#first_or_empty)
+    - [first\_or](#first_or)
+    - [first](#first)
+    - [index\_of](#index_of)
+    - [kebab\_case](#kebab_case)
+    - [last\_index\_of](#last_index_of)
+    - [last\_or\_empty](#last_or_empty)
+    - [last\_or](#last_or)
+    - [last](#last)
+    - [latest\_by](#latest_by)
+    - [latest](#latest)
+    - [max\_by](#max_by)
+    - [max](#max)
+    - [min\_by](#min_by)
+    - [min](#min)
+    - [nearest\_power\_of\_two](#nearest_power_of_two)
+    - [nth](#nth)
+    - [pascal\_case](#pascal_case)
+    - [random\_string](#random_string)
+    - [sample](#sample)
+    - [samples](#samples)
+    - [snake\_case](#snake_case)
+    - [substring](#substring)
+    - [words](#words)
+    - [reject](#reject)
+    - [filter](#filter)
+    - [map](#map)
+    - [filter\_map](#filter_map)
+    - [flat\_map](#flat_map)
+    - [reduce](#reduce)
+    - [reduce\_right](#reduce_right)
+    - [foreach](#foreach)
+    - [foreach\_while](#foreach_while)
+    - [times](#times)
+    - [uniq](#uniq)
+    - [uniq\_by](#uniq_by)
+    - [group\_by](#group_by)
+    - [chunk](#chunk)
+    - [partition\_by](#partition_by)
+    - [flatten](#flatten)
+    - [interleave](#interleave)
+    - [shuffle](#shuffle)
+    - [reverse](#reverse)
+    - [fill](#fill)
+    - [repeat](#repeat)
+    - [repeat\_by](#repeat_by)
+    - [key\_by](#key_by)
+    - [associate](#associate)
+    - [slice\_to\_map](#slice_to_map)
+    - [drop](#drop)
+    - [drop\_right](#drop_right)
+    - [drop\_while](#drop_while)
+    - [drop\_right\_while](#drop_right_while)
+    - [drop\_by\_index](#drop_by_index)
+    - [reject\_map](#reject_map)
+    - [filter\_reject](#filter_reject)
+    - [count](#count)
+    - [count\_by](#count_by)
+    - [count\_values](#count_values)
+    - [count\_values\_by](#count_values_by)
+    - [subset](#subset)
+    - [slice](#slice)
+    - [replace](#replace)
+    - [replace\_all](#replace_all)
+    - [compact](#compact)
+- [Arguments](#arguments)
+- [Type Parameters](#type-parameters)
+- [Returns](#returns)
+- [Examples](#examples)
+    - [is\_sorted](#is_sorted)
+    - [is\_sorted\_by\_key](#is_sorted_by_key)
+    - [splice](#splice)
+    - [keys](#keys)
+    - [uniq\_keys](#uniq_keys)
+    - [has\_key](#has_key)
+    - [values](#values)
+    - [uniq\_values](#uniq_values)
+    - [value\_or](#value_or)
+    - [pick\_by](#pick_by)
+    - [pick\_by\_keys](#pick_by_keys)
+    - [pick\_by\_values](#pick_by_values)
+    - [omit\_by](#omit_by)
+    - [omit\_by\_keys](#omit_by_keys)
+    - [omit\_by\_values](#omit_by_values)
+    - [entries](#entries)
+    - [to\_pairs](#to_pairs)
+    - [from\_entries](#from_entries)
+    - [from\_pairs](#from_pairs)
+    - [invert](#invert)
+    - [assign](#assign)
+    - [map\_values](#map_values)
+    - [map\_keys](#map_keys)
+    - [map\_entries](#map_entries)
+    - [map\_to\_slice](#map_to_slice)
+    - [range](#range)
+    - [range\_from](#range_from)
+    - [range\_with\_step](#range_with_step)
+    - [clamp](#clamp)
+    - [sum](#sum)
+    - [sum\_by](#sum_by)
+    - [product](#product)
+    - [product\_by](#product_by)
+    - [mean](#mean)
+    - [mean\_by](#mean_by)
+    - [percentile](#percentile)
+    - [median](#median)
+    - [interpolate](#interpolate)
+    - [permutation](#permutation)
+    - [combination](#combination)
+    - [duration\_between](#duration_between)
+  - [🔥 Benchmark (experimental)](#-benchmark-experimental)
+  - [🫡 Acknowledgement](#-acknowledgement)
 
 Utility functions for string manipulation:
 - [camel_case](#camel_case)
@@ -135,6 +195,22 @@ Utility functions for object manipulation:
 
 Utility functions for math:
 - [nearest_power_of_two](#nearest_power_of_two)
+- [range](#range)
+- [range_from](#range_from)
+- [range_with_step](#range_with_step)
+- [clamp](#clamp)
+- [sum](#sum)
+- [sum_by](#sum_by)
+- [product](#product)
+- [product_by](#product_by)
+- [mean](#mean)
+- [mean_by](#mean_by)
+- [percentile](#percentile)
+- [median](#median)
+- [interpolate](#interpolate)
+- [permutation](#permutation)
+- [combination](#combination)
+- [duration_between](#duration_between)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3199,6 +3275,294 @@ map.insert("b", 2);
 let transformed = map_to_slice(&map, |k, v| format!("{}:{}", k, v));
 assert!(transformed.contains(&"a:1".to_string()));
 assert!(transformed.contains(&"b:2".to_string()));
+```
+
+### range
+Generate a range of integers from 0 to `element_num` (exclusive).
+If `element_num` is negative, generate a range from 0 to `-element_num` (exclusive) with a step of -1.
+
+```rust
+use lowdash::range;
+let result = range(5);
+assert_eq!(result, vec![0, 1, 2, 3, 4]);
+```
+
+```rust
+use lowdash::range;
+let result = range(-5);
+assert_eq!(result, vec![0, -1, -2, -3, -4]);
+```
+
+### range_from
+Generate a range of numbers starting from a given value.
+If `element_num` is negative, generate a range with a step of -1.
+
+```rust
+use lowdash::range_from;
+let result = range_from(5, 3);
+assert_eq!(result, vec![5, 6, 7]);
+```
+
+```rust
+use lowdash::range_from;
+let result = range_from(5, -3);
+assert_eq!(result, vec![5, 4, 3]);
+```
+
+### range_with_step
+Generate a range of numbers from start to end (exclusive) with a specified step.
+
+```rust
+use lowdash::range_with_steps;
+let result = range_with_steps(1, 5, 1);
+assert_eq!(result, vec![1, 2, 3, 4]);
+```
+
+```rust
+use lowdash::range_with_steps;
+let result = range_with_steps(5.0, 2.0, -1.0);
+assert_eq!(result, vec![5.0, 4.0, 3.0]);
+```
+
+```rust
+use lowdash::range_with_steps;
+let result = range_with_steps(1, 1, 1);  // Empty range
+assert_eq!(result, Vec::<i32>::new());
+```
+
+### clamp
+Clamps a value between a minimum and maximum value.
+If the value is less than the minimum, returns the minimum.
+If the value is greater than the maximum, returns the maximum.
+Otherwise, returns the value unchanged.
+
+```rust
+use lowdash::clamp;
+assert_eq!(clamp(5, 0, 10), 5);  // Value within range
+assert_eq!(clamp(-5, 0, 10), 0); // Value below minimum
+assert_eq!(clamp(15, 0, 10), 10); // Value above maximum
+```
+
+### sum
+Calculates the sum of all elements in a collection.
+
+```rust
+use lowdash::sum;
+
+// Integer sum
+assert_eq!(sum(&[1, 2, 3, 4, 5]), 15);
+
+// Float sum
+assert_eq!(sum(&[1.1, 2.2, 3.3]), 6.6);
+```
+
+### sum_by
+Calculates the sum of values obtained by applying a function to each element in a collection.
+
+```rust
+use lowdash::sum_by;
+
+let numbers = vec![1, 2, 3, 4];
+let result = sum_by(&numbers, |x| x * 2);
+assert_eq!(result, 20); // (1*2 + 2*2 + 3*2 + 4*2)
+```
+
+### product
+Calculate the product of all elements in a collection.
+If the collection is empty, returns 1 (multiplicative identity).
+
+```rust
+use lowdash::product;
+
+// Integer product
+let numbers = vec![1, 2, 3, 4, 5];
+assert_eq!(product(&numbers), 120);
+```
+
+```rust
+use lowdash::product;
+
+// Float product
+let numbers = vec![1.5, 2.0, 3.0];
+assert_eq!(product(&numbers), 9.0);
+```
+
+```rust
+use lowdash::product;
+
+// Empty collection returns 1
+let empty: Vec<i32> = vec![];
+assert_eq!(product(&empty), 1);
+```
+
+### product_by
+Calculate the product of values obtained by applying a function to each element in a collection.
+If the collection is empty, returns 1 (multiplicative identity).
+
+```rust
+use lowdash::product_by;
+
+let numbers = vec![1, 2, 3, 4];
+let result = product_by(&numbers, |x| x * 2);
+assert_eq!(result, 384); // (1*2) * (2*2) * (3*2) * (4*2)
+```
+
+```rust
+use lowdash::product_by;
+
+#[derive(Debug)]
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+let rectangles = vec![
+    Rectangle { width: 2.0, height: 3.0 },
+    Rectangle { width: 4.0, height: 5.0 },
+];
+
+let total_area = product_by(&rectangles, |r| r.width * r.height);
+assert_eq!(total_area, 120.0); // (2*3) * (4*5)
+```
+
+### mean
+Calculates the arithmetic mean of a collection of numbers.
+If the collection is empty, returns zero.
+
+```rust
+use lowdash::mean;
+let numbers = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+let result = mean(&numbers);
+assert_eq!(result, 3.0);
+```
+
+```rust
+use lowdash::mean;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = mean(&numbers);
+assert_eq!(result, 3);
+```
+
+```rust
+use lowdash::mean;
+let empty: Vec<f64> = vec![];
+let result = mean(&empty);
+assert_eq!(result, 0.0);
+```
+
+### mean_by
+Calculates the mean value of a collection after applying a transformation function to each element.
+
+```rust
+use lowdash::mean_by;
+
+let objects = vec![(1, 4), (2, 6), (3, 8)];
+let mean = mean_by(&objects, |&(x, _)| x as f64);
+assert!((mean - 2.0).abs() < f64::EPSILON);
+
+// Calculate mean of y coordinates
+let mean_y = mean_by(&objects, |&(_, y)| y as f64);
+assert!((mean_y - 6.0).abs() < f64::EPSILON);
+```
+
+### percentile
+Calculates the specified percentile of a collection.
+The percentile should be a value between 0 and 100.
+The collection will be sorted before calculation.
+Uses linear interpolation between closest ranks for non-integer results.
+ 
+```rust
+use lowdash::percentile;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = percentile(&numbers, 50.0);
+assert!((result.unwrap() - 3.0).abs() < f64::EPSILON);
+```
+ 
+```rust
+use lowdash::percentile;
+let numbers = vec![1, 2, 3, 4];
+let result = percentile(&numbers, 75.0);
+assert!((result.unwrap() - 3.25).abs() < f64::EPSILON);
+```
+
+### median
+Calculate the median value of a collection.
+The median is the 50th percentile of a collection.
+For collections with an even number of elements, the median is the average of the two middle values. The collection will be sorted before calculation.
+
+```rust
+use lowdash::median;
+let numbers = vec![1, 3, 5, 2, 4];
+let result = median(&numbers);
+assert!((result.unwrap() - 3.0).abs() < f64::EPSILON);
+```
+
+```rust
+use lowdash::median;
+let numbers = vec![1, 2, 3, 4];
+let result = median(&numbers);
+assert!((result.unwrap() - 2.5).abs() < f64::EPSILON);
+```
+
+### interpolate
+Performs linear interpolation between two values.
+
+```rust
+use lowdash::interpolate;
+let lerp = interpolate(0.0, 10.0);
+assert_eq!(lerp(0.5), 5.0);
+```
+
+```rust
+use lowdash::interpolate;
+let lerp = interpolate(-10.0, 10.0);
+assert_eq!(lerp(0.25), -5.0);
+assert_eq!(lerp(0.75), 5.0);
+```
+
+### permutation
+Finds all permutation of a collection.
+
+```rust
+use lowdash::permutation;
+
+let items = vec![1, 2, 3];
+let result = permutation(&items);
+assert_eq!(result.len(), 6);
+// Possible permutation: [2, 1, 3]
+assert!(result.contains(&vec![2, 1, 3]));
+```
+
+### combination
+Finds all combinations of k elements from a collection.
+
+```rust
+use lowdash::combination;
+
+let items = vec![1, 2, 3, 4];
+let result = combination(&items, 2);
+assert_eq!(result.len(), 6);
+// One possible combination: [2, 3]
+assert!(result.contains(&vec![2, 3]));
+```
+
+### duration_between
+Returns the absolute difference between two dates in the specified unit.
+
+```rust
+use std::time::{SystemTime, Duration};
+use lowdash::{duration_between, DurationUnit};
+
+let epoch = SystemTime::UNIX_EPOCH;
+let one_year = Duration::from_secs(31_557_600);
+let later = epoch + one_year;
+// Difference in years
+assert_eq!(duration_between(epoch, later, DurationUnit::Years), 1);
+
+let one_day = Duration::from_secs(86_400);
+let day_later = epoch + one_day;
+// Difference in days
+assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
 ```
 
 ## 🔥 Benchmark (experimental)

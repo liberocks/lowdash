@@ -48,7 +48,7 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::collections::{BTreeMap, HashMap};
+    use std::collections::HashMap;
 
     #[test]
     fn test_map_entries_basic() {

@@ -49,7 +49,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::entries::Entry;
 
     #[test]
     fn test_invert_single_entry() {
