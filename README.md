@@ -144,6 +144,8 @@ Utility functions for array:
     - [sum](#sum)
     - [sum\_by](#sum_by)
     - [product](#product)
+    - [product\_by](#product_by)
+    - [mean](#mean)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -193,6 +195,8 @@ Utility functions for math:
 - [sum](#sum)
 - [sum_by](#sum_by)
 - [product](#product)
+- [product_by](#product_by)
+- [mean](#mean)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3327,7 +3331,6 @@ assert_eq!(clamp(15, 0, 10), 10); // Value above maximum
 
 ### sum
 Calculates the sum of all elements in a collection.
-Works with any numeric type that implements `std::ops::Add` and can be copied.
 
 ```rust
 use lowdash::sum;
@@ -3353,7 +3356,6 @@ assert_eq!(result, 20); // (1*2 + 2*2 + 3*2 + 4*2)
 ### product
 Calculate the product of all elements in a collection.
 If the collection is empty, returns 1 (multiplicative identity).
-Works with any numeric type that implements `std::ops::Mul` and can be copied.
 
 ```rust
 use lowdash::product;
@@ -3377,6 +3379,61 @@ use lowdash::product;
 // Empty collection returns 1
 let empty: Vec<i32> = vec![];
 assert_eq!(product(&empty), 1);
+```
+
+### product_by
+Calculate the product of values obtained by applying a function to each element in a collection.
+If the collection is empty, returns 1 (multiplicative identity).
+
+```rust
+use lowdash::product_by;
+
+let numbers = vec![1, 2, 3, 4];
+let result = product_by(&numbers, |x| x * 2);
+assert_eq!(result, 384); // (1*2) * (2*2) * (3*2) * (4*2)
+```
+
+```rust
+use lowdash::product_by;
+
+#[derive(Debug)]
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+let rectangles = vec![
+    Rectangle { width: 2.0, height: 3.0 },
+    Rectangle { width: 4.0, height: 5.0 },
+];
+
+let total_area = product_by(&rectangles, |r| r.width * r.height);
+assert_eq!(total_area, 120.0); // (2*3) * (4*5)
+```
+
+### mean
+Calculates the arithmetic mean of a collection of numbers.
+If the collection is empty, returns zero.
+
+```rust
+use lowdash::mean;
+let numbers = vec![1.0, 2.0, 3.0, 4.0, 5.0];
+let result = mean(&numbers);
+assert_eq!(result, 3.0);
+```
+
+```rust
+use lowdash::mean;
+let numbers = vec![1, 2, 3, 4, 5];
+let result = mean(&numbers);
+assert_eq!(result, 3);
+```
+
+```rust
+use lowdash::mean;
+let empty: Vec<f64> = vec![];
+let result = mean(&empty);
+assert_eq!(result, 0.0);
 ```
 
 ## 🔥 Benchmark (experimental)
