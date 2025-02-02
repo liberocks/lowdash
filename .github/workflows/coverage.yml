@@ -7,11 +7,13 @@ env:
   RUST_BACKTRACE: 1
 jobs:
   coverage:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         version:
           - nightly
+        target:
+          - x86_64-unknown-linux-gnu
       fail-fast: false
     steps:
       - uses: actions/checkout@v3
@@ -20,8 +22,8 @@ jobs:
           toolchain: ${{ matrix.version }}
       - name: Install dependencies
         run: |
-          brew update
-          brew install openssl pkg-config zlib
+          sudo apt-get update
+          sudo apt-get install -y libssl-dev pkg-config zlib1g-dev
       - name: Cache cargo-tarpaulin
         uses: actions/cache@v3
         with:
@@ -32,7 +34,7 @@ jobs:
       - name: Install cargo-tarpaulin
         run: |
           if ! command -v cargo-tarpaulin &> /dev/null; then
-            cargo install --version 0.31.2 cargo-tarpaulin
+            cargo install --version 0.31.3 cargo-tarpaulin
           else
             echo "cargo-tarpaulin is already installed"
           fi
