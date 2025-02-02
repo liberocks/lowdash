@@ -146,6 +146,7 @@ Utility functions for array:
     - [product](#product)
     - [product\_by](#product_by)
     - [mean](#mean)
+    - [mean\_by](#mean_by)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -197,6 +198,7 @@ Utility functions for math:
 - [product](#product)
 - [product_by](#product_by)
 - [mean](#mean)
+- [mean_by](#mean_by)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3434,6 +3436,21 @@ use lowdash::mean;
 let empty: Vec<f64> = vec![];
 let result = mean(&empty);
 assert_eq!(result, 0.0);
+```
+
+### mean_by
+Calculates the mean value of a collection after applying a transformation function to each element.
+
+```rust
+use lowdash::mean_by;
+
+let objects = vec![(1, 4), (2, 6), (3, 8)];
+let mean = mean_by(&objects, |&(x, _)| x as f64);
+assert!((mean - 2.0).abs() < f64::EPSILON);
+
+// Calculate mean of y coordinates
+let mean_y = mean_by(&objects, |&(_, y)| y as f64);
+assert!((mean_y - 6.0).abs() < f64::EPSILON);
 ```
 
 ## 🔥 Benchmark (experimental)
