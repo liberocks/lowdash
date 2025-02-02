@@ -2,7 +2,7 @@
 name = "lowdash"
 version = "0.5.0"
 authors = ["Tirtadwipa Manunggal <tirtadwipa.manunggal@gmail.com>"]
-description = "A Lodash inspired utility library to manipulate array and object"
+description = "A Lodash inspired utility library to manipulate array and object for Rust"
 repository = "https://github.com/liberocks/lowdash"
 readme = "README.md"
 license = "MIT"
