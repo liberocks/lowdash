@@ -31,18 +31,13 @@ jobs:
           key: ${{ runner.os }}-cargo-tarpaulin-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
              ${{ runner.os }}-cargo-tarpaulin-
-      # - name: Install cargo-tarpaulin
-      #   run: |
-      #     if ! command -v cargo-tarpaulin &> /dev/null; then
-      #       cargo install --version 0.31.3 cargo-tarpaulin
-      #     else
-      #       echo "cargo-tarpaulin is already installed"
-      #     fi
-      - name: Patch clap_builder and install cargo-tarpaulin
+      - name: Install cargo-tarpaulin
         run: |
-          echo "[patch.crates-io]" >> Cargo.toml
-          echo 'clap_builder = "=4.5.23"' >> Cargo.toml
-          cargo install cargo-tarpaulin --version 0.31.3 --locked
+          if ! command -v cargo-tarpaulin &> /dev/null; then
+            cargo install --version 0.31.3 cargo-tarpaulin
+          else
+            echo "cargo-tarpaulin is already installed"
+          fi
       - name: coverage
         run: |
           cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --coveralls ${{ secrets.COVERALLS_TOKEN }}
