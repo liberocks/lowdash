@@ -150,6 +150,8 @@ Utility functions for array:
     - [percentile](#percentile)
     - [median](#median)
     - [interpolate](#interpolate)
+    - [permutation](#permutation)
+    - [combination](#combination)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -205,6 +207,8 @@ Utility functions for math:
 - [percentile](#percentile)
 - [median](#median)
 - [interpolate](#interpolate)
+- [permutation](#permutation)
+- [combination](#combination)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3512,6 +3516,32 @@ use lowdash::interpolate;
 let lerp = interpolate(-10.0, 10.0);
 assert_eq!(lerp(0.25), -5.0);
 assert_eq!(lerp(0.75), 5.0);
+```
+
+### permutation
+Finds all permutation of a collection.
+
+```rust
+use lowdash::permutation;
+
+let items = vec![1, 2, 3];
+let result = permutation(&items);
+assert_eq!(result.len(), 6);
+// Possible permutation: [2, 1, 3]
+assert!(result.contains(&vec![2, 1, 3]));
+```
+
+### combination
+Finds all combinations of k elements from a collection.
+
+```rust
+use lowdash::combination;
+
+let items = vec![1, 2, 3, 4];
+let result = combination(&items, 2);
+assert_eq!(result.len(), 6);
+// One possible combination: [2, 3]
+assert!(result.contains(&vec![2, 3]));
 ```
 
 ## 🔥 Benchmark (experimental)

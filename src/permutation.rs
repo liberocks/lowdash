@@ -8,7 +8,7 @@
 ///
 /// # Examples
 /// ```rust
-/// use lowdash::permutation::permutation;
+/// use lowdash::permutation;
 ///
 /// let items = vec![1, 2, 3];
 /// let result = permutation(&items);
@@ -16,8 +16,6 @@
 /// // Possible permutation: [2, 1, 3]
 /// assert!(result.contains(&vec![2, 1, 3]));
 /// ```
-///
-/// This implementation uses recursion and the standard library only.
 pub fn permutation<T: Clone>(items: &[T]) -> Vec<Vec<T>> {
     if items.is_empty() {
         return vec![vec![]];
