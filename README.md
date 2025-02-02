@@ -152,6 +152,7 @@ Utility functions for array:
     - [interpolate](#interpolate)
     - [permutation](#permutation)
     - [combination](#combination)
+    - [duration\_between](#duration_between)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -209,6 +210,7 @@ Utility functions for math:
 - [interpolate](#interpolate)
 - [permutation](#permutation)
 - [combination](#combination)
+- [duration_between](#duration_between)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3542,6 +3544,25 @@ let result = combination(&items, 2);
 assert_eq!(result.len(), 6);
 // One possible combination: [2, 3]
 assert!(result.contains(&vec![2, 3]));
+```
+
+### duration_between
+Returns the absolute difference between two dates in the specified unit.
+
+```rust
+use std::time::{SystemTime, Duration};
+use lowdash::{duration_between, DurationUnit};
+
+let epoch = SystemTime::UNIX_EPOCH;
+let one_year = Duration::from_secs(31_557_600);
+let later = epoch + one_year;
+// Difference in years
+assert_eq!(duration_between(epoch, later, DurationUnit::Years), 1);
+
+let one_day = Duration::from_secs(86_400);
+let day_later = epoch + one_day;
+// Difference in days
+assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
 ```
 
 ## 🔥 Benchmark (experimental)
