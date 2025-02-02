@@ -8,6 +8,9 @@
 
 **liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
 
+## ⚠️ Disclaimer
+This project is still in heavy development and not ready for production use.
+
 ## 🚀 Installation
 ```bash
 cargo add lowdash
@@ -20,6 +23,7 @@ You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
 - [Lowdash](#lowdash)
+  - [⚠️ Disclaimer](#️-disclaimer)
   - [🚀 Installation](#-installation)
   - [📚 Documentation](#-documentation)
     - [camel\_case](#camel_case)
@@ -133,6 +137,10 @@ Utility functions for array:
     - [map\_keys](#map_keys)
     - [map\_entries](#map_entries)
     - [map\_to\_slice](#map_to_slice)
+    - [range](#range)
+    - [range\_from](#range_from)
+    - [range\_with\_step](#range_with_step)
+  - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
 Utility functions for string manipulation:
@@ -174,6 +182,9 @@ Utility functions for object manipulation:
 
 Utility functions for math:
 - [nearest_power_of_two](#nearest_power_of_two)
+- [range](#range)
+- [range_from](#range_from)
+- [range_with_step](#range_with_step)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3239,6 +3250,62 @@ let transformed = map_to_slice(&map, |k, v| format!("{}:{}", k, v));
 assert!(transformed.contains(&"a:1".to_string()));
 assert!(transformed.contains(&"b:2".to_string()));
 ```
+
+### range
+Generate a range of integers from 0 to `element_num` (exclusive).
+If `element_num` is negative, generate a range from 0 to `-element_num` (exclusive) with a step of -1.
+
+```rust
+use lowdash::range;
+let result = range(5);
+assert_eq!(result, vec![0, 1, 2, 3, 4]);
+```
+
+```rust
+use lowdash::range;
+let result = range(-5);
+assert_eq!(result, vec![0, -1, -2, -3, -4]);
+```
+
+### range_from
+Generate a range of numbers starting from a given value.
+If `element_num` is negative, generate a range with a step of -1.
+
+```rust
+use lowdash::range_from;
+let result = range_from(5, 3);
+assert_eq!(result, vec![5, 6, 7]);
+```
+
+```rust
+use lowdash::range_from;
+let result = range_from(5, -3);
+assert_eq!(result, vec![5, 4, 3]);
+```
+
+### range_with_step
+Generate a range of numbers from start to end (exclusive) with a specified step.
+
+```rust
+use lowdash::range_with_steps;
+let result = range_with_steps(1, 5, 1);
+assert_eq!(result, vec![1, 2, 3, 4]);
+```
+
+```rust
+use lowdash::range_with_steps;
+let result = range_with_steps(5.0, 2.0, -1.0);
+assert_eq!(result, vec![5.0, 4.0, 3.0]);
+```
+
+```rust
+use lowdash::range_with_steps;
+let result = range_with_steps(1, 1, 1);  // Empty range
+assert_eq!(result, Vec::<i32>::new());
+```
+
+## 🔥 Benchmark (experimental)
+You can find the benchmark result in `report` directory. All the benchmark was generated in Macbook Air M2 with 16GB RAM. 
 
 ## 🫡 Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
