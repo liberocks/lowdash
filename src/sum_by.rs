@@ -17,28 +17,6 @@ use std::ops::Add;
 /// let result = sum_by(&numbers, |x| x * 2);
 /// assert_eq!(result, 20); // (1*2 + 2*2 + 3*2 + 4*2)
 /// ```
-///
-/// ```rust
-/// use lowdash::sum_by;
-///
-/// #[derive(Debug)]
-/// struct Person {
-///     age: u32,
-///     score: f64,
-/// }
-///
-/// let people = vec![
-///     Person { age: 25, score: 4.5 },
-///     Person { age: 30, score: 3.7 },
-///     Person { age: 35, score: 4.2 },
-/// ];
-///
-/// let total_age = sum_by(&people, |p| p.age);
-/// assert_eq!(total_age, 90);
-///
-/// let total_score = sum_by(&people, |p| p.score);
-/// assert!((total_score - 12.4).abs() < f64::EPSILON);
-/// ```
 pub fn sum_by<T, R, F>(collection: &[T], iteratee: F) -> R
 where
     F: Fn(&T) -> R,

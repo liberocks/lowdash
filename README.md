@@ -143,6 +143,7 @@ Utility functions for array:
     - [clamp](#clamp)
     - [sum](#sum)
     - [sum\_by](#sum_by)
+    - [product](#product)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -191,6 +192,7 @@ Utility functions for math:
 - [clamp](#clamp)
 - [sum](#sum)
 - [sum_by](#sum_by)
+- [product](#product)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3348,26 +3350,33 @@ let result = sum_by(&numbers, |x| x * 2);
 assert_eq!(result, 20); // (1*2 + 2*2 + 3*2 + 4*2)
 ```
 
+### product
+Calculate the product of all elements in a collection.
+If the collection is empty, returns 1 (multiplicative identity).
+Works with any numeric type that implements `std::ops::Mul` and can be copied.
+
 ```rust
-use lowdash::sum_by;
+use lowdash::product;
 
-#[derive(Debug)]
-struct Person {
-    age: u32,
-    score: f64,
-}
+// Integer product
+let numbers = vec![1, 2, 3, 4, 5];
+assert_eq!(product(&numbers), 120);
+```
 
-let people = vec![
-    Person { age: 25, score: 4.5 },
-    Person { age: 30, score: 3.7 },
-    Person { age: 35, score: 4.2 },
-];
+```rust
+use lowdash::product;
 
-let total_age = sum_by(&people, |p| p.age);
-assert_eq!(total_age, 90);
+// Float product
+let numbers = vec![1.5, 2.0, 3.0];
+assert_eq!(product(&numbers), 9.0);
+```
 
-let total_score = sum_by(&people, |p| p.score);
-assert!((total_score - 12.4).abs() < f64::EPSILON);
+```rust
+use lowdash::product;
+
+// Empty collection returns 1
+let empty: Vec<i32> = vec![];
+assert_eq!(product(&empty), 1);
 ```
 
 ## 🔥 Benchmark (experimental)
