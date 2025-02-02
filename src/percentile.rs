@@ -32,7 +32,7 @@ where
         return None;
     }
 
-    if p < 0.0 || p > 100.0 {
+    if !(0.0..=100.0).contains(&p) {
         return None;
     }
 

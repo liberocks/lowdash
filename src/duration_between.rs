@@ -1,4 +1,4 @@
-use std::time::{Duration, SystemTime};
+use std::time::SystemTime;
 
 /// Time units for calculating duration.
 pub enum DurationUnit {

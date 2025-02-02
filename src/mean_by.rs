@@ -1,5 +1,3 @@
-use std::ops::Add;
-
 /// Calculates the mean value of a collection after applying a transformation function to each element.
 ///
 /// # Arguments
