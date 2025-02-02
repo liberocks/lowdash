@@ -140,6 +140,7 @@ Utility functions for array:
     - [range](#range)
     - [range\_from](#range_from)
     - [range\_with\_step](#range_with_step)
+    - [clamp](#clamp)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -185,6 +186,7 @@ Utility functions for math:
 - [range](#range)
 - [range_from](#range_from)
 - [range_with_step](#range_with_step)
+- [clamp](#clamp)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3302,6 +3304,19 @@ assert_eq!(result, vec![5.0, 4.0, 3.0]);
 use lowdash::range_with_steps;
 let result = range_with_steps(1, 1, 1);  // Empty range
 assert_eq!(result, Vec::<i32>::new());
+```
+
+### clamp
+Clamps a value between a minimum and maximum value.
+If the value is less than the minimum, returns the minimum.
+If the value is greater than the maximum, returns the maximum.
+Otherwise, returns the value unchanged.
+
+```rust
+use lowdash::clamp;
+assert_eq!(clamp(5, 0, 10), 5);  // Value within range
+assert_eq!(clamp(-5, 0, 10), 0); // Value below minimum
+assert_eq!(clamp(15, 0, 10), 10); // Value above maximum
 ```
 
 ## 🔥 Benchmark (experimental)
