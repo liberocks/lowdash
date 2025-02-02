@@ -34,7 +34,7 @@ jobs:
       - name: Install cargo-tarpaulin
         run: |
           if ! command -v cargo-tarpaulin &> /dev/null; then
-            cargo install cargo-tarpaulin
+            cargo install --version 0.31.4 cargo-tarpaulin
           else
             echo "cargo-tarpaulin is already installed"
           fi
