@@ -141,6 +141,7 @@ Utility functions for array:
     - [range\_from](#range_from)
     - [range\_with\_step](#range_with_step)
     - [clamp](#clamp)
+    - [sum](#sum)
   - [🔥 Benchmark (experimental)](#-benchmark-experimental)
   - [🫡 Acknowledgement](#-acknowledgement)
 
@@ -187,6 +188,7 @@ Utility functions for math:
 - [range_from](#range_from)
 - [range_with_step](#range_with_step)
 - [clamp](#clamp)
+- [sum](#sum)
 
 ### camel_case
 Converts a string to camelCase.
@@ -3317,6 +3319,20 @@ use lowdash::clamp;
 assert_eq!(clamp(5, 0, 10), 5);  // Value within range
 assert_eq!(clamp(-5, 0, 10), 0); // Value below minimum
 assert_eq!(clamp(15, 0, 10), 10); // Value above maximum
+```
+
+### sum
+Calculates the sum of all elements in a collection.
+Works with any numeric type that implements `std::ops::Add` and can be copied.
+
+```rust
+use lowdash::sum;
+
+// Integer sum
+assert_eq!(sum(&[1, 2, 3, 4, 5]), 15);
+
+// Float sum
+assert_eq!(sum(&[1.1, 2.2, 3.3]), 6.6);
 ```
 
 ## 🔥 Benchmark (experimental)
