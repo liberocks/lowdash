@@ -1,6 +1,6 @@
 [package]
 name = "lowdash"
-version = "0.5.1"
+version = "0.5.2"
 authors = ["Tirtadwipa Manunggal <tirtadwipa.manunggal@gmail.com>"]
 description = "A Lodash inspired utility library to manipulate array and object for Rust"
 repository = "https://github.com/liberocks/lowdash"
