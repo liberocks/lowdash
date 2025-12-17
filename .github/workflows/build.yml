@@ -69,7 +69,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: test
         run: cargo test
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: windows ${{ matrix.version }}
@@ -96,7 +96,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: test
         run: cargo test
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: mac ${{ matrix.version }}
