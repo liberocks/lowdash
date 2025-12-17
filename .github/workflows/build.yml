@@ -42,8 +42,8 @@ jobs:
           name: linux ${{ matrix.version }}
           retention-days: 3
           path: |
-              tests/data/
-              !tests/data/**/*.rs
+            tests/data/
+            !tests/data/**/*.rs
       - name: check formatting
         run: cargo fmt -- --check
   windows:
@@ -66,14 +66,14 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: test
         run: cargo test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: windows ${{ matrix.version }}
           retention-days: 3
           path: |
-              tests/data/
-              !tests/data/**/*.rs
+            tests/data/
+            !tests/data/**/*.rs
   mac:
     runs-on: macos-latest
     strategy:
@@ -93,11 +93,11 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: test
         run: cargo test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: mac ${{ matrix.version }}
           retention-days: 3
           path: |
-              tests/data/
-              !tests/data/**/*.rs
+            tests/data/
+            !tests/data/**/*.rs
