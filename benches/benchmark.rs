@@ -132,7 +132,10 @@ mod values;
 mod words;
 
 fn custom_criterion() -> Criterion {
-    Criterion::default().output_directory(std::path::Path::new("./report"))
+    Criterion::default()
+        .output_directory(std::path::Path::new("./report"))
+        .sample_size(500)
+        .measurement_time(std::time::Duration::from_secs(10))
 }
 
 fn all_benches(c: &mut Criterion) {
