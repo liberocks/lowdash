@@ -1,4 +1,4 @@
-        use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 mod assign;
 mod associate;
@@ -138,9 +138,9 @@ fn custom_criterion() -> Criterion {
         .measurement_time(std::time::Duration::from_secs(7))
 }
 
-        criterion_group! {
-            name = benches;
-            config = custom_criterion();
-            targets = all_benches
-        }
-        criterion_main!(benches);
+criterion_group! {
+    name = benches;
+    config = custom_criterion();
+    targets = all_benches
+}
+criterion_main!(benches);
