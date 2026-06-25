@@ -25,6 +25,7 @@ mod drop;
 mod drop_by_index;
 mod drop_right;
 mod drop_right_while;
+mod drop_while;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -55,6 +56,7 @@ mod drop_right_while;
     drop_by_index::benchmark_drop_by_index(c);
     drop_right::benchmark_drop_right(c);
     drop_right_while::benchmark_drop_right_while(c);
+    drop_while::benchmark_drop_while(c);
 }
 
         criterion_group! {
