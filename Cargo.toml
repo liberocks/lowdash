@@ -9,6 +9,7 @@ license = "MIT"
 categories = ["rust-patterns"]
 keywords = ["rust-lodash", "lodash", "utility", "js", "javascript"]
 edition = "2021"
+autobenches = false
 
 [dev-dependencies]
 criterion = { version = "0.5.1", features = ["html_reports"] }
