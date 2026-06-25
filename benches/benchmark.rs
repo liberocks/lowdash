@@ -33,6 +33,7 @@ mod ellipsis;
 mod entries;
 mod fill;
 mod filter;
+mod filter_map;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -71,6 +72,7 @@ mod filter;
     entries::benchmark_entries(c);
     fill::benchmark_fill(c);
     filter::benchmark_filter(c);
+    filter_map::benchmark_filter_map(c);
 }
 
         criterion_group! {
