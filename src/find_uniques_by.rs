@@ -42,19 +42,21 @@ where
 {
     use std::collections::HashMap;
 
-    let mut key_counts = HashMap::new();
+    // Pre-compute keys so iteratee runs once per item
+    let keys: Vec<U> = collection.iter().map(iteratee).collect();
 
-    // Count occurrences of each key
-    for item in collection {
-        let key = iteratee(item);
-        *key_counts.entry(key).or_insert(0) += 1;
+    // Count using references into the cached keys Vec
+    let mut counts: HashMap<&U, usize> = HashMap::new();
+    for key in &keys {
+        *counts.entry(key).or_insert(0) += 1;
     }
 
     // Collect items whose keys appear exactly once
     collection
         .iter()
-        .filter(|item| key_counts.get(&iteratee(item)) == Some(&1))
-        .cloned()
+        .zip(keys.iter())
+        .filter(|(_, key)| counts.get(key) == Some(&1))
+        .map(|(item, _)| item.clone())
         .collect()
 }
 
