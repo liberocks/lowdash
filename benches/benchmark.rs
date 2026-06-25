@@ -270,6 +270,8 @@ fn all_benches(c: &mut Criterion) {
     words::benchmark_words(c);
 }
 
+fn all_benches(_c: &mut Criterion) {}
+
 criterion_group! {
     name = benches;
     config = custom_criterion();
