@@ -14,6 +14,7 @@ mod capitalize;
 mod char_length;
 mod chunk;
 mod chunk_string;
+mod clamp;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -33,6 +34,7 @@ mod chunk_string;
     char_length::benchmark_char_length(c);
     chunk::benchmark_chunk(c);
     chunk_string::benchmark_chunk_string(c);
+    clamp::benchmark_clamp(c);
 }
 
         criterion_group! {
