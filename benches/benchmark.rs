@@ -117,6 +117,7 @@ mod slice;
 mod slice_to_map;
 mod snake_case;
 mod splice;
+mod subset;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -239,6 +240,7 @@ mod splice;
     slice_to_map::benchmark_slice_to_map(c);
     snake_case::benchmark_snake_case(c);
     splice::benchmark_splice(c);
+    subset::benchmark_subset(c);
 }
 
         criterion_group! {
