@@ -68,7 +68,7 @@ where
     for item in collection {
         let key = iteratee(item);
         if !seen.contains(&key) {
-            seen.push(key.clone());
+            seen.push(key);
             result.push(item.clone());
         }
     }
