@@ -49,6 +49,7 @@ mod first;
 mod first_or;
 mod first_or_empty;
 mod flat_map;
+mod flatten;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -103,6 +104,7 @@ mod flat_map;
     first_or::benchmark_first_or(c);
     first_or_empty::benchmark_first_or_empty(c);
     flat_map::benchmark_flat_map(c);
+    flatten::benchmark_flatten(c);
 }
 
         criterion_group! {
