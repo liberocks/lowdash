@@ -1,0 +1,39 @@
+name: Release PR
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create PR from next to master
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create \
+            --base master \
+            --head next \
+            --title "${{ github.event.release.name }}" \
+            --body "${{ github.event.release.body }}"
+
+      - name: Merge to master
+        run: |
+          git checkout master
+          git merge origin/next
+          git push origin master
+
+      - name: Rebase next from master
+        run: |
+          git checkout next
+          git rebase master
+          git push origin next --force-with-lease
