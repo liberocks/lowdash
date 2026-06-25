@@ -51,6 +51,7 @@ mod first_or_empty;
 mod flat_map;
 mod flatten;
 mod foreach;
+mod foreach_while;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -107,6 +108,7 @@ mod foreach;
     flat_map::benchmark_flat_map(c);
     flatten::benchmark_flatten(c);
     foreach::benchmark_foreach(c);
+    foreach_while::benchmark_foreach_while(c);
 }
 
         criterion_group! {
