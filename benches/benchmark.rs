@@ -40,6 +40,7 @@ mod find_duplicates;
 mod find_duplicates_by;
 mod find_index_of;
 mod find_key;
+mod find_key_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -85,6 +86,7 @@ mod find_key;
     find_duplicates_by::benchmark_find_duplicates_by(c);
     find_index_of::benchmark_find_index_of(c);
     find_key::benchmark_find_key(c);
+    find_key_by::benchmark_find_key_by(c);
 }
 
         criterion_group! {
