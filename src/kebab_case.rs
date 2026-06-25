@@ -150,4 +150,11 @@ mod tests {
         assert_eq!(kebab_case("--hello--"), "hello");
         assert_eq!(kebab_case("  foo bar  "), "foo-bar");
     }
+
+    #[test]
+    fn test_uppercase_after_separator() {
+        assert_eq!(kebab_case("hello-World"), "hello-world");
+        assert_eq!(kebab_case("hello_World"), "hello-world");
+        assert_eq!(kebab_case("hello World"), "hello-world");
+    }
 }

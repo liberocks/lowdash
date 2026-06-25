@@ -48,7 +48,9 @@ pub fn benchmark_max_by(c: &mut Criterion) {
         b.iter(|| {
             ld::max_by(
                 black_box(&timed_records),
-                black_box(|a: &support::TimedRecord, b: &support::TimedRecord| a.timestamp > b.timestamp),
+                black_box(|a: &support::TimedRecord, b: &support::TimedRecord| {
+                    a.timestamp > b.timestamp
+                }),
             )
         })
     });
@@ -58,7 +60,11 @@ pub fn benchmark_max_by(c: &mut Criterion) {
         b.iter(|| {
             ld::max_by(
                 black_box(&copy_timed_records),
-                black_box(|a: &support::CopyTimedRecord, b: &support::CopyTimedRecord| a.timestamp > b.timestamp),
+                black_box(
+                    |a: &support::CopyTimedRecord, b: &support::CopyTimedRecord| {
+                        a.timestamp > b.timestamp
+                    },
+                ),
             )
         })
     });
