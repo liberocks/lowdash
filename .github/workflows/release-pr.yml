@@ -3,6 +3,12 @@ name: Release PR
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      pr_title:
+        description: "Pull request title (defaults to release name)"
+      pr_body:
+        description: "Pull request body (defaults to release notes)"
 
 permissions:
   contents: write
@@ -17,8 +23,8 @@ jobs:
       - name: Create PR from next to master
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_TITLE: ${{ github.event.release.name }}
-          PR_BODY: ${{ github.event.release.body }}
+          PR_TITLE: ${{ inputs.pr_title || github.event.release.name }}
+          PR_BODY: ${{ inputs.pr_body || github.event.release.body }}
         run: |
           gh pr create \
             --base master \
