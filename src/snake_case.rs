@@ -24,7 +24,7 @@ pub fn snake_case(str_input: &str) -> String {
         return String::new();
     }
 
-    let mut words = Vec::new();
+    let mut result = String::with_capacity(str_input.len());
     let mut current_word = String::new();
     let mut prev_char = ' ';
 
@@ -36,13 +36,19 @@ pub fn snake_case(str_input: &str) -> String {
                 || prev_char == '_')
         {
             if !current_word.is_empty() {
-                words.push(current_word.to_lowercase());
+                if !result.is_empty() {
+                    result.push('_');
+                }
+                result.push_str(&current_word.to_lowercase());
                 current_word.clear();
             }
             current_word.push(c);
         } else if c.is_whitespace() || c == '-' || c == '_' {
             if !current_word.is_empty() {
-                words.push(current_word.to_lowercase());
+                if !result.is_empty() {
+                    result.push('_');
+                }
+                result.push_str(&current_word.to_lowercase());
                 current_word.clear();
             }
         } else {
@@ -52,10 +58,13 @@ pub fn snake_case(str_input: &str) -> String {
     }
 
     if !current_word.is_empty() {
-        words.push(current_word.to_lowercase());
+        if !result.is_empty() {
+            result.push('_');
+        }
+        result.push_str(&current_word.to_lowercase());
     }
 
-    words.join("_")
+    result
 }
 
 #[cfg(test)]
