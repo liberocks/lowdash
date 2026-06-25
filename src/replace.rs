@@ -55,9 +55,12 @@ pub fn replace<T>(collection: &[T], old: T, new: T, mut n: usize) -> Vec<T>
 where
     T: PartialEq + Clone,
 {
+    if n == 0 {
+        return collection.to_vec();
+    }
     let mut result = collection.to_vec();
     for item in &mut result {
-        if *item == old && n > 0 {
+        if *item == old {
             *item = new.clone();
             n -= 1;
             if n == 0 {
