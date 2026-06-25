@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Create PR from next to master
         env:
@@ -29,14 +27,4 @@ jobs:
             --body "$PR_BODY" \
             || echo "PR may already exist, continuing..."
 
-      - name: Merge to master
-        run: |
-          git checkout master
-          git merge origin/next --no-edit
-          git push origin master
 
-      - name: Rebase next from master
-        run: |
-          git checkout next
-          git rebase master
-          git push origin next --force-with-lease
