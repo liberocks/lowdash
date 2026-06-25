@@ -101,6 +101,7 @@ mod random_string;
 mod range;
 mod range_from;
 mod range_with_steps;
+mod reduce;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -207,6 +208,7 @@ mod range_with_steps;
     range::benchmark_range(c);
     range_from::benchmark_range_from(c);
     range_with_steps::benchmark_range_with_steps(c);
+    reduce::benchmark_reduce(c);
 }
 
         criterion_group! {
