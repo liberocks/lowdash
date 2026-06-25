@@ -30,6 +30,7 @@ mod duration_between;
 mod earliest;
 mod earliest_by;
 mod ellipsis;
+mod entries;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -65,6 +66,7 @@ mod ellipsis;
     earliest::benchmark_earliest(c);
     earliest_by::benchmark_earliest_by(c);
     ellipsis::benchmark_ellipsis(c);
+    entries::benchmark_entries(c);
 }
 
         criterion_group! {
