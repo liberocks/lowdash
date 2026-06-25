@@ -15,6 +15,7 @@ mod char_length;
 mod chunk;
 mod chunk_string;
 mod clamp;
+mod combination;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -35,6 +36,7 @@ mod clamp;
     chunk::benchmark_chunk(c);
     chunk_string::benchmark_chunk_string(c);
     clamp::benchmark_clamp(c);
+    combination::benchmark_combination(c);
 }
 
         criterion_group! {
