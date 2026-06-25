@@ -22,7 +22,7 @@ format:
 	$(CARGO) fmt
 
 coverage:
-	cargo-tarpaulin --exclude-files benches/*
+	cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --exclude-files benches/*
 
 clippy:
 	$(CARGO) clippy
