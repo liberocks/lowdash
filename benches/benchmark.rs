@@ -1,4 +1,4 @@
-use criterion::{criterion_group, criterion_main, Criterion};
+        use criterion::{criterion_group, criterion_main, Criterion};
 
 mod assign;
 mod associate;
@@ -270,11 +270,9 @@ fn all_benches(c: &mut Criterion) {
     words::benchmark_words(c);
 }
 
-fn all_benches(_c: &mut Criterion) {}
-
-criterion_group! {
-    name = benches;
-    config = custom_criterion();
-    targets = all_benches
-}
-criterion_main!(benches);
+        criterion_group! {
+            name = benches;
+            config = custom_criterion();
+            targets = all_benches
+        }
+        criterion_main!(benches);
