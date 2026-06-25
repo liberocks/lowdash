@@ -23,6 +23,7 @@ mod count_values;
 mod count_values_by;
 mod drop;
 mod drop_by_index;
+mod drop_right;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -51,6 +52,7 @@ mod drop_by_index;
     count_values_by::benchmark_count_values_by(c);
     drop::benchmark_drop(c);
     drop_by_index::benchmark_drop_by_index(c);
+    drop_right::benchmark_drop_right(c);
 }
 
         criterion_group! {
