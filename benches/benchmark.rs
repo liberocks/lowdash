@@ -4,6 +4,7 @@
 mod common_is_collection_float;
 mod common_is_floats;
 mod common_random_usize;
+mod common_random_usize_with_seed;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -13,6 +14,7 @@ mod common_random_usize;
             common_is_collection_float::benchmark_common_is_collection_float(c);
     common_is_floats::benchmark_common_is_floats(c);
     common_random_usize::benchmark_common_random_usize(c);
+    common_random_usize_with_seed::benchmark_common_random_usize_with_seed(c);
 }
 
         criterion_group! {
