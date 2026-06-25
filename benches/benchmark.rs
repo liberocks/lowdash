@@ -114,6 +114,7 @@ mod sample;
 mod samples;
 mod shuffle;
 mod slice;
+mod slice_to_map;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -233,6 +234,7 @@ mod slice;
     samples::benchmark_samples(c);
     shuffle::benchmark_shuffle(c);
     slice::benchmark_slice(c);
+    slice_to_map::benchmark_slice_to_map(c);
 }
 
         criterion_group! {
