@@ -88,6 +88,7 @@ mod nth;
 mod omit_by;
 mod omit_by_keys;
 mod omit_by_values;
+mod partition_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -181,6 +182,7 @@ mod omit_by_values;
     omit_by::benchmark_omit_by(c);
     omit_by_keys::benchmark_omit_by_keys(c);
     omit_by_values::benchmark_omit_by_values(c);
+    partition_by::benchmark_partition_by(c);
 }
 
         criterion_group! {
