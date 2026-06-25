@@ -119,6 +119,7 @@ mod snake_case;
 mod splice;
 mod subset;
 mod substring;
+mod sum;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -243,6 +244,7 @@ mod substring;
     splice::benchmark_splice(c);
     subset::benchmark_subset(c);
     substring::benchmark_substring(c);
+    sum::benchmark_sum(c);
 }
 
         criterion_group! {
