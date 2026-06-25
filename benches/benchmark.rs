@@ -67,6 +67,7 @@ mod key_by;
 mod keys;
 mod last;
 mod last_index_of;
+mod last_or;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -139,6 +140,7 @@ mod last_index_of;
     keys::benchmark_keys(c);
     last::benchmark_last(c);
     last_index_of::benchmark_last_index_of(c);
+    last_or::benchmark_last_or(c);
 }
 
         criterion_group! {
