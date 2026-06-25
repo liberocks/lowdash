@@ -85,4 +85,11 @@ mod tests {
         assert!((lerp(0.5) - 1500.0).abs() < EPSILON);
         assert!((lerp(1.0) - 2000.0).abs() < EPSILON);
     }
+
+    #[test]
+    fn test_interpolate_nan_t() {
+        let lerp = interpolate(0.0, 10.0);
+        let result = lerp(std::f64::NAN);
+        assert!(result.is_nan());
+    }
 }

@@ -22,7 +22,7 @@ format:
 	$(CARGO) fmt
 
 coverage:
-	cargo-tarpaulin
+	cargo-tarpaulin --exclude-files benches/*
 
 clippy:
 	$(CARGO) clippy

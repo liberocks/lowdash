@@ -62,4 +62,16 @@ mod tests {
         assert_eq!(clamp('x', 'a', 'c'), 'c');
         assert_eq!(clamp('a', 'b', 'c'), 'b');
     }
+
+    #[test]
+    fn test_clamp_with_nan_value() {
+        let result = clamp(std::f64::NAN, 0.0, 10.0);
+        assert!(result.is_nan());
+    }
+
+    #[test]
+    fn test_clamp_with_nan_min() {
+        let result = clamp(5.0, std::f64::NAN, 10.0);
+        assert!(!result.is_nan());
+    }
 }

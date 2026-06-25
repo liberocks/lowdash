@@ -121,4 +121,20 @@ mod tests {
         let later = epoch + one_year;
         assert_eq!(duration_between(epoch, later, DurationUnit::Years), 1);
     }
+
+    #[test]
+    fn test_seconds() {
+        let epoch = SystemTime::UNIX_EPOCH;
+        let thirty_secs = Duration::from_secs(30);
+        let later = epoch + thirty_secs;
+        assert_eq!(duration_between(epoch, later, DurationUnit::Seconds), 30);
+    }
+
+    #[test]
+    fn test_reverse_order() {
+        let epoch = SystemTime::UNIX_EPOCH;
+        let one_day = Duration::from_secs(86_400);
+        let later = epoch + one_day;
+        assert_eq!(duration_between(later, epoch, DurationUnit::Days), 1);
+    }
 }
