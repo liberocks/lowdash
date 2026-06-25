@@ -45,6 +45,7 @@ mod find_last_index_of;
 mod find_or_else;
 mod find_uniques;
 mod find_uniques_by;
+mod first;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -95,6 +96,7 @@ mod find_uniques_by;
     find_or_else::benchmark_find_or_else(c);
     find_uniques::benchmark_find_uniques(c);
     find_uniques_by::benchmark_find_uniques_by(c);
+    first::benchmark_first(c);
 }
 
         criterion_group! {
