@@ -2,6 +2,7 @@
 
         mod support;
 mod common_is_collection_float;
+mod common_is_floats;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -9,6 +10,7 @@ mod common_is_collection_float;
 
         fn all_benches(c: &mut Criterion) {
             common_is_collection_float::benchmark_common_is_collection_float(c);
+    common_is_floats::benchmark_common_is_floats(c);
 }
 
         criterion_group! {
