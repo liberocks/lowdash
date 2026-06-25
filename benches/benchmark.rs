@@ -78,6 +78,7 @@ mod map_to_slice;
 mod map_values;
 mod max;
 mod max_by;
+mod mean;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -161,6 +162,7 @@ mod max_by;
     map_values::benchmark_map_values(c);
     max::benchmark_max(c);
     max_by::benchmark_max_by(c);
+    mean::benchmark_mean(c);
 }
 
         criterion_group! {
