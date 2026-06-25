@@ -39,32 +39,18 @@
 pub fn find_duplicates_by<T, U, F>(collection: &[T], iteratee: F) -> Vec<T>
 where
     T: Clone,
-    U: Eq + std::hash::Hash + Clone,
+    U: Eq + std::hash::Hash,
     F: Fn(&T) -> U,
 {
     use std::collections::HashMap;
 
-    // First pass: count occurrences of each key
-    let mut key_counts: HashMap<U, usize> = HashMap::new();
-    for item in collection {
-        let key = iteratee(item);
-        *key_counts.entry(key).or_insert(0) += 1;
-    }
-
-    let mut seen: HashMap<U, usize> = HashMap::new();
+    let mut seen: HashMap<U, bool> = HashMap::new();
     let mut result = Vec::new();
 
-    // Second pass: collect duplicates beyond the first occurrence
     for item in collection {
         let key = iteratee(item);
-        if let Some(&count) = key_counts.get(&key) {
-            if count > 1 {
-                let entry = seen.entry(key.clone()).or_insert(0);
-                if *entry >= 1 {
-                    result.push(item.clone());
-                }
-                *entry += 1;
-            }
+        if seen.insert(key, true).unwrap_or(false) {
+            result.push(item.clone());
         }
     }
 
