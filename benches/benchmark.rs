@@ -11,6 +11,7 @@ mod assign;
 mod associate;
 mod camel_case;
 mod capitalize;
+mod char_length;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -27,6 +28,7 @@ mod capitalize;
     associate::benchmark_associate(c);
     camel_case::benchmark_camel_case(c);
     capitalize::benchmark_capitalize(c);
+    char_length::benchmark_char_length(c);
 }
 
         criterion_group! {
