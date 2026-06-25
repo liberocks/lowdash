@@ -22,17 +22,23 @@ pub fn pascal_case(str_input: &str) -> String {
         return String::new();
     }
 
-    str_input
-        .split(|c: char| c.is_whitespace() || c == '-' || c == '_')
-        .filter(|s| !s.is_empty())
-        .map(|word| {
-            let mut chars: Vec<char> = word.chars().collect();
-            if let Some(first) = chars.first_mut() {
-                *first = first.to_uppercase().next().unwrap_or(*first);
+    let mut result = String::with_capacity(str_input.len());
+    let mut in_word = false;
+
+    for c in str_input.chars() {
+        if c.is_whitespace() || c == '-' || c == '_' {
+            in_word = false;
+        } else {
+            if !in_word {
+                result.push(c.to_uppercase().next().unwrap_or(c));
+                in_word = true;
+            } else {
+                result.push(c);
             }
-            chars.into_iter().collect::<String>()
-        })
-        .collect()
+        }
+    }
+
+    result
 }
 
 #[cfg(test)]
