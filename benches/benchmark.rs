@@ -124,6 +124,7 @@ mod sum_by;
 mod times;
 mod to_pairs;
 mod uniq;
+mod uniq_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -253,6 +254,7 @@ mod uniq;
     times::benchmark_times(c);
     to_pairs::benchmark_to_pairs(c);
     uniq::benchmark_uniq(c);
+    uniq_by::benchmark_uniq_by(c);
 }
 
         criterion_group! {
