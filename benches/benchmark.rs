@@ -86,6 +86,7 @@ mod min_by;
 mod nearest_power_of_two;
 mod nth;
 mod omit_by;
+mod omit_by_keys;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -177,6 +178,7 @@ mod omit_by;
     nearest_power_of_two::benchmark_nearest_power_of_two(c);
     nth::benchmark_nth(c);
     omit_by::benchmark_omit_by(c);
+    omit_by_keys::benchmark_omit_by_keys(c);
 }
 
         criterion_group! {
