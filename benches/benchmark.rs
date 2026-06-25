@@ -121,6 +121,7 @@ mod subset;
 mod substring;
 mod sum;
 mod sum_by;
+mod times;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -247,6 +248,7 @@ mod sum_by;
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
+    times::benchmark_times(c);
 }
 
         criterion_group! {
