@@ -18,22 +18,42 @@
 /// assert!(result.contains(&vec![2, 1]));
 /// ```
 pub fn permutation<T: Clone>(items: &[T], k: usize) -> Vec<Vec<T>> {
+    fn backtrack<T: Clone>(
+        items: &[T],
+        k: usize,
+        buffer: &mut Vec<T>,
+        used: &mut Vec<bool>,
+        result: &mut Vec<Vec<T>>,
+    ) {
+        if buffer.len() == k {
+            result.push(buffer.clone());
+            return;
+        }
+        for i in 0..items.len() {
+            if used[i] {
+                continue;
+            }
+            used[i] = true;
+            buffer.push(items[i].clone());
+            backtrack(items, k, buffer, used, result);
+            buffer.pop();
+            used[i] = false;
+        }
+    }
+
     if k == 0 {
         return vec![vec![]];
     }
     if k > items.len() {
         return vec![];
     }
-    let mut result = Vec::new();
-    for (i, item) in items.iter().enumerate() {
-        let mut remaining = items.to_vec();
-        remaining.remove(i);
-        for mut perm in permutation(&remaining, k - 1) {
-            let mut current = vec![item.clone()];
-            current.append(&mut perm);
-            result.push(current);
-        }
-    }
+
+    let n = items.len();
+    let count = (n - k + 1..=n).product::<usize>();
+    let mut result = Vec::with_capacity(count);
+    let mut buffer = Vec::with_capacity(k);
+    let mut used = vec![false; n];
+    backtrack(items, k, &mut buffer, &mut used, &mut result);
     result
 }
 

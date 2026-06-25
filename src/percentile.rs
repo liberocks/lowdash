@@ -36,29 +36,41 @@ where
         return None;
     }
 
-    let mut sorted = collection.to_vec();
-    sorted.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
-
     if p == 0.0 {
-        return Some(sorted[0].into());
-    }
-    if p == 100.0 {
-        return Some(sorted[sorted.len() - 1].into());
+        let min = collection
+            .iter()
+            .min_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal))?;
+        return Some((*min).into());
     }
 
-    let rank = (p / 100.0) * (sorted.len() - 1) as f64;
+    if p == 100.0 {
+        let max = collection
+            .iter()
+            .max_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal))?;
+        return Some((*max).into());
+    }
+
+    let len = collection.len();
+    let rank = (p / 100.0) * (len - 1) as f64;
     let lower_idx = rank.floor() as usize;
     let upper_idx = rank.ceil() as usize;
 
+    let cmp = |a: &T, b: &T| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal);
+
+    let mut copy = collection.to_vec();
+
     if lower_idx == upper_idx {
-        return Some(sorted[lower_idx].into());
+        copy.select_nth_unstable_by(lower_idx, cmp);
+        return Some(copy[lower_idx].into());
     }
 
-    let lower_value: f64 = sorted[lower_idx].into();
-    let upper_value: f64 = sorted[upper_idx].into();
-    let fraction = rank - lower_idx as f64;
+    copy.select_nth_unstable_by(upper_idx, cmp);
+    let upper_val: f64 = copy[upper_idx].into();
+    copy[..upper_idx].select_nth_unstable_by(lower_idx, cmp);
+    let lower_val: f64 = copy[lower_idx].into();
 
-    Some(lower_value + (upper_value - lower_value) * fraction)
+    let fraction = rank - lower_idx as f64;
+    Some(lower_val + (upper_val - lower_val) * fraction)
 }
 
 #[cfg(test)]

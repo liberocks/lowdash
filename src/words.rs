@@ -31,18 +31,10 @@ pub fn words(str_input: &str) -> Vec<String> {
     let mut current_word = String::new();
     let mut prev_char = '\0';
 
-    let chars: Vec<char> = str_input.chars().collect();
-    let len = chars.len();
+    let mut chars = str_input.chars().peekable();
 
-    for i in 0..len {
-        let c = chars[i];
-
-        // Look ahead to the next character if it exists
-        let next_char = if i + 1 < len {
-            Some(chars[i + 1])
-        } else {
-            None
-        };
+    while let Some(c) = chars.next() {
+        let next_char = chars.peek().copied();
 
         if c.is_uppercase() {
             if prev_char.is_lowercase()
@@ -52,24 +44,20 @@ pub fn words(str_input: &str) -> Vec<String> {
                 || prev_char == '_'
             {
                 if !current_word.is_empty() {
-                    words.push(current_word.clone());
-                    current_word.clear();
+                    words.push(std::mem::take(&mut current_word));
                 }
             } else if let Some(next) = next_char {
                 if next.is_lowercase() && !current_word.is_empty() {
-                    words.push(current_word.clone());
-                    current_word.clear();
+                    words.push(std::mem::take(&mut current_word));
                 }
             }
         } else if c.is_ascii_digit() && !prev_char.is_ascii_digit() {
             if !current_word.is_empty() {
-                words.push(current_word.clone());
-                current_word.clear();
+                words.push(std::mem::take(&mut current_word));
             }
         } else if !c.is_alphanumeric() {
             if !current_word.is_empty() {
-                words.push(current_word.clone());
-                current_word.clear();
+                words.push(std::mem::take(&mut current_word));
             }
             prev_char = c;
             continue;

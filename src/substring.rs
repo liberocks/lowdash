@@ -29,10 +29,8 @@
 /// assert_eq!(substring(&s, 0, 10), "HelloWorld");
 /// ```
 pub fn substring(str_input: &str, offset: i32, length: u32) -> String {
-    let rs: Vec<char> = str_input.chars().collect();
-    let size = rs.len();
+    let size = str_input.chars().count();
 
-    // Adjust the offset for negative values
     let idx = if offset < 0 {
         let new_offset = size as i32 + offset;
         if new_offset < 0 {
@@ -44,25 +42,16 @@ pub fn substring(str_input: &str, offset: i32, length: u32) -> String {
         offset as usize
     };
 
-    // If the adjusted offset is beyond the string length, return an empty string
     if idx >= size {
         return String::new();
     }
 
-    let mut collected = 0;
-    let mut result = String::new();
-    let mut current_idx = idx;
-
-    while current_idx < size && collected < (length as usize) {
-        let c = rs[current_idx];
-        if c != '\x00' {
-            result.push(c);
-            collected += 1;
-        }
-        current_idx += 1;
-    }
-
-    result
+    str_input
+        .chars()
+        .skip(idx)
+        .filter(|&c| c != '\x00')
+        .take(length as usize)
+        .collect()
 }
 
 #[cfg(test)]

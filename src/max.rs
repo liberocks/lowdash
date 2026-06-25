@@ -58,29 +58,25 @@ where
     T: PartialOrd + Clone + 'static,
 {
     if collection.is_empty() {
-        None
-    } else if common::is_collection_float(
-        &collection
-            .iter()
-            .map(|item| Box::new(item.clone()) as Box<dyn std::any::Any>)
-            .collect::<Vec<_>>(),
-    ) {
-        let mut max = collection[0].clone();
-        for item in &collection[1..] {
-            if item > &max || max != max {
-                // note: NaN != NaN is true because NaN is not equal to itself
-                max = item.clone();
+        return None;
+    }
+
+    if common::is_floats::<T>() {
+        let mut max_idx = 0;
+        for i in 1..collection.len() {
+            if collection[i] > collection[max_idx] || collection[max_idx] != collection[max_idx] {
+                max_idx = i;
             }
         }
-        Some(max)
+        Some(collection[max_idx].clone())
     } else {
-        let mut max = collection[0].clone();
-        for item in &collection[1..] {
-            if item > &max {
-                max = item.clone();
+        let mut max_idx = 0;
+        for i in 1..collection.len() {
+            if collection[i] > collection[max_idx] {
+                max_idx = i;
             }
         }
-        Some(max)
+        Some(collection[max_idx].clone())
     }
 }
 

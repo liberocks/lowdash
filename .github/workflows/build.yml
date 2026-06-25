@@ -42,8 +42,8 @@ jobs:
           name: linux ${{ matrix.version }}
           retention-days: 3
           path: |
-              tests/data/
-              !tests/data/**/*.rs
+            tests/data/
+            !tests/data/**/*.rs
       - name: check formatting
         run: cargo fmt -- --check
   windows:
@@ -72,8 +72,8 @@ jobs:
           name: windows ${{ matrix.version }}
           retention-days: 3
           path: |
-              tests/data/
-              !tests/data/**/*.rs
+            tests/data/
+            !tests/data/**/*.rs
   mac:
     runs-on: macos-latest
     strategy:
@@ -99,5 +99,5 @@ jobs:
           name: mac ${{ matrix.version }}
           retention-days: 3
           path: |
-              tests/data/
-              !tests/data/**/*.rs
+            tests/data/
+            !tests/data/**/*.rs
