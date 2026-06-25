@@ -44,22 +44,22 @@ pub fn find_duplicates<T>(collection: &[T]) -> Vec<T>
 where
     T: Clone + Eq + std::hash::Hash,
 {
+    use std::collections::hash_map::Entry;
     use std::collections::HashMap;
 
     let mut seen: HashMap<&T, bool> = HashMap::new();
     let mut result = Vec::new();
 
-    // Track items and their duplicate status
     for item in collection {
-        match seen.get(item) {
-            Some(&already_added) => {
-                if !already_added {
+        match seen.entry(item) {
+            Entry::Occupied(mut e) => {
+                if !*e.get() {
                     result.push(item.clone());
-                    seen.insert(item, true);
+                    e.insert(true);
                 }
             }
-            None => {
-                seen.insert(item, false);
+            Entry::Vacant(e) => {
+                e.insert(false);
             }
         }
     }
