@@ -17,11 +17,26 @@ pub struct TimedRecord {
     pub timestamp: SystemTime,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct CopyTimedRecord {
+    pub id: usize,
+    pub timestamp: SystemTime,
+}
+
 impl Default for TimedRecord {
     fn default() -> Self {
         Self {
             id: 0,
             name: String::new(),
+            timestamp: UNIX_EPOCH,
+        }
+    }
+}
+
+impl Default for CopyTimedRecord {
+    fn default() -> Self {
+        Self {
+            id: 0,
             timestamp: UNIX_EPOCH,
         }
     }
@@ -63,6 +78,71 @@ pub fn timed_records(len: usize) -> Vec<TimedRecord> {
             timestamp: UNIX_EPOCH + Duration::from_secs((i * 17) as u64),
         })
         .collect()
+}
+
+pub fn timed_records_descending(len: usize) -> Vec<TimedRecord> {
+    (0..len)
+        .map(|i| TimedRecord {
+            id: i,
+            name: format!("record-{}", i),
+            timestamp: UNIX_EPOCH + Duration::from_secs(((len - i) * 17) as u64),
+        })
+        .collect()
+}
+
+pub fn timed_records_equal(len: usize) -> Vec<TimedRecord> {
+    (0..len)
+        .map(|i| TimedRecord {
+            id: i,
+            name: format!("record-{}", i),
+            timestamp: UNIX_EPOCH + Duration::from_secs(17),
+        })
+        .collect()
+}
+
+pub fn timed_records_shuffled(len: usize) -> Vec<TimedRecord> {
+    let mut records = timed_records(len);
+    for i in (1..records.len()).rev() {
+        let j = (i * 31 + 7) % (i + 1);
+        records.swap(i, j);
+    }
+    records
+}
+
+pub fn copy_timed_records(len: usize) -> Vec<CopyTimedRecord> {
+    (0..len)
+        .map(|i| CopyTimedRecord {
+            id: i,
+            timestamp: UNIX_EPOCH + Duration::from_secs((i * 17) as u64),
+        })
+        .collect()
+}
+
+pub fn copy_timed_records_descending(len: usize) -> Vec<CopyTimedRecord> {
+    (0..len)
+        .map(|i| CopyTimedRecord {
+            id: i,
+            timestamp: UNIX_EPOCH + Duration::from_secs(((len - i) * 17) as u64),
+        })
+        .collect()
+}
+
+pub fn copy_timed_records_equal(len: usize) -> Vec<CopyTimedRecord> {
+    (0..len)
+        .map(|i| CopyTimedRecord {
+            id: i,
+            timestamp: UNIX_EPOCH + Duration::from_secs(17),
+        })
+        .collect()
+}
+
+pub fn copy_timed_records_shuffled(len: usize) -> Vec<CopyTimedRecord> {
+    let mut records = copy_timed_records(len);
+    for i in (1..records.len()).rev() {
+        let j = (i * 31 + 7) % (i + 1);
+        records.swap(i, j);
+    }
+    records
 }
 
 pub fn time_vec(len: usize) -> Vec<SystemTime> {
