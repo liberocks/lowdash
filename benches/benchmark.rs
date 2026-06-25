@@ -72,6 +72,7 @@ mod last_or_empty;
 mod latest;
 mod latest_by;
 mod map;
+mod map_entries;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -149,6 +150,7 @@ mod map;
     latest::benchmark_latest(c);
     latest_by::benchmark_latest_by(c);
     map::benchmark_map(c);
+    map_entries::benchmark_map_entries(c);
 }
 
         criterion_group! {
