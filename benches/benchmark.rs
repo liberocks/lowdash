@@ -90,6 +90,7 @@ mod omit_by_keys;
 mod omit_by_values;
 mod partition_by;
 mod pascal_case;
+mod percentile;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -185,6 +186,7 @@ mod pascal_case;
     omit_by_values::benchmark_omit_by_values(c);
     partition_by::benchmark_partition_by(c);
     pascal_case::benchmark_pascal_case(c);
+    percentile::benchmark_percentile(c);
 }
 
         criterion_group! {
