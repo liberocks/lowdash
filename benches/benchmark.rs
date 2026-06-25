@@ -106,6 +106,7 @@ mod reduce_right;
 mod reject;
 mod reject_map;
 mod repeat;
+mod repeat_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -217,6 +218,7 @@ mod repeat;
     reject::benchmark_reject(c);
     reject_map::benchmark_reject_map(c);
     repeat::benchmark_repeat(c);
+    repeat_by::benchmark_repeat_by(c);
 }
 
         criterion_group! {
