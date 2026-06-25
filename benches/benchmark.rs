@@ -48,6 +48,7 @@ mod find_uniques_by;
 mod first;
 mod first_or;
 mod first_or_empty;
+mod flat_map;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -101,6 +102,7 @@ mod first_or_empty;
     first::benchmark_first(c);
     first_or::benchmark_first_or(c);
     first_or_empty::benchmark_first_or_empty(c);
+    flat_map::benchmark_flat_map(c);
 }
 
         criterion_group! {
