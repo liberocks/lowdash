@@ -6,6 +6,7 @@ mod common_is_floats;
 mod common_random_usize;
 mod common_random_usize_with_seed;
 mod common_ceil_log2;
+mod common_random_u64;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -17,6 +18,7 @@ mod common_ceil_log2;
     common_random_usize::benchmark_common_random_usize(c);
     common_random_usize_with_seed::benchmark_common_random_usize_with_seed(c);
     common_ceil_log2::benchmark_common_ceil_log2(c);
+    common_random_u64::benchmark_common_random_u64(c);
 }
 
         criterion_group! {
