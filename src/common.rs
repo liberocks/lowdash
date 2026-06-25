@@ -1,9 +1,18 @@
 use std::hash::{Hash, Hasher};
 use std::{
     any::TypeId,
+    collections::hash_map::DefaultHasher,
     sync::atomic::{AtomicU64, Ordering},
     time::SystemTime,
 };
+
+thread_local! {
+    static TID_HASH: u64 = {
+        let mut hasher = DefaultHasher::new();
+        std::thread::current().id().hash(&mut hasher);
+        hasher.finish()
+    };
+}
 
 #[derive(Clone, Debug)]
 pub struct Float(pub f64);
@@ -69,10 +78,7 @@ pub fn random_usize(maximum: usize) -> usize {
 
     let pid = std::process::id() as u64;
 
-    let tid_str = format!("{:?}", std::thread::current().id());
-    let tid_hash = tid_str
-        .bytes()
-        .fold(0u64, |acc, b| acc.wrapping_add(b as u64));
+    let tid_hash = TID_HASH.with(|&h| h);
 
     // Increment the global counter atomically
     let counter = COUNTER.fetch_add(1, Ordering::Relaxed);
@@ -106,9 +112,7 @@ pub fn random_usize_with_seed(n: usize, seed: u64) -> usize {
     }
 
     let pid = std::process::id() as u64;
-    let tid_hash = format!("{:?}", std::thread::current().id())
-        .bytes()
-        .fold(0u64, |acc, b| acc.wrapping_add(b as u64));
+    let tid_hash = TID_HASH.with(|&h| h);
 
     // Increment the global counter atomically
     let counter = COUNTER.fetch_add(1, Ordering::Relaxed);
@@ -165,10 +169,7 @@ pub fn random_u64() -> u64 {
 
     let pid = std::process::id() as u64;
 
-    let tid_str = format!("{:?}", std::thread::current().id());
-    let tid_hash = tid_str
-        .bytes()
-        .fold(0u64, |acc, b| acc.wrapping_add(b as u64));
+    let tid_hash = TID_HASH.with(|&h| h);
 
     // Increment the global counter atomically
     let counter = COUNTER.fetch_add(1, Ordering::Relaxed);
