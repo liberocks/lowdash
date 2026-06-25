@@ -6,7 +6,7 @@ pub fn benchmark_filter(c: &mut Criterion) {
     let collection = support::int_vec(4_096);
     c.bench_function("filter", |b| {
         b.iter(|| {
-            ld::filter(black_box(&collection), black_box(|value: &i32| *value % 2 == 0))
+            ld::filter(black_box(&collection), black_box(|value: &i32, _| *value % 2 == 0))
         })
     });
 }
