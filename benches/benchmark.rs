@@ -138,6 +138,8 @@ fn custom_criterion() -> Criterion {
         .measurement_time(std::time::Duration::from_secs(7))
 }
 
+fn all_benches(_c: &mut Criterion) {}
+
 criterion_group! {
     name = benches;
     config = custom_criterion();
