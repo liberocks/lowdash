@@ -25,10 +25,10 @@ where
     T: Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T> + From<i32>,
 {
     let length = if element_num < 0 {
-        -element_num
+        (-element_num) as usize
     } else {
-        element_num
-    } as usize;
+        element_num as usize
+    };
     let step: T = if element_num < 0 {
         (-1).into()
     } else {

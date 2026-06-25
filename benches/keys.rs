@@ -9,5 +9,7 @@ pub fn benchmark_keys(c: &mut Criterion) {
 
     let small_maps = support::numeric_maps(4, 32);
     let small_refs = support::map_refs(&small_maps);
-    c.bench_function("keys/small", |b| b.iter(|| ld::keys(black_box(&small_refs))));
+    c.bench_function("keys/small", |b| {
+        b.iter(|| ld::keys(black_box(&small_refs)))
+    });
 }

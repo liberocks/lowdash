@@ -265,4 +265,11 @@ mod tests {
         let result = slice(&numbers, 1, -1);
         assert_eq!(result, vec![2, 3, 4]);
     }
+
+    #[test]
+    fn test_slice_start_exceeds_size() {
+        let numbers = vec![1, 2, 3];
+        let result = slice(&numbers, 5, 6);
+        assert_eq!(result, Vec::<i32>::new());
+    }
 }
