@@ -59,23 +59,31 @@ where
         return T::default();
     }
 
+    let first = collection[0].clone();
     let mut latest_idx = 0;
-    let mut latest_time = iteratee(&collection[0]);
+    let mut latest_time = iteratee(&first);
 
-    for i in 1..collection.len() {
+    let mut i = 1;
+    while i < collection.len() {
         let item_time = iteratee(&collection[i]);
         if item_time > latest_time {
             latest_idx = i;
             latest_time = item_time;
         }
+        i += 1;
     }
 
-    collection[latest_idx].clone()
+    if latest_idx == 0 {
+        first
+    } else {
+        collection[latest_idx].clone()
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::cell::Cell;
     use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
     #[derive(Debug, PartialEq, Clone)]
@@ -244,5 +252,47 @@ mod tests {
 
         let latest_event = latest_by(&events, |e| e.time);
         assert_eq!(latest_event, event3);
+    }
+
+    #[test]
+    fn test_latest_by_iteratee_receives_first_item_clone() {
+        #[derive(Clone)]
+        struct MutableEvent {
+            id: u32,
+            time: SystemTime,
+            touched: Cell<bool>,
+        }
+
+        impl Default for MutableEvent {
+            fn default() -> Self {
+                Self {
+                    id: 0,
+                    time: UNIX_EPOCH,
+                    touched: Cell::new(false),
+                }
+            }
+        }
+
+        let events = vec![
+            MutableEvent {
+                id: 1,
+                time: UNIX_EPOCH + Duration::new(100, 0),
+                touched: Cell::new(false),
+            },
+            MutableEvent {
+                id: 2,
+                time: UNIX_EPOCH + Duration::new(200, 0),
+                touched: Cell::new(false),
+            },
+        ];
+
+        let latest_event = latest_by(&events, |event| {
+            event.touched.set(true);
+            event.time
+        });
+
+        assert_eq!(latest_event.id, 2);
+        assert!(!events[0].touched.get());
+        assert!(events[1].touched.get());
     }
 }
