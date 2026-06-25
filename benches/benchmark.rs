@@ -27,6 +27,7 @@ mod drop_right;
 mod drop_right_while;
 mod drop_while;
 mod duration_between;
+mod earliest;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -59,6 +60,7 @@ mod duration_between;
     drop_right_while::benchmark_drop_right_while(c);
     drop_while::benchmark_drop_while(c);
     duration_between::benchmark_duration_between(c);
+    earliest::benchmark_earliest(c);
 }
 
         criterion_group! {
