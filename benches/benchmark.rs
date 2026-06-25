@@ -120,6 +120,7 @@ mod splice;
 mod subset;
 mod substring;
 mod sum;
+mod sum_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -245,6 +246,7 @@ mod sum;
     subset::benchmark_subset(c);
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
+    sum_by::benchmark_sum_by(c);
 }
 
         criterion_group! {
