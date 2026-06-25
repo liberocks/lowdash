@@ -55,6 +55,7 @@ mod foreach_while;
 mod from_entries;
 mod from_pairs;
 mod group_by;
+mod has_key;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -115,6 +116,7 @@ mod group_by;
     from_entries::benchmark_from_entries(c);
     from_pairs::benchmark_from_pairs(c);
     group_by::benchmark_group_by(c);
+    has_key::benchmark_has_key(c);
 }
 
         criterion_group! {
