@@ -63,6 +63,7 @@ mod invert;
 mod is_sorted;
 mod is_sorted_by_key;
 mod kebab_case;
+mod key_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -131,6 +132,7 @@ mod kebab_case;
     is_sorted::benchmark_is_sorted(c);
     is_sorted_by_key::benchmark_is_sorted_by_key(c);
     kebab_case::benchmark_kebab_case(c);
+    key_by::benchmark_key_by(c);
 }
 
         criterion_group! {
