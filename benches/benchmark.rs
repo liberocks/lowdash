@@ -60,6 +60,7 @@ mod index_of;
 mod interleave;
 mod interpolate;
 mod invert;
+mod is_sorted;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -125,6 +126,7 @@ mod invert;
     interleave::benchmark_interleave(c);
     interpolate::benchmark_interpolate(c);
     invert::benchmark_invert(c);
+    is_sorted::benchmark_is_sorted(c);
 }
 
         criterion_group! {
