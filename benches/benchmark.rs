@@ -94,6 +94,7 @@ mod percentile;
 mod permutation;
 mod pick_by;
 mod pick_by_keys;
+mod pick_by_values;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -193,6 +194,7 @@ mod pick_by_keys;
     permutation::benchmark_permutation(c);
     pick_by::benchmark_pick_by(c);
     pick_by_keys::benchmark_pick_by_keys(c);
+    pick_by_values::benchmark_pick_by_values(c);
 }
 
         criterion_group! {
