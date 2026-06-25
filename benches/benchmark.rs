@@ -10,6 +10,7 @@ mod common_random_u64;
 mod assign;
 mod associate;
 mod camel_case;
+mod capitalize;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -25,6 +26,7 @@ mod camel_case;
     assign::benchmark_assign(c);
     associate::benchmark_associate(c);
     camel_case::benchmark_camel_case(c);
+    capitalize::benchmark_capitalize(c);
 }
 
         criterion_group! {
