@@ -4,10 +4,8 @@ use lowdash as ld;
 
 pub fn benchmark_omit_by_keys(c: &mut Criterion) {
     let keys = vec![
-        String::from("key-10"),
-        String::from("key-20"),
-        String::from("key-30"),
-        String::from("key-40"),
+        String::from("key-10"), String::from("key-20"),
+        String::from("key-30"), String::from("key-40"),
     ];
 
     let map = support::numeric_map(2_048);
