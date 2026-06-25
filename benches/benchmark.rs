@@ -127,6 +127,7 @@ mod uniq;
 mod uniq_by;
 mod uniq_keys;
 mod uniq_values;
+mod value_or;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -259,6 +260,7 @@ mod uniq_values;
     uniq_by::benchmark_uniq_by(c);
     uniq_keys::benchmark_uniq_keys(c);
     uniq_values::benchmark_uniq_values(c);
+    value_or::benchmark_value_or(c);
 }
 
         criterion_group! {
