@@ -129,6 +129,7 @@ mod uniq_keys;
 mod uniq_values;
 mod value_or;
 mod values;
+mod words;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -263,6 +264,7 @@ mod values;
     uniq_values::benchmark_uniq_values(c);
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
+    words::benchmark_words(c);
 }
 
         criterion_group! {
