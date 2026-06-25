@@ -112,6 +112,7 @@ mod replace_all;
 mod reverse;
 mod sample;
 mod samples;
+mod shuffle;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -229,6 +230,7 @@ mod samples;
     reverse::benchmark_reverse(c);
     sample::benchmark_sample(c);
     samples::benchmark_samples(c);
+    shuffle::benchmark_shuffle(c);
 }
 
         criterion_group! {
