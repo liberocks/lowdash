@@ -35,6 +35,7 @@ mod fill;
 mod filter;
 mod filter_map;
 mod filter_reject;
+mod find;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -75,6 +76,7 @@ mod filter_reject;
     filter::benchmark_filter(c);
     filter_map::benchmark_filter_map(c);
     filter_reject::benchmark_filter_reject(c);
+    find::benchmark_find(c);
 }
 
         criterion_group! {
