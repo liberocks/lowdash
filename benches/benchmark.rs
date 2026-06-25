@@ -58,6 +58,7 @@ mod group_by;
 mod has_key;
 mod index_of;
 mod interleave;
+mod interpolate;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -121,6 +122,7 @@ mod interleave;
     has_key::benchmark_has_key(c);
     index_of::benchmark_index_of(c);
     interleave::benchmark_interleave(c);
+    interpolate::benchmark_interpolate(c);
 }
 
         criterion_group! {
