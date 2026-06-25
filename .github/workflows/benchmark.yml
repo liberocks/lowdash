@@ -44,65 +44,65 @@ jobs:
           VERSION: ${{ matrix.version }}
         run: |
           python3 << 'PYEOF'
-import os, re
+          import os, re
 
-with open("bench_output.txt") as f:
-    content = f.read()
+          with open("bench_output.txt") as f:
+              content = f.read()
 
-entries = []
-current_name = None
-current_time_min = current_time_mean = current_time_max = None
-current_chg_min = current_chg_mean = current_chg_max = None
-skip_prefixes = ("Found", "Warning", "Benchmarking", "Gnuplot", "criterion", "Generating", "Baseline")
+          entries = []
+          current_name = None
+          current_time_min = current_time_mean = current_time_max = None
+          current_chg_min = current_chg_mean = current_chg_max = None
+          skip_prefixes = ("Found", "Warning", "Benchmarking", "Gnuplot", "criterion", "Generating", "Baseline")
 
-def flush_entry():
-    if current_name is not None and current_time_min:
-        entries.append((current_name, current_time_min, current_time_mean, current_time_max,
-                        current_chg_min, current_chg_mean, current_chg_max))
+          def flush_entry():
+              if current_name is not None and current_time_min:
+                  entries.append((current_name, current_time_min, current_time_mean, current_time_max,
+                                  current_chg_min, current_chg_mean, current_chg_max))
 
-for line in content.split("\n"):
-    stripped = line.strip()
-    if not stripped:
-        continue
-    if not line.startswith((" ", "\t")) and re.match(r"^[a-zA-Z_]", stripped) and not any(stripped.startswith(p) for p in skip_prefixes):
-        flush_entry()
-        current_name = stripped
-        current_time_min = current_time_mean = current_time_max = None
-        current_chg_min = current_chg_mean = current_chg_max = None
-    elif stripped.startswith("time:") and "[" in stripped and current_name:
-        m = re.search(r"\[([\d.]+\s+\S+)\s+([\d.]+\s+\S+)\s+([\d.]+\s+\S+)\]", stripped)
-        if m:
-            current_time_min, current_time_mean, current_time_max = m.group(1), m.group(2), m.group(3)
-    elif stripped.startswith("change:") and "[" in stripped and current_name:
-        m = re.search(r"\[([+-][\d.]+%)\s+([+-][\d.]+%)\s+([+-][\d.]+%)\]", stripped)
-        if m:
-            current_chg_min, current_chg_mean, current_chg_max = m.group(1), m.group(2), m.group(3)
+          for line in content.split("\n"):
+              stripped = line.strip()
+              if not stripped:
+                  continue
+              if not line.startswith((" ", "\t")) and re.match(r"^[a-zA-Z_]", stripped) and not any(stripped.startswith(p) for p in skip_prefixes):
+                  flush_entry()
+                  current_name = stripped
+                  current_time_min = current_time_mean = current_time_max = None
+                  current_chg_min = current_chg_mean = current_chg_max = None
+              elif stripped.startswith("time:") and "[" in stripped and current_name:
+                  m = re.search(r"\[([\d.]+\s+\S+)\s+([\d.]+\s+\S+)\s+([\d.]+\s+\S+)\]", stripped)
+                  if m:
+                      current_time_min, current_time_mean, current_time_max = m.group(1), m.group(2), m.group(3)
+              elif stripped.startswith("change:") and "[" in stripped and current_name:
+                  m = re.search(r"\[([+-][\d.]+%)\s+([+-][\d.]+%)\s+([+-][\d.]+%)\]", stripped)
+                  if m:
+                      current_chg_min, current_chg_mean, current_chg_max = m.group(1), m.group(2), m.group(3)
 
-flush_entry()
+          flush_entry()
 
-def verdict(mean_chg):
-    if mean_chg is None:
-        return "—"
-    v = float(mean_chg.rstrip("%"))
-    if v < -0.5:
-        return "improvement"
-    elif v > 0.5:
-        return "regression"
-    else:
-        return "~ no change"
+          def verdict(mean_chg):
+              if mean_chg is None:
+                  return "—"
+              v = float(mean_chg.rstrip("%"))
+              if v < -0.5:
+                  return "improvement"
+              elif v > 0.5:
+                  return "regression"
+              else:
+                  return "~ no change"
 
-summary_path = os.environ["GITHUB_STEP_SUMMARY"]
-with open(summary_path, "a") as f:
-    f.write(f"## Benchmark Results ({os.environ['VERSION']})\n\n")
-    f.write("| Benchmark | Min | Mean | Max | Delta | Verdict |\n")
-    f.write("|---|---|---|---|---|---|\n")
-    for name, mn, mean, mx, chg_min, chg_mean, chg_max in entries:
-        if chg_mean:
-            delta = f"{chg_min} / {chg_mean} / {chg_max}"
-        else:
-            delta = "—"
-        f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(chg_mean)} |\n")
-PYEOF
+          summary_path = os.environ["GITHUB_STEP_SUMMARY"]
+          with open(summary_path, "a") as f:
+              f.write(f"## Benchmark Results ({os.environ['VERSION']})\n\n")
+              f.write("| Benchmark | Min | Mean | Max | Delta | Verdict |\n")
+              f.write("|---|---|---|---|---|---|\n")
+              for name, mn, mean, mx, chg_min, chg_mean, chg_max in entries:
+                  if chg_mean:
+                      delta = f"{chg_min} / {chg_mean} / {chg_max}"
+                  else:
+                      delta = "—"
+                  f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(chg_mean)} |\n")
+          PYEOF
       - uses: actions/upload-artifact@v4
         with:
           name: report ${{ matrix.version }}
