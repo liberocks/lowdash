@@ -113,6 +113,7 @@ mod reverse;
 mod sample;
 mod samples;
 mod shuffle;
+mod slice;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -231,6 +232,7 @@ mod shuffle;
     sample::benchmark_sample(c);
     samples::benchmark_samples(c);
     shuffle::benchmark_shuffle(c);
+    slice::benchmark_slice(c);
 }
 
         criterion_group! {
