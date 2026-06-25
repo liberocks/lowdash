@@ -8,7 +8,7 @@ use crate::last::last;
 ///
 /// # Returns
 /// * `T` - The last item in the collection.
-///         If the collection is empty, returns `T::default()`.
+///   If the collection is empty, returns `T::default()`.
 ///
 /// # Examples
 /// ```rust

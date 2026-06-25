@@ -7,7 +7,7 @@
 /// # Arguments
 /// * `collection` - A slice of items.
 /// * `callback` - A function that takes a reference to an item and its index, returning a tuple `(R, bool)`
-///                where `R` is the transformed value and `bool` indicates whether to include it.
+///   where `R` is the transformed value and `bool` indicates whether to include it.
 ///
 /// # Returns
 /// * `Vec<R>` - A vector containing the transformed items that passed the callback's predicate.

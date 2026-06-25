@@ -134,8 +134,8 @@ mod words;
 fn custom_criterion() -> Criterion {
     Criterion::default()
         .output_directory(std::path::Path::new("./report"))
-        .sample_size(500)
-        .measurement_time(std::time::Duration::from_secs(10))
+        .sample_size(100)
+        .measurement_time(std::time::Duration::from_secs(7))
 }
 
 fn all_benches(c: &mut Criterion) {
@@ -268,6 +268,7 @@ fn all_benches(c: &mut Criterion) {
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
+>>>>>>> origin/next
 }
 
 criterion_group! {

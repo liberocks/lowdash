@@ -10,7 +10,7 @@
 ///
 /// * `collection` - A slice of items to iterate over.
 /// * `callback` - A mutable function that takes a reference to an item and its index, returning a tuple `(R, bool)`.
-///                If the second element of the tuple is `false`, the first element (`R`) is collected.
+///   If the second element of the tuple is `false`, the first element (`R`) is collected.
 ///
 /// # Type Parameters
 ///

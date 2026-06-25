@@ -34,12 +34,11 @@ jobs:
 
       - name: run benchmark with comparison
         if: steps.download-baseline.outcome == 'success'
-        run: cargo bench -- --baseline baseline --save-baseline baseline 2>&1 | tee bench_output.txt
+        run: (set -o pipefail; cargo bench --bench benchmark -- --baseline baseline --save-baseline baseline 2>&1 | tee bench_output.txt)
 
       - name: run benchmark (initial)
         if: steps.download-baseline.outcome != 'success'
-        run: cargo bench -- --save-baseline baseline 2>&1 | tee bench_output.txt
-
+        run: (set -o pipefail; cargo bench --bench benchmark -- --save-baseline baseline 2>&1 | tee bench_output.txt)
       - name: tabularize results
         env:
           VERSION: ${{ matrix.version }}
@@ -83,7 +82,7 @@ jobs:
 
           def verdict(mean_chg):
               if mean_chg is None:
-                  return "—"
+                  return "\u2014"
               v = float(mean_chg.rstrip("%"))
               if v < -0.5:
                   return "improvement"
@@ -91,6 +90,20 @@ jobs:
                   return "regression"
               else:
                   return "~ no change"
+
+          summary_path = os.environ["GITHUB_STEP_SUMMARY"]
+          with open(summary_path, "a") as f:
+              version = os.environ.get("VERSION")
+              f.write(f"## Benchmark Results ({version})\n\n")
+              f.write("| Benchmark | Min | Mean | Max | Delta | Verdict |\n")
+              f.write("|---|---|---|---|---|---|\n")
+              for name, mn, mean, mx, chg_min, chg_mean, chg_max in entries:
+                  if chg_mean:
+                      delta = f"{chg_min} / {chg_mean} / {chg_max}"
+                  else:
+                      delta = "\u2014"
+                  f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(chg_mean)} |\n")
+          PYEOF
 
           summary_path = os.environ["GITHUB_STEP_SUMMARY"]
           with open(summary_path, "a") as f:
@@ -104,7 +117,6 @@ jobs:
                       delta = "—"
                   f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(chg_mean)} |\n")
           PYEOF
-
       - uses: actions/upload-artifact@v4
         with:
           name: report ${{ matrix.version }}

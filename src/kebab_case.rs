@@ -24,7 +24,7 @@ pub fn kebab_case(str_input: &str) -> String {
         return String::new();
     }
 
-    let mut words = Vec::new();
+    let mut result = String::with_capacity(str_input.len());
     let mut current_word = String::new();
     let mut prev_char = ' ';
 
@@ -36,13 +36,19 @@ pub fn kebab_case(str_input: &str) -> String {
                 || prev_char == '_')
         {
             if !current_word.is_empty() {
-                words.push(current_word.to_lowercase());
+                if !result.is_empty() {
+                    result.push('-');
+                }
+                result.push_str(&current_word.to_lowercase());
                 current_word.clear();
             }
             current_word.push(c);
         } else if c.is_whitespace() || c == '-' || c == '_' {
             if !current_word.is_empty() {
-                words.push(current_word.to_lowercase());
+                if !result.is_empty() {
+                    result.push('-');
+                }
+                result.push_str(&current_word.to_lowercase());
                 current_word.clear();
             }
         } else {
@@ -52,10 +58,13 @@ pub fn kebab_case(str_input: &str) -> String {
     }
 
     if !current_word.is_empty() {
-        words.push(current_word.to_lowercase());
+        if !result.is_empty() {
+            result.push('-');
+        }
+        result.push_str(&current_word.to_lowercase());
     }
 
-    words.join("-")
+    result
 }
 
 #[cfg(test)]
@@ -130,5 +139,31 @@ mod tests {
     #[test]
     fn test_unicode_characters() {
         assert_eq!(kebab_case("hello_世界"), "hello-世界");
+    }
+
+    #[test]
+    fn test_leading_separators() {
+        assert_eq!(kebab_case("--hello-world"), "hello-world");
+        assert_eq!(kebab_case("  foo-bar"), "foo-bar");
+        assert_eq!(kebab_case("__test_case"), "test-case");
+    }
+
+    #[test]
+    fn test_trailing_separators() {
+        assert_eq!(kebab_case("hello-world--"), "hello-world");
+        assert_eq!(kebab_case("foo-bar  "), "foo-bar");
+    }
+
+    #[test]
+    fn test_leading_and_trailing_separators() {
+        assert_eq!(kebab_case("--hello--"), "hello");
+        assert_eq!(kebab_case("  foo bar  "), "foo-bar");
+    }
+
+    #[test]
+    fn test_uppercase_after_separator() {
+        assert_eq!(kebab_case("hello-World"), "hello-world");
+        assert_eq!(kebab_case("hello_World"), "hello-world");
+        assert_eq!(kebab_case("hello World"), "hello-world");
     }
 }
