@@ -70,6 +70,7 @@ mod last_index_of;
 mod last_or;
 mod last_or_empty;
 mod latest;
+mod latest_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -145,6 +146,7 @@ mod latest;
     last_or::benchmark_last_or(c);
     last_or_empty::benchmark_last_or_empty(c);
     latest::benchmark_latest(c);
+    latest_by::benchmark_latest_by(c);
 }
 
         criterion_group! {
