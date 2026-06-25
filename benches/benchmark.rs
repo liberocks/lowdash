@@ -42,6 +42,7 @@ mod find_index_of;
 mod find_key;
 mod find_key_by;
 mod find_last_index_of;
+mod find_or_else;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -89,6 +90,7 @@ mod find_last_index_of;
     find_key::benchmark_find_key(c);
     find_key_by::benchmark_find_key_by(c);
     find_last_index_of::benchmark_find_last_index_of(c);
+    find_or_else::benchmark_find_or_else(c);
 }
 
         criterion_group! {
