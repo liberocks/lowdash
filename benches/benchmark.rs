@@ -75,6 +75,7 @@ mod map;
 mod map_entries;
 mod map_keys;
 mod map_to_slice;
+mod map_values;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -155,6 +156,7 @@ mod map_to_slice;
     map_entries::benchmark_map_entries(c);
     map_keys::benchmark_map_keys(c);
     map_to_slice::benchmark_map_to_slice(c);
+    map_values::benchmark_map_values(c);
 }
 
         criterion_group! {
