@@ -5,6 +5,7 @@ mod common_is_collection_float;
 mod common_is_floats;
 mod common_random_usize;
 mod common_random_usize_with_seed;
+mod common_ceil_log2;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -15,6 +16,7 @@ mod common_random_usize_with_seed;
     common_is_floats::benchmark_common_is_floats(c);
     common_random_usize::benchmark_common_random_usize(c);
     common_random_usize_with_seed::benchmark_common_random_usize_with_seed(c);
+    common_ceil_log2::benchmark_common_ceil_log2(c);
 }
 
         criterion_group! {
