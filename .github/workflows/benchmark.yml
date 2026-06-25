@@ -34,11 +34,11 @@ jobs:
 
       - name: run benchmark with comparison
         if: steps.download-baseline.outcome == 'success'
-        run: cargo bench -- --baseline baseline --save-baseline baseline 2>&1 | tee bench_output.txt
+        run: (set -o pipefail; cargo bench --bench benchmark -- --baseline baseline --save-baseline baseline 2>&1 | tee bench_output.txt)
 
       - name: run benchmark (initial)
         if: steps.download-baseline.outcome != 'success'
-        run: cargo bench -- --save-baseline baseline 2>&1 | tee bench_output.txt
+        run: (set -o pipefail; cargo bench --bench benchmark -- --save-baseline baseline 2>&1 | tee bench_output.txt)
       - name: tabularize results
         env:
           VERSION: ${{ matrix.version }}
