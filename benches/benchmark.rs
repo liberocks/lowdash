@@ -9,6 +9,7 @@ mod common_ceil_log2;
 mod common_random_u64;
 mod assign;
 mod associate;
+mod camel_case;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -23,6 +24,7 @@ mod associate;
     common_random_u64::benchmark_common_random_u64(c);
     assign::benchmark_assign(c);
     associate::benchmark_associate(c);
+    camel_case::benchmark_camel_case(c);
 }
 
         criterion_group! {
