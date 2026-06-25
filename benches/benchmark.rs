@@ -32,6 +32,7 @@ mod earliest_by;
 mod ellipsis;
 mod entries;
 mod fill;
+mod filter;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -69,6 +70,7 @@ mod fill;
     ellipsis::benchmark_ellipsis(c);
     entries::benchmark_entries(c);
     fill::benchmark_fill(c);
+    filter::benchmark_filter(c);
 }
 
         criterion_group! {
