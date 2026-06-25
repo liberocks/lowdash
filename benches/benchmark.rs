@@ -82,6 +82,7 @@ mod mean;
 mod mean_by;
 mod median;
 mod min;
+mod min_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -169,6 +170,7 @@ mod min;
     mean_by::benchmark_mean_by(c);
     median::benchmark_median(c);
     min::benchmark_min(c);
+    min_by::benchmark_min_by(c);
 }
 
         criterion_group! {
