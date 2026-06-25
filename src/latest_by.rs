@@ -59,18 +59,18 @@ where
         return T::default();
     }
 
-    let mut latest = collection[0].clone();
-    let mut latest_time = iteratee(&latest);
+    let mut latest_idx = 0;
+    let mut latest_time = iteratee(&collection[0]);
 
-    for item in &collection[1..] {
-        let item_time = iteratee(item);
+    for i in 1..collection.len() {
+        let item_time = iteratee(&collection[i]);
         if item_time > latest_time {
-            latest = item.clone();
+            latest_idx = i;
             latest_time = item_time;
         }
     }
 
-    latest
+    collection[latest_idx].clone()
 }
 
 #[cfg(test)]
