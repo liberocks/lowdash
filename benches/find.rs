@@ -1,3 +1,4 @@
+use crate::support;
 use criterion::{black_box, Criterion};
 use lowdash as ld;
 
