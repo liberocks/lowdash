@@ -131,4 +131,11 @@ mod tests {
     fn test_unicode_characters() {
         assert_eq!(snake_case("hello_世界"), "hello_世界");
     }
+
+    #[test]
+    fn test_uppercase_after_separator() {
+        assert_eq!(snake_case("hello-World"), "hello_world");
+        assert_eq!(snake_case("hello_World"), "hello_world");
+        assert_eq!(snake_case("hello World"), "hello_world");
+    }
 }

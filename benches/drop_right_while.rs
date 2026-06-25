@@ -10,7 +10,12 @@ pub fn benchmark_drop_right_while(c: &mut Criterion) {
 
     let descending = support::int_vec_descending(4_096);
     c.bench_function("drop_right_while/descending", |b| {
-        b.iter(|| ld::drop_right_while(black_box(&descending), black_box(|value: &i32| *value > -10)))
+        b.iter(|| {
+            ld::drop_right_while(
+                black_box(&descending),
+                black_box(|value: &i32| *value > -10),
+            )
+        })
     });
 
     let floats = support::float_vec(4_096);

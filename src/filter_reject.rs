@@ -11,7 +11,7 @@
 ///
 /// * `collection` - A slice of items to be filtered.
 /// * `predicate` - A function that takes a reference to an item and its index, returning a boolean.
-///                If the predicate returns `true`, the item is kept; otherwise, it is rejected.
+///   If the predicate returns `true`, the item is kept; otherwise, it is rejected.
 ///
 /// # Type Parameters
 ///

@@ -6,7 +6,7 @@
 /// # Arguments
 /// * `collection` - A slice of items.
 /// * `iteratee` - A function that takes a reference to an item and its index, returning a boolean.
-///                If `false` is returned, the iteration stops.
+///   If `false` is returned, the iteration stops.
 ///
 /// # Examples
 /// ```rust
@@ -73,7 +73,95 @@ where
 mod tests {
     use super::*;
 
-    // ... other tests ...
+    #[test]
+    fn test_foreach_while_all_true() {
+        let numbers = vec![1, 2, 3, 4, 5];
+        let mut sum = 0;
+        foreach_while(&numbers, |x, _| {
+            sum += x;
+            true
+        });
+        assert_eq!(sum, 15);
+    }
+
+    #[test]
+    fn test_foreach_while_early_stop() {
+        let numbers = vec![10, 20, 30, 40, 50];
+        let mut collected = Vec::new();
+        foreach_while(&numbers, |x, index| {
+            if *x < 35 {
+                collected.push((*x, index));
+                true
+            } else {
+                false
+            }
+        });
+        assert_eq!(collected, vec![(10, 0), (20, 1), (30, 2)]);
+    }
+
+    #[test]
+    fn test_foreach_while_stops_immediately() {
+        let numbers = vec![1, 2, 3];
+        let mut visited = Vec::new();
+        foreach_while(&numbers, |x, _| {
+            visited.push(*x);
+            false
+        });
+        assert_eq!(visited, vec![1]);
+    }
+
+    #[test]
+    fn test_foreach_while_empty_collection() {
+        let empty: Vec<i32> = vec![];
+        let mut called = false;
+        foreach_while(&empty, |_, _| {
+            called = true;
+            true
+        });
+        assert!(!called);
+    }
+
+    #[test]
+    fn test_foreach_while_with_index() {
+        let items = vec!["a", "b", "c", "d"];
+        let mut indices = Vec::new();
+        foreach_while(&items, |_, index| {
+            indices.push(index);
+            true
+        });
+        assert_eq!(indices, vec![0, 1, 2, 3]);
+    }
+
+    #[test]
+    fn test_foreach_while_with_structs() {
+        #[derive(Debug, PartialEq)]
+        struct Person {
+            name: String,
+            age: u32,
+        }
+
+        let people = vec![
+            Person {
+                name: "Alice".to_string(),
+                age: 25,
+            },
+            Person {
+                name: "Bob".to_string(),
+                age: 30,
+            },
+            Person {
+                name: "Carol".to_string(),
+                age: 35,
+            },
+        ];
+
+        let mut names = Vec::new();
+        foreach_while(&people, |p, _| {
+            names.push(p.name.clone());
+            true
+        });
+        assert_eq!(names, vec!["Alice", "Bob", "Carol"]);
+    }
 
     #[test]
     fn test_foreach_while_with_floats() {
@@ -83,8 +171,39 @@ mod tests {
             product *= x;
             true
         });
-        assert!((product - 35.1384).abs() < 1e-10); // Corrected expected product: 35.1384
+        assert!((product - 35.1384).abs() < 1e-10);
     }
 
-    // ... remaining tests ...
+    #[test]
+    fn test_foreach_while_single_element() {
+        let numbers = vec![42];
+        let mut sum = 0;
+        foreach_while(&numbers, |x, _| {
+            sum += x;
+            true
+        });
+        assert_eq!(sum, 42);
+    }
+
+    #[test]
+    fn test_foreach_while_with_optionals() {
+        let collection = vec![Some(1), None, Some(2)];
+        let mut collected = Vec::new();
+        foreach_while(&collection, |x, _| {
+            collected.push(x.is_some());
+            true
+        });
+        assert_eq!(collected, vec![true, false, true]);
+    }
+
+    #[test]
+    fn test_foreach_while_stops_at_false_middle() {
+        let numbers = vec![1, 2, 3, 4, 5];
+        let mut collected = Vec::new();
+        foreach_while(&numbers, |x, _| {
+            collected.push(*x);
+            *x != 3
+        });
+        assert_eq!(collected, vec![1, 2, 3]);
+    }
 }

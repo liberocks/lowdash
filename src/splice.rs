@@ -81,9 +81,6 @@ where
 
     if index < 0 {
         index += size_collection;
-        if index < 0 {
-            index = 0;
-        }
     }
 
     let usize_index = index as usize;

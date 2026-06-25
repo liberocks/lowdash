@@ -9,7 +9,7 @@
 ///
 /// * `collection` - A slice of items to be evaluated.
 /// * `predicate` - A function that takes a reference to an item and returns a boolean.
-///                If the predicate returns `true`, the item is counted.
+///   If the predicate returns `true`, the item is counted.
 ///
 /// # Type Parameters
 ///

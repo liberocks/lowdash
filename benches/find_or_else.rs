@@ -7,7 +7,8 @@ pub fn benchmark_find_or_else(c: &mut Criterion) {
     c.bench_function("find_or_else/int_vec/exists", |b| {
         b.iter(|| {
             ld::find_or_else(
-                black_box(&ints), black_box(&fallback),
+                black_box(&ints),
+                black_box(&fallback),
                 black_box(|value: &i32| *value == 4_095),
             )
         })
@@ -16,7 +17,8 @@ pub fn benchmark_find_or_else(c: &mut Criterion) {
     c.bench_function("find_or_else/int_vec/missing", |b| {
         b.iter(|| {
             ld::find_or_else(
-                black_box(&ints), black_box(&fallback),
+                black_box(&ints),
+                black_box(&fallback),
                 black_box(|value: &i32| *value == -1),
             )
         })

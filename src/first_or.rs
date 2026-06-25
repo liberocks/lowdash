@@ -7,7 +7,7 @@
 ///
 /// # Returns
 /// * `T` - The first item in the collection.
-///         If the collection is empty, returns the `fallback` value.
+///   If the collection is empty, returns the `fallback` value.
 ///
 /// # Examples
 /// ```rust

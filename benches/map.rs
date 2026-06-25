@@ -10,7 +10,12 @@ pub fn benchmark_map(c: &mut Criterion) {
 
     let duplicates = support::duplicate_int_vec(4_096);
     c.bench_function("map/duplicate_int_vec", |b| {
-        b.iter(|| ld::map(black_box(&duplicates), black_box(|value: &i32, _| *value * 2)))
+        b.iter(|| {
+            ld::map(
+                black_box(&duplicates),
+                black_box(|value: &i32, _| *value * 2),
+            )
+        })
     });
 
     let floats = support::float_vec(4_096);

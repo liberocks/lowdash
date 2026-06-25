@@ -7,7 +7,7 @@
 /// # Arguments
 /// * `collection` - A slice of items.
 /// * `accumulator` - A function that takes the current accumulated value, a reference to an item, and its index,
-///                   then returns the new accumulated value.
+///   then returns the new accumulated value.
 /// * `initial` - The initial value for the accumulation.
 ///
 /// # Returns

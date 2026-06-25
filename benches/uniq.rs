@@ -9,9 +9,7 @@ pub fn benchmark_uniq(c: &mut Criterion) {
     });
 
     let ints = support::int_vec(4_096);
-    c.bench_function("uniq/int_vec", |b| {
-        b.iter(|| ld::uniq(black_box(&ints)))
-    });
+    c.bench_function("uniq/int_vec", |b| b.iter(|| ld::uniq(black_box(&ints))));
 
     let floats = support::float_vec(4_096);
     c.bench_function("uniq/float_vec", |b| {
