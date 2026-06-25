@@ -109,6 +109,7 @@ mod repeat;
 mod repeat_by;
 mod replace;
 mod replace_all;
+mod reverse;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -223,6 +224,7 @@ mod replace_all;
     repeat_by::benchmark_repeat_by(c);
     replace::benchmark_replace(c);
     replace_all::benchmark_replace_all(c);
+    reverse::benchmark_reverse(c);
 }
 
         criterion_group! {
