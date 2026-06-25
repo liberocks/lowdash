@@ -161,6 +161,18 @@ mod tests {
     }
 
     #[test]
+    fn test_multiple_camel_case_words() {
+        assert_eq!(kebab_case("fooBarBaz"), "foo-bar-baz");
+        assert_eq!(kebab_case("helloWorldTest"), "hello-world-test");
+    }
+
+    #[test]
+    fn test_multiple_pascal_case_words() {
+        assert_eq!(kebab_case("FooBarBaz"), "foo-bar-baz");
+        assert_eq!(kebab_case("HelloWorldTest"), "hello-world-test");
+    }
+
+    #[test]
     fn test_uppercase_after_separator() {
         assert_eq!(kebab_case("hello-World"), "hello-world");
         assert_eq!(kebab_case("hello_World"), "hello-world");
