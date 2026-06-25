@@ -89,6 +89,7 @@ mod omit_by;
 mod omit_by_keys;
 mod omit_by_values;
 mod partition_by;
+mod pascal_case;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -183,6 +184,7 @@ mod partition_by;
     omit_by_keys::benchmark_omit_by_keys(c);
     omit_by_values::benchmark_omit_by_values(c);
     partition_by::benchmark_partition_by(c);
+    pascal_case::benchmark_pascal_case(c);
 }
 
         criterion_group! {
