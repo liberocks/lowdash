@@ -97,6 +97,7 @@ mod pick_by_keys;
 mod pick_by_values;
 mod product;
 mod product_by;
+mod random_string;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -199,6 +200,7 @@ mod product_by;
     pick_by_values::benchmark_pick_by_values(c);
     product::benchmark_product(c);
     product_by::benchmark_product_by(c);
+    random_string::benchmark_random_string(c);
 }
 
         criterion_group! {
