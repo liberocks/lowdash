@@ -40,4 +40,4 @@ jobs:
           fi
       - name: coverage
         run: |
-          cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --coveralls ${{ secrets.COVERALLS_TOKEN }}
+          cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --exclude-files benches/* --coveralls ${{ secrets.COVERALLS_TOKEN }}

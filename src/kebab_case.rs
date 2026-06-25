@@ -131,4 +131,23 @@ mod tests {
     fn test_unicode_characters() {
         assert_eq!(kebab_case("hello_世界"), "hello-世界");
     }
+
+    #[test]
+    fn test_leading_separators() {
+        assert_eq!(kebab_case("--hello-world"), "hello-world");
+        assert_eq!(kebab_case("  foo-bar"), "foo-bar");
+        assert_eq!(kebab_case("__test_case"), "test-case");
+    }
+
+    #[test]
+    fn test_trailing_separators() {
+        assert_eq!(kebab_case("hello-world--"), "hello-world");
+        assert_eq!(kebab_case("foo-bar  "), "foo-bar");
+    }
+
+    #[test]
+    fn test_leading_and_trailing_separators() {
+        assert_eq!(kebab_case("--hello--"), "hello");
+        assert_eq!(kebab_case("  foo bar  "), "foo-bar");
+    }
 }
