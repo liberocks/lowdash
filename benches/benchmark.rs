@@ -37,6 +37,7 @@ mod filter_map;
 mod filter_reject;
 mod find;
 mod find_duplicates;
+mod find_duplicates_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -79,6 +80,7 @@ mod find_duplicates;
     filter_reject::benchmark_filter_reject(c);
     find::benchmark_find(c);
     find_duplicates::benchmark_find_duplicates(c);
+    find_duplicates_by::benchmark_find_duplicates_by(c);
 }
 
         criterion_group! {
