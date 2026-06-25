@@ -63,12 +63,14 @@ where
     let mut latest_idx = 0;
     let mut latest_time = iteratee(&first);
 
-    for (i, item) in collection.iter().enumerate().skip(1) {
-        let item_time = iteratee(item);
+    let mut i = 1;
+    while i < collection.len() {
+        let item_time = iteratee(&collection[i]);
         if item_time > latest_time {
             latest_idx = i;
             latest_time = item_time;
         }
+        i += 1;
     }
 
     if latest_idx == 0 {
