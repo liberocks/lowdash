@@ -268,7 +268,6 @@ fn all_benches(c: &mut Criterion) {
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
->>>>>>> origin/next
 }
 
 criterion_group! {
