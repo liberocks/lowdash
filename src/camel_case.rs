@@ -97,4 +97,11 @@ mod tests {
     fn test_unicode_characters() {
         assert_eq!(camel_case("hello_世界"), "hello世界");
     }
+
+    #[test]
+    fn test_separator_only() {
+        assert_eq!(camel_case("   "), "");
+        assert_eq!(camel_case("---"), "");
+        assert_eq!(camel_case("___"), "");
+    }
 }

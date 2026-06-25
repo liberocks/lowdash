@@ -8,7 +8,7 @@ use crate::first::first;
 ///
 /// # Returns
 /// * `T` - The first item in the collection.
-///         If the collection is empty, returns `T::default()`.
+///   If the collection is empty, returns `T::default()`.
 ///
 /// # Examples
 /// ```rust

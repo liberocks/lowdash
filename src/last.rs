@@ -6,7 +6,7 @@
 ///
 /// # Returns
 /// * `(T, bool)` - A tuple containing the last item and `true`.
-///                If the collection is empty, returns `(T::default(), false)`.
+///   If the collection is empty, returns `(T::default(), false)`.
 ///
 /// # Examples
 /// ```rust

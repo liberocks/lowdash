@@ -20,6 +20,11 @@ pub fn benchmark_count_by(c: &mut Criterion) {
 
     let people = support::people(4_096);
     c.bench_function("count_by/people", |b| {
-        b.iter(|| ld::count_by(black_box(&people), black_box(|p: &support::Person| p.age > 30)))
+        b.iter(|| {
+            ld::count_by(
+                black_box(&people),
+                black_box(|p: &support::Person| p.age > 30),
+            )
+        })
     });
 }

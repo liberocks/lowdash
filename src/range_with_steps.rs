@@ -124,4 +124,10 @@ mod tests {
         let result = range_with_steps(10, 1, -3);
         assert_eq!(result, vec![10, 7, 4]);
     }
+
+    #[test]
+    fn test_range_with_steps_wrong_direction_positive_step() {
+        let result: Vec<i32> = range_with_steps(5, 1, 2);
+        assert_eq!(result, Vec::<i32>::new());
+    }
 }

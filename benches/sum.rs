@@ -10,5 +10,7 @@ pub fn benchmark_sum(c: &mut Criterion) {
     c.bench_function("sum/float_vec", |b| b.iter(|| ld::sum(black_box(&floats))));
 
     let duplicates = support::duplicate_int_vec(4_096);
-    c.bench_function("sum/duplicate_int_vec", |b| b.iter(|| ld::sum(black_box(&duplicates))));
+    c.bench_function("sum/duplicate_int_vec", |b| {
+        b.iter(|| ld::sum(black_box(&duplicates)))
+    });
 }
