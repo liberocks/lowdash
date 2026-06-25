@@ -28,13 +28,17 @@ where
     let size = collection.len();
     let sample_size = size.min(count);
 
-    let mut copy = collection.to_vec();
+    if sample_size == 0 {
+        return Vec::new();
+    }
+
+    // Fisher-Yates shuffle on indices to avoid cloning all elements
+    let mut indices: Vec<usize> = (0..size).collect();
     let mut results = Vec::with_capacity(sample_size);
 
     for i in 0..sample_size {
-        let copy_length = size - i;
+        let bound = size - i;
 
-        // Use multiple time sources for better entropy
         let seed1 = SystemTime::now()
             .duration_since(SystemTime::UNIX_EPOCH)
             .unwrap_or_default()
@@ -42,13 +46,11 @@ where
 
         let seed2 = std::time::Instant::now().elapsed().as_nanos() as u64;
 
-        // Combine seeds
         let seed = (seed1 ^ seed2).wrapping_add(i as u64);
 
-        let index = common::random_usize_with_seed(copy_length, seed);
-        results.push(copy[index].clone());
-        copy.swap(index, copy_length - 1);
-        copy.truncate(copy_length - 1);
+        let idx = common::random_usize_with_seed(bound, seed);
+        results.push(collection[indices[idx]].clone());
+        indices.swap(idx, bound - 1);
     }
 
     results
