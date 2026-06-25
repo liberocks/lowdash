@@ -19,17 +19,20 @@ jobs:
       - name: Create PR from next to master
         env:
           GH_TOKEN: ${{ github.token }}
+          PR_TITLE: ${{ github.event.release.name }}
+          PR_BODY: ${{ github.event.release.body }}
         run: |
           gh pr create \
             --base master \
             --head next \
-            --title "${{ github.event.release.name }}" \
-            --body "${{ github.event.release.body }}"
+            --title "$PR_TITLE" \
+            --body "$PR_BODY" \
+            || echo "PR may already exist, continuing..."
 
       - name: Merge to master
         run: |
           git checkout master
-          git merge origin/next
+          git merge origin/next --no-edit
           git push origin master
 
       - name: Rebase next from master
