@@ -102,6 +102,7 @@ mod range;
 mod range_from;
 mod range_with_steps;
 mod reduce;
+mod reduce_right;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -209,6 +210,7 @@ mod reduce;
     range_from::benchmark_range_from(c);
     range_with_steps::benchmark_range_with_steps(c);
     reduce::benchmark_reduce(c);
+    reduce_right::benchmark_reduce_right(c);
 }
 
         criterion_group! {
