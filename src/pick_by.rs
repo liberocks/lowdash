@@ -34,7 +34,7 @@ where
     V: Clone,
     F: Fn(&K, &V) -> bool,
 {
-    let mut result = std::collections::HashMap::new();
+    let mut result = std::collections::HashMap::with_capacity(map.len());
     for (k, v) in map.iter() {
         if predicate(k, v) {
             result.insert(k.clone(), v.clone());
