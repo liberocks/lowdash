@@ -84,6 +84,7 @@ mod median;
 mod min;
 mod min_by;
 mod nearest_power_of_two;
+mod nth;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -173,6 +174,7 @@ mod nearest_power_of_two;
     min::benchmark_min(c);
     min_by::benchmark_min_by(c);
     nearest_power_of_two::benchmark_nearest_power_of_two(c);
+    nth::benchmark_nth(c);
 }
 
         criterion_group! {
