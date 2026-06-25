@@ -1,12 +1,15 @@
-use criterion::{black_box, Criterion};
 use crate::support;
+use criterion::{black_box, Criterion};
 use lowdash as ld;
 
 pub fn benchmark_sum_by(c: &mut Criterion) {
     let collection = support::people(2_048);
     c.bench_function("sum_by", |b| {
         b.iter(|| {
-            ld::sum_by(black_box(&collection), black_box(|person: &support::Person| person.age))
+            ld::sum_by(
+                black_box(&collection),
+                black_box(|person: &support::Person| person.age),
+            )
         })
     });
 }

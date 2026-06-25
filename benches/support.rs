@@ -42,15 +42,7 @@ pub fn defaulty_int_vec(len: usize) -> Vec<i32> {
 }
 
 pub fn float_vec(len: usize) -> Vec<f64> {
-    (0..len)
-        .map(|i| (((i % 97) as f64) - 48.0) / 3.0)
-        .collect()
-}
-
-pub fn string_vec(len: usize) -> Vec<String> {
-    (0..len)
-        .map(|i| format!("item-{}-{}", i % 64, i))
-        .collect()
+    (0..len).map(|i| (((i % 97) as f64) - 48.0) / 3.0).collect()
 }
 
 pub fn people(len: usize) -> Vec<Person> {

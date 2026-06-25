@@ -1,5 +1,5 @@
-use criterion::{black_box, Criterion};
 use crate::support;
+use criterion::{black_box, Criterion};
 use lowdash as ld;
 
 pub fn benchmark_foreach_while(c: &mut Criterion) {

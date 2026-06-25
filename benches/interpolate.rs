@@ -1,5 +1,4 @@
 use criterion::{black_box, Criterion};
-use crate::support;
 use lowdash as ld;
 
 pub fn benchmark_interpolate(c: &mut Criterion) {
