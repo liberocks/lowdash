@@ -18,6 +18,7 @@ mod clamp;
 mod combination;
 mod compact;
 mod count;
+mod count_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -41,6 +42,7 @@ mod count;
     combination::benchmark_combination(c);
     compact::benchmark_compact(c);
     count::benchmark_count(c);
+    count_by::benchmark_count_by(c);
 }
 
         criterion_group! {
