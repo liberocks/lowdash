@@ -20,6 +20,7 @@ mod compact;
 mod count;
 mod count_by;
 mod count_values;
+mod count_values_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -45,6 +46,7 @@ mod count_values;
     count::benchmark_count(c);
     count_by::benchmark_count_by(c);
     count_values::benchmark_count_values(c);
+    count_values_by::benchmark_count_values_by(c);
 }
 
         criterion_group! {
