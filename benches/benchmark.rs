@@ -92,6 +92,7 @@ mod partition_by;
 mod pascal_case;
 mod percentile;
 mod permutation;
+mod pick_by;
 
         fn custom_criterion() -> Criterion {
             Criterion::default().output_directory(std::path::Path::new("./report"))
@@ -189,6 +190,7 @@ mod permutation;
     pascal_case::benchmark_pascal_case(c);
     percentile::benchmark_percentile(c);
     permutation::benchmark_permutation(c);
+    pick_by::benchmark_pick_by(c);
 }
 
         criterion_group! {
