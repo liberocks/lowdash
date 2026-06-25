@@ -7,7 +7,7 @@ repository = "https://github.com/liberocks/lowdash"
 readme = "README.md"
 license = "MIT"
 categories = ["rust-patterns"]
-keywords = ["rust-lodash", "lodash", "utility", "js", "javascript"]
+keywords = ["rust-lodash", "lodash", "utility"]
 edition = "2021"
 autobenches = false
 
