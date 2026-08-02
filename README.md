@@ -92,6 +92,7 @@ Utility functions for array:
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
 - [subset](#subset)
+- [take_right_while](#take_right_while)
 - [take_while](#take_while)
 - [times](#times)
 - [uniq](#uniq)
@@ -2213,6 +2214,21 @@ use lowdash::drop_right_while;
 let letters = vec!['a', 'b', 'c', 'd', 'e'];
 let result = drop_right_while(&letters, |&c| c != 'c');
 assert_eq!(result, vec!['a', 'b', 'c']);
+```
+
+### take_right_while
+Returns the longest suffix whose items satisfy a predicate.
+
+The scan starts at the end, and the result keeps the original item order.
+
+```rust
+use lowdash::take_right_while;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = take_right_while(&numbers, |number| *number > 2);
+
+assert_eq!(result, vec![3, 4, 5]);
+
 ```
 
 ### take_while
