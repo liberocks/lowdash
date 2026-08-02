@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.0] 2026-08-02
+### Added
+- Added stable `sort_by` and `sort_by_key` collection sorting functions.
+- Added `difference`, `intersection`, and `union` collection set functions.
+- Added `take_while` and `take_right_while` prefix and suffix functions.
+- Added `zip` for pairing items from two collections.
+- Added `every` and `some` short-circuiting predicate functions.
+- Added unit tests, README documentation, and Criterion benchmarks for all new functions.
+
+### Changed
+- Updated coverage workflow triggers so feature branches are covered.
+- Simplified README headings by removing decorative emoji.
+
 ## [0.6.2] 2026-08-02
 ### Added
 - Added Dependabot updates for Rust dependencies and GitHub Actions.
