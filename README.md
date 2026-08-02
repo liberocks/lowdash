@@ -84,6 +84,7 @@ Utility functions for array:
 - [sample](#sample)
 - [samples](#samples)
 - [shuffle](#shuffle)
+- [sort_by_key](#sort_by_key)
 - [slice](#slice)
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
@@ -2734,6 +2735,21 @@ let floats = vec![
 ];
 let result = is_sorted_by_key(&floats, |item| item.0);
 assert_eq!(result, true);
+```
+
+### sort_by_key
+Returns a stable, ascending copy of a collection sorted by a key.
+
+Items with equal keys keep their original order. The input collection is not changed.
+
+```rust
+use lowdash::sort_by_key;
+
+let records = vec![(3, "c"), (1, "a"), (2, "b")];
+let sorted = sort_by_key(&records, |record| record.0);
+
+assert_eq!(sorted, vec![(1, "a"), (2, "b"), (3, "c")]);
+assert_eq!(records, vec![(3, "c"), (1, "a"), (2, "b")]);
 ```
 
 ### splice
