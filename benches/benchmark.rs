@@ -125,6 +125,7 @@ mod substring;
 mod sum;
 mod sum_by;
 mod support;
+mod take_right_while;
 mod times;
 mod to_pairs;
 mod uniq;
@@ -267,6 +268,7 @@ fn all_benches(c: &mut Criterion) {
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
+    take_right_while::benchmark_take_right_while(c);
     times::benchmark_times(c);
     to_pairs::benchmark_to_pairs(c);
     uniq::benchmark_uniq(c);
