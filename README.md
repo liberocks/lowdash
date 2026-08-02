@@ -33,6 +33,7 @@ Utility functions for array:
 - [drop_while](#drop_while)
 - [earliest](#earliest)
 - [earliest_by](#earliest_by)
+- [every](#every)
 - [fill](#fill)
 - [filter](#filter)
 - [filter_map](#filter_map)
@@ -1199,6 +1200,18 @@ use lowdash::reject;
 let numbers = vec![1, 2, 3, 4, 5];
 let result = reject(&numbers, |x, _| *x % 2 == 0);
 assert_eq!(result, vec![&1, &3, &5]);
+```
+
+### every
+Returns `true` when every item satisfies a predicate.
+
+The scan stops at the first item that fails. An empty collection returns `true`.
+
+```rust
+use lowdash::every;
+
+let numbers = vec![2, 4, 6];
+assert!(every(&numbers, |number| *number % 2 == 0));
 ```
 
 ### filter

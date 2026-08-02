@@ -31,6 +31,7 @@ mod earliest;
 mod earliest_by;
 mod ellipsis;
 mod entries;
+mod every;
 mod fill;
 mod filter;
 mod filter_map;
@@ -173,6 +174,7 @@ fn all_benches(c: &mut Criterion) {
     earliest::benchmark_earliest(c);
     earliest_by::benchmark_earliest_by(c);
     ellipsis::benchmark_ellipsis(c);
+    every::benchmark_every(c);
     entries::benchmark_entries(c);
     fill::benchmark_fill(c);
     filter::benchmark_filter(c);
