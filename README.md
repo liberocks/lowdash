@@ -26,6 +26,7 @@ Utility functions for array:
 - [count_by](#count_by)
 - [count_values](#count_values)
 - [count_values_by](#count_values_by)
+- [difference](#difference)
 - [drop](#drop)
 - [drop_right](#drop_right)
 - [drop_right_while](#drop_right_while)
@@ -1577,6 +1578,20 @@ assert_eq!(unique_people, vec![
     Person { name: "Bob".to_string(), age: 30 },
     Person { name: "Carol".to_string(), age: 35 },
 ]);
+```
+
+### difference
+Returns the items from one collection that are not in another collection.
+
+The result keeps the input order and keeps repeated items that are not excluded.
+
+```rust
+use lowdash::difference;
+
+let numbers = vec![1, 2, 2, 3, 4];
+let result = difference(&numbers, &[2, 4]);
+
+assert_eq!(result, vec![1, 3]);
 ```
 
 ### group_by
