@@ -12,7 +12,7 @@ edition = "2021"
 autobenches = false
 
 [dev-dependencies]
-criterion = { version = "0.5.1", features = ["html_reports"] }
+criterion = { version = "0.8.2", features = ["html_reports"] }
 
 [[bench]]
 name = "benchmark"
