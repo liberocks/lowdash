@@ -31,6 +31,7 @@ mod earliest;
 mod earliest_by;
 mod ellipsis;
 mod entries;
+mod every;
 mod fill;
 mod filter;
 mod filter_map;
@@ -126,8 +127,11 @@ mod substring;
 mod sum;
 mod sum_by;
 mod support;
+mod take_right_while;
+mod take_while;
 mod times;
 mod to_pairs;
+mod union;
 mod uniq;
 mod uniq_by;
 mod uniq_keys;
@@ -135,6 +139,7 @@ mod uniq_values;
 mod value_or;
 mod values;
 mod words;
+mod zip;
 
 fn custom_criterion() -> Criterion {
     Criterion::default()
@@ -174,6 +179,7 @@ fn all_benches(c: &mut Criterion) {
     earliest::benchmark_earliest(c);
     earliest_by::benchmark_earliest_by(c);
     ellipsis::benchmark_ellipsis(c);
+    every::benchmark_every(c);
     entries::benchmark_entries(c);
     fill::benchmark_fill(c);
     filter::benchmark_filter(c);
@@ -269,15 +275,19 @@ fn all_benches(c: &mut Criterion) {
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
+    take_right_while::benchmark_take_right_while(c);
+    take_while::benchmark_take_while(c);
     times::benchmark_times(c);
     to_pairs::benchmark_to_pairs(c);
     uniq::benchmark_uniq(c);
     uniq_by::benchmark_uniq_by(c);
     uniq_keys::benchmark_uniq_keys(c);
     uniq_values::benchmark_uniq_values(c);
+    union::benchmark_union(c);
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
+    zip::benchmark_zip(c);
 }
 
 criterion_group! {

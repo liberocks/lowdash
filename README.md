@@ -8,14 +8,14 @@
 
 **liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
 
-## 🚀 Installation
+## Installation
 ```bash
 cargo add lowdash
 ```
 
 This library has no dependencies outside the Rust standard library.
 
-## 📚 Documentation
+## Documentation
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
@@ -33,6 +33,7 @@ Utility functions for array:
 - [drop_while](#drop_while)
 - [earliest](#earliest)
 - [earliest_by](#earliest_by)
+- [every](#every)
 - [fill](#fill)
 - [filter](#filter)
 - [filter_map](#filter_map)
@@ -93,6 +94,9 @@ Utility functions for array:
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
 - [subset](#subset)
+- [zip](#zip)
+- [take_right_while](#take_right_while)
+- [take_while](#take_while)
 - [times](#times)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
@@ -132,6 +136,7 @@ Utility functions for object manipulation:
 - [to_pairs](#to_pairs)
 - [uniq_keys](#uniq_keys)
 - [uniq_values](#uniq_values)
+- [union](#union)
 - [value_or](#value_or)
 - [values](#values)
 
@@ -1212,6 +1217,19 @@ use lowdash::some;
 
 let numbers = vec![1, 3, 4, 7];
 assert!(some(&numbers, |number| *number % 2 == 0));
+
+```
+
+### every
+Returns `true` when every item satisfies a predicate.
+
+The scan stops at the first item that fails. An empty collection returns `true`.
+
+```rust
+use lowdash::every;
+
+let numbers = vec![2, 4, 6];
+assert!(every(&numbers, |number| *number % 2 == 0));
 ```
 
 ### filter
@@ -1855,6 +1873,21 @@ assert!(shuffled.contains(&4));
 assert!(shuffled.contains(&5));
 ```
 
+### zip
+Pairs items from two collections at matching indices.
+
+The result stops when either collection ends.
+
+```rust
+use lowdash::zip;
+
+let names = vec!["Alice", "Bob"];
+let ages = vec![30, 25];
+let result = zip(&names, &ages);
+
+assert_eq!(result, vec![("Alice", 30), ("Bob", 25)]);
+```
+
 ### reverse
 Reverse a collection, returning a new vector with the elements in reverse order.
 
@@ -2224,6 +2257,35 @@ use lowdash::drop_right_while;
 let letters = vec!['a', 'b', 'c', 'd', 'e'];
 let result = drop_right_while(&letters, |&c| c != 'c');
 assert_eq!(result, vec!['a', 'b', 'c']);
+```
+
+### take_right_while
+Returns the longest suffix whose items satisfy a predicate.
+
+The scan starts at the end, and the result keeps the original item order.
+
+```rust
+use lowdash::take_right_while;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = take_right_while(&numbers, |number| *number > 2);
+
+assert_eq!(result, vec![3, 4, 5]);
+
+```
+
+### take_while
+Returns the longest prefix whose items satisfy a predicate.
+
+The scan stops at the first item that fails the predicate.
+
+```rust
+use lowdash::take_while;
+
+let numbers = vec![1, 2, 3, 1, 4];
+let result = take_while(&numbers, |number| *number < 3);
+
+assert_eq!(result, vec![1, 2]);
 ```
 
 ### drop_by_index
@@ -2670,6 +2732,20 @@ let collections = vec![vec![1, 2, 2, 3], vec![2, 3, 4], vec![0, 2, 3]];
 let result = intersection(&collections);
 
 assert_eq!(result, vec![2, 3]);
+```
+
+### union
+Returns the unique values from all collections.
+
+Values keep the order of their first appearance across the collections.
+
+```rust
+use lowdash::union;
+
+let collections = vec![vec![1, 2, 2], vec![2, 3], vec![3, 4]];
+let result = union(&collections);
+
+assert_eq!(result, vec![1, 2, 3, 4]);
 ```
 
 ### is_sorted
@@ -3577,5 +3653,5 @@ let day_later = epoch + one_day;
 assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
 ```
 
-## 🫡 Acknowledgement
+## Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
