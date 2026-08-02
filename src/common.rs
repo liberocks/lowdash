@@ -236,6 +236,8 @@ pub const ALL_CHARSET: &[char] = &[
     '[', ']', '{', '}', '|', ';', '\'', ':', '"', ',', '.', '/', '<', '>', '?',
 ];
 
+///
+///
 #[cfg(test)]
 mod tests {
     use std::collections::HashSet;

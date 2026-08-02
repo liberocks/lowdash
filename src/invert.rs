@@ -43,6 +43,7 @@ where
     inverted
 }
 
+///
 #[cfg(test)]
 mod tests {
     use super::*;
