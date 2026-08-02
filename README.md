@@ -8,14 +8,14 @@
 
 **liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
 
-## 🚀 Installation
+## Installation
 ```bash
 cargo add lowdash
 ```
 
 This library has no dependencies outside the Rust standard library.
 
-## 📚 Documentation
+## Documentation
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
@@ -3564,5 +3564,5 @@ let day_later = epoch + one_day;
 assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
 ```
 
-## 🫡 Acknowledgement
+## Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
