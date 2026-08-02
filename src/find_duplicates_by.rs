@@ -44,8 +44,8 @@ where
 {
     use std::collections::HashMap;
 
-    let mut seen: HashMap<U, bool> = HashMap::with_capacity(collection.len());
-    let mut result = Vec::with_capacity(collection.len());
+    let mut seen: HashMap<U, bool> = HashMap::new();
+    let mut result = Vec::new();
 
     for item in collection {
         let key = iteratee(item);
