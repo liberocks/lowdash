@@ -14,17 +14,14 @@ impl fmt::Display for NthError {
 
 impl Error for NthError {}
 
-/// Returns the nth element from the collection.
-/// Supports both positive and negative indices.
-/// Negative indices count from the end of the collection.
+/// Returns the item at index `nth`. Negative indices count from the end.
 ///
 /// # Arguments
-/// * `collection` - A slice of items
-/// * `nth` - Index of the desired element (can be negative)
+/// * `collection` - Items to index.
+/// * `nth` - Index, possibly negative.
 ///
 /// # Returns
-/// * `Ok(&T)` - The element at the specified index
-/// * `Err(NthError)` - If the index is out of bounds
+/// * `Result<&T, NthError>` - The item, or `NthError` if the index is out of bounds.
 ///
 /// # Examples
 /// ```rust

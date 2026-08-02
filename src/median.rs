@@ -1,15 +1,13 @@
 use crate::percentile;
 
-/// Calculate the median value of a collection.
-/// The median is the 50th percentile of a collection.
-/// For collections with an even number of elements, the median is the average of the two middle values.
-/// The collection will be sorted before calculation.
+/// Returns the 50th percentile, or `None` for an empty collection.
+/// Even-length inputs use the average of the two middle values.
 ///
 /// # Arguments
-/// * `collection` - A slice of items to calculate the median from
+/// * `collection` - Values to compare.
 ///
 /// # Returns
-/// * `Option<f64>` - The median value, or None if the collection is empty
+/// * `Option<f64>` - The median as `f64`, if the collection is non-empty.
 ///
 /// # Examples
 /// ```rust

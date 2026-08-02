@@ -1,13 +1,15 @@
 use std::collections::{BTreeMap, HashMap};
 
-/// Transforms the keys of a map using a provided function.
+/// Transforms map keys into a sorted `BTreeMap`.
+/// The callback receives `(value, key)`. Input keys are processed in
+/// descending order, so later inserts win on transformed-key collisions.
 ///
 /// # Arguments
-/// * `map` - The input map whose keys are to be transformed.
-/// * `iteratee` - A function that takes a reference to a value and its key, returning a new key.
+/// * `map` - Map to transform.
+/// * `iteratee` - Function returning a new key for `(value, key)`.
 ///
 /// # Returns
-/// * `BTreeMap<R, V>` - A new map with transformed keys.
+/// * `BTreeMap<R, V>` - The transformed map.
 ///
 /// # Examples
 /// ```rust
@@ -23,19 +25,18 @@ use std::collections::{BTreeMap, HashMap};
 /// ```
 pub fn map_keys<K, V, R, F>(map: &HashMap<K, V>, iteratee: F) -> BTreeMap<R, V>
 where
-    K: Eq + std::hash::Hash + Ord,
+    K: Ord,
     V: Clone,
     R: Ord,
     F: Fn(&V, &K) -> R,
 {
     let mut result = BTreeMap::new();
-    let mut keys: Vec<&K> = map.keys().collect();
+    let mut entries: Vec<(&K, &V)> = map.iter().collect();
 
-    // Sort keys in descending order to ensure later keys overwrite earlier ones
-    keys.sort_by(|a, b| b.cmp(a));
+    // Sort descending so later inserts win.
+    entries.sort_by(|(a, _), (b, _)| b.cmp(a));
 
-    for k in keys {
-        let v = &map[k];
+    for (k, v) in entries {
         let new_key = iteratee(v, k);
         result.insert(new_key, v.clone());
     }
@@ -69,9 +70,9 @@ mod tests {
     fn test_map_keys_overwrite() {
         let mut map = HashMap::new();
         map.insert("a", 1);
-        map.insert("A", 2); // "a" and "A" will both transform to "a"
+        map.insert("A", 2); // Both keys become "a".
         let transformed = map_keys(&map, |&v, k| k.to_lowercase());
-        // Since keys are sorted in descending order, "a" is inserted first, then "A" overwrites it
+        // Descending order makes "A" overwrite "a".
         assert_eq!(transformed.get("a"), Some(&2));
     }
 }

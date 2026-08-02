@@ -1,13 +1,15 @@
 use std::collections::{BTreeMap, HashMap};
 
-/// Transforms the entries of a map using a provided function.
+/// Transforms each map entry into a sorted `BTreeMap`.
+/// Input keys are processed in ascending order; later inserts overwrite
+/// earlier values when transformed keys collide.
 ///
 /// # Arguments
-/// * `map` - The input map whose entries are to be transformed.
-/// * `iteratee` - A function that takes a reference to a key and its value, returning a new key and value.
+/// * `map` - Map to transform.
+/// * `iteratee` - Function called as `(key, value)`.
 ///
 /// # Returns
-/// * `BTreeMap<K2, V2>` - A new map with transformed entries.
+/// * `BTreeMap<K2, V2>` - The transformed map.
 ///
 /// # Examples
 /// ```rust

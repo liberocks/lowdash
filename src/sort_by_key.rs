@@ -1,17 +1,17 @@
 /// Returns a stable, ascending sort of a collection using a key function.
 ///
-/// The input collection is not changed. Items with equal keys keep their original order.
+/// The input is unchanged; equal keys keep their original order.
 ///
 /// **Time Complexity:** O(n log n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - The items to sort.
-/// * `iteratee` - A function that returns a sort key for each item.
+/// * `collection` - Items to sort.
+/// * `iteratee` - Function returning each sort key.
 ///
 /// # Returns
 ///
-/// A new vector containing the sorted items.
+/// * `Vec<T>` - A stable, ascending-sorted copy.
 ///
 /// # Examples
 ///

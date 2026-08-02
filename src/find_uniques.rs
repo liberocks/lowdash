@@ -1,10 +1,10 @@
-/// Find all unique elements in a collection (elements that appear exactly once).
+/// Returns values that appear exactly once, in input order.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to inspect.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing only the elements that appear exactly once in the input.
+/// * `Vec<T>` - The values with one occurrence.
 ///
 /// # Examples
 /// ```rust

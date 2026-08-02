@@ -1,24 +1,21 @@
 use std::cmp::Ordering;
 
-/// Determines if a collection is sorted in ascending order.
+/// Returns `true` when items are in non-decreasing order.
+/// Incomparable pairs, including comparisons involving `NaN`, return `false`.
 ///
-/// This function checks whether the elements in the provided slice are in non-decreasing order.
-/// It iterates through the slice and compares each element with its predecessor.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be checked for sorted order.
+/// * `collection` - Items to check.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `PartialOrd`.
+/// * `T` - Partially ordered item type.
 ///
 /// # Returns
 ///
-/// * `true` if the collection is sorted in ascending order.
-/// * `false` otherwise.
+/// * `bool` - Whether the collection is sorted.
 ///
 /// # Examples
 ///

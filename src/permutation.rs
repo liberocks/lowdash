@@ -1,11 +1,11 @@
 /// Finds all permutations of k elements from a collection.
 ///
 /// # Arguments
-/// * `items` - A slice of items to permute.
-/// * `k` - The number of elements in each permutation.
+/// * `items` - Items to permute.
+/// * `k` - Length of each permutation.
 ///
 /// # Returns
-/// * `Vec<Vec<T>>` - A vector containing all permutations of k elements from the input.
+/// * `Vec<Vec<T>>` - All length-`k` permutations, or an empty vector when `k` exceeds the input length.
 ///
 /// # Examples
 /// ```rust

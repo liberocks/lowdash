@@ -1,13 +1,13 @@
 use std::collections::HashMap;
 
-/// Transforms the entries of a map into a slice using a provided function.
+/// Maps each map entry to a value. HashMap iteration order is not specified.
 ///
 /// # Arguments
-/// * `map` - The input map whose entries are to be transformed.
-/// * `iteratee` - A function that takes a reference to a key and its value, returning a new value.
+/// * `map` - Map to transform.
+/// * `iteratee` - Function called as `(key, value)`.
 ///
 /// # Returns
-/// * `Vec<R>` - A vector containing the transformed values.
+/// * `Vec<R>` - The transformed values.
 ///
 /// # Examples
 /// ```rust

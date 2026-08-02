@@ -11,6 +11,15 @@
 
 ### Changed
 - Updated coverage workflow triggers so feature branches are covered.
+- Switched coverage reporting from Tarpaulin to LLVM coverage for more accurate DeepSource results.
+- Improved `assign` by 45.9% to 46.8% through map capacity reservation.
+- Improved `chunk` by 15.6% to 26.6% through outer vector capacity reservation.
+- Improved `combination` by 17.4% to 36.9% by removing intermediate clones.
+- Improved `count_values` by 43.0% to 57.9% by cloning keys only once per distinct value.
+- Improved `filter_map` by 25.4% to 29.7% through result capacity reservation.
+- Improved `keys` by 13.8% to 21.4% through exact output capacity reservation.
+- Improved `map_keys` by 30.1% to 35.4% by avoiding repeated map lookups.
+- Improved `uniq_keys` by 35.5% to 37.9% by avoiding duplicate key clones.
 - Simplified README headings by removing decorative emoji.
 
 ## [0.6.2] 2026-08-02

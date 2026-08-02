@@ -1,21 +1,21 @@
-/// Inserts elements into a collection at a specified index, handling negative indices and overflow.
-/// Returns a new `Vec<T>` with the elements inserted.
+/// Inserts `elements` at index `i`, returning a new vector.
+/// Negative indices count from the end; out-of-range indices are clamped.
 ///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the output length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items in which to perform the insertion.
-/// * `i` - The index at which to insert the elements. Can be negative to indicate an offset from the end.
-/// * `elements` - A slice of elements to insert.
+/// * `collection` - Items to copy.
+/// * `i` - Insertion index, possibly negative.
+/// * `elements` - Items to insert.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector with the specified elements inserted.
+/// * `Vec<T>` - The updated copy.
 ///
 /// # Examples
 ///

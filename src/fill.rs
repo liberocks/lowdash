@@ -1,23 +1,20 @@
-/// Fill a collection with a specified value, returning a new vector with all elements set to the initial value.
-///
-/// This function takes a slice of items and an initial value, then returns a new `Vec<T>` containing the initial value
-/// repeated for the length of the input collection. The original collection remains unmodified.
+/// Returns a vector filled with `initial`, with the same length as `collection`.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of elements in the collection.
+/// O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items indicating the size of the resulting vector.
-/// * `initial` - The value to fill the new vector with.
+/// * `collection` - Items whose length determines the result length.
+/// * `initial` - Value to clone into the result.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement the `Clone` trait to allow duplication.
+/// * `T` - Value type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector containing the initial value repeated for the length of the input collection.
+/// * `Vec<T>` - A vector of cloned values.
 ///
 /// # Examples
 ///

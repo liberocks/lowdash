@@ -1,23 +1,20 @@
-/// Flatten a collection of slices into a single vector, preserving the order of elements.
-///
-/// This function takes a slice of slices and concatenates all inner slices into a single `Vec<T>`.
-/// The order of elements is preserved based on their original ordering in the input collection.
+/// Concatenates nested slices into one vector, preserving outer and inner order.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the total number of elements across all inner slices.
+/// O(n), where `n` is the total number of inner elements.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of slices to be flattened.
+/// * `collection` - Nested slices to concatenate.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the slices. Must implement `Clone`.
-/// * `Slice` - The type of the inner slices. Must implement `AsRef<[T]>`.
+/// * `T` - Item type.
+/// * `Slice` - Nested slice type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing all elements from the input slices, flattened into a single collection.
+/// * `Vec<T>` - The flattened items.
 ///
 /// # Examples
 ///

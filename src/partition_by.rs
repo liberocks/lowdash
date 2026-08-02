@@ -1,30 +1,25 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-/// Divide a collection into partitions based on a key extracted by a provided function,
-/// preserving the order of elements and the order of partitions as they first appear.
-///
-/// This function takes a slice of items and splits it into multiple partitions. Each partition
-/// contains elements that share the same key, as determined by the `iteratee` function.
-/// The order of partitions corresponds to the order in which their keys first appear in the collection.
+/// Groups items by key while preserving item order and first-seen partition order.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of elements in the collection.
+/// O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be partitioned.
-/// * `iteratee` - A function that takes a reference to an item and returns a key of type `K`.
+/// * `collection` - Items to partition.
+/// * `iteratee` - Function returning an item's partition key.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
-/// * `K` - The type of the key extracted from each element used to determine partitions. Must implement `Hash`, `Eq`, and `Clone`.
-/// * `F` - The type of the iteratee function. Must implement `Fn(&T) -> K`.
+/// * `T` - Item type.
+/// * `K` - Hashable partition-key type.
+/// * `F` - Iteratee type.
 ///
 /// # Returns
 ///
-/// * `Vec<Vec<T>>` - A vector of partitions, where each partition is a vector of elements sharing the same key.
+/// * `Vec<Vec<T>>` - Partitions in first-key-seen order.
 ///
 /// # Examples
 ///
@@ -75,7 +70,7 @@ use std::hash::Hash;
 pub fn partition_by<T, K, F>(collection: &[T], iteratee: F) -> Vec<Vec<T>>
 where
     T: Clone,
-    K: Eq + Hash + Clone,
+    K: Eq + Hash,
     F: Fn(&T) -> K,
 {
     let mut seen: HashMap<K, usize> = HashMap::new();
@@ -86,7 +81,8 @@ where
         if let Some(&index) = seen.get(&key) {
             result[index].push(item.clone());
         } else {
-            seen.insert(key.clone(), result.len());
+            let index = result.len();
+            seen.insert(key, index);
             result.push(vec![item.clone()]);
         }
     }
@@ -110,6 +106,9 @@ mod tests {
         value: String,
     }
 
+    #[derive(Debug, PartialEq, Eq, Hash)]
+    struct NonCloneKey(u32);
+
     #[test]
     fn test_partition_by_integers() {
         let numbers = vec![1, 2, 2, 3, 4, 3, 5];
@@ -118,6 +117,14 @@ mod tests {
             partitions,
             vec![vec![1], vec![2, 2], vec![3, 3], vec![4], vec![5]]
         );
+    }
+
+    #[test]
+    fn test_partition_by_accepts_non_clone_keys() {
+        let numbers = vec![1, 2, 1];
+        let partitions = partition_by(&numbers, |x| NonCloneKey(*x as u32));
+
+        assert_eq!(partitions, vec![vec![1, 1], vec![2]]);
     }
 
     #[test]
@@ -308,10 +315,10 @@ mod tests {
         let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4, std::f64::NAN];
         let partitions = partition_by(&float_collection, |x| x.is_nan());
 
-        // All NaNs should be grouped under `true` and others under `false`
+        // Keep NaN and non-NaN values in separate groups.
         assert_eq!(partitions.len(), 2);
 
-        // Identify which partition is NaNs and which is non-NaNs
+        // Check each group.
         let mut nan_partition = false;
         let mut non_nan_partition = false;
 
@@ -320,12 +327,11 @@ mod tests {
                 assert!(!nan_partition, "NaN group already exists");
                 nan_partition = true;
                 assert_eq!(partition.len(), 3);
-            } else if partition.iter().all(|x| !x.is_nan()) {
+            } else {
                 assert!(!non_nan_partition, "Non-NaN group already exists");
                 non_nan_partition = true;
+                assert!(partition.iter().all(|x| !x.is_nan()));
                 assert_eq!(partition, vec![2.2, 4.4]);
-            } else {
-                panic!("Partition contains both NaN and non-NaN values");
             }
         }
 

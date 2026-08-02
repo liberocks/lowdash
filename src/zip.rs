@@ -1,17 +1,17 @@
 /// Pairs items from two collections at matching indices.
 ///
-/// The result stops when either collection ends. The input collections are not changed.
+/// Stops when either collection ends; inputs are unchanged.
 ///
 /// **Time Complexity:** O(n), where `n` is the shorter collection length.
 ///
 /// # Arguments
 ///
-/// * `left` - The first collection.
-/// * `right` - The second collection.
+/// * `left` - First collection.
+/// * `right` - Second collection.
 ///
 /// # Returns
 ///
-/// A new vector of pairs from matching positions.
+/// * `Vec<(T, U)>` - Pairs from matching positions.
 ///
 /// # Examples
 ///

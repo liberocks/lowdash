@@ -27,23 +27,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libssl-dev pkg-config zlib1g-dev
-      - name: Cache cargo-tarpaulin
-        uses: actions/cache@v6
-        with:
-          path: ~/.cargo/bin/cargo-tarpaulin
-          key: ${{ runner.os }}-cargo-tarpaulin-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-             ${{ runner.os }}-cargo-tarpaulin-
-      - name: Install cargo-tarpaulin
-        run: |
-          if ! command -v cargo-tarpaulin &> /dev/null; then
-            cargo install --version 0.31.3 cargo-tarpaulin
-          else
-            echo "cargo-tarpaulin is already installed"
-          fi
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@cargo-llvm-cov
       - name: coverage
         run: |
-          cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --exclude-files benches/* --out Lcov --output-dir coverage --coveralls ${{ secrets.COVERALLS_TOKEN }}
+          mkdir -p coverage
+          cargo llvm-cov --workspace --lcov --output-path coverage/lcov.info --ignore-filename-regex '(^|/)benches/'
       - name: Report coverage to DeepSource
         run: |
           curl -fsSL https://cli.deepsource.com/install | BINDIR=./bin sh

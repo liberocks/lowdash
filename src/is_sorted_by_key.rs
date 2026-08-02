@@ -1,29 +1,24 @@
 use std::cmp::Ordering;
 
-/// Determines if a collection is sorted in ascending order based on a specified key.
+/// Returns `true` when keys from `iteratee` are in non-decreasing order.
+/// Incomparable keys, including `NaN`, return `false`.
 ///
-/// This function iterates through the provided collection, applying the `iteratee` function
-/// to each element to extract a key. It then checks if the sequence of keys is in non-decreasing
-/// order. If all consecutive keys satisfy the ordering condition, the function returns `true`,
-/// indicating that the collection is sorted based on the specified key. Otherwise, it returns `false`.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be checked for sorted order based on the key.
-/// * `iteratee` - A function that extracts the key from each item for comparison.
+/// * `collection` - Items to check.
+/// * `iteratee` - Function returning each item's sort key.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection.
-/// * `K` - The type of the key extracted from each element. Must implement `PartialOrd`.
-/// * `F` - The type of the iteratee function.
+/// * `T` - Item type.
+/// * `K` - Partially ordered key type.
+/// * `F` - Iteratee type.
 ///
 /// # Returns
 ///
-/// * `true` if the collection is sorted in ascending order based on the keys.
-/// * `false` otherwise.
+/// * `bool` - Whether the collection is sorted by its keys.
 ///
 /// # Examples
 ///

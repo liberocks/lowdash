@@ -1,19 +1,17 @@
-/// Calculates the smallest power of two greater than or equal to the given capacity.
-///
-/// This function determines the nearest power of two that is not less than the provided `cap`. If
-/// the calculated power of two exceeds the predefined `MAXIMUM_CAPACITY`, it returns `MAXIMUM_CAPACITY`.
+/// Returns the smallest power of two at least `cap`, capped at the maximum
+/// supported capacity.
 ///
 /// # Arguments
 ///
-/// * `cap` - The target capacity. Must be a non-negative integer.
+/// * `cap` - Target capacity.
 ///
 /// # Returns
 ///
-/// * `usize` - The nearest power of two greater than or equal to `cap`.
+/// * `usize` - The capped power of two.
 ///
 /// # Panics
 ///
-/// * This function does not panic.
+/// This function does not panic.
 ///
 /// # Examples
 ///

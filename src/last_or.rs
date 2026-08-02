@@ -1,14 +1,13 @@
 use crate::last::last;
 
-/// Returns the last item from the collection.
-/// If the collection is empty, returns the provided fallback value.
+/// Returns the last item, or `fallback` when the collection is empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `fallback` - The value to return if the collection is empty.
+/// * `collection` - Items to inspect.
+/// * `fallback` - Empty-input result.
 ///
 /// # Returns
-/// * `T` - The last item in the collection or the fallback value if empty.
+/// * `T` - The last item or `fallback`.
 ///
 /// # Examples
 /// ```rust

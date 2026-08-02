@@ -1,13 +1,10 @@
-/// Converts a string to kebab-case.
-///
-/// Splits the input string into words based on spaces, hyphens, underscores, and capitalization,
-/// then converts each word to lowercase and joins them with hyphens.
+/// Converts a string to `kebab-case` using separators and case boundaries.
 ///
 /// # Arguments
-/// * `str_input` - The input string to convert
+/// * `str_input` - String to convert.
 ///
 /// # Returns
-/// * `String` - The converted string in kebab-case
+/// * `String` - The converted string.
 ///
 /// # Examples
 /// ```rust

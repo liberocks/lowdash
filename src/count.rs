@@ -1,22 +1,19 @@
-/// Counts the number of occurrences of a specific value in a collection.
+/// Counts occurrences of `value` in a collection.
 ///
-/// This function iterates over a slice of items and returns the number of times
-/// the specified `value` appears in the collection.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items in which to count occurrences of `value`.
-/// * `value` - The value to count within the collection.
+/// * `collection` - Items to search.
+/// * `value` - Value to count.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `PartialEq`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `usize` - The number of times `value` appears in `collection`.
+/// * `usize` - The number of matches.
 ///
 /// # Examples
 ///

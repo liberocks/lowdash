@@ -1,28 +1,21 @@
-/// Remove duplicate elements from a collection based on a key extracted by a provided function,
-/// preserving the order of their first occurrence.
-///
-/// This function takes a slice of items and returns a new `Vec<T>` containing only the unique elements,
-/// determined by the key extracted using the provided `iteratee` function. The order of first occurrences
-/// is preserved.
-///
-/// **Note:** This implementation requires `U` to implement `PartialEq` and `Clone`.
-/// While it doesn't leverage hashing for efficiency, it ensures compatibility with all types,
-/// including those like floating-point numbers (`f32`, `f64`) that do not implement `Eq`.
+/// Removes items with duplicate keys from `iteratee`, preserving first-key order.
+/// Key equality uses `PartialEq`, including its behavior for `NaN`.
+/// **Time Complexity:** O(n²), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which to extract unique elements.
-/// * `iteratee` - A function that takes a reference to an item and returns a key of type `U`.
+/// * `collection` - Items to deduplicate.
+/// * `iteratee` - Function returning an item's key.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
-/// * `U` - The type of the key extracted from each element used to determine uniqueness. Must implement `PartialEq` and `Clone`.
-/// * `F` - The type of the iteratee function. Must implement `Fn(&T) -> U`.
+/// * `T` - Item type.
+/// * `U` - Partially comparable key type.
+/// * `F` - Iteratee type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the unique elements from the input collection, in the order they first appear.
+/// * `Vec<T>` - The first item for each unique key.
 ///
 /// # Examples
 ///

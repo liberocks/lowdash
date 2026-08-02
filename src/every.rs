@@ -12,7 +12,7 @@
 ///
 /// # Returns
 ///
-/// `true` if every item matches the predicate; otherwise `false`.
+/// * `bool` - `true` if every item matches the predicate; otherwise `false`.
 ///
 /// # Examples
 ///

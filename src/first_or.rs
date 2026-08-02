@@ -1,13 +1,11 @@
-/// Returns the first item from the collection.
-/// If the collection is empty, returns the provided fallback value.
+/// Returns the first item, or `fallback` when the collection is empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `fallback` - The value to return if the collection is empty.
+/// * `collection` - Items to inspect.
+/// * `fallback` - Empty-input result.
 ///
 /// # Returns
-/// * `T` - The first item in the collection.
-///   If the collection is empty, returns the `fallback` value.
+/// * `T` - The first item or `fallback`.
 ///
 /// # Examples
 /// ```rust

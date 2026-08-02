@@ -1,26 +1,22 @@
-/// Applies a callback function to each item in a collection along with its index and collects the results
-/// where the callback returns `false`.
+/// Maps each item with `callback` and keeps results whose flag is `false`.
+/// The callback receives `(item, index)` and returns `(value, include)`.
 ///
-/// This function iterates over a slice of items, applies the provided callback to each item and its index,
-/// and collects the results (`R`) for which the callback returns `false`.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to iterate over.
-/// * `callback` - A mutable function that takes a reference to an item and its index, returning a tuple `(R, bool)`.
-///   If the second element of the tuple is `false`, the first element (`R`) is collected.
+/// * `collection` - Items to process.
+/// * `callback` - Function returning `(value, include)`.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the input collection.
-/// * `R` - The type of elements in the resulting collection.
-/// * `F` - The type of the callback function.
+/// * `T` - Item type.
+/// * `R` - Result type.
+/// * `F` - Callback type.
 ///
 /// # Returns
 ///
-/// * `Vec<R>` - A vector containing the results from the callback where the predicate is `false`.
+/// * `Vec<R>` - Mapped values with a `false` flag.
 ///
 /// # Examples
 ///

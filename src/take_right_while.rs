@@ -1,18 +1,17 @@
 /// Returns the longest suffix whose items satisfy a predicate.
 ///
-/// The scan starts at the end and stops at the first item for which the predicate returns `false`.
-/// The returned items keep their original order.
+/// Scans from the end and stops at the first `false`; output keeps input order.
 ///
 /// **Time Complexity:** O(n), where `n` is the number of checked items.
 ///
 /// # Arguments
 ///
-/// * `collection` - The items to scan.
-/// * `predicate` - A function that decides whether an item belongs in the suffix.
+/// * `collection` - Items to scan.
+/// * `predicate` - Function deciding whether an item belongs in the suffix.
 ///
 /// # Returns
 ///
-/// A new vector containing the matching suffix.
+/// * `Vec<T>` - The matching suffix.
 ///
 /// # Examples
 ///

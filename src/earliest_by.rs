@@ -1,16 +1,15 @@
 use std::time::SystemTime;
 
-/// Find the earliest item in a collection based on a custom iteratee function.
-/// If the collection is empty, returns `None`.
+/// Returns the item with the earliest time from `iteratee`, or `None` if empty.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items.
-/// * `iteratee` - A function that takes an item and returns a `SystemTime` used for comparison.
+/// * `collection` - Items to compare.
+/// * `iteratee` - Function returning an item's comparison time.
 ///
 /// # Returns
 ///
-/// * `Option<T>` - The earliest item based on the iteratee function, or `None` if the collection is empty.
+/// * `Option<T>` - The earliest item, if any.
 ///
 /// # Examples
 /// ```rust

@@ -1,22 +1,18 @@
-/// Removes all zero-valued elements from a collection, preserving the order of non-zero elements.
+/// Removes elements equal to `T::default()`, preserving the order of the rest.
 ///
-/// This function iterates over a slice of items, removing each element that is equal to the zero value.
-/// The zero value is determined by the `Default` trait implementation for the type `T`.
-/// The function preserves the order of the remaining elements and does not modify the original collection.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which to remove zero-valued elements.
+/// * `collection` - Items to filter.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `PartialEq`, `Clone`, and `Default`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector containing only the non-zero elements from the input collection.
+/// * `Vec<T>` - The non-default elements.
 ///
 /// # Examples
 ///

@@ -1,14 +1,11 @@
-/// Filter items from a collection that satisfy a predicate.
-///
-/// This function iterates over a collection and returns a new vector containing
-/// all items for which the predicate returns `true`.
+/// Returns references to items for which `predicate` returns `true`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `predicate` - A function that takes an item and its index, returning a boolean.
+/// * `collection` - Items to filter.
+/// * `predicate` - Function called as `(item, index)`.
 ///
 /// # Returns
-/// * `Vec<&T>` - A vector of references to items that satisfy the predicate.
+/// * `Vec<&T>` - References to matching items, in input order.
 ///
 /// # Examples
 /// ```rust

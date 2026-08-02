@@ -1,28 +1,21 @@
-/// Filters a collection into two separate vectors based on a predicate function.
+/// Splits a collection into matching and non-matching vectors.
+/// The predicate receives `(item, index)`; each output keeps input order.
 ///
-/// This function iterates over a slice of items, applies the provided predicate to each item along
-/// with its index, and separates the items into two vectors:
-/// - `kept`: Contains items for which the predicate returned `true`.
-/// - `rejected`: Contains items for which the predicate returned `false`.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be filtered.
-/// * `predicate` - A function that takes a reference to an item and its index, returning a boolean.
-///   If the predicate returns `true`, the item is kept; otherwise, it is rejected.
+/// * `collection` - Items to split.
+/// * `predicate` - Function called as `(item, index)`.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the input collection. Must implement `Clone`.
-/// * `F` - The type of the predicate function.
+/// * `T` - Item type.
+/// * `F` - Predicate type.
 ///
 /// # Returns
 ///
-/// * `(Vec<T>, Vec<T>)` - A tuple containing two vectors:
-///     - The first vector (`kept`) contains all items for which the predicate returned `true`.
-///     - The second vector (`rejected`) contains all items for which the predicate returned `false`.
+/// * `(Vec<T>, Vec<T>)` - `(kept, rejected)`.
 ///
 /// # Examples
 ///

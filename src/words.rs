@@ -1,13 +1,10 @@
-/// Splits a string into words based on casing, digits, and separators.
-///
-/// Processes the input string by inserting spaces between words based on uppercase letters,
-/// digits, and other non-alphanumeric characters, then splits on spaces to extract words.
+/// Splits a string into words using case, digits, and separators.
 ///
 /// # Arguments
-/// * `str_input` - The input string to split into words
+/// * `str_input` - String to split.
 ///
 /// # Returns
-/// * `Vec<String>` - A vector of words extracted from the input string
+/// * `Vec<String>` - The extracted words.
 ///
 /// # Examples
 /// ```rust
@@ -178,6 +175,12 @@ mod tests {
         let result = words("HTTPRequest");
         let expected = vec!["HTTP".to_string(), "Request".to_string()];
         assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_acronym_before_word() {
+        let result = words("XMLParser");
+        assert_eq!(result, vec!["XML", "Parser"]);
     }
 
     #[test]

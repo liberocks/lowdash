@@ -1,14 +1,11 @@
-/// Filters a map by omitting key-value pairs that have values present in the provided values slice.
-///
-/// Iterates over each key-value pair in the input map and excludes it from the result map
-/// if the value is present in the `values` slice.
+/// Omits entries whose values occur in `values`.
 ///
 /// # Arguments
-/// * `map` - The input map to filter.
-/// * `values` - A slice of values to omit from the result map.
+/// * `map` - Map to filter.
+/// * `values` - Values to omit.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new map containing only the key-value pairs that do not have values in `values`.
+/// * `HashMap<K, V>` - The entries not omitted.
 ///
 /// # Examples
 /// ```rust

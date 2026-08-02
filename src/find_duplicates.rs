@@ -1,11 +1,11 @@
-/// Find all duplicate elements in a collection (elements that appear more than once).
-/// Each duplicate element appears exactly once in the result.
+/// Returns each value that appears more than once, once per value.
+/// Results follow the order of the second occurrence of each duplicate.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to inspect.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing one instance of each duplicate element.
+/// * `Vec<T>` - One copy of each duplicate.
 ///
 /// # Examples
 /// ```rust

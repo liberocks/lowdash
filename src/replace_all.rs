@@ -1,25 +1,22 @@
 use crate::replace;
 
-/// Replaces all occurrences of a specified value in a collection with a new value.
+/// Replaces every occurrence of `old` with `new`, preserving order.
 ///
-/// This function iterates over a slice of items, replacing each occurrence of `old` with `new`.
-/// It preserves the order of elements and does not modify the original collection.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items in which to perform replacements.
-/// * `old` - The value to be replaced.
-/// * `new` - The value to replace with.
+/// * `collection` - Items to copy and update.
+/// * `old` - Value to replace.
+/// * `new` - Replacement value.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `PartialEq` and `Clone`.
+/// * `T` - Comparable, cloneable item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector with all specified replacements made.
+/// * `Vec<T>` - The updated copy.
 ///
 /// # Examples
 ///

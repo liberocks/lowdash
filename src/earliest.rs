@@ -1,15 +1,14 @@
 use std::time::SystemTime;
 
-/// Find the earliest time in a collection.
-/// If the collection is empty, returns `None`.
+/// Returns the earliest time, or `None` for an empty collection.
 ///
 /// # Arguments
 ///
-/// * `times` - A slice of `SystemTime` items.
+/// * `times` - Times to compare.
 ///
 /// # Returns
 ///
-/// * `Option<SystemTime>` - The earliest `SystemTime`, or `None` if the collection is empty.
+/// * `Option<SystemTime>` - The earliest time, if any.
 ///
 /// # Examples
 ///

@@ -1,12 +1,12 @@
-/// Performs linear interpolation between two values.
+/// Returns a function that linearly interpolates from `start` to `end`.
+/// Its input is clamped to `0.0..=1.0`.
 ///
 /// # Arguments
-/// * `start` - The starting value
-/// * `end` - The ending value
-/// * `t` - The interpolation factor between 0.0 and 1.0
+/// * `start` - Starting value.
+/// * `end` - Ending value.
 ///
 /// # Returns
-/// The interpolated value between start and end
+/// * `impl Fn(f64) -> f64` - The interpolation function.
 ///
 /// # Examples
 /// ```rust

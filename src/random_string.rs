@@ -1,16 +1,16 @@
 use crate::common;
 
-/// Generates a random string of a specified size using the provided charset.
+/// Generates a pseudo-random string of `size` characters from `charset`.
 ///
 /// # Arguments
 ///
-/// * `size` - The length of the generated string. Must be greater than 0.
-/// * `charset` - A slice of characters to use for generating the string. Must not be empty.
+/// * `size` - Output length; must be greater than `0`.
+/// * `charset` - Characters to choose from; must not be empty.
 ///
 /// # Panics
 ///
-/// * If `size` is less than or equal to 0.
-/// * If `charset` is empty.
+/// * `size` is `0`.
+/// * `charset` is empty.
 ///
 /// # Examples
 ///

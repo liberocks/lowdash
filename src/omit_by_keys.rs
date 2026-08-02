@@ -1,14 +1,11 @@
-/// Filters a map by omitting specified keys.
-///
-/// Iterates over the provided keys and removes them from a cloned version of the input map.
-/// Only key-value pairs not present in the keys slice are included in the result map.
+/// Returns a copy of `map` without keys in `keys`.
 ///
 /// # Arguments
-/// * `map` - The input map to filter.
-/// * `keys` - A slice of keys to omit from the result map.
+/// * `map` - Map to copy.
+/// * `keys` - Keys to omit.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new map containing only the key-value pairs that are not in the keys slice.
+/// * `HashMap<K, V>` - The filtered copy.
 ///
 /// # Examples
 /// ```rust

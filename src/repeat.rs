@@ -1,23 +1,20 @@
-/// Fill a collection with a specified value, returning a new vector with all elements set to the initial value.
-///
-/// This function takes a count and an initial value, then returns a new `Vec<T>` containing the initial value
-/// repeated `count` times. The original value remains unmodified.
+/// Returns `count` clones of `initial`.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of times to repeat the initial value.
+/// O(n), where `n` is `count`.
 ///
 /// # Arguments
 ///
-/// * `count` - The number of times to repeat the initial value.
-/// * `initial` - The value to fill the new vector with.
+/// * `count` - Number of output items.
+/// * `initial` - Value to clone.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements to be repeated. Must implement the `Clone` trait to allow duplication.
+/// * `T` - Value type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector containing the initial value repeated `count` times.
+/// * `Vec<T>` - The cloned values.
 ///
 /// # Examples
 ///

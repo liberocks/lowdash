@@ -11,7 +11,7 @@
 ///
 /// # Returns
 ///
-/// A new vector containing items that are not present in `excluded`.
+/// * `Vec<T>` - A new vector containing items that are not present in `excluded`.
 ///
 /// # Examples
 ///

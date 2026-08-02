@@ -1,14 +1,15 @@
 use std::ops::{Add, Sub};
 
-/// Generate a range of numbers from start to end (exclusive) with a specified step.
+/// Generates a range from `start` toward `end` (exclusive) using `step`.
+/// A zero or direction-incompatible step returns an empty vector.
 ///
 /// # Arguments
-/// * `start` - The starting value of the range.
-/// * `end` - The ending value of the range (exclusive).
-/// * `step` - The increment/decrement value between elements.
+/// * `start` - First value.
+/// * `end` - Exclusive bound.
+/// * `step` - Increment or decrement.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing the range of numbers.
+/// * `Vec<T>` - The generated range.
 ///
 /// # Examples
 /// ```rust
