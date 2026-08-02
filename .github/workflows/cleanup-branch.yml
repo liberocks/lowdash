@@ -12,4 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Delete branch
-        run: git push origin --delete "${{ github.event.pull_request.head.ref }}"
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            git push origin --delete "$BRANCH"
+          else
+            echo "Remote branch $BRANCH is already absent"
+          fi
