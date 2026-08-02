@@ -131,6 +131,7 @@ Utility functions for object manipulation:
 - [to_pairs](#to_pairs)
 - [uniq_keys](#uniq_keys)
 - [uniq_values](#uniq_values)
+- [union](#union)
 - [value_or](#value_or)
 - [values](#values)
 
@@ -2657,6 +2658,20 @@ let collections = vec![vec![1, 2, 2, 3], vec![2, 3, 4], vec![0, 2, 3]];
 let result = intersection(&collections);
 
 assert_eq!(result, vec![2, 3]);
+```
+
+### union
+Returns the unique values from all collections.
+
+Values keep the order of their first appearance across the collections.
+
+```rust
+use lowdash::union;
+
+let collections = vec![vec![1, 2, 2], vec![2, 3], vec![3, 4]];
+let result = union(&collections);
+
+assert_eq!(result, vec![1, 2, 3, 4]);
 ```
 
 ### is_sorted
