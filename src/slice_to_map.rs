@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{hash_map::Entry, HashMap};
 use std::hash::Hash;
 
 /// Transforms a slice of items into a `HashMap` by applying a provided function to each item.
@@ -87,7 +87,14 @@ where
 
     for item in collection {
         let (key, value) = transform(item);
-        result.insert(key, value);
+        match result.entry(key) {
+            Entry::Vacant(entry) => {
+                entry.insert(value);
+            }
+            Entry::Occupied(mut entry) => {
+                entry.insert(value);
+            }
+        }
     }
 
     result

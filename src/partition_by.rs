@@ -19,7 +19,7 @@ use std::hash::Hash;
 /// # Type Parameters
 ///
 /// * `T` - The type of elements in the collection. Must implement `Clone`.
-/// * `K` - The type of the key extracted from each element used to determine partitions. Must implement `Hash`, `Eq`, and `Clone`.
+/// * `K` - The type of the key extracted from each element used to determine partitions. Must implement `Hash` and `Eq`.
 /// * `F` - The type of the iteratee function. Must implement `Fn(&T) -> K`.
 ///
 /// # Returns
@@ -75,7 +75,7 @@ use std::hash::Hash;
 pub fn partition_by<T, K, F>(collection: &[T], iteratee: F) -> Vec<Vec<T>>
 where
     T: Clone,
-    K: Eq + Hash + Clone,
+    K: Eq + Hash,
     F: Fn(&T) -> K,
 {
     let mut seen: HashMap<K, usize> = HashMap::new();
@@ -86,7 +86,8 @@ where
         if let Some(&index) = seen.get(&key) {
             result[index].push(item.clone());
         } else {
-            seen.insert(key.clone(), result.len());
+            let index = result.len();
+            seen.insert(key, index);
             result.push(vec![item.clone()]);
         }
     }
@@ -110,6 +111,9 @@ mod tests {
         value: String,
     }
 
+    #[derive(Debug, PartialEq, Eq, Hash)]
+    struct NonCloneKey(u32);
+
     #[test]
     fn test_partition_by_integers() {
         let numbers = vec![1, 2, 2, 3, 4, 3, 5];
@@ -118,6 +122,14 @@ mod tests {
             partitions,
             vec![vec![1], vec![2, 2], vec![3, 3], vec![4], vec![5]]
         );
+    }
+
+    #[test]
+    fn test_partition_by_accepts_non_clone_keys() {
+        let numbers = vec![1, 2, 1];
+        let partitions = partition_by(&numbers, |x| NonCloneKey(*x as u32));
+
+        assert_eq!(partitions, vec![vec![1, 1], vec![2]]);
     }
 
     #[test]
