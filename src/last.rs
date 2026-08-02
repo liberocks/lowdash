@@ -1,12 +1,10 @@
-/// Returns the last item from the collection.
-/// If the collection is empty, returns the default value of `T` and `false`.
+/// Returns `(last_item, true)`, or `(T::default(), false)` when empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to inspect.
 ///
 /// # Returns
-/// * `(T, bool)` - A tuple containing the last item and `true`.
-///   If the collection is empty, returns `(T::default(), false)`.
+/// * `(T, bool)` - The last item and whether the collection was non-empty.
 ///
 /// # Examples
 /// ```rust

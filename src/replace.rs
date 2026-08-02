@@ -1,25 +1,22 @@
-/// Replaces occurrences of a specified value in a collection with a new value, up to a maximum number of replacements.
+/// Replaces up to `n` occurrences of `old` with `new`, in input order.
+/// A zero limit returns an unchanged copy.
 ///
-/// This function iterates over a slice of items, replacing each occurrence of `old` with `new` until
-/// `n` replacements have been made. If `n` is zero, no replacements are performed. The function
-/// preserves the order of elements and does not modify the original collection.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items in which to perform replacements.
-/// * `old` - The value to be replaced.
-/// * `new` - The value to replace with.
-/// * `n` - The maximum number of replacements to perform. If `n` is zero, no replacements are done.
+/// * `collection` - Items to copy and update.
+/// * `old` - Value to replace.
+/// * `new` - Replacement value.
+/// * `n` - Maximum replacements.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `PartialEq` and `Clone`.
+/// * `T` - Comparable, cloneable item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector with the specified replacements made.
+/// * `Vec<T>` - The updated copy.
 ///
 /// # Examples
 ///

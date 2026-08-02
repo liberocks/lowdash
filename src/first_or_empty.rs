@@ -1,14 +1,12 @@
 use crate::first::first;
 
-/// Returns the first item from the collection.
-/// If the collection is empty, returns the default value of `T`.
+/// Returns the first item, or `T::default()` when the collection is empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to inspect.
 ///
 /// # Returns
-/// * `T` - The first item in the collection.
-///   If the collection is empty, returns `T::default()`.
+/// * `T` - The first item or the default value.
 ///
 /// # Examples
 /// ```rust

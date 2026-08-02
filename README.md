@@ -8,14 +8,14 @@
 
 **liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
 
-## 🚀 Installation
+## Installation
 ```bash
 cargo add lowdash
 ```
 
 This library has no dependencies outside the Rust standard library.
 
-## 📚 Documentation
+## Documentation
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
@@ -26,12 +26,14 @@ Utility functions for array:
 - [count_by](#count_by)
 - [count_values](#count_values)
 - [count_values_by](#count_values_by)
+- [difference](#difference)
 - [drop](#drop)
 - [drop_right](#drop_right)
 - [drop_right_while](#drop_right_while)
 - [drop_while](#drop_while)
 - [earliest](#earliest)
 - [earliest_by](#earliest_by)
+- [every](#every)
 - [fill](#fill)
 - [filter](#filter)
 - [filter_map](#filter_map)
@@ -56,6 +58,7 @@ Utility functions for array:
 - [group_by](#group_by)
 - [index_of](#index_of)
 - [interleave](#interleave)
+- [intersection](#intersection)
 - [is_sorted](#is_sorted)
 - [is_sorted_by_key](#is_sorted_by_key)
 - [key_by](#key_by)
@@ -84,10 +87,16 @@ Utility functions for array:
 - [sample](#sample)
 - [samples](#samples)
 - [shuffle](#shuffle)
+- [some](#some)
+- [sort_by](#sort_by)
+- [sort_by_key](#sort_by_key)
 - [slice](#slice)
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
 - [subset](#subset)
+- [zip](#zip)
+- [take_right_while](#take_right_while)
+- [take_while](#take_while)
 - [times](#times)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
@@ -127,6 +136,7 @@ Utility functions for object manipulation:
 - [to_pairs](#to_pairs)
 - [uniq_keys](#uniq_keys)
 - [uniq_values](#uniq_values)
+- [union](#union)
 - [value_or](#value_or)
 - [values](#values)
 
@@ -1197,6 +1207,31 @@ let result = reject(&numbers, |x, _| *x % 2 == 0);
 assert_eq!(result, vec![&1, &3, &5]);
 ```
 
+### some
+Returns `true` when at least one item satisfies a predicate.
+
+The scan stops at the first matching item. An empty collection returns `false`.
+
+```rust
+use lowdash::some;
+
+let numbers = vec![1, 3, 4, 7];
+assert!(some(&numbers, |number| *number % 2 == 0));
+
+```
+
+### every
+Returns `true` when every item satisfies a predicate.
+
+The scan stops at the first item that fails. An empty collection returns `true`.
+
+```rust
+use lowdash::every;
+
+let numbers = vec![2, 4, 6];
+assert!(every(&numbers, |number| *number % 2 == 0));
+```
+
 ### filter
 Filter items from a collection that satisfy a predicate.
 
@@ -1577,6 +1612,20 @@ assert_eq!(unique_people, vec![
 ]);
 ```
 
+### difference
+Returns the items from one collection that are not in another collection.
+
+The result keeps the input order and keeps repeated items that are not excluded.
+
+```rust
+use lowdash::difference;
+
+let numbers = vec![1, 2, 2, 3, 4];
+let result = difference(&numbers, &[2, 4]);
+
+assert_eq!(result, vec![1, 3]);
+```
+
 ### group_by
 Group elements of a collection based on a key extracted by a provided function,
 preserving the order of their first occurrence.
@@ -1822,6 +1871,21 @@ assert!(shuffled.contains(&2));
 assert!(shuffled.contains(&3));
 assert!(shuffled.contains(&4));
 assert!(shuffled.contains(&5));
+```
+
+### zip
+Pairs items from two collections at matching indices.
+
+The result stops when either collection ends.
+
+```rust
+use lowdash::zip;
+
+let names = vec!["Alice", "Bob"];
+let ages = vec![30, 25];
+let result = zip(&names, &ages);
+
+assert_eq!(result, vec![("Alice", 30), ("Bob", 25)]);
 ```
 
 ### reverse
@@ -2193,6 +2257,35 @@ use lowdash::drop_right_while;
 let letters = vec!['a', 'b', 'c', 'd', 'e'];
 let result = drop_right_while(&letters, |&c| c != 'c');
 assert_eq!(result, vec!['a', 'b', 'c']);
+```
+
+### take_right_while
+Returns the longest suffix whose items satisfy a predicate.
+
+The scan starts at the end, and the result keeps the original item order.
+
+```rust
+use lowdash::take_right_while;
+
+let numbers = vec![1, 2, 3, 4, 5];
+let result = take_right_while(&numbers, |number| *number > 2);
+
+assert_eq!(result, vec![3, 4, 5]);
+
+```
+
+### take_while
+Returns the longest prefix whose items satisfy a predicate.
+
+The scan stops at the first item that fails the predicate.
+
+```rust
+use lowdash::take_while;
+
+let numbers = vec![1, 2, 3, 1, 4];
+let result = take_while(&numbers, |number| *number < 3);
+
+assert_eq!(result, vec![1, 2]);
 ```
 
 ### drop_by_index
@@ -2627,6 +2720,34 @@ let compacted = compact(&floats);
 assert_eq!(compacted, vec![1.1, 2.2, 3.3, 4.4]);
 ```
 
+### intersection
+Returns the unique values present in every collection.
+
+Values keep the order of their first appearance in the first collection.
+
+```rust
+use lowdash::intersection;
+
+let collections = vec![vec![1, 2, 2, 3], vec![2, 3, 4], vec![0, 2, 3]];
+let result = intersection(&collections);
+
+assert_eq!(result, vec![2, 3]);
+```
+
+### union
+Returns the unique values from all collections.
+
+Values keep the order of their first appearance across the collections.
+
+```rust
+use lowdash::union;
+
+let collections = vec![vec![1, 2, 2], vec![2, 3], vec![3, 4]];
+let result = union(&collections);
+
+assert_eq!(result, vec![1, 2, 3, 4]);
+```
+
 ### is_sorted
 Determines if a collection is sorted in ascending order.
 
@@ -2734,6 +2855,35 @@ let floats = vec![
 ];
 let result = is_sorted_by_key(&floats, |item| item.0);
 assert_eq!(result, true);
+```
+
+### sort_by_key
+Returns a stable, ascending copy of a collection sorted by a key.
+
+Items with equal keys keep their original order. The input collection is not changed.
+
+```rust
+use lowdash::sort_by_key;
+
+let records = vec![(3, "c"), (1, "a"), (2, "b")];
+let sorted = sort_by_key(&records, |record| record.0);
+
+assert_eq!(sorted, vec![(1, "a"), (2, "b"), (3, "c")]);
+assert_eq!(records, vec![(3, "c"), (1, "a"), (2, "b")]);
+```
+
+### sort_by
+Returns a stable copy of a collection sorted with a comparison function.
+
+Return `Ordering::Less` when the first item belongs before the second item.
+
+```rust
+use lowdash::sort_by;
+
+let numbers = vec![3, 1, 2];
+let sorted = sort_by(&numbers, |left, right| left.cmp(right));
+
+assert_eq!(sorted, vec![1, 2, 3]);
 ```
 
 ### splice
@@ -3503,5 +3653,5 @@ let day_later = epoch + one_day;
 assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
 ```
 
-## 🫡 Acknowledgement
+## Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)

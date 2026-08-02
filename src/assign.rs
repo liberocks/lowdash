@@ -1,10 +1,9 @@
 use std::collections::HashMap;
 
-/// Merges multiple maps into a single map.
-/// If the same key exists in multiple maps, the value from the last map is used.
+/// Merges maps into one. Later maps overwrite earlier values for duplicate keys.
 ///
 /// # Arguments
-/// * `maps` - A variadic number of maps to merge.
+/// * `maps` - Maps to merge, in overwrite order.
 ///
 /// # Returns
 /// * `HashMap<K, V>` - The merged map.
@@ -28,7 +27,8 @@ where
     K: Eq + std::hash::Hash + Clone,
     V: Clone,
 {
-    let mut out = HashMap::new();
+    let capacity = maps.iter().map(|map| map.len()).sum();
+    let mut out = HashMap::with_capacity(capacity);
     for map in maps {
         for (k, v) in map {
             out.insert(k.clone(), v.clone());

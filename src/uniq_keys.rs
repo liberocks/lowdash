@@ -1,12 +1,10 @@
-/// Collects all unique keys from one or more maps into a single vector.
-///
-/// Iterates over each map and collects all unique keys into a single vector.
+/// Collects unique keys from one or more maps.
 ///
 /// # Arguments
-/// * `maps` - A slice of references to maps to collect unique keys from
+/// * `maps` - Maps to collect.
 ///
 /// # Returns
-/// * `Vec<K>` - A vector containing all unique keys from the input maps
+/// * `Vec<K>` - The unique keys.
 ///
 /// # Examples
 /// ```
@@ -36,7 +34,7 @@ where
 
     for map in maps {
         for key in map.keys() {
-            if seen.insert(key.clone()) {
+            if seen.insert(key) {
                 result.push(key.clone());
             }
         }

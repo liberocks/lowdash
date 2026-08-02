@@ -1,14 +1,13 @@
-/// Find the maximum element in a collection based on a custom comparison function.
-/// If the collection is empty, returns `None`.
+/// Returns the item selected as maximum by `comparison`, or `None` if empty.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items.
-/// * `comparison` - A function that takes two items and returns `true` if the first item is considered greater than the second.
+/// * `collection` - Items to compare.
+/// * `comparison` - Returns `true` when the first item is greater.
 ///
 /// # Returns
 ///
-/// * `Option<T>` - The maximum item in the collection based on the comparison function, or `None` if the collection is empty.
+/// * `Option<T>` - The selected maximum, if any.
 ///
 /// # Examples
 /// ```rust

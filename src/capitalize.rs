@@ -1,10 +1,10 @@
-/// Capitalizes the first letter of the input string and converts the rest to lowercase.
+/// Uppercases the first character and lowercases the rest.
 ///
 /// # Arguments
-/// * `str_input` - The input string to capitalize
+/// * `str_input` - String to capitalize.
 ///
 /// # Returns
-/// * `String` - The capitalized string
+/// * `String` - The capitalized string.
 ///
 /// # Examples
 /// ```rust

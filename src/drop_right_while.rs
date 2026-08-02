@@ -1,21 +1,20 @@
-/// Removes elements from the end of a collection as long as a predicate returns `true`,
-/// and returns the remaining elements. As soon as the predicate returns `false`, the function stops dropping elements.
+/// Drops the matching suffix while `predicate` returns `true`.
 ///
-/// **Time Complexity:** O(n), where n is the number of elements until the predicate returns `false`.
+/// **Time Complexity:** O(n), where `n` is the number of checked items.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which elements will be dropped.
-/// * `predicate` - A function that takes an item and returns `true` or `false`.
+/// * `collection` - Items to scan.
+/// * `predicate` - Function deciding whether to drop an item.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
-/// * `F` - The type of the predicate function. Must implement `Fn(&T) -> bool`.
+/// * `T` - Item type.
+/// * `F` - Predicate type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the elements after dropping from the end while the predicate holds true.
+/// * `Vec<T>` - The remaining prefix.
 ///
 /// # Examples
 ///

@@ -1,18 +1,14 @@
-/// Splits a string into chunks of specified size.
-///
-/// This function takes a string and divides it into chunks of the specified size.
-/// The last chunk may be shorter than the specified size if the string length
-/// is not evenly divisible by the chunk size.
+/// Splits a string into character chunks of `size`. The last chunk may be shorter.
 ///
 /// # Arguments
-/// * `str_input` - The input string to be chunked
-/// * `size` - The size of each chunk
+/// * `str_input` - The string to split.
+/// * `size` - The chunk size.
 ///
 /// # Returns
-/// * `Vec<String>` - A vector containing the chunked strings
+/// * `Vec<String>` - The character chunks.
 ///
 /// # Panics
-/// Panics if the chunk size is less than or equal to 0
+/// Panics if `size` is less than or equal to `0`.
 ///
 /// # Examples
 /// ```rust

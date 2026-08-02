@@ -1,16 +1,14 @@
 use crate::entries::Entry;
 use std::collections::HashMap;
 
-/// Constructs a `HashMap` from a slice of `Entry` structs.
-///
-/// Iterates over each `Entry` in the provided slice and inserts them into a new `HashMap`.
-/// If duplicate keys are present, the value from the last `Entry` with that key will be used.
+/// Builds a `HashMap` from entries. Later entries overwrite earlier values
+/// for duplicate keys.
 ///
 /// # Arguments
-/// * `entries` - A slice of `Entry` structs to convert into a `HashMap`.
+/// * `entries` - Entries to insert in order.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new `HashMap` containing all key-value pairs from the `entries` slice.
+/// * `HashMap<K, V>` - The resulting map.
 ///
 /// # Examples
 /// ```rust

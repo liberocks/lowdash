@@ -1,6 +1,6 @@
 [package]
 name = "lowdash"
-version = "0.6.2"
+version = "0.7.0"
 authors = ["Tirtadwipa Manunggal <tirtadwipa.manunggal@gmail.com>"]
 description = "A Lodash inspired utility library to manipulate array and object for Rust"
 repository = "https://github.com/liberocks/lowdash"
@@ -12,7 +12,7 @@ edition = "2021"
 autobenches = false
 
 [dev-dependencies]
-criterion = { version = "0.5.1", features = ["html_reports"] }
+criterion = { version = "0.8.2", features = ["html_reports"] }
 
 [[bench]]
 name = "benchmark"

@@ -20,6 +20,7 @@ mod count;
 mod count_by;
 mod count_values;
 mod count_values_by;
+mod difference;
 mod drop;
 mod drop_by_index;
 mod drop_right;
@@ -30,6 +31,7 @@ mod earliest;
 mod earliest_by;
 mod ellipsis;
 mod entries;
+mod every;
 mod fill;
 mod filter;
 mod filter_map;
@@ -58,6 +60,7 @@ mod has_key;
 mod index_of;
 mod interleave;
 mod interpolate;
+mod intersection;
 mod invert;
 mod is_sorted;
 mod is_sorted_by_key;
@@ -115,14 +118,20 @@ mod shuffle;
 mod slice;
 mod slice_to_map;
 mod snake_case;
+mod some;
+mod sort_by;
+mod sort_by_key;
 mod splice;
 mod subset;
 mod substring;
 mod sum;
 mod sum_by;
 mod support;
+mod take_right_while;
+mod take_while;
 mod times;
 mod to_pairs;
+mod union;
 mod uniq;
 mod uniq_by;
 mod uniq_keys;
@@ -130,6 +139,7 @@ mod uniq_values;
 mod value_or;
 mod values;
 mod words;
+mod zip;
 
 fn custom_criterion() -> Criterion {
     Criterion::default()
@@ -159,6 +169,7 @@ fn all_benches(c: &mut Criterion) {
     count_by::benchmark_count_by(c);
     count_values::benchmark_count_values(c);
     count_values_by::benchmark_count_values_by(c);
+    difference::benchmark_difference(c);
     drop::benchmark_drop(c);
     drop_by_index::benchmark_drop_by_index(c);
     drop_right::benchmark_drop_right(c);
@@ -168,6 +179,7 @@ fn all_benches(c: &mut Criterion) {
     earliest::benchmark_earliest(c);
     earliest_by::benchmark_earliest_by(c);
     ellipsis::benchmark_ellipsis(c);
+    every::benchmark_every(c);
     entries::benchmark_entries(c);
     fill::benchmark_fill(c);
     filter::benchmark_filter(c);
@@ -197,6 +209,7 @@ fn all_benches(c: &mut Criterion) {
     index_of::benchmark_index_of(c);
     interleave::benchmark_interleave(c);
     interpolate::benchmark_interpolate(c);
+    intersection::benchmark_intersection(c);
     invert::benchmark_invert(c);
     is_sorted::benchmark_is_sorted(c);
     is_sorted_by_key::benchmark_is_sorted_by_key(c);
@@ -251,6 +264,9 @@ fn all_benches(c: &mut Criterion) {
     sample::benchmark_sample(c);
     samples::benchmark_samples(c);
     shuffle::benchmark_shuffle(c);
+    some::benchmark_some(c);
+    sort_by::benchmark_sort_by(c);
+    sort_by_key::benchmark_sort_by_key(c);
     slice::benchmark_slice(c);
     slice_to_map::benchmark_slice_to_map(c);
     snake_case::benchmark_snake_case(c);
@@ -259,15 +275,19 @@ fn all_benches(c: &mut Criterion) {
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
+    take_right_while::benchmark_take_right_while(c);
+    take_while::benchmark_take_while(c);
     times::benchmark_times(c);
     to_pairs::benchmark_to_pairs(c);
     uniq::benchmark_uniq(c);
     uniq_by::benchmark_uniq_by(c);
     uniq_keys::benchmark_uniq_keys(c);
     uniq_values::benchmark_uniq_values(c);
+    union::benchmark_union(c);
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
+    zip::benchmark_zip(c);
 }
 
 criterion_group! {

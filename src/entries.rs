@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-/// Represents a key-value pair entry in a map.
+/// A key-value pair from a map.
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Entry<K, V> {
     /// The key of the entry.
@@ -9,15 +9,14 @@ pub struct Entry<K, V> {
     pub value: V,
 }
 
-/// Collects all entries from a map into a vector of `Entry` structs.
-///
-/// Iterates over each key-value pair in the input map and collects them into a vector.
+/// Collects a map's entries into a vector.
+/// HashMap iteration order is not specified.
 ///
 /// # Arguments
-/// * `map` - The input map from which to collect entries.
+/// * `map` - Map to collect.
 ///
 /// # Returns
-/// * `Vec<Entry<K, V>>` - A vector containing all key-value pairs as `Entry` structs.
+/// * `Vec<Entry<K, V>>` - The map entries.
 ///
 /// # Examples
 /// ```rust

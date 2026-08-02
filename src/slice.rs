@@ -1,25 +1,21 @@
-/// Returns a subset of the collection based on the provided start and end indices.
+/// Returns items in the half-open range `start..end`.
+/// Negative indices count from the end; bounds are clamped to the collection.
 ///
-/// This function extracts a subset from the given collection starting at the specified `start` index
-/// and ending before the `end` index. If the `start` or `end` indices are negative, they are offset
-/// from the end of the collection. The function ensures that the resulting subset does not exceed
-/// the bounds of the original collection.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the subset.
+/// **Time Complexity:** O(n), where `n` is the result length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which to extract the subset.
-/// * `start` - The starting index for the subset. Can be negative to indicate an offset from the end.
-/// * `end` - The ending index for the subset. Can be negative to indicate an offset from the end.
+/// * `collection` - Items to slice.
+/// * `start` - Start index, possibly negative.
+/// * `end` - Exclusive end index, possibly negative.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the subset of elements.
+/// * `Vec<T>` - The selected items.
 ///
 /// # Examples
 ///

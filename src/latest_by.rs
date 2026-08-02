@@ -1,15 +1,14 @@
 use std::time::SystemTime;
 
-/// Returns the item from the collection for which the iteratee returns the latest `SystemTime`.
-/// If the collection is empty, returns the default value of `T`.
+/// Returns the item with the latest time from `iteratee`.
+/// Returns `T::default()` when the collection is empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `iteratee` - A function that takes a reference to an item and returns a `SystemTime`.
+/// * `collection` - Items to compare.
+/// * `iteratee` - Function returning an item's comparison time.
 ///
 /// # Returns
-/// * `T` - The item with the latest `SystemTime` as determined by the iteratee.
-/// * If the collection is empty, returns `T::default()`.
+/// * `T` - The latest item, or the default value for an empty collection.
 ///
 /// # Examples
 ///
@@ -80,6 +79,7 @@ where
     }
 }
 
+///
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -272,6 +272,9 @@ mod tests {
                 }
             }
         }
+
+        let default_event = MutableEvent::default();
+        assert_eq!(default_event.time, UNIX_EPOCH);
 
         let events = vec![
             MutableEvent {

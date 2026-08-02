@@ -1,26 +1,23 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-/// Counts the number of occurrences of each value in a collection after applying a mapper function.
+/// Counts occurrences of each mapped value.
 ///
-/// This function iterates over a slice of items, applies the mapper function to each item, and returns a `HashMap`
-/// where each key is the mapped value, and the corresponding value is the number of times that mapped value appears.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be counted.
-/// * `mapper` - A function that maps an item of type `T` to a key of type `U`.
+/// * `collection` - Items to count.
+/// * `mapper` - Function mapping an item to a key.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the input collection.
-/// * `U` - The type of keys in the resulting `HashMap`. Must implement `Hash`, `Eq`, and `Clone`.
+/// * `T` - Item type.
+/// * `U` - Hashable, comparable key type.
 ///
 /// # Returns
 ///
-/// * `HashMap<U, usize>` - A map where keys are the mapped values from the collection and values are their counts.
+/// * `HashMap<U, usize>` - A map from each mapped value to its count.
 ///
 /// # Examples
 ///

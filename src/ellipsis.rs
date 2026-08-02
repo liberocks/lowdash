@@ -1,19 +1,14 @@
-/// Truncates a string and appends an ellipsis (`"..."`) if it exceeds the specified length.
-///
-/// This function trims the input string of leading and trailing whitespace. If the trimmed
-/// string's length exceeds the specified `length`, it truncates the string to `length - 3`
-/// characters and appends an ellipsis. If the trimmed string is shorter than or equal to
-/// `length`, it returns the trimmed string as is. If either the trimmed string or the
-/// specified `length` is less than 3, it returns `"..."`.
+/// Trims a string and appends `"..."` when it exceeds `length`.
+/// If truncation is needed and either length is below 3, returns `"..."`.
 ///
 /// # Arguments
 ///
-/// * `s` - The input string to potentially truncate.
-/// * `length` - The maximum allowed length of the returned string.
+/// * `s` - String to trim and truncate.
+/// * `length` - Maximum output length.
 ///
 /// # Returns
 ///
-/// * `String` - The possibly truncated string with an ellipsis appended.
+/// * `String` - The trimmed or truncated string.
 ///
 /// # Examples
 ///

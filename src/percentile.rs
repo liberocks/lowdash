@@ -1,14 +1,13 @@
-/// Calculates the specified percentile of a collection.
-/// The percentile should be a value between 0 and 100.
-/// The collection will be sorted before calculation.
-/// Uses linear interpolation between closest ranks for non-integer results.
+/// Returns percentile `p` using linear interpolation between adjacent ranks.
+/// `p` must be in `0.0..=100.0`; invalid or empty input returns `None`.
+/// Values are compared with `partial_cmp`; incomparable values are treated as equal.
 ///
 /// # Arguments
-/// * `collection` - A slice of items to calculate the percentile from
-/// * `p` - The percentile to calculate (0-100)
+/// * `collection` - Values to compare.
+/// * `p` - Percentile in `0.0..=100.0`.
 ///
 /// # Returns
-/// * `Option<f64>` - The calculated percentile value, or None if the collection is empty
+/// * `Option<f64>` - The percentile value, if `p` is valid and the collection is non-empty.
 ///
 /// # Examples
 /// ```rust

@@ -1,24 +1,21 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-/// Counts the number of occurrences of each value in a collection.
+/// Counts occurrences of each value in a collection.
 ///
-/// This function iterates over a slice of items and returns a `HashMap` where each key is a unique
-/// item from the collection, and the corresponding value is the number of times that item appears.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be counted.
+/// * `collection` - Items to count.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the input collection. Must implement `Hash`, `Eq`, and `Clone`.
+/// * `T` - Hashable, comparable item type.
 ///
 /// # Returns
 ///
-/// * `HashMap<T, usize>` - A map where keys are unique items from the collection and values are their counts.
+/// * `HashMap<T, usize>` - A map from each value to its count.
 ///
 /// # Examples
 ///
@@ -74,10 +71,16 @@ pub fn count_values<T>(collection: &[T]) -> HashMap<T, usize>
 where
     T: Hash + Eq + Clone,
 {
-    let mut result = HashMap::new();
+    let mut counts: HashMap<&T, usize> = HashMap::new();
     for item in collection {
-        *result.entry(item.clone()).or_insert(0) += 1;
+        *counts.entry(item).or_insert(0) += 1;
     }
+
+    let mut result = HashMap::with_capacity(counts.len());
+    for (item, count) in counts {
+        result.insert(item.clone(), count);
+    }
+
     result
 }
 

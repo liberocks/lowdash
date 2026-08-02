@@ -1,17 +1,14 @@
 use std::collections::HashMap;
 
-/// Constructs a `HashMap` by inverting the keys and values of the input map.
-///
-/// This function iterates over each key-value pair in the input `HashMap` and
-/// inserts them into a new `HashMap` with the keys and values swapped.
-/// If duplicate values are present in the input map, the value from the last
-/// `Entry` with that value will be used in the inverted map.
+/// Swaps keys and values in a map.
+/// If values repeat, later HashMap iteration overwrites earlier keys; iteration
+/// order is unspecified.
 ///
 /// # Arguments
-/// * `input` - A reference to the input `HashMap` to invert.
+/// * `input` - Map to invert.
 ///
 /// # Returns
-/// * `HashMap<V, K>` - A new `HashMap` with keys and values inverted from the input.
+/// * `HashMap<V, K>` - The inverted map.
 ///
 /// # Examples
 /// ```rust
@@ -46,6 +43,7 @@ where
     inverted
 }
 
+///
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -89,12 +87,7 @@ mod tests {
         let map: HashMap<&str, i32> = HashMap::new();
 
         let result = invert(&map);
-        let expected: HashMap<i32, &str> = HashMap::new();
-
-        assert_eq!(result.len(), expected.len());
-        for (key, value) in &expected {
-            assert_eq!(result.get(key), Some(value));
-        }
+        assert!(result.is_empty());
     }
 
     #[test]

@@ -1,13 +1,11 @@
-/// Find the first item in a collection that satisfies a predicate.
-/// If no item satisfies the predicate, return None.
+/// Returns the first item that satisfies `predicate`, or `None`.
 ///
 /// # Arguments
-/// * `collection` - A collection of items.
-/// * `predicate` - A function that takes an item from the collection and returns a boolean.
+/// * `collection` - Items to search.
+/// * `predicate` - Function called with each item.
 ///
 /// # Returns
-/// * `Some(&T)` - The first item in the collection that satisfies the predicate.
-/// * `None` - If no item satisfies the predicate.
+/// * `Option<&T>` - The first matching item, if any.
 ///
 /// # Examples
 /// ```rust

@@ -1,24 +1,21 @@
-/// Returns a subset of the collection based on the provided offset and length.
+/// Returns up to `length` items starting at `offset`.
+/// Negative offsets count from the end; the result is clamped to the collection.
 ///
-/// This function extracts a subset from the given collection starting at the specified `offset` and spanning
-/// up to `length` elements. If the `offset` is negative, it counts from the end of the collection. The function
-/// ensures that the resulting subset does not exceed the bounds of the original collection.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the subset.
+/// **Time Complexity:** O(n), where `n` is the result length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which to extract the subset.
-/// * `offset` - The starting position for the subset. Can be negative to indicate an offset from the end.
-/// * `length` - The number of elements to include in the subset.
+/// * `collection` - Items to slice.
+/// * `offset` - Start offset, possibly negative.
+/// * `length` - Maximum result length.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the subset of elements.
+/// * `Vec<T>` - The selected items.
 ///
 /// # Examples
 ///

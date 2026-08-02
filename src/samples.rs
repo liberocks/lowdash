@@ -2,15 +2,14 @@ use std::time::SystemTime;
 
 use crate::common;
 
-/// Returns a slice of pseudo-randomly selected elements from the collection.
-/// The elements are selected without replacement (no duplicates).
+/// Returns up to `count` pseudo-random items without replacement.
 ///
 /// # Arguments
-/// * `collection` - A slice of items
-/// * `count` - Number of elements to sample
+/// * `collection` - Items to sample.
+/// * `count` - Maximum number of items.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing the sampled elements
+/// * `Vec<T>` - The sampled items, or an empty vector for empty input or zero `count`.
 ///
 /// # Examples
 /// ```rust

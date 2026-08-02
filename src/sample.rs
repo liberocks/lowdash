@@ -1,13 +1,12 @@
 use crate::common;
 
-/// Returns a pseudo-random element from the collection.
-/// If the collection is empty, returns the default value of T.
+/// Returns a pseudo-random item, or `T::default()` when empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items
+/// * `collection` - Items to sample.
 ///
 /// # Returns
-/// * `T` - A pseudo-randomly selected item from the collection or the default value if empty
+/// * `T` - The selected item or the default value.
 ///
 /// # Examples
 /// ```rust

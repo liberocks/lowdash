@@ -1,15 +1,12 @@
-/// Apply a function to each item in a collection, flattening the results based on a callback.
-///
-/// This function iterates over a collection and applies the provided `iteratee` function
-/// to each item along with its index. The `iteratee` returns a vector of transformed items,
-/// which are then concatenated into a single resulting vector.
+/// Maps each item to a vector and concatenates the results.
+/// The iteratee receives `(item, index)`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `iteratee` - A function that takes a reference to an item and its index, returning a vector of transformed items.
+/// * `collection` - Items to map.
+/// * `iteratee` - Function returning a vector for `(item, index)`.
 ///
 /// # Returns
-/// * `Vec<R>` - A vector containing all the transformed items from each iteration.
+/// * `Vec<R>` - The concatenated mapped values.
 ///
 /// # Examples
 /// ```rust

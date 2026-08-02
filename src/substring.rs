@@ -1,16 +1,13 @@
-/// Extracts a substring from the given string based on the specified offset and length.
-///
-/// This function handles negative offsets by counting from the end of the string. It ensures that
-/// the resulting substring contains up to `length` non-null characters, skipping any null characters (`\x00`).
-/// If the offset is out of bounds, it returns an empty string.
+/// Extracts up to `length` non-null characters from `offset`.
+/// Negative offsets count from the end; an out-of-bounds offset returns an empty string.
 ///
 /// # Arguments
-/// * `str_input` - The input string from which to extract the substring.
-/// * `offset` - The starting position for the substring. Can be negative to indicate an offset from the end.
-/// * `length` - The number of non-null characters to include in the substring.
+/// * `str_input` - String to read.
+/// * `offset` - Start offset, possibly negative.
+/// * `length` - Maximum number of non-null characters.
 ///
 /// # Returns
-/// * `String` - The extracted substring with null characters removed.
+/// * `String` - The extracted string with null characters removed.
 ///
 /// # Examples
 /// ```rust

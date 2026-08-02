@@ -1,13 +1,12 @@
-/// Find the first item in a collection that satisfies a predicate.
-/// If no item satisfies the predicate, return the fallback value.
+/// Returns the first matching item, or `fallback` when there is no match.
 ///
 /// # Arguments
-/// * `collection` - A collection of items.
-/// * `fallback` - Value to return if no item satisfies the predicate.
-/// * `predicate` - A function that takes an item from the collection and returns a boolean.
+/// * `collection` - Items to search.
+/// * `fallback` - Value returned when no item matches.
+/// * `predicate` - Function called with each item.
 ///
 /// # Returns
-/// * `&T` - Either the first item that satisfies the predicate or the fallback value.
+/// * `&T` - The first matching item or `fallback`.
 ///
 /// # Examples
 /// ```rust

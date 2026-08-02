@@ -1,16 +1,14 @@
 use crate::{entries::Entry, from_entries};
 use std::collections::HashMap;
 
-/// Constructs a `HashMap` from a slice of `Entry` structs.
-///
-/// This function is an alias for the `from_entries` function and provides the same functionality.
-/// It exists for semantic clarity in contexts where representing map entries as pairs is more intuitive.
+/// Builds a `HashMap` from entries, with later duplicate keys overwriting earlier values.
+/// This delegates to `from_entries`.
 ///
 /// # Arguments
-/// * `entries` - A slice of `Entry` structs to convert into a `HashMap`.
+/// * `entries` - Entries to insert in order.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new `HashMap` containing all key-value pairs from the `entries` slice.
+/// * `HashMap<K, V>` - The resulting map.
 ///
 /// # Examples
 /// ```rust

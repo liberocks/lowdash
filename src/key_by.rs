@@ -1,29 +1,26 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-/// Creates a `HashMap` by mapping each element in a collection to a key using an iteratee function.
-/// If multiple elements map to the same key, the last occurrence will overwrite previous ones.
-///
-/// **Note:** The key type `K` must implement both `Eq` and `Hash` traits to be used in a `HashMap`.
+/// Maps each item to a key from `iteratee`.
+/// Later items overwrite earlier items for duplicate keys.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of elements in the collection.
+/// O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which to create the `HashMap`.
-/// * `iteratee` - A function that takes an item from the collection and returns a key of type `K`.
+/// * `collection` - Items to map.
+/// * `iteratee` - Function returning an item's key.
 ///
 /// # Type Parameters
 ///
-/// * `K` - The type of keys in the resulting `HashMap`. Must implement `Eq` and `Hash`.
-/// * `V` - The type of values in the collection. Must implement `Clone`.
-/// * `F` - The type of the iteratee function. Must implement `Fn(&V) -> K`.
+/// * `K` - Hashable key type.
+/// * `V` - Item type.
+/// * `F` - Iteratee type.
 ///
 /// # Returns
 ///
-/// * `HashMap<K, V>` - A `HashMap` where each key is the result of applying the iteratee to an element in the collection,
-///   and each value is the corresponding element from the collection.
+/// * `HashMap<K, V>` - A map from generated keys to items.
 ///
 /// # Examples
 ///

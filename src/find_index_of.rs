@@ -1,12 +1,11 @@
-/// Find the first item in a collection that satisfies a predicate and return its index.
-/// If no item satisfies the predicate, return None.
+/// Returns the first matching item and its index, or `None`.
 ///
 /// # Arguments
-/// * `collection` - A collection of items.
-/// * `predicate` - A function that takes an item from the collection and returns a boolean.
+/// * `collection` - Items to search.
+/// * `predicate` - Function called with each item.
 ///
 /// # Returns
-/// * `Option<(&T, usize)>` - A tuple containing the first item in the collection that satisfies the predicate and its index, or None if no item satisfies the predicate.
+/// * `Option<(&T, usize)>` - The first matching `(item, index)`, if any.
 ///
 /// # Examples
 /// ```rust

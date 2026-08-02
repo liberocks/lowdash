@@ -1,11 +1,8 @@
-/// Execute a function on each item in a collection.
-///
-/// This function iterates over a collection, applying the provided `iteratee` function
-/// to each item along with its index.
+/// Calls `iteratee(item, index)` for each item in input order.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `iteratee` - A function that takes a reference to an item and its index.
+/// * `collection` - Items to visit.
+/// * `iteratee` - Function called as `(item, index)`.
 ///
 /// # Examples
 /// ```rust

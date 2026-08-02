@@ -1,14 +1,11 @@
-/// Apply a function to each item in a collection, producing a new collection of results.
-///
-/// This function iterates over a collection and applies the provided `iteratee` function
-/// to each item along with its index, collecting the results into a new vector.
+/// Maps each item to a value. The iteratee receives `(item, index)`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `iteratee` - A function that takes a reference to an item and its index, returning a new value.
+/// * `collection` - Items to map.
+/// * `iteratee` - Function returning a value for `(item, index)`.
 ///
 /// # Returns
-/// * `Vec<R>` - A vector containing the results of applying `iteratee` to each item.
+/// * `Vec<R>` - Mapped values in input order.
 ///
 /// # Examples
 /// ```rust

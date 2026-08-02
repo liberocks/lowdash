@@ -1,24 +1,20 @@
-/// Counts the number of elements in a collection that satisfy a given predicate.
+/// Counts items for which `predicate` returns `true`.
 ///
-/// This function iterates over a slice of items and applies the provided predicate to each item.
-/// It returns the total count of items for which the predicate returns `true`.
-///
-/// **Time Complexity:** O(n), where n is the number of elements in the collection.
+/// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be evaluated.
-/// * `predicate` - A function that takes a reference to an item and returns a boolean.
-///   If the predicate returns `true`, the item is counted.
+/// * `collection` - Items to check.
+/// * `predicate` - Function called with each item.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the input collection.
-/// * `F` - The type of the predicate function.
+/// * `T` - Item type.
+/// * `F` - Predicate type.
 ///
 /// # Returns
 ///
-/// * `usize` - The number of elements in the collection that satisfy the predicate.
+/// * `usize` - The number of matching items.
 ///
 /// # Examples
 ///
