@@ -1,7 +1,6 @@
 # Lowdash
 
 ![Build Status](https://github.com/liberocks/lowdash/actions/workflows/build.yml/badge.svg)
-[![Coverage](https://coveralls.io/repos/github/liberocks/lowdash/badge.svg?branch=master)](https://coveralls.io/github/liberocks/lowdash?branch=master)
 [![DeepSource](https://app.deepsource.com/gh/liberocks/lowdash.svg/?label=code+coverage&show_trend=true&token=VDDalUJzfKqMiOF1qYc2tCki)](https://app.deepsource.com/gh/liberocks/lowdash/)
 [![Contributors](https://img.shields.io/github/contributors/liberocks/lowdash)](https://github.com/liberocks/lowdash/graphs/contributors)
 [![License](https://img.shields.io/github/license/liberocks/lowdash)](./LICENSE)
