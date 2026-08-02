@@ -41,7 +41,21 @@ where
 
     let sum = collection.iter().fold(T::from(0), |acc, &x| acc + x);
 
-    sum / T::from(length as u8)
+    // Build the divisor from bits so large lengths do not truncate to u8.
+    let mut divisor = T::from(0);
+    let mut power = T::from(1);
+    let mut remaining = length;
+    while remaining > 0 {
+        if remaining & 1 == 1 {
+            divisor = divisor + power;
+        }
+        remaining >>= 1;
+        if remaining > 0 {
+            power = power + power;
+        }
+    }
+
+    sum / divisor
 }
 
 #[cfg(test)]
@@ -88,5 +102,17 @@ mod tests {
     fn test_mean_decimal_result() {
         let numbers = vec![1.0, 2.0, 3.0];
         assert_eq!(mean(&numbers), 2.0);
+    }
+
+    #[test]
+    fn test_mean_large_integers() {
+        let numbers = vec![1; 256];
+        assert_eq!(mean(&numbers), 1);
+    }
+
+    #[test]
+    fn test_mean_large_floats() {
+        let numbers = vec![1.0; 4096];
+        assert_eq!(mean(&numbers), 1.0);
     }
 }

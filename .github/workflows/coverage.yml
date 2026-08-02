@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - "*"
+permissions:
+  contents: read
+  id-token: write
 env:
   RUST_BACKTRACE: 1
 jobs:
@@ -16,7 +19,7 @@ jobs:
           - x86_64-unknown-linux-gnu
       fail-fast: false
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.version }}
@@ -25,7 +28,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libssl-dev pkg-config zlib1g-dev
       - name: Cache cargo-tarpaulin
-        uses: actions/cache@v3
+        uses: actions/cache@v6
         with:
           path: ~/.cargo/bin/cargo-tarpaulin
           key: ${{ runner.os }}-cargo-tarpaulin-${{ hashFiles('**/Cargo.lock') }}
@@ -40,4 +43,8 @@ jobs:
           fi
       - name: coverage
         run: |
-          cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --exclude-files benches/* --coveralls ${{ secrets.COVERALLS_TOKEN }}
+          cargo-tarpaulin --engine llvm --follow-exec --post-test-delay 10 --exclude-files benches/* --out Lcov --output-dir coverage --coveralls ${{ secrets.COVERALLS_TOKEN }}
+      - name: Report coverage to DeepSource
+        run: |
+          curl -fsSL https://cli.deepsource.com/install | BINDIR=./bin sh
+          ./bin/deepsource report --analyzer test-coverage --key rust --value-file coverage/lcov.info --use-oidc
