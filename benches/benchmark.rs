@@ -134,6 +134,7 @@ mod uniq_values;
 mod value_or;
 mod values;
 mod words;
+mod zip;
 
 fn custom_criterion() -> Criterion {
     Criterion::default()
@@ -276,6 +277,7 @@ fn all_benches(c: &mut Criterion) {
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
+    zip::benchmark_zip(c);
 }
 
 criterion_group! {
