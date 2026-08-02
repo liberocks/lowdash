@@ -31,13 +31,13 @@ impl Hash for Float {
     }
 }
 
-/// Returns `true` if every item is an `f32` or `f64`.
+/// Determines if the collection contains floating-point numbers (`f32` or `f64`).
 ///
 /// # Arguments
-/// * `collection` - Items to check.
+/// * `collection` - A slice of items.
 ///
 /// # Returns
-/// * `bool` - `true` for an empty collection or when every item has one of those types.
+/// * `true` if all elements in the collection are of type `f32` or `f64`, otherwise `false`.
 #[allow(dead_code)]
 pub fn is_collection_float(collection: &[Box<dyn std::any::Any>]) -> bool {
     collection.iter().all(|item| {
@@ -46,23 +46,23 @@ pub fn is_collection_float(collection: &[Box<dyn std::any::Any>]) -> bool {
     })
 }
 
-/// Returns `true` if `T` is `f32` or `f64`.
+/// Determines if the given generic is floating-point numbers (`f32` or `f64`).
 ///
 /// # Returns
 ///
-/// * `bool` - Whether `T` is a floating-point type.
+/// * `bool` - `true` if given generic is floating-point numbers, else `false`.
 #[allow(dead_code)]
 pub fn is_floats<T: 'static>() -> bool {
     TypeId::of::<T>() == TypeId::of::<f32>() || TypeId::of::<T>() == TypeId::of::<f64>()
 }
 
-/// Returns a pseudo-random index below `maximum`.
+/// Returns a pseudo-random index from the collection.
 ///
 /// # Arguments
-/// * `maximum` - Exclusive upper bound. Returns `0` when it is `0`.
+/// * `n` - The upper bound of the random index (exclusive).
 ///
 /// # Returns
-/// * `usize` - An index in `0..maximum`, or `0` when `maximum` is `0`.
+/// * `usize` - A pseudo-random index from 0 to n-1.
 #[allow(dead_code)]
 pub fn random_usize(maximum: usize) -> usize {
     static COUNTER: AtomicU64 = AtomicU64::new(0);
@@ -95,14 +95,14 @@ pub fn random_usize(maximum: usize) -> usize {
     (mixed % (maximum as u64)) as usize
 }
 
-/// Returns a pseudo-random index below `n`, using `seed` as input.
+/// Returns a pseudo-random index from the collection using a seed.
 ///
 /// # Arguments
-/// * `n` - Exclusive upper bound. Returns `0` when it is `0`.
-/// * `seed` - Seed input.
+/// * `n` - The upper bound of the random index (exclusive).
+/// * `seed` - The seed value for the random number generator.
 ///
 /// # Returns
-/// * `usize` - An index in `0..n`, or `0` when `n` is `0`.
+/// * `usize` - A pseudo-random index from 0 to n-1.
 #[allow(dead_code)]
 pub fn random_usize_with_seed(n: usize, seed: u64) -> usize {
     static COUNTER: AtomicU64 = AtomicU64::new(0);
@@ -129,15 +129,15 @@ pub fn random_usize_with_seed(n: usize, seed: u64) -> usize {
     (mixed % (n as u64)) as usize
 }
 
-/// Returns the ceiling of `log2(n)`.
+/// Calculates the ceiling of the base-2 logarithm of a number.
 ///
 /// # Arguments
 ///
-/// * `n` - Input number.
+/// * `n` - The number to calculate the ceiling log2 for.
 ///
 /// # Returns
 ///
-/// * `usize` - The smallest integer greater than or equal to `log2(n)`.
+/// * The smallest integer greater than or equal to log2(n).
 #[allow(dead_code)]
 pub fn ceil_log2(n: usize) -> usize {
     if n <= 1 {
@@ -152,10 +152,12 @@ pub fn ceil_log2(n: usize) -> usize {
     bits
 }
 
-/// Generates a pseudo-random `u64` from process, thread, time, and counter data.
+/// Generates a pseudo-random `u64` number using entropy sources.
+///
+/// Combines system time, process ID, and thread ID to generate randomness.
 ///
 /// # Returns
-/// * `u64` - A pseudo-random `u64`.
+/// * A pseudo-random `u64` number.
 #[allow(dead_code)]
 pub fn random_u64() -> u64 {
     static COUNTER: AtomicU64 = AtomicU64::new(0);
@@ -236,8 +238,6 @@ pub const ALL_CHARSET: &[char] = &[
     '[', ']', '{', '}', '|', ';', '\'', ':', '"', ',', '.', '/', '<', '>', '?',
 ];
 
-///
-///
 #[cfg(test)]
 mod tests {
     use std::collections::HashSet;

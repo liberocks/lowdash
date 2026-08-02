@@ -1,14 +1,15 @@
 use std::time::SystemTime;
 
-/// Returns the item with the latest time from `iteratee`.
-/// Returns `T::default()` when the collection is empty.
+/// Returns the item from the collection for which the iteratee returns the latest `SystemTime`.
+/// If the collection is empty, returns the default value of `T`.
 ///
 /// # Arguments
-/// * `collection` - Items to compare.
-/// * `iteratee` - Function returning an item's comparison time.
+/// * `collection` - A slice of items.
+/// * `iteratee` - A function that takes a reference to an item and returns a `SystemTime`.
 ///
 /// # Returns
-/// * `T` - The latest item, or the default value for an empty collection.
+/// * `T` - The item with the latest `SystemTime` as determined by the iteratee.
+/// * If the collection is empty, returns `T::default()`.
 ///
 /// # Examples
 ///
@@ -79,7 +80,6 @@ where
     }
 }
 
-///
 #[cfg(test)]
 mod tests {
     use super::*;

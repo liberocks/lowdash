@@ -1,8 +1,12 @@
-/// Calls `iteratee(item, index)` until it returns `false`.
+/// Execute a function on each item in a collection until the iteratee returns `false`.
+///
+/// This function iterates over a collection, applying the provided `iteratee` function
+/// to each item along with its index. If the `iteratee` returns `false`, the iteration stops.
 ///
 /// # Arguments
-/// * `collection` - Items to visit.
-/// * `iteratee` - Function called as `(item, index)`; `false` stops the scan.
+/// * `collection` - A slice of items.
+/// * `iteratee` - A function that takes a reference to an item and its index, returning a boolean.
+///   If `false` is returned, the iteration stops.
 ///
 /// # Examples
 /// ```rust
@@ -65,9 +69,6 @@ where
     }
 }
 
-///
-///
-///
 #[cfg(test)]
 mod tests {
     use super::*;
