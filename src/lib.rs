@@ -130,6 +130,7 @@ mod uniq_values;
 mod value_or;
 mod values;
 mod words;
+mod zip;
 
 pub use assign::assign;
 pub use associate::associate;
@@ -263,3 +264,4 @@ pub use uniq_values::uniq_values;
 pub use value_or::value_or;
 pub use values::values;
 pub use words::words;
+pub use zip::zip;

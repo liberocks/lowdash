@@ -92,6 +92,7 @@ Utility functions for array:
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
 - [subset](#subset)
+- [zip](#zip)
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
 - [times](#times)
@@ -1843,6 +1844,21 @@ assert!(shuffled.contains(&2));
 assert!(shuffled.contains(&3));
 assert!(shuffled.contains(&4));
 assert!(shuffled.contains(&5));
+```
+
+### zip
+Pairs items from two collections at matching indices.
+
+The result stops when either collection ends.
+
+```rust
+use lowdash::zip;
+
+let names = vec!["Alice", "Bob"];
+let ages = vec![30, 25];
+let result = zip(&names, &ages);
+
+assert_eq!(result, vec![("Alice", 30), ("Bob", 25)]);
 ```
 
 ### reverse
