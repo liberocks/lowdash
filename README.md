@@ -57,6 +57,7 @@ Utility functions for array:
 - [group_by](#group_by)
 - [index_of](#index_of)
 - [interleave](#interleave)
+- [intersection](#intersection)
 - [is_sorted](#is_sorted)
 - [is_sorted_by_key](#is_sorted_by_key)
 - [key_by](#key_by)
@@ -2642,6 +2643,20 @@ use lowdash::compact;
 let floats = vec![0.0, 1.1, 0.0, 2.2, 3.3, 0.0, 4.4];
 let compacted = compact(&floats);
 assert_eq!(compacted, vec![1.1, 2.2, 3.3, 4.4]);
+```
+
+### intersection
+Returns the unique values present in every collection.
+
+Values keep the order of their first appearance in the first collection.
+
+```rust
+use lowdash::intersection;
+
+let collections = vec![vec![1, 2, 2, 3], vec![2, 3, 4], vec![0, 2, 3]];
+let result = intersection(&collections);
+
+assert_eq!(result, vec![2, 3]);
 ```
 
 ### is_sorted
