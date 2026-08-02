@@ -6,6 +6,9 @@ on:
 
 env:
   RUST_BACKTRACE: 1
+permissions:
+  actions: read
+  contents: read
 
 jobs:
   benchmark:
@@ -17,20 +20,41 @@ jobs:
           - nightly
       fail-fast: false
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.version }}
       - name: cache
         uses: Swatinem/rust-cache@v2
 
+      - name: find previous baseline
+        id: find-baseline
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_NAME: criterion-baseline-${{ matrix.version }}
+        run: |
+          run_id=""
+          while read -r candidate; do
+            artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${candidate}/artifacts" \
+              --paginate \
+              --jq ".artifacts[] | select(.name == \"${ARTIFACT_NAME}\" and .expired == false) | .id")"
+            if [[ -n "$artifact_id" ]]; then
+              run_id="$candidate"
+              break
+            fi
+          done < <(gh run list --workflow Benchmark --branch "$GITHUB_REF_NAME" --status success --limit 20 --json databaseId --jq '.[].databaseId')
+          printf 'run-id=%s\n' "$run_id" >> "$GITHUB_OUTPUT"
+
       - name: download previous baseline
         id: download-baseline
-        continue-on-error: true
-        uses: actions/download-artifact@v4
+        if: steps.find-baseline.outputs.run-id != ''
+        uses: actions/download-artifact@v8
         with:
           name: criterion-baseline-${{ matrix.version }}
-          path: target/criterion/
+          path: report/
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.find-baseline.outputs.run-id }}
 
       - name: run benchmark with comparison
         if: steps.download-baseline.outcome == 'success'
@@ -104,14 +128,14 @@ jobs:
                       delta = "\u2014"
                   f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(chg_mean)} |\n")
           PYEOF
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: report ${{ matrix.version }}
-          path: report/
+          path: bench_output.txt
           retention-days: 30
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: criterion-baseline-${{ matrix.version }}
-          path: target/criterion/
+          path: report/
           retention-days: 90
