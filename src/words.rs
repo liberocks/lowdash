@@ -181,6 +181,12 @@ mod tests {
     }
 
     #[test]
+    fn test_acronym_before_word() {
+        let result = words("XMLParser");
+        assert_eq!(result, vec!["XML", "Parser"]);
+    }
+
+    #[test]
     fn test_consecutive_digits() {
         let result = words("version2Release10");
         let expected = vec![

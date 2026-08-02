@@ -28,7 +28,8 @@ where
     K: Eq + std::hash::Hash + Clone,
     V: Clone,
 {
-    let mut out = HashMap::new();
+    let capacity = maps.iter().map(|map| map.len()).sum();
+    let mut out = HashMap::with_capacity(capacity);
     for map in maps {
         for (k, v) in map {
             out.insert(k.clone(), v.clone());

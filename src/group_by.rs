@@ -7,7 +7,6 @@ use std::hash::Hash;
 /// This function takes a slice of items and returns a `HashMap<U, Vec<T>>` where each key
 /// corresponds to a group of items that share the same key.
 ///
-/// **Note:** This implementation requires `U` to implement `Hash`, `Eq`, and `Clone`, and `T` to implement `Clone`.
 ///
 /// # Arguments
 ///

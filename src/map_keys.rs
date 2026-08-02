@@ -23,19 +23,18 @@ use std::collections::{BTreeMap, HashMap};
 /// ```
 pub fn map_keys<K, V, R, F>(map: &HashMap<K, V>, iteratee: F) -> BTreeMap<R, V>
 where
-    K: Eq + std::hash::Hash + Ord,
+    K: Ord,
     V: Clone,
     R: Ord,
     F: Fn(&V, &K) -> R,
 {
     let mut result = BTreeMap::new();
-    let mut keys: Vec<&K> = map.keys().collect();
+    let mut entries: Vec<(&K, &V)> = map.iter().collect();
 
     // Sort keys in descending order to ensure later keys overwrite earlier ones
-    keys.sort_by(|a, b| b.cmp(a));
+    entries.sort_by(|(a, _), (b, _)| b.cmp(a));
 
-    for k in keys {
-        let v = &map[k];
+    for (k, v) in entries {
         let new_key = iteratee(v, k);
         result.insert(new_key, v.clone());
     }

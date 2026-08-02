@@ -77,7 +77,8 @@ where
         panic!("Chunk size must be greater than 0");
     }
 
-    let mut result: Vec<Vec<T>> = Vec::new();
+    let chunk_count = collection.len() / size + usize::from(collection.len() % size != 0);
+    let mut result: Vec<Vec<T>> = Vec::with_capacity(chunk_count);
     let mut start = 0;
 
     while start < collection.len() {

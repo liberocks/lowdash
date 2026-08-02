@@ -11,6 +11,9 @@
 
 ### Changed
 - Updated coverage workflow triggers so feature branches are covered.
+- Switched coverage reporting from Tarpaulin to LLVM coverage for more accurate DeepSource results.
+- Improved collection performance by reducing cloning, avoiding repeated map lookups, and reserving known output capacity.
+- Improved `count_values`, `combination`, `map_keys`, `assign`, `chunk`, `filter_map`, `keys`, and `values` performance.
 - Simplified README headings by removing decorative emoji.
 
 ## [0.6.2] 2026-08-02

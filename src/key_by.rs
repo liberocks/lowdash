@@ -1,4 +1,4 @@
-use std::collections::{hash_map::Entry, HashMap};
+use std::collections::HashMap;
 use std::hash::Hash;
 
 /// Creates a `HashMap` by mapping each element in a collection to a key using an iteratee function.
@@ -84,14 +84,7 @@ where
 
     for item in collection {
         let key = iteratee(item);
-        match result.entry(key) {
-            Entry::Vacant(entry) => {
-                entry.insert(item.clone());
-            }
-            Entry::Occupied(mut entry) => {
-                entry.insert(item.clone());
-            }
-        }
+        result.insert(key, item.clone());
     }
 
     result

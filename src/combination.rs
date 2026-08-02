@@ -26,10 +26,10 @@ pub fn combination<T: Clone>(items: &[T], k: usize) -> Vec<Vec<T>> {
     }
     let mut result = Vec::new();
     for i in 0..=items.len() - k {
-        let current = items[i].clone();
         let rest_combinations = combination(&items[i + 1..], k - 1);
         for mut comb in rest_combinations {
-            let mut entry = vec![current.clone()];
+            let mut entry = Vec::with_capacity(k);
+            entry.push(items[i].clone());
             entry.append(&mut comb);
             result.push(entry);
         }

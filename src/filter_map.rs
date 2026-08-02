@@ -56,7 +56,7 @@ pub fn filter_map<T, R, F>(collection: &[T], callback: F) -> Vec<R>
 where
     F: Fn(&T, usize) -> (R, bool),
 {
-    let mut result = Vec::new();
+    let mut result = Vec::with_capacity(collection.len());
     for (index, item) in collection.iter().enumerate() {
         let (mapped, include) = callback(item, index);
         if include {

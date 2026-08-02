@@ -36,7 +36,7 @@ where
 
     for map in maps {
         for key in map.keys() {
-            if seen.insert(key.clone()) {
+            if seen.insert(key) {
                 result.push(key.clone());
             }
         }

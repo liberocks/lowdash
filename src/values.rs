@@ -32,7 +32,8 @@ pub fn values<K, V>(maps: &[&std::collections::HashMap<K, V>]) -> Vec<V>
 where
     V: Clone,
 {
-    let mut result = Vec::new();
+    let capacity = maps.iter().map(|map| map.len()).sum();
+    let mut result = Vec::with_capacity(capacity);
     for map in maps {
         for value in map.values() {
             result.push(value.clone());
