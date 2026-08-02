@@ -87,6 +87,7 @@ Utility functions for array:
 - [sample](#sample)
 - [samples](#samples)
 - [shuffle](#shuffle)
+- [some](#some)
 - [sort_by](#sort_by)
 - [sort_by_key](#sort_by_key)
 - [slice](#slice)
@@ -1204,6 +1205,19 @@ use lowdash::reject;
 let numbers = vec![1, 2, 3, 4, 5];
 let result = reject(&numbers, |x, _| *x % 2 == 0);
 assert_eq!(result, vec![&1, &3, &5]);
+```
+
+### some
+Returns `true` when at least one item satisfies a predicate.
+
+The scan stops at the first matching item. An empty collection returns `false`.
+
+```rust
+use lowdash::some;
+
+let numbers = vec![1, 3, 4, 7];
+assert!(some(&numbers, |number| *number % 2 == 0));
+
 ```
 
 ### every

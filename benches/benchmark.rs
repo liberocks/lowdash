@@ -118,6 +118,7 @@ mod shuffle;
 mod slice;
 mod slice_to_map;
 mod snake_case;
+mod some;
 mod sort_by;
 mod sort_by_key;
 mod splice;
@@ -263,6 +264,7 @@ fn all_benches(c: &mut Criterion) {
     sample::benchmark_sample(c);
     samples::benchmark_samples(c);
     shuffle::benchmark_shuffle(c);
+    some::benchmark_some(c);
     sort_by::benchmark_sort_by(c);
     sort_by_key::benchmark_sort_by_key(c);
     slice::benchmark_slice(c);
