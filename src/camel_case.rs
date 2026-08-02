@@ -1,16 +1,12 @@
 use crate::pascal_case;
 
-/// Converts a string to camelCase.
-///
-/// Splits the input string into words based on spaces, hyphens, and underscores,
-/// then converts the first word to lowercase and capitalizes the first letter of each subsequent word,
-/// and joins them together.
+/// Converts a string to `camelCase` using word boundaries.
 ///
 /// # Arguments
-/// * `str_input` - The input string to convert
+/// * `str_input` - String to convert.
 ///
 /// # Returns
-/// * `String` - The converted string in camelCase
+/// * `String` - The converted string.
 ///
 /// # Examples
 /// ```rust

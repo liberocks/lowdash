@@ -1,14 +1,11 @@
-/// Filters a map by omitting key-value pairs that satisfy a predicate.
-///
-/// Iterates over each key-value pair in the input map and excludes it from the result map
-/// if the predicate returns `true` for that pair.
+/// Omits entries for which `predicate(key, value)` is `true`.
 ///
 /// # Arguments
-/// * `map` - The input map to filter.
-/// * `predicate` - A function that takes a key and value, and returns `true` if the pair should be omitted.
+/// * `map` - Map to filter.
+/// * `predicate` - Function called as `(key, value)`.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new map containing only the key-value pairs that do not satisfy the predicate.
+/// * `HashMap<K, V>` - The entries not omitted.
 ///
 /// # Examples
 /// ```rust

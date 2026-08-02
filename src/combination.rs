@@ -1,11 +1,11 @@
 /// Finds all combinations of k elements from a collection.
 ///
 /// # Arguments
-/// * `items` - A slice of items to combine
-/// * `k` - The number of elements to select in each combination
+/// * `items` - Items to combine.
+/// * `k` - Length of each combination.
 ///
 /// # Returns
-/// * `Vec<Vec<T>>` - A vector containing all combinations of k elements from the input
+/// * `Vec<Vec<T>>` - All length-`k` combinations, or an empty vector when `k` exceeds the input length.
 ///
 /// # Examples
 /// ```rust
@@ -14,7 +14,7 @@
 /// let items = vec![1, 2, 3, 4];
 /// let result = combination(&items, 2);
 /// assert_eq!(result.len(), 6);
-/// // One possible combination: [2, 3]
+/// // Example: [2, 3]
 /// assert!(result.contains(&vec![2, 3]));
 /// ```
 pub fn combination<T: Clone>(items: &[T], k: usize) -> Vec<Vec<T>> {
@@ -66,7 +66,7 @@ mod tests {
     fn test_combination_multiple() {
         let items = vec![1, 2, 3, 4];
         let result = combination(&items, 2);
-        // combinations: [1,2], [1,3], [1,4], [2,3], [2,4], [3,4]
+        // Expected combinations.
         assert_eq!(result.len(), 6);
         assert!(result.contains(&vec![1, 2]));
         assert!(result.contains(&vec![2, 4]));

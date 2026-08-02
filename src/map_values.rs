@@ -1,13 +1,14 @@
 use std::collections::HashMap;
 
-/// Transforms the values of a map using a provided function.
+/// Transforms map values, preserving keys.
+/// The callback receives `(value, key)`.
 ///
 /// # Arguments
-/// * `map` - The input map whose values are to be transformed.
-/// * `iteratee` - A function that takes a reference to a value and its key, returning a new value.
+/// * `map` - Map to transform.
+/// * `iteratee` - Function returning a value for `(value, key)`.
 ///
 /// # Returns
-/// * `HashMap<K, R>` - A new map with transformed values.
+/// * `HashMap<K, R>` - The transformed map.
 ///
 /// # Examples
 /// ```

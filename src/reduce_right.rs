@@ -1,17 +1,13 @@
-/// Apply a function to each item in a collection, accumulating a single result from right to left.
-///
-/// This function iterates over a collection from the end to the start and applies the provided
-/// `accumulator` function to each item along with its index and the current accumulated value.
-/// The accumulated value is updated with each iteration based on the result of the `accumulator`.
+/// Folds a collection from right to left.
+/// The accumulator receives `(current, item, index)`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `accumulator` - A function that takes the current accumulated value, a reference to an item, and its index,
-///   then returns the new accumulated value.
-/// * `initial` - The initial value for the accumulation.
+/// * `collection` - Items to fold.
+/// * `accumulator` - Function returning the next value for `(current, item, index)`.
+/// * `initial` - Initial accumulator value.
 ///
 /// # Returns
-/// * `R` - The final accumulated value after processing all items in the collection from right to left.
+/// * `R` - The final accumulated value.
 ///
 /// # Examples
 /// ```rust

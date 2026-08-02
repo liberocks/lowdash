@@ -1,12 +1,11 @@
-/// Generate a range of numbers starting from a given value.
-/// If `element_num` is negative, generate a range with a step of -1.
+/// Generates `element_num` values starting at `start`, stepping by `1` or `-1`.
 ///
 /// # Arguments
-/// * `start` - The starting value of the range.
-/// * `element_num` - The number of elements in the range. If negative, generates a descending range.
+/// * `start` - First value.
+/// * `element_num` - Number of values; negative means descending.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing the range of numbers.
+/// * `Vec<T>` - The generated range.
 ///
 /// # Examples
 /// ```rust

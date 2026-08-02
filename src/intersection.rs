@@ -12,7 +12,7 @@
 ///
 /// # Returns
 ///
-/// A new vector containing unique values found in every collection.
+/// * `Vec<T>` - A new vector containing unique values found in every collection.
 ///
 /// # Examples
 ///

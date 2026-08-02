@@ -1,14 +1,11 @@
-/// Reject items from a collection that satisfy a predicate.
-///
-/// This function iterates over a collection and returns a new vector containing
-/// all items for which the predicate returns `false`.
+/// Returns references to items for which `predicate(item, index)` is `false`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `predicate` - A function that takes an item and its index, returning a boolean.
+/// * `collection` - Items to filter.
+/// * `predicate` - Function called as `(item, index)`.
 ///
 /// # Returns
-/// * `Vec<&T>` - A vector of references to items that do not satisfy the predicate.
+/// * `Vec<&T>` - References to rejected items, in input order.
 ///
 /// # Examples
 /// ```rust

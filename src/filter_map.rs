@@ -1,16 +1,12 @@
-/// Apply a function to each item in a collection, filtering and transforming items based on a callback.
-///
-/// This function iterates over a collection and applies the provided `callback` function
-/// to each item along with its index. If the callback returns `(R, true)`, the transformed
-/// value `R` is included in the resulting vector.
+/// Maps each item with `callback` and keeps results whose flag is `true`.
+/// The callback receives `(item, index)` and returns `(value, include)`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `callback` - A function that takes a reference to an item and its index, returning a tuple `(R, bool)`
-///   where `R` is the transformed value and `bool` indicates whether to include it.
+/// * `collection` - Items to process.
+/// * `callback` - Function returning `(value, include)`.
 ///
 /// # Returns
-/// * `Vec<R>` - A vector containing the transformed items that passed the callback's predicate.
+/// * `Vec<R>` - Included mapped values, in input order.
 ///
 /// # Examples
 /// ```rust

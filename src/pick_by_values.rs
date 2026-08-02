@@ -1,14 +1,11 @@
-/// Filters a map by selecting only the specified values.
-///
-/// Iterates over each key-value pair in the input map and includes it in the result map
-/// only if the value is present in the provided values slice.
+/// Keeps entries whose values occur in `values`.
 ///
 /// # Arguments
-/// * `map` - The input map to filter.
-/// * `values` - A slice of values to select from the map.
+/// * `map` - Map to filter.
+/// * `values` - Values to select.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new map containing only the key-value pairs that have values present in the values slice.
+/// * `HashMap<K, V>` - The selected entries.
 ///
 /// # Examples
 /// ```rust

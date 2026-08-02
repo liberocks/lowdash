@@ -1,14 +1,12 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
-/// Returns the latest `SystemTime` from the provided arguments.
-/// If no arguments are provided, returns `SystemTime::UNIX_EPOCH`.
+/// Returns the latest time, or `SystemTime::UNIX_EPOCH` for an empty slice.
 ///
 /// # Arguments
-/// * `times` - A slice of `SystemTime` instances.
+/// * `times` - Times to compare.
 ///
 /// # Returns
-/// * `SystemTime` - The latest `SystemTime` among the provided arguments.
-/// * If no arguments are provided, returns `SystemTime::UNIX_EPOCH`.
+/// * `SystemTime` - The latest time or the Unix epoch.
 ///
 /// # Examples
 /// ```rust

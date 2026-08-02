@@ -1,17 +1,17 @@
 /// Returns the longest prefix whose items satisfy a predicate.
 ///
-/// The scan stops at the first item for which the predicate returns `false`.
+/// Stops at the first item for which the predicate returns `false`.
 ///
 /// **Time Complexity:** O(n), where `n` is the number of checked items.
 ///
 /// # Arguments
 ///
-/// * `collection` - The items to scan.
-/// * `predicate` - A function that decides whether an item belongs in the prefix.
+/// * `collection` - Items to scan.
+/// * `predicate` - Function deciding whether an item belongs in the prefix.
 ///
 /// # Returns
 ///
-/// A new vector containing the matching prefix.
+/// * `Vec<T>` - The matching prefix.
 ///
 /// # Examples
 ///

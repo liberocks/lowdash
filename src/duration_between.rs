@@ -26,17 +26,16 @@ impl DurationUnit {
     }
 }
 
-/// Returns the absolute difference between two dates in the specified unit.
-///
-/// The calculation is based on approximations for months and years.
+/// Returns the absolute time difference in `unit`.
+/// Months and years use fixed average durations.
 ///
 /// # Arguments
-/// * `date1` - The first date.
-/// * `date2` - The second date.
-/// * `unit` - The unit of time for the returned difference.
+/// * `date1` - First date.
+/// * `date2` - Second date.
+/// * `unit` - Output unit.
 ///
 /// # Returns
-/// * `u64` - The absolute difference between the two dates in the specified unit.
+/// * `u64` - The absolute difference in the selected unit.
 ///
 /// # Examples
 /// ```rust

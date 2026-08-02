@@ -1,12 +1,12 @@
-/// Find the key in a map that satisfies a predicate based on both key and value.
-/// If no key satisfies the predicate, return None.
+/// Returns the first key for which `predicate(key, value)` is `true`, or `None`.
+/// HashMap iteration order determines which key is returned when several match.
 ///
 /// # Arguments
-/// * `object` - A map of key-value pairs.
-/// * `predicate` - A function that takes a key and value and returns a boolean.
+/// * `object` - Map to search.
+/// * `predicate` - Function called as `(key, value)`.
 ///
 /// # Returns
-/// * `Option<&K>` - The key that satisfies the predicate, or None if no key satisfies the predicate.
+/// * `Option<&K>` - A matching key, if any.
 ///
 /// # Examples
 /// ```rust

@@ -1,12 +1,10 @@
-/// Returns the first item from the collection.
-/// If the collection is empty, returns the default value of `T` and `false`.
+/// Returns `(first_item, true)`, or `(T::default(), false)` when empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to inspect.
 ///
 /// # Returns
-/// * `(T, bool)` - A tuple containing the first item and `true`.
-///   If the collection is empty, returns `(T::default(), false)`.
+/// * `(T, bool)` - The first item and whether the collection was non-empty.
 ///
 /// # Examples
 /// ```rust

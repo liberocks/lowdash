@@ -12,7 +12,7 @@
 ///
 /// # Returns
 ///
-/// `true` if at least one item matches the predicate; otherwise `false`.
+/// * `bool` - `true` if at least one item matches the predicate; otherwise `false`.
 ///
 /// # Examples
 ///

@@ -1,13 +1,12 @@
 use std::ops::{Add, Div};
 
-/// Calculates the arithmetic mean of a collection of numbers.
-/// If the collection is empty, returns zero.
+/// Returns the arithmetic mean, or zero for an empty collection.
 ///
 /// # Arguments
-/// * `collection` - A slice of numbers.
+/// * `collection` - Numbers to average.
 ///
 /// # Returns
-/// * `T` - The arithmetic mean of the collection.
+/// * `T` - The arithmetic mean.
 ///
 /// # Examples
 /// ```rust

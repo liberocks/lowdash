@@ -2,18 +2,18 @@ use std::cmp::Ordering;
 
 /// Returns a stable sort of a collection using a comparison function.
 ///
-/// The input collection is not changed. Return `Ordering::Less` when the first item belongs first.
+/// The input is unchanged. Return `Ordering::Less` when the first item belongs first.
 ///
 /// **Time Complexity:** O(n log n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - The items to sort.
-/// * `compare` - A function that compares two items.
+/// * `collection` - Items to sort.
+/// * `compare` - Comparator for two items.
 ///
 /// # Returns
 ///
-/// A new vector containing the sorted items.
+/// * `Vec<T>` - A stable-sorted copy.
 ///
 /// # Examples
 ///

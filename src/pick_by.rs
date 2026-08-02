@@ -1,14 +1,11 @@
-/// Filters a map by applying a predicate to its key-value pairs.
-///
-/// Iterates over each key-value pair in the input map and includes it in the result map
-/// only if the predicate returns `true` for that pair.
+/// Keeps map entries for which `predicate(key, value)` is `true`.
 ///
 /// # Arguments
-/// * `map` - The input map to filter.
-/// * `predicate` - A function that takes a key and value, and returns `true` if the pair should be included.
+/// * `map` - Map to filter.
+/// * `predicate` - Function called as `(key, value)`.
 ///
 /// # Returns
-/// * `HashMap<K, V>` - A new map containing all key-value pairs that satisfy the predicate.
+/// * `HashMap<K, V>` - The matching entries.
 ///
 /// # Examples
 /// ```rust

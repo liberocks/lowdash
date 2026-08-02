@@ -1,12 +1,11 @@
-/// Collects all values from one or more maps into a single vector.
-///
-/// Iterates over each map and collects all values into a single vector.
+/// Collects values from maps in map-slice order.
+/// HashMap iteration order is not specified.
 ///
 /// # Arguments
-/// * `maps` - A slice of references to maps to collect values from
+/// * `maps` - Maps to collect.
 ///
 /// # Returns
-/// * `Vec<V>` - A vector containing all values from the input maps
+/// * `Vec<V>` - The collected values.
 ///
 /// # Examples
 /// ```

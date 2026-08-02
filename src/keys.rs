@@ -1,12 +1,11 @@
-/// Collects all keys from one or more maps into a single vector.
-///
-/// Iterates over each map and collects all keys into a single vector.
+/// Collects keys from maps in map-slice order.
+/// HashMap iteration order is not specified.
 ///
 /// # Arguments
-/// * `maps` - One or more maps to collect keys from
+/// * `maps` - Maps to collect.
 ///
 /// # Returns
-/// * `Vec<K>` - A vector containing all keys from the input maps
+/// * `Vec<K>` - The collected keys.
 ///
 /// # Examples
 /// ```

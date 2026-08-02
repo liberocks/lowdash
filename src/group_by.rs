@@ -1,27 +1,23 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-/// Group elements of a collection based on a key extracted by a provided function,
-/// preserving the order of their first occurrence.
-///
-/// This function takes a slice of items and returns a `HashMap<U, Vec<T>>` where each key
-/// corresponds to a group of items that share the same key.
-///
+/// Groups items by a key from `iteratee`.
+/// Items within each group keep input order; HashMap key order is unspecified.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be grouped.
-/// * `iteratee` - A function that takes a reference to an item and returns a key of type `U`.
+/// * `collection` - Items to group.
+/// * `iteratee` - Function returning an item's group key.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
-/// * `U` - The type of the key extracted from each element used to group the elements. Must implement `Hash`, `Eq`, and `Clone`.
-/// * `F` - The type of the iteratee function. Must implement `Fn(&T) -> U`.
+/// * `T` - Item type.
+/// * `U` - Hashable group-key type.
+/// * `F` - Iteratee type.
 ///
 /// # Returns
 ///
-/// * `HashMap<U, Vec<T>>` - A map where each key is associated with a vector of items that share the same key.
+/// * `HashMap<U, Vec<T>>` - A map from each key to its items.
 ///
 /// # Examples
 ///
@@ -277,13 +273,13 @@ mod tests {
         let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
         let grouped = group_by(&float_collection, |x| x.is_nan());
 
-        // Verify the NaN group
+        // Check the NaN group.
         let nans = grouped.get(&true).expect("expected a NaN group");
         assert_eq!(nans.len(), 2);
         assert!(nans[0].is_nan());
         assert!(nans[1].is_nan());
 
-        // Verify the non-NaN group
+        // Check the non-NaN group.
         assert_eq!(grouped.get(&false), Some(&vec![2.2, 4.4]));
     }
 }

@@ -2,14 +2,14 @@
 
 use crate::common;
 
-/// Find the minimum element in a collection.
-/// If the collection is empty, returns `None`.
+/// Returns the minimum item, or `None` for an empty collection.
+/// Float comparisons treat `NaN` as incomparable; an all-`NaN` input returns a `NaN`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to compare.
 ///
 /// # Returns
-/// * `Option<T>` - The minimum item in the collection, or `None` if the collection is empty.
+/// * `Option<T>` - The minimum item, if any.
 ///
 /// # Examples
 /// ```rust

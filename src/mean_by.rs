@@ -1,11 +1,11 @@
-/// Calculates the mean value of a collection after applying a transformation function to each element.
+/// Returns the mean of values produced by `iteratee`, or `0.0` if empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items to calculate the mean from
-/// * `iteratee` - A function that transforms each item before calculating the mean
+/// * `collection` - Items to average.
+/// * `iteratee` - Function mapping an item to `f64`.
 ///
 /// # Returns
-/// The mean value after applying the transformation
+/// * `f64` - The mapped mean.
 ///
 /// # Examples
 /// ```rust

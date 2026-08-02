@@ -1,12 +1,11 @@
-/// Find the minimum element in a collection based on a custom comparison function.
-/// If the collection is empty, returns `None`.
+/// Returns the item selected as minimum by `comparison`, or `None` if empty.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
-/// * `comparison` - A function that takes two items and returns `true` if the first item is considered less than the second.
+/// * `collection` - Items to compare.
+/// * `comparison` - Returns `true` when the first item is less.
 ///
 /// # Returns
-/// * `Option<T>` - The minimum item in the collection based on the comparison function, or `None` if the collection is empty.
+/// * `Option<T>` - The selected minimum, if any.
 ///
 /// # Examples
 /// ```rust

@@ -1,13 +1,13 @@
 use std::ops::Add;
 
-/// Calculates the sum of values obtained by applying a function to each element in a collection.
+/// Returns the sum of values produced by `iteratee`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items to process.
-/// * `iteratee` - A function that maps each item to a numeric value.
+/// * `collection` - Items to map.
+/// * `iteratee` - Function returning a value to add.
 ///
 /// # Returns
-/// * `R` - The sum of all values produced by the iteratee function.
+/// * `R` - The sum, or `R::default()` for an empty collection.
 ///
 /// # Examples
 /// ```rust

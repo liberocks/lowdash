@@ -1,14 +1,11 @@
-/// Generates a collection by invoking the provided function `iteratee` a specified number of times.
-///
-/// This function calls the `iteratee` function `count` times, passing in the current index each time,
-/// and collects the results into a `Vec<T>`.
+/// Calls `iteratee(index)` for each index in `0..count` and collects the results.
 ///
 /// # Arguments
-/// * `count` - The number of times to invoke `iteratee`.
-/// * `iteratee` - A function that takes the current index and returns a value of type `T`.
+/// * `count` - Number of calls.
+/// * `iteratee` - Function generating an item from its index.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing the results of each invocation of `iteratee`.
+/// * `Vec<T>` - The generated values.
 ///
 /// # Examples
 /// ```rust

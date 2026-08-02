@@ -3,12 +3,12 @@
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items.
-/// * `element` - The element to search for.
+/// * `collection` - Items to search.
+/// * `element` - Value to find.
 ///
 /// # Returns
 ///
-/// * `isize` - The index of the last occurrence of the element, or -1 if not found.
+/// * `isize` - The last index, or `-1` when not found.
 ///
 /// # Examples
 /// ```rust

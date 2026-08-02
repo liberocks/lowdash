@@ -1,24 +1,20 @@
-/// Interleave multiple collections into a single vector, preserving the order of elements.
-///
-/// This function takes multiple slices and interleaves their elements into a single `Vec<T>`. It
-/// iterates over the collections in a round-robin fashion, taking one element from each collection
-/// per iteration. If a collection is exhausted, it is skipped in subsequent iterations.
+/// Interleaves collections round-robin, skipping exhausted collections.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the total number of elements across all collections.
+/// O(n), where `n` is the total number of elements.
 ///
 /// # Arguments
 ///
-/// * `collections` - A slice of slices to be interleaved.
+/// * `collections` - Collections to interleave.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collections. Must implement `Clone`.
-/// * `Slice` - The type of the inner slices. Must implement `AsRef<[T]>`.
+/// * `T` - Item type.
+/// * `Slice` - Nested collection type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the interleaved elements from the input collections.
+/// * `Vec<T>` - The interleaved items.
 ///
 /// # Examples
 ///

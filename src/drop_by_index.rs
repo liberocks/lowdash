@@ -1,21 +1,21 @@
-/// Removes elements from a collection at the specified indices.
-/// Supports negative indices which count from the end of the collection.
-/// Indices that are out of bounds are ignored.
+/// Removes items at the specified indices. Negative indices count from the end;
+/// out-of-bounds indices are ignored.
 ///
-/// **Time Complexity:** O(n log n) for sorting the indices, O(m) for cloning, where m is the length of the resulting collection.
+/// **Time Complexity:** O(k log k + n), where `k` is the number of indices and
+/// `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which elements will be removed.
-/// * `indexes` - A slice of indices at which elements should be removed.
+/// * `collection` - Items to filter.
+/// * `indexes` - Indices to remove.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the elements after removing the specified indices.
+/// * `Vec<T>` - The items not removed.
 ///
 /// # Examples
 ///

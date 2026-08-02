@@ -1,10 +1,10 @@
-/// Returns the length of a string in Unicode characters.
+/// Returns the number of Unicode scalar values in a string.
 ///
 /// # Arguments
-/// * `str_input` - The input string to count characters from
+/// * `str_input` - String to count.
 ///
 /// # Returns
-/// * `usize` - The number of Unicode characters in the string
+/// * `usize` - The character count.
 ///
 /// # Examples
 /// ```rust

@@ -1,29 +1,24 @@
-/// Divide a collection into smaller chunks of a specified size,
-/// preserving the order of elements.
-///
-/// This function takes a slice of items and splits it into multiple
-/// chunks, each with a maximum of `size` elements. The order of elements
-/// is preserved, and the last chunk may contain fewer elements if the
-/// total number of elements is not perfectly divisible by `size`.
+/// Splits a collection into chunks of at most `size` elements, preserving order.
+/// The last chunk may be shorter.
 ///
 /// **Panics:**  
 /// Panics if `size` is less than or equal to 0.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of elements in the collection.
+/// O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be divided into chunks.
-/// * `size` - The maximum number of elements each chunk should contain.
+/// * `collection` - Items to split.
+/// * `size` - Maximum chunk length.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<Vec<T>>` - A vector of chunks, where each chunk is a vector of elements.
+/// * `Vec<Vec<T>>` - The chunks.
 ///
 /// # Examples
 ///

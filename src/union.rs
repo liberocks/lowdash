@@ -10,7 +10,7 @@
 ///
 /// # Returns
 ///
-/// A new vector containing each value once.
+/// * `Vec<T>` - A new vector containing each value once.
 ///
 /// # Examples
 ///

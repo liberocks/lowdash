@@ -1,29 +1,21 @@
 use crate::common::random_usize;
 
-/// Shuffle a collection, returning a new vector with the elements in random order.
-///
-/// This function takes a slice of items and returns a new `Vec<T>` containing all the elements
-/// from the input collection rearranged in a random order. It utilizes the Fisher-Yates algorithm
-/// in conjunction with random number generation functions from `common.rs`.
-///
-/// **Note:** This implementation relies on the random functions provided in `common.rs` and is not
-/// suitable for cryptographic purposes. For more robust randomness, consider using external crates
-/// like `rand`.
+/// Returns a randomly reordered copy using non-cryptographic randomness.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of elements in the collection.
+/// O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be shuffled.
+/// * `collection` - Items to reorder.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector containing all elements from the input collection in shuffled order.
+/// * `Vec<T>` - The shuffled copy.
 ///
 /// # Examples
 ///

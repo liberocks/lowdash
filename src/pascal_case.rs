@@ -1,13 +1,10 @@
-/// Converts a string to PascalCase.
-///
-/// Splits the input string into words based on spaces, hyphens, and underscores,
-/// then capitalizes the first letter of each word and joins them together.
+/// Converts a string to `PascalCase` using spaces, hyphens, and underscores.
 ///
 /// # Arguments
-/// * `str_input` - The input string to convert
+/// * `str_input` - String to convert.
 ///
 /// # Returns
-/// * `String` - The converted string in PascalCase
+/// * `String` - The converted string.
 ///
 /// # Examples
 /// ```rust

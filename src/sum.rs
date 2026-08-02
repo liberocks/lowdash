@@ -1,11 +1,10 @@
-/// Calculates the sum of all elements in a collection.
-/// Works with any numeric type that implements `std::ops::Add` and can be copied.
+/// Returns the sum of all items, using `T::default()` for an empty collection.
 ///
 /// # Arguments
-/// * `collection` - A slice of numeric values.
+/// * `collection` - Values to add.
 ///
 /// # Returns
-/// * `T` - The sum of all elements in the collection.
+/// * `T` - The sum.
 ///
 /// # Examples
 /// ```rust

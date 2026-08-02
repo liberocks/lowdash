@@ -1,23 +1,15 @@
-/// Remove duplicate elements from a collection, preserving the order of their first occurrence.
-///
-/// This function takes a slice of items and returns a new `Vec<T>` containing only the unique elements,
-/// preserving the order in which they first appear in the input collection.
-///
-/// **Note:** Unlike the previous implementation, this version does not require `T` to implement `Hash` and `Eq`.
-/// This allows the function to work with types like floating-point numbers (`f32`, `f64`), which do not implement `Eq`
-/// due to the presence of `NaN` (Not a Number) values.
-///
-/// However, this approach has a time complexity of O(n²) because it performs a linear search for each element to check for duplicates.
-/// Use it with caution on large collections.
+/// Removes duplicates, preserving first-occurrence order.
+/// Equality uses `PartialEq`, so `NaN` values follow normal `PartialEq` behavior.
+/// **Time Complexity:** O(n²), where `n` is the collection length.
 ///
 /// # Arguments
-/// * `collection` - A slice of items from which to extract unique elements.
+/// * `collection` - Items to deduplicate.
 ///
 /// # Type Parameters
-/// * `T` - The type of elements in the collection. Must implement `PartialEq` and `Clone`.
+/// * `T` - Partially comparable, cloneable item type.
 ///
 /// # Returns
-/// * `Vec<T>` - A vector containing the unique elements from the input collection, in the order they first appear.
+/// * `Vec<T>` - The unique items in first-occurrence order.
 ///
 /// # Examples
 /// ```rust

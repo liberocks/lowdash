@@ -2,16 +2,14 @@ use crate::entries;
 use crate::entries::Entry;
 use std::collections::HashMap;
 
-/// Collects all entries from a map into a vector of `Entry` structs.
-///
-/// This function is an alias for the `entries` function and provides the same functionality.
-/// It exists for semantic clarity in contexts where representing map entries as pairs is more intuitive.
+/// Collects map entries into a vector. HashMap iteration order is not specified.
+/// This is an alias for [`entries`].
 ///
 /// # Arguments
-/// * `map` - The input map from which to collect entries.
+/// * `map` - Map to collect.
 ///
 /// # Returns
-/// * `Vec<Entry<K, V>>` - A vector containing all key-value pairs as `Entry` structs.
+/// * `Vec<Entry<K, V>>` - The map entries.
 ///
 /// # Examples
 /// ```rust

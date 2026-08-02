@@ -1,21 +1,20 @@
-/// Removes the first `n` elements from a collection and returns the remaining elements.
-/// If `n` is greater than or equal to the length of the collection, returns an empty `Vec`.
+/// Drops the first `n` elements, preserving the rest in order.
+/// Returns an empty vector when `n` is at least the collection length.
 ///
-/// **Time Complexity:** O(1) for slices, as it creates a slice from an existing slice.  
-/// O(m) for cloning elements, where m is the number of elements after dropping.
+/// **Time Complexity:** O(m) to clone the `m` retained elements.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items from which elements will be dropped.
-/// * `n` - The number of elements to drop from the beginning of the collection.
+/// * `collection` - Items to trim.
+/// * `n` - Number of items to drop.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A vector containing the elements after dropping the first `n` elements.
+/// * `Vec<T>` - The retained elements.
 ///
 /// # Examples
 ///

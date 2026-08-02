@@ -1,14 +1,14 @@
 #![allow(clippy::eq_op)]
 use crate::common;
 
-/// Find the maximum element in a collection.
-/// If the collection is empty, returns `None`.
+/// Returns the maximum item, or `None` for an empty collection.
+/// Float comparisons treat `NaN` as incomparable; an all-`NaN` input returns a `NaN`.
 ///
 /// # Arguments
-/// * `collection` - A slice of items.
+/// * `collection` - Items to compare.
 ///
 /// # Returns
-/// * `Option<T>` - The maximum item in the collection, or `None` if the collection is empty.
+/// * `Option<T>` - The maximum item, if any.
 ///
 /// # Examples
 /// ```rust

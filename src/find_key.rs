@@ -1,12 +1,12 @@
-/// Find the key in a map that corresponds to a given value.
-/// If no key corresponds to the value, return None.
+/// Returns a key whose value equals `value`, or `None`.
+/// HashMap iteration order determines which key is returned when values repeat.
 ///
 /// # Arguments
-/// * `object` - A map of key-value pairs.
-/// * `value` - The value to search for.
+/// * `object` - Map to search.
+/// * `value` - Value to find.
 ///
 /// # Returns
-/// * `Option<K>` - The key that corresponds to the value, or None if no key corresponds to the value.
+/// * `Option<K>` - A matching key, if any.
 ///
 /// # Examples
 /// ```rust

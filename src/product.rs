@@ -1,12 +1,10 @@
-/// Calculate the product of all elements in a collection.
-/// If the collection is empty, returns 1 (multiplicative identity).
-/// Works with any numeric type that implements `std::ops::Mul` and can be copied.
+/// Returns the product of all items, or `1` for an empty collection.
 ///
 /// # Arguments
-/// * `collection` - A slice of numbers.
+/// * `collection` - Numbers to multiply.
 ///
 /// # Returns
-/// * `T` - The product of all numbers in the collection.
+/// * `T` - The product.
 ///
 /// # Examples
 /// ```rust

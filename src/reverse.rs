@@ -1,22 +1,19 @@
-/// Reverse a collection, returning a new vector with the elements in reverse order.
-///
-/// This function takes a slice of items and returns a new `Vec<T>` containing all the elements
-/// from the input collection in reverse order.
+/// Returns a reversed copy of the collection.
 ///
 /// **Time Complexity:**  
-/// O(n), where n is the number of elements in the collection.
+/// O(n), where `n` is the collection length.
 ///
 /// # Arguments
 ///
-/// * `collection` - A slice of items to be reversed.
+/// * `collection` - Items to reverse.
 ///
 /// # Type Parameters
 ///
-/// * `T` - The type of elements in the collection. Must implement `Clone`.
+/// * `T` - Item type.
 ///
 /// # Returns
 ///
-/// * `Vec<T>` - A new vector containing all elements from the input collection in reverse order.
+/// * `Vec<T>` - The reversed copy.
 ///
 /// # Examples
 ///
