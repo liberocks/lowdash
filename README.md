@@ -2657,26 +2657,6 @@ assert_eq!(
 ### compact
 Removes all zero-valued elements from a collection, preserving the order of non-zero elements.
 
-This function iterates over a slice of items, removing each element that is equal to the zero value.
-The zero value is determined by the `Default` trait implementation for the type `T`.
-The function preserves the order of the remaining elements and does not modify the original collection.
-
-**Time Complexity:** O(n), where n is the number of elements in the collection.
-
-# Arguments
-
-* `collection` - A slice of items from which to remove zero-valued elements.
-
-# Type Parameters
-
-* `T` - The type of elements in the collection. Must implement `PartialEq`, `Clone`, and `Default`.
-
-# Returns
-
-* `Vec<T>` - A new vector containing only the non-zero elements from the input collection.
-
-# Examples
-
 ```rust
 use lowdash::compact;
 
