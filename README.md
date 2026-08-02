@@ -92,6 +92,7 @@ Utility functions for array:
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
 - [subset](#subset)
+- [take_while](#take_while)
 - [times](#times)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
@@ -2212,6 +2213,20 @@ use lowdash::drop_right_while;
 let letters = vec!['a', 'b', 'c', 'd', 'e'];
 let result = drop_right_while(&letters, |&c| c != 'c');
 assert_eq!(result, vec!['a', 'b', 'c']);
+```
+
+### take_while
+Returns the longest prefix whose items satisfy a predicate.
+
+The scan stops at the first item that fails the predicate.
+
+```rust
+use lowdash::take_while;
+
+let numbers = vec![1, 2, 3, 1, 4];
+let result = take_while(&numbers, |number| *number < 3);
+
+assert_eq!(result, vec![1, 2]);
 ```
 
 ### drop_by_index
