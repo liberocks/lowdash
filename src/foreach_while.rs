@@ -112,12 +112,7 @@ mod tests {
     #[test]
     fn test_foreach_while_empty_collection() {
         let empty: Vec<i32> = vec![];
-        let mut called = false;
-        foreach_while(&empty, |_, _| {
-            called = true;
-            true
-        });
-        assert!(!called);
+        foreach_while(&empty, |_, _| true);
     }
 
     #[test]

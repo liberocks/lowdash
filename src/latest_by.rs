@@ -273,6 +273,9 @@ mod tests {
             }
         }
 
+        let default_event = MutableEvent::default();
+        assert_eq!(default_event.time, UNIX_EPOCH);
+
         let events = vec![
             MutableEvent {
                 id: 1,

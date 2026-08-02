@@ -320,16 +320,11 @@ mod tests {
     #[test]
     fn test_random_usize_variety() {
         let n = 10;
-        let mut previous = random_usize(n);
-        for _ in 0..100 {
-            let current = random_usize(n);
-            // It's possible to get the same index; ensure not always the same
-            if current != previous {
-                return;
-            }
-            previous = current;
-        }
-        panic!("random_usize should produce varied results");
+        let values: HashSet<_> = (0..100).map(|_| random_usize(n)).collect();
+        assert!(
+            values.len() > 1,
+            "random_usize should produce varied results"
+        );
     }
 
     #[test]
@@ -390,16 +385,11 @@ mod tests {
     fn test_random_usize_with_seed_variety() {
         let n = 10;
         let seed = 999;
-        let mut previous = random_usize_with_seed(n, seed);
-        for _ in 0..100 {
-            let current = random_usize_with_seed(n, seed);
-            // It's possible to get the same index; ensure not always the same
-            if current != previous {
-                return;
-            }
-            previous = current;
-        }
-        panic!("random_usize_with_seed should produce varied results");
+        let values: HashSet<_> = (0..100).map(|_| random_usize_with_seed(n, seed)).collect();
+        assert!(
+            values.len() > 1,
+            "random_usize_with_seed should produce varied results"
+        );
     }
 
     #[test]

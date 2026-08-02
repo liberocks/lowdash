@@ -87,12 +87,7 @@ mod tests {
         let map: HashMap<&str, i32> = HashMap::new();
 
         let result = invert(&map);
-        let expected: HashMap<i32, &str> = HashMap::new();
-
-        assert_eq!(result.len(), expected.len());
-        for (key, value) in &expected {
-            assert_eq!(result.get(key), Some(value));
-        }
+        assert!(result.is_empty());
     }
 
     #[test]
