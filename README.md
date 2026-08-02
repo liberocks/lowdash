@@ -84,6 +84,7 @@ Utility functions for array:
 - [sample](#sample)
 - [samples](#samples)
 - [shuffle](#shuffle)
+- [sort_by](#sort_by)
 - [sort_by_key](#sort_by_key)
 - [slice](#slice)
 - [slice_to_map](#slice_to_map)
@@ -2750,6 +2751,20 @@ let sorted = sort_by_key(&records, |record| record.0);
 
 assert_eq!(sorted, vec![(1, "a"), (2, "b"), (3, "c")]);
 assert_eq!(records, vec![(3, "c"), (1, "a"), (2, "b")]);
+```
+
+### sort_by
+Returns a stable copy of a collection sorted with a comparison function.
+
+Return `Ordering::Less` when the first item belongs before the second item.
+
+```rust
+use lowdash::sort_by;
+
+let numbers = vec![3, 1, 2];
+let sorted = sort_by(&numbers, |left, right| left.cmp(right));
+
+assert_eq!(sorted, vec![1, 2, 3]);
 ```
 
 ### splice
