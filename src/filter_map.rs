@@ -184,7 +184,7 @@ mod tests {
 
     #[test]
     fn test_filter_map_with_negative_numbers() {
-        let numbers: Vec<i32> = vec![-1, -2, -3];
+        let numbers: Vec<i32> = vec![-1, -2, -3, 4];
         let result: Vec<i32> =
             filter_map(
                 &numbers,

@@ -278,13 +278,10 @@ mod tests {
         let grouped = group_by(&float_collection, |x| x.is_nan());
 
         // Verify the NaN group
-        if let Some(nans) = grouped.get(&true) {
-            assert_eq!(nans.len(), 2);
-            assert!(nans[0].is_nan());
-            assert!(nans[1].is_nan());
-        } else {
-            panic!("Expected Some(&vec![NaN, NaN]) for key true");
-        }
+        let nans = grouped.get(&true).expect("expected a NaN group");
+        assert_eq!(nans.len(), 2);
+        assert!(nans[0].is_nan());
+        assert!(nans[1].is_nan());
 
         // Verify the non-NaN group
         assert_eq!(grouped.get(&false), Some(&vec![2.2, 4.4]));

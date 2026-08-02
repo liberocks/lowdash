@@ -332,12 +332,11 @@ mod tests {
                 assert!(!nan_partition, "NaN group already exists");
                 nan_partition = true;
                 assert_eq!(partition.len(), 3);
-            } else if partition.iter().all(|x| !x.is_nan()) {
+            } else {
                 assert!(!non_nan_partition, "Non-NaN group already exists");
                 non_nan_partition = true;
+                assert!(partition.iter().all(|x| !x.is_nan()));
                 assert_eq!(partition, vec![2.2, 4.4]);
-            } else {
-                panic!("Partition contains both NaN and non-NaN values");
             }
         }
 
