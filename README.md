@@ -8,14 +8,14 @@
 
 **liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
 
-## 🚀 Installation
+## Installation
 ```bash
 cargo add lowdash
 ```
 
 This library has no dependencies outside the Rust standard library.
 
-## 📚 Documentation
+## Documentation
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
 Utility functions for array:
@@ -93,6 +93,7 @@ Utility functions for array:
 - [splice](#splice)
 - [subset](#subset)
 - [take_right_while](#take_right_while)
+- [take_while](#take_while)
 - [times](#times)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
@@ -132,6 +133,7 @@ Utility functions for object manipulation:
 - [to_pairs](#to_pairs)
 - [uniq_keys](#uniq_keys)
 - [uniq_values](#uniq_values)
+- [union](#union)
 - [value_or](#value_or)
 - [values](#values)
 
@@ -2226,6 +2228,21 @@ let numbers = vec![1, 2, 3, 4, 5];
 let result = take_right_while(&numbers, |number| *number > 2);
 
 assert_eq!(result, vec![3, 4, 5]);
+
+```
+
+### take_while
+Returns the longest prefix whose items satisfy a predicate.
+
+The scan stops at the first item that fails the predicate.
+
+```rust
+use lowdash::take_while;
+
+let numbers = vec![1, 2, 3, 1, 4];
+let result = take_while(&numbers, |number| *number < 3);
+
+assert_eq!(result, vec![1, 2]);
 ```
 
 ### drop_by_index
@@ -2672,6 +2689,20 @@ let collections = vec![vec![1, 2, 2, 3], vec![2, 3, 4], vec![0, 2, 3]];
 let result = intersection(&collections);
 
 assert_eq!(result, vec![2, 3]);
+```
+
+### union
+Returns the unique values from all collections.
+
+Values keep the order of their first appearance across the collections.
+
+```rust
+use lowdash::union;
+
+let collections = vec![vec![1, 2, 2], vec![2, 3], vec![3, 4]];
+let result = union(&collections);
+
+assert_eq!(result, vec![1, 2, 3, 4]);
 ```
 
 ### is_sorted
@@ -3579,5 +3610,5 @@ let day_later = epoch + one_day;
 assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
 ```
 
-## 🫡 Acknowledgement
+## Acknowledgement
 This project is inspired by [lodash](https://lodash.com/) and [lo](https://github.com/samber/lo)
