@@ -33,16 +33,29 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ARTIFACT_NAME: criterion-baseline-${{ matrix.version }}
         run: |
-          run_id=""
-          while read -r candidate; do
-            artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${candidate}/artifacts" \
-              --paginate \
-              --jq ".artifacts[] | select(.name == \"${ARTIFACT_NAME}\" and .expired == false) | .id")"
-            if [[ -n "$artifact_id" ]]; then
-              run_id="$candidate"
-              break
+          find_run_with_baseline() {
+            local branch="${1:-}"
+            local branch_args=()
+            if [[ -n "$branch" ]]; then
+              branch_args+=(--branch "$branch")
             fi
-          done < <(gh run list --workflow Benchmark --branch "$GITHUB_REF_NAME" --status success --limit 20 --json databaseId --jq '.[].databaseId')
+
+            while read -r candidate; do
+              [[ "$candidate" == "$GITHUB_RUN_ID" ]] && continue
+              artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${candidate}/artifacts" \
+                --paginate \
+                --jq ".artifacts[] | select(.name == \"${ARTIFACT_NAME}\" and .expired == false) | .id")"
+              if [[ -n "$artifact_id" ]]; then
+                printf '%s\n' "$candidate"
+                return
+              fi
+            done < <(gh run list --workflow Benchmark "${branch_args[@]}" --status success --limit 50 --json databaseId --jq '.[].databaseId')
+          }
+
+          run_id="$(find_run_with_baseline "$GITHUB_REF_NAME")"
+          if [[ -z "$run_id" ]]; then
+            run_id="$(find_run_with_baseline)"
+          fi
           printf 'run-id=%s\n' "$run_id" >> "$GITHUB_OUTPUT"
 
       - name: download previous baseline
@@ -51,87 +64,151 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: criterion-baseline-${{ matrix.version }}
-          path: report/
+          path: previous-report/
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
           run-id: ${{ steps.find-baseline.outputs.run-id }}
 
-      - name: run benchmark with comparison
-        if: steps.download-baseline.outcome == 'success'
-        run: (set -o pipefail; cargo bench --bench benchmark -- --baseline baseline --save-baseline baseline 2>&1 | tee bench_output.txt)
+      - name: run benchmark
+        run: |
+          set -o pipefail
+          cargo bench --bench benchmark --no-run --message-format=json-render-diagnostics > cargo-build.json
+          benchmark_binary="$(python3 - <<'PYEOF'
+          import json
 
-      - name: run benchmark (initial)
-        if: steps.download-baseline.outcome != 'success'
-        run: (set -o pipefail; cargo bench --bench benchmark -- --save-baseline baseline 2>&1 | tee bench_output.txt)
+          paths = []
+          with open("cargo-build.json") as f:
+              for line in f:
+                  try:
+                      event = json.loads(line)
+                  except json.JSONDecodeError:
+                      continue
+                  target = event.get("target", {})
+                  if (
+                      event.get("reason") == "compiler-artifact"
+                      and target.get("name") == "benchmark"
+                      and "bench" in target.get("kind", [])
+                      and event.get("executable")
+                  ):
+                      paths.append(event["executable"])
+
+          if not paths:
+              raise SystemExit("Unable to locate the benchmark executable")
+          print(paths[-1])
+          PYEOF
+          )"
+          /usr/bin/time -v -o process_memory.txt "$benchmark_binary" --bench --save-baseline baseline 2>&1 | tee bench_output.txt
       - name: tabularize results
         env:
           VERSION: ${{ matrix.version }}
         run: |
           python3 << 'PYEOF'
-          import os, re
+          import json
+          import os
+          import re
+          from pathlib import Path
 
           with open("bench_output.txt") as f:
               content = f.read()
 
+          def load_estimates(root):
+              root = Path(root)
+              estimates = {}
+              if not root.is_dir():
+                  return estimates
+
+              for benchmark_file in root.rglob("baseline/benchmark.json"):
+                  benchmark_dir = benchmark_file.parent
+                  try:
+                      benchmark = json.loads(benchmark_file.read_text())
+                      estimate = json.loads((benchmark_dir / "estimates.json").read_text())
+                      mean = estimate["mean"]["point_estimate"]
+                  except (OSError, KeyError, TypeError, ValueError):
+                      continue
+
+                  for name in (benchmark.get("full_id"), benchmark.get("title")):
+                      if name:
+                          estimates[name] = mean
+              return estimates
+
+          current_estimates = load_estimates("report")
+          previous_estimates = load_estimates("previous-report")
+
           entries = []
           current_name = None
           current_time_min = current_time_mean = current_time_max = None
-          current_chg_min = current_chg_mean = current_chg_max = None
           skip_prefixes = ("Found", "Warning", "Benchmarking", "Gnuplot", "criterion", "Generating", "Baseline")
 
           def flush_entry():
-              if current_name is not None and current_time_min:
-                  entries.append((current_name, current_time_min, current_time_mean, current_time_max,
-                                  current_chg_min, current_chg_mean, current_chg_max))
+              if current_name is not None and current_time_min is not None:
+                  current = current_estimates.get(current_name)
+                  previous = previous_estimates.get(current_name)
+                  change = None
+                  if current is not None and previous not in (None, 0):
+                      change = (current / previous - 1) * 100
+                  entries.append((current_name, current_time_min, current_time_mean, current_time_max, change))
 
           for line in content.split("\n"):
               stripped = line.strip()
               if not stripped:
                   continue
-              if not line.startswith((" ", "\t")) and re.match(r"^[a-zA-Z_]", stripped) and not any(stripped.startswith(p) for p in skip_prefixes):
+              if stripped.startswith("Benchmarking ") and ": " not in stripped:
                   flush_entry()
-                  current_name = stripped
+                  current_name = stripped.removeprefix("Benchmarking ")
                   current_time_min = current_time_mean = current_time_max = None
-                  current_chg_min = current_chg_mean = current_chg_max = None
-              elif stripped.startswith("time:") and "[" in stripped and current_name:
+              elif "time:" in stripped and "[" in stripped and current_name:
                   m = re.search(r"\[([\d.]+\s+\S+)\s+([\d.]+\s+\S+)\s+([\d.]+\s+\S+)\]", stripped)
                   if m:
                       current_time_min, current_time_mean, current_time_max = m.group(1), m.group(2), m.group(3)
-              elif stripped.startswith("change:") and "[" in stripped and current_name:
-                  m = re.search(r"\[([+-][\d.]+%)\s+([+-][\d.]+%)\s+([+-][\d.]+%)\]", stripped)
-                  if m:
-                      current_chg_min, current_chg_mean, current_chg_max = m.group(1), m.group(2), m.group(3)
+              elif not line.startswith((" ", "\t")) and re.match(r"^[a-zA-Z_]", stripped) and not any(stripped.startswith(p) for p in skip_prefixes):
+                  flush_entry()
+                  current_name = stripped
+                  current_time_min = current_time_mean = current_time_max = None
 
           flush_entry()
 
-          def verdict(mean_chg):
-              if mean_chg is None:
+          def verdict(change):
+              if change is None:
                   return "\u2014"
-              v = float(mean_chg.rstrip("%"))
-              if v < -0.5:
+              if change < -0.5:
                   return "improvement"
-              elif v > 0.5:
+              elif change > 0.5:
                   return "regression"
               else:
                   return "~ no change"
+
+          peak_rss_kib = None
+          try:
+              for line in Path("process_memory.txt").read_text().splitlines():
+                  match = re.search(r"Maximum resident set size \(kbytes\):\s*(\d+)", line)
+                  if match:
+                      peak_rss_kib = int(match.group(1))
+                      break
+          except OSError:
+              pass
 
           summary_path = os.environ["GITHUB_STEP_SUMMARY"]
           with open(summary_path, "a") as f:
               version = os.environ.get("VERSION")
               f.write(f"## Benchmark Results ({version})\n\n")
-              f.write("| Benchmark | Min | Mean | Max | Delta | Verdict |\n")
+              if peak_rss_kib is not None:
+                  f.write(f"Peak process RSS: {peak_rss_kib / 1024:.1f} MiB ({peak_rss_kib} KiB)\n\n")
+              if previous_estimates:
+                  f.write("Comparison: previous successful benchmark baseline\n\n")
+              else:
+                  f.write("Comparison: unavailable (no previous benchmark baseline)\n\n")
+              f.write("| Benchmark | Min | Mean | Max | Mean Delta | Verdict |\n")
               f.write("|---|---|---|---|---|---|\n")
-              for name, mn, mean, mx, chg_min, chg_mean, chg_max in entries:
-                  if chg_mean:
-                      delta = f"{chg_min} / {chg_mean} / {chg_max}"
-                  else:
-                      delta = "\u2014"
-                  f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(chg_mean)} |\n")
+              for name, mn, mean, mx, change in entries:
+                  delta = "\u2014" if change is None else f"{change:+.2f}%"
+                  f.write(f"| {name} | {mn} | {mean} | {mx} | {delta} | {verdict(change)} |\n")
           PYEOF
       - uses: actions/upload-artifact@v7
         with:
           name: report ${{ matrix.version }}
-          path: bench_output.txt
+          path: |
+            bench_output.txt
+            process_memory.txt
           retention-days: 30
 
       - uses: actions/upload-artifact@v7
