@@ -125,6 +125,7 @@ mod partition_by;
 mod pascal_case;
 mod percentile;
 mod permutation;
+mod permutation_count;
 mod pick_by;
 mod pick_by_keys;
 mod pick_by_values;
@@ -320,6 +321,7 @@ fn all_benches(c: &mut Criterion) {
     percentile::benchmark_percentile(c);
     population_standard_deviation::benchmark_population_standard_deviation(c);
     permutation::benchmark_permutation(c);
+    permutation_count::benchmark_permutation_count(c);
     pick_by::benchmark_pick_by(c);
     pick_by_keys::benchmark_pick_by_keys(c);
     pick_by_values::benchmark_pick_by_values(c);
