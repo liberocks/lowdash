@@ -148,6 +148,7 @@ mod some;
 mod sort_by;
 mod sort_by_key;
 mod splice;
+mod standard_deviation;
 mod subset;
 mod substring;
 mod sum;
@@ -324,6 +325,7 @@ fn all_benches(c: &mut Criterion) {
     samples::benchmark_samples(c);
     sample_variance::benchmark_sample_variance(c);
     scan::benchmark_scan(c);
+    standard_deviation::benchmark_standard_deviation(c);
     shuffle::benchmark_shuffle(c);
     some::benchmark_some(c);
     sort_by::benchmark_sort_by(c);
