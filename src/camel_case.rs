@@ -26,7 +26,12 @@ pub fn camel_case(str_input: &str) -> String {
     let mut chars = pascal.chars();
     match chars.next() {
         None => String::new(),
-        Some(first) => first.to_lowercase().collect::<String>() + chars.as_str(),
+        Some(first) => {
+            let mut result = String::with_capacity(pascal.len());
+            result.extend(first.to_lowercase());
+            result.push_str(chars.as_str());
+            result
+        }
     }
 }
 
