@@ -3,6 +3,7 @@
 ## [0.8.0] 2026-08-08
 ### Added
 - Added `take` for selecting the first items from a collection.
+- Added `take_right` for selecting the final items from a collection.
 
 ## [0.7.0] 2026-08-02
 ### Added
