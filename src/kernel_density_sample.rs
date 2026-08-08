@@ -39,9 +39,16 @@ pub fn kernel_density_sample(
 
     let mut random = Lcg::new(seed);
     let mut samples = Vec::with_capacity(count);
+    let mut cached_noise = None;
     for _ in 0..count {
         let center = values[random.index_below(values.len())];
-        let noise = standard_normal(&mut random);
+        let noise = if let Some(noise) = cached_noise.take() {
+            noise
+        } else {
+            let (first, second) = standard_normal_pair(&mut random);
+            cached_noise = Some(second);
+            first
+        };
         samples.push(center + bandwidth * noise);
     }
 
@@ -93,10 +100,10 @@ impl Lcg {
     }
 }
 
-fn standard_normal(random: &mut Lcg) -> f64 {
+fn standard_normal_pair(random: &mut Lcg) -> (f64, f64) {
     let radius = (-2.0 * random.unit_open().ln()).sqrt();
     let angle = std::f64::consts::TAU * random.unit();
-    radius * angle.cos()
+    (radius * angle.cos(), radius * angle.sin())
 }
 
 #[cfg(test)]
