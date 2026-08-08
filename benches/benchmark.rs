@@ -12,6 +12,7 @@ mod chunk_by;
 mod chunk_string;
 mod clamp;
 mod combination;
+mod combination_count;
 mod common_ceil_log2;
 mod common_is_collection_float;
 mod common_is_floats;
@@ -207,6 +208,7 @@ fn all_benches(c: &mut Criterion) {
     chunk_string::benchmark_chunk_string(c);
     clamp::benchmark_clamp(c);
     combination::benchmark_combination(c);
+    combination_count::benchmark_combination_count(c);
     compact::benchmark_compact(c);
     correlation::benchmark_correlation(c);
     covariance::benchmark_covariance(c);

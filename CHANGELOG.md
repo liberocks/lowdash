@@ -42,6 +42,7 @@
 - Added `covariance` for stable sample covariance.
 - Added `correlation` for stable Pearson coefficients.
 - Added `linear_regression` for ordinary least-squares fits.
+- Added `combination_count` for checked binomial coefficients.
 
 ## [0.7.0] 2026-08-02
 ### Added
