@@ -177,6 +177,7 @@ Utility functions for math:
 - [euclidean_norm](#euclidean_norm)
 - [sum_products](#sum_products)
 - [is_close](#is_close)
+- [kernel_density_estimate](#kernel_density_estimate)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
@@ -4088,6 +4089,17 @@ Negative or nonfinite tolerances return `false`.
 use lowdash::is_close;
 
 assert!(is_close(100.0, 101.0, 0.01, 0.0));
+```
+
+### kernel_density_estimate
+Builds a Gaussian kernel density estimate whose closure owns a copy of the data.
+Construction validates finite nonempty data and a positive finite bandwidth.
+
+```rust
+use lowdash::kernel_density_estimate;
+
+let estimate = kernel_density_estimate(&[0.0], 1.0).unwrap();
+assert!((estimate(0.0) - 0.39894228).abs() < 1.0e-7);
 ```
 
 ### weighted_mean
