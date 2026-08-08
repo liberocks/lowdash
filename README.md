@@ -136,6 +136,7 @@ Utility functions for object manipulation:
 - [from_pairs](#from_pairs)
 - [has_key](#has_key)
 - [invert](#invert)
+- [invert_grouped](#invert_grouped)
 - [keys](#keys)
 - [map_entries](#map_entries)
 - [map_keys](#map_keys)
@@ -3815,6 +3816,19 @@ first.insert("mode", "safe");
 let mut fallback = HashMap::new();
 fallback.insert("mode", "fast");
 assert_eq!(defaults(&[first, fallback])["mode"], "safe");
+```
+
+### invert_grouped
+Groups all keys by their values instead of discarding repeated values.
+
+```rust
+use lowdash::invert_grouped;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 1);
+assert_eq!(invert_grouped(&map)[&1].len(), 2);
 ```
 
 ## Acknowledgement
