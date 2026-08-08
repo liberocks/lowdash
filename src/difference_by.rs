@@ -4,7 +4,7 @@
 /// per excluded item and once per input item; an empty excluded collection
 /// returns a clone without invoking it.
 ///
-/// **Time Complexity:** O(n * m), where `n` is the input length and `m` is the
+/// **Time Complexity:** O(n + m), where `n` is the input length and `m` is the
 /// excluded length. Extra space is O(m) for excluded keys and O(n) for output.
 ///
 /// # Examples
@@ -17,7 +17,7 @@
 pub fn difference_by<T, K, F>(collection: &[T], excluded: &[T], iteratee: F) -> Vec<T>
 where
     T: Clone,
-    K: PartialEq,
+    K: Eq + std::hash::Hash,
     F: Fn(&T) -> K,
 {
     if collection.is_empty() {
@@ -28,15 +28,13 @@ where
         return collection.to_vec();
     }
 
-    let excluded_keys: Vec<K> = excluded.iter().map(|item| iteratee(item)).collect();
+    let excluded_keys: std::collections::HashSet<K> =
+        excluded.iter().map(|item| iteratee(item)).collect();
     let mut result = Vec::with_capacity(collection.len());
 
     for item in collection {
         let key = iteratee(item);
-        if !excluded_keys
-            .iter()
-            .any(|excluded_key| excluded_key == &key)
-        {
+        if !excluded_keys.contains(&key) {
             result.push(item.clone());
         }
     }
@@ -123,7 +121,7 @@ mod tests {
 
     #[test]
     fn handles_empty_inputs_and_custom_non_clone_keys() {
-        #[derive(Debug, PartialEq)]
+        #[derive(Debug, PartialEq, Eq, Hash)]
         struct Key(u8);
 
         #[derive(Debug, Clone, PartialEq)]
