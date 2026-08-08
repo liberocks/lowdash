@@ -170,6 +170,7 @@ Utility functions for math:
 - [product_by](#product_by)
 - [mean](#mean)
 - [mean_by](#mean_by)
+- [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
 - [interpolate](#interpolate)
@@ -3849,6 +3850,15 @@ Returns the most frequent values, keeping ties in first-appearance order.
 use lowdash::modes;
 
 assert_eq!(modes(&[1, 2, 2, 3, 3]), vec![2, 3]);
+```
+
+### variance
+Calculates population variance in one pass and returns `None` for empty input.
+
+```rust
+use lowdash::variance;
+
+assert_eq!(variance(&[1.0, 2.0, 3.0]), Some(2.0 / 3.0));
 ```
 
 ## Acknowledgement

@@ -155,6 +155,7 @@ mod uniq_values;
 mod unzip;
 mod value_or;
 mod values;
+mod variance;
 mod windows;
 mod words;
 mod zip;
@@ -321,6 +322,7 @@ fn all_benches(c: &mut Criterion) {
     union_by::benchmark_union_by(c);
     unzip::benchmark_unzip(c);
     value_or::benchmark_value_or(c);
+    variance::benchmark_variance(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
     windows::benchmark_windows(c);
