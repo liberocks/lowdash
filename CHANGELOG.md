@@ -16,6 +16,7 @@
 - Added `symmetric_difference` for stable exclusive values.
 - Added `unzip` for splitting pairs into two collections.
 - Added `min_by_key` for selecting the first minimum keyed item.
+- Added `max_by_key` for selecting the first maximum keyed item.
 
 ## [0.7.0] 2026-08-02
 ### Added
