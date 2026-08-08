@@ -101,6 +101,7 @@ mod median_low;
 mod min;
 mod min_by;
 mod min_by_key;
+mod mode;
 mod modes;
 mod nearest_power_of_two;
 mod nth;
@@ -282,6 +283,7 @@ fn all_benches(c: &mut Criterion) {
     min::benchmark_min(c);
     min_by::benchmark_min_by(c);
     min_by_key::benchmark_min_by_key(c);
+    mode::benchmark_mode(c);
     modes::benchmark_modes(c);
     nearest_power_of_two::benchmark_nearest_power_of_two(c);
     nth::benchmark_nth(c);
