@@ -6,6 +6,7 @@ mod camel_case;
 mod capitalize;
 mod char_length;
 mod chunk;
+mod chunk_by;
 mod chunk_string;
 mod clamp;
 mod combination;
@@ -164,6 +165,7 @@ fn all_benches(c: &mut Criterion) {
     capitalize::benchmark_capitalize(c);
     char_length::benchmark_char_length(c);
     chunk::benchmark_chunk(c);
+    chunk_by::benchmark_chunk_by(c);
     chunk_string::benchmark_chunk_string(c);
     clamp::benchmark_clamp(c);
     combination::benchmark_combination(c);

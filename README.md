@@ -20,6 +20,7 @@ You can find the generated documentation [here](https://docs.rs/lowdash)
 Utility functions for array:
 - [associate](#associate)
 - [chunk](#chunk)
+- [chunk_by](#chunk_by)
 - [compact](#compact)
 - [count](#count)
 - [count_by](#count_by)
@@ -3660,6 +3661,19 @@ Finds the last item that matches a predicate by scanning from the end.
 use lowdash::find_last;
 
 assert_eq!(find_last(&[1, 2, 3, 2], |number| *number == 2), Some(&2));
+```
+
+### chunk_by
+Groups adjacent items with the same generated key.
+
+```rust
+use lowdash::chunk_by;
+
+assert_eq!(chunk_by(&[1, 1, 2, 1], |number| *number), vec![
+    vec![1, 1],
+    vec![2],
+    vec![1],
+]);
 ```
 
 ## Acknowledgement
