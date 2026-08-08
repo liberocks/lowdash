@@ -86,6 +86,7 @@ mod map_to_slice;
 mod map_values;
 mod max;
 mod max_by;
+mod max_by_key;
 mod mean;
 mod mean_by;
 mod median;
@@ -249,6 +250,7 @@ fn all_benches(c: &mut Criterion) {
     map_values::benchmark_map_values(c);
     max::benchmark_max(c);
     max_by::benchmark_max_by(c);
+    max_by_key::benchmark_max_by_key(c);
     mean::benchmark_mean(c);
     mean_by::benchmark_mean_by(c);
     median::benchmark_median(c);
