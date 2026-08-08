@@ -177,6 +177,7 @@ Utility functions for math:
 - [median_low](#median_low)
 - [median_high](#median_high)
 - [median_grouped](#median_grouped)
+- [mode](#mode)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -4002,6 +4003,15 @@ Estimates a median from sorted class-midpoint observations and a fixed interval.
 use lowdash::median_grouped;
 
 assert_eq!(median_grouped(&[5.0], 2.0), Some(5.0));
+```
+
+### mode
+Returns the first encountered most common value, or `None` for empty input.
+
+```rust
+use lowdash::mode;
+
+assert_eq!(mode(&[1, 2, 2, 3]), Some(2));
 ```
 
 ## Acknowledgement
