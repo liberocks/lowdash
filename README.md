@@ -175,6 +175,7 @@ Utility functions for math:
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
 - [covariance](#covariance)
+- [correlation](#correlation)
 - [median_low](#median_low)
 - [median_high](#median_high)
 - [median_grouped](#median_grouped)
@@ -4063,6 +4064,15 @@ Calculates sample covariance for equal-length finite inputs.
 use lowdash::covariance;
 
 assert_eq!(covariance(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(2.0));
+```
+
+### correlation
+Calculates the Pearson coefficient for finite, nonconstant paired data.
+
+```rust
+use lowdash::correlation;
+
+assert_eq!(correlation(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(1.0));
 ```
 
 ## Acknowledgement

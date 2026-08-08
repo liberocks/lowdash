@@ -19,6 +19,7 @@ mod common_random_u64;
 mod common_random_usize;
 mod common_random_usize_with_seed;
 mod compact;
+mod correlation;
 mod count;
 mod count_by;
 mod count_values;
@@ -206,6 +207,7 @@ fn all_benches(c: &mut Criterion) {
     clamp::benchmark_clamp(c);
     combination::benchmark_combination(c);
     compact::benchmark_compact(c);
+    correlation::benchmark_correlation(c);
     covariance::benchmark_covariance(c);
     count::benchmark_count(c);
     count_by::benchmark_count_by(c);
