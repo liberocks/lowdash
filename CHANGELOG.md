@@ -26,6 +26,7 @@
 - Added `parallel_try_map` for ordered concurrent fallible mapping.
 - Added `parallel_for_each` for concurrent side-effect callbacks.
 - Added `parallel_find_map` for ordered concurrent searches.
+- Added `parallel_reduce` for chunked concurrent reductions.
 
 ## [0.7.0] 2026-08-02
 ### Added
