@@ -180,6 +180,7 @@ Utility functions for math:
 
 Concurrency utilities:
 - [parallel_map](#parallel_map)
+- [parallel_try_map](#parallel_try_map)
 
 
 ### camel_case
@@ -3873,6 +3874,19 @@ use std::num::NonZeroUsize;
 
 let result = parallel_map(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| value * 2);
 assert_eq!(result, vec![2, 4, 6]);
+```
+
+### parallel_try_map
+Maps concurrently and returns the first error by input order; other callbacks are not cancelled.
+
+```rust
+use lowdash::parallel_try_map;
+use std::num::NonZeroUsize;
+
+let result = parallel_try_map(&[1, 2], NonZeroUsize::new(2).unwrap(), |value, index| {
+    if index == 1 { Err("bad") } else { Ok(value * 2) }
+});
+assert_eq!(result, Err("bad"));
 ```
 
 ## Acknowledgement
