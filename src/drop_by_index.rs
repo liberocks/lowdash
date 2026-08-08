@@ -44,18 +44,16 @@ where
     }
 
     // Adjust negative indices and filter out-of-bounds indices
-    let mut adjusted_indexes: Vec<usize> = indexes
-        .iter()
-        .filter_map(|&idx| {
-            let adjusted_idx = if idx < 0 { initial_size + idx } else { idx };
+    let mut adjusted_indexes = Vec::with_capacity(indexes.len());
+    adjusted_indexes.extend(indexes.iter().filter_map(|&idx| {
+        let adjusted_idx = if idx < 0 { initial_size + idx } else { idx };
 
-            if adjusted_idx >= 0 && adjusted_idx < initial_size {
-                Some(adjusted_idx as usize)
-            } else {
-                None
-            }
-        })
-        .collect();
+        if adjusted_idx >= 0 && adjusted_idx < initial_size {
+            Some(adjusted_idx as usize)
+        } else {
+            None
+        }
+    }));
 
     // Remove duplicates and sort indices
     adjusted_indexes.sort_unstable();
