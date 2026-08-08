@@ -47,6 +47,7 @@
 - Added `euclidean_norm` for overflow-resistant vector norms.
 - Added `sum_products` for compensated pairwise product sums.
 - Added `product_with_start` for caller-specified product seeds.
+- Added `is_close` for relative and absolute floating-point comparisons.
 - Added `combination_count` for checked binomial coefficients.
 - Added `factorial` for checked factorial values.
 - Added `greatest_common_divisor` for Euclidean greatest common divisors.

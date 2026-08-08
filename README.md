@@ -176,6 +176,7 @@ Utility functions for math:
 - [euclidean_distance](#euclidean_distance)
 - [euclidean_norm](#euclidean_norm)
 - [sum_products](#sum_products)
+- [is_close](#is_close)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
@@ -4077,6 +4078,16 @@ Returns `None` for a length mismatch and `Some(0.0)` for empty slices.
 use lowdash::sum_products;
 
 assert_eq!(sum_products(&[1.0, 2.0], &[3.0, 4.0]), Some(11.0));
+```
+
+### is_close
+Compares floating-point values using relative and absolute tolerances.
+Negative or nonfinite tolerances return `false`.
+
+```rust
+use lowdash::is_close;
+
+assert!(is_close(100.0, 101.0, 0.01, 0.0));
 ```
 
 ### weighted_mean
