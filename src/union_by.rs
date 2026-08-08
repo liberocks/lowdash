@@ -11,7 +11,7 @@
 /// use lowdash::union_by;
 ///
 /// let collections = vec![vec![11, 12], vec![2, 13], vec![22]];
-/// assert_eq!(union_by(&collections, |number| *number % 10), vec![11, 12]);
+/// assert_eq!(union_by(&collections, |number| *number % 10), vec![11, 12, 13]);
 /// ```
 pub fn union_by<T, K, F, Slice>(collections: &[Slice], iteratee: F) -> Vec<T>
 where

@@ -8,7 +8,7 @@ pub fn benchmark_assign_with(c: &mut Criterion) {
         b.iter(|| {
             ld::assign_with(
                 black_box(&small),
-                black_box(|_, existing: &i32, incoming: &i32| existing + incoming),
+                black_box(|_: &String, existing: &i32, incoming: &i32| existing + incoming),
             )
         })
     });
@@ -18,7 +18,7 @@ pub fn benchmark_assign_with(c: &mut Criterion) {
         b.iter(|| {
             ld::assign_with(
                 black_box(&large),
-                black_box(|_, existing: &i32, incoming: &i32| existing + incoming),
+                black_box(|_: &String, existing: &i32, incoming: &i32| existing + incoming),
             )
         })
     });
