@@ -182,6 +182,7 @@ Concurrency utilities:
 - [parallel_find_map](#parallel_find_map)
 - [parallel_for_each](#parallel_for_each)
 - [parallel_map](#parallel_map)
+- [parallel_reduce](#parallel_reduce)
 - [parallel_try_map](#parallel_try_map)
 
 
@@ -3914,6 +3915,23 @@ let result = parallel_find_map(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value
     (*value > 1).then_some(value * 10)
 });
 assert_eq!(result, Some(20));
+```
+
+### parallel_reduce
+Reduces contiguous chunks concurrently and combines partial results in chunk order.
+
+```rust
+use lowdash::parallel_reduce;
+use std::num::NonZeroUsize;
+
+let result = parallel_reduce(
+    &[1, 2, 3],
+    NonZeroUsize::new(2).unwrap(),
+    || 0,
+    |sum, value, _| sum + value,
+    |left, right| left + right,
+);
+assert_eq!(result, 6);
 ```
 
 ## Acknowledgement
