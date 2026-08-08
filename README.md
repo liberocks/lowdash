@@ -77,6 +77,7 @@ Utility functions for array:
 - [max](#max)
 - [max_by](#max_by)
 - [max_by_key](#max_by_key)
+- [modes](#modes)
 - [min](#min)
 - [min_by](#min_by)
 - [min_by_key](#min_by_key)
@@ -3839,6 +3840,15 @@ Returns overlapping windows of a requested size.
 use lowdash::windows;
 
 assert_eq!(windows(&[1, 2, 3], 2), vec![vec![1, 2], vec![2, 3]]);
+```
+
+### modes
+Returns the most frequent values, keeping ties in first-appearance order.
+
+```rust
+use lowdash::modes;
+
+assert_eq!(modes(&[1, 2, 2, 3, 3]), vec![2, 3]);
 ```
 
 ## Acknowledgement
