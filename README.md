@@ -168,6 +168,7 @@ Utility functions for math:
 - [sum_by](#sum_by)
 - [product](#product)
 - [product_by](#product_by)
+- [product_with_start](#product_with_start)
 - [mean](#mean)
 - [mean_by](#mean_by)
 - [floating_mean](#floating_mean)
@@ -3551,6 +3552,16 @@ let rectangles = vec![
 
 let total_area = product_by(&rectangles, |r| r.width * r.height);
 assert_eq!(total_area, 120.0); // (2*3) * (4*5)
+```
+
+### product_with_start
+Multiplies each value by a caller-provided starting value.
+Empty input returns the starting value unchanged.
+
+```rust
+use lowdash::product_with_start;
+
+assert_eq!(product_with_start(&[2, 3, 4], 10), 240);
 ```
 
 ### mean
