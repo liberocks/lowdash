@@ -130,6 +130,7 @@ Utility functions for string manipulation:
 Utility functions for object manipulation:
 - [assign](#assign)
 - [assign_with](#assign_with)
+- [defaults](#defaults)
 - [entries](#entries)
 - [from_entries](#from_entries)
 - [from_pairs](#from_pairs)
@@ -3800,6 +3801,20 @@ Returns the first item with the largest value produced by a key function.
 use lowdash::max_by_key;
 
 assert_eq!(max_by_key(&["a", "longer"], |word| word.len()), Some("longer"));
+```
+
+### defaults
+Combines maps while keeping the first value for each duplicate key.
+
+```rust
+use lowdash::defaults;
+use std::collections::HashMap;
+
+let mut first = HashMap::new();
+first.insert("mode", "safe");
+let mut fallback = HashMap::new();
+fallback.insert("mode", "fast");
+assert_eq!(defaults(&[first, fallback])["mode"], "safe");
 ```
 
 ## Acknowledgement
