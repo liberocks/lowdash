@@ -20,6 +20,7 @@
 - Added `defaults` for first-value-wins map merging.
 - Added `invert_grouped` for grouping all keys by value.
 - Added `windows` for producing overlapping collection windows.
+- Added `modes` for finding most frequent values.
 
 ## [0.7.0] 2026-08-02
 ### Added
