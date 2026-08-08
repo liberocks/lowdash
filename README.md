@@ -195,6 +195,7 @@ Utility functions for math:
 - [factorial](#factorial)
 - [greatest_common_divisor](#greatest_common_divisor)
 - [integer_square_root](#integer_square_root)
+- [least_common_multiple](#least_common_multiple)
 - [duration_between](#duration_between)
 
 Concurrency utilities:
@@ -3706,6 +3707,16 @@ It is safe for the full `u128` range.
 use lowdash::integer_square_root;
 
 assert_eq!(integer_square_root(17), 4);
+```
+
+### least_common_multiple
+Calculates the least common multiple with checked `u64` arithmetic.
+An empty collection returns `Some(1)` and any zero returns `Some(0)`.
+
+```rust
+use lowdash::least_common_multiple;
+
+assert_eq!(least_common_multiple(&[4, 6, 8]), Some(24));
 ```
 
 ### duration_between
