@@ -39,6 +39,7 @@
 - Added `sample_variance` for corrected one-pass variance.
 - Added `standard_deviation` for sample standard deviation.
 - Added `population_standard_deviation` for population standard deviation.
+- Added `covariance` for stable sample covariance.
 
 ## [0.7.0] 2026-08-02
 ### Added
