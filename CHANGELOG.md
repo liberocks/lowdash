@@ -31,6 +31,7 @@
 - Added `weighted_mean` for validated weighted averages.
 - Added `geometric_mean` for log-space geometric means.
 - Added `harmonic_mean` for scaled reciprocal means.
+- Added `median_low` for lower-middle selection.
 
 ## [0.7.0] 2026-08-02
 ### Added

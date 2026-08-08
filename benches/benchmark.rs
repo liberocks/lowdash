@@ -95,6 +95,7 @@ mod max_by_key;
 mod mean;
 mod mean_by;
 mod median;
+mod median_low;
 mod min;
 mod min_by;
 mod min_by_key;
@@ -273,6 +274,7 @@ fn all_benches(c: &mut Criterion) {
     mean::benchmark_mean(c);
     mean_by::benchmark_mean_by(c);
     median::benchmark_median(c);
+    median_low::benchmark_median_low(c);
     min::benchmark_min(c);
     min_by::benchmark_min_by(c);
     min_by_key::benchmark_min_by_key(c);

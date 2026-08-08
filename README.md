@@ -174,6 +174,7 @@ Utility functions for math:
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
+- [median_low](#median_low)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3972,6 +3973,15 @@ Calculates a scaled reciprocal mean for nonnegative finite values.
 use lowdash::harmonic_mean;
 
 assert_eq!(harmonic_mean(&[1.0, 3.0]), Some(1.5));
+```
+
+### median_low
+Returns the lower middle value from a sorted copy of the input.
+
+```rust
+use lowdash::median_low;
+
+assert_eq!(median_low(&[1, 4, 2, 3]), Some(2));
 ```
 
 ## Acknowledgement
