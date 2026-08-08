@@ -159,7 +159,7 @@ mod tests {
 
     #[test]
     fn test_reverse_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
         let reversed = reverse(&float_collection);
         assert_eq!(reversed.len(), float_collection.len());
         // Verify each element is reversed correctly

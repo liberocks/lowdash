@@ -54,7 +54,7 @@ mod tests {
             name: String,
         }
 
-        let names = vec!["Alice", "Bob", "Carol"];
+        let names = ["Alice", "Bob", "Carol"];
         let people = times(names.len(), |i| Person {
             id: i,
             name: names[i].to_string(),

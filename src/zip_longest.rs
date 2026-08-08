@@ -20,6 +20,15 @@ where
     U: Clone,
 {
     let length = left.len().max(right.len());
+
+    if left.len() == right.len() {
+        let mut result = Vec::with_capacity(length);
+        for (left, right) in left.iter().zip(right) {
+            result.push((Some(left.clone()), Some(right.clone())));
+        }
+        return result;
+    }
+
     let mut result = Vec::with_capacity(length);
 
     for index in 0..length {

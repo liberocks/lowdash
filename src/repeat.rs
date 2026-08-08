@@ -136,6 +136,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_repeat_with_floats() {
         let filled = repeat(3, 3.14);
         assert_eq!(filled, vec![3.14, 3.14, 3.14]);
@@ -143,7 +144,7 @@ mod tests {
 
     #[test]
     fn test_repeat_with_nan_floats() {
-        let nan = std::f64::NAN;
+        let nan = f64::NAN;
         let filled = repeat(2, nan);
         assert_eq!(filled.len(), 2);
         for value in filled {

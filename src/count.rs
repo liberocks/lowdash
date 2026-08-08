@@ -245,8 +245,8 @@ mod tests {
 
     #[test]
     fn test_count_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
-        let result_nan = count(&float_collection, std::f64::NAN);
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
+        let result_nan = count(&float_collection, f64::NAN);
         // Note: In Rust, NaN != NaN, so each comparison with NaN returns false
         assert_eq!(result_nan, 0);
 

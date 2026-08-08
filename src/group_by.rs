@@ -261,7 +261,7 @@ mod tests {
     #[test]
     fn test_group_by_with_optionals() {
         let collection = vec![Some(1), None, Some(2), Some(1), None, Some(3), Some(2)];
-        let grouped = group_by(&collection, |x| x.clone());
+        let grouped = group_by(&collection, |x| *x);
         assert_eq!(grouped.get(&Some(1)), Some(&vec![Some(1), Some(1)]));
         assert_eq!(grouped.get(&None), Some(&vec![None, None]));
         assert_eq!(grouped.get(&Some(2)), Some(&vec![Some(2), Some(2)]));
@@ -270,7 +270,7 @@ mod tests {
 
     #[test]
     fn test_group_by_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
         let grouped = group_by(&float_collection, |x| x.is_nan());
 
         // Check the NaN group.

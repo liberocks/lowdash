@@ -38,7 +38,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f64::EPSILON;
 
     #[test]
     fn test_mean_by_numbers() {
@@ -46,11 +45,11 @@ mod tests {
 
         // Test x coordinates
         let mean_x = mean_by(&numbers, |&(x, _)| x as f64);
-        assert!((mean_x - 2.0).abs() < EPSILON);
+        assert!((mean_x - 2.0).abs() < f64::EPSILON);
 
         // Test y coordinates
         let mean_y = mean_by(&numbers, |&(_, y)| y as f64);
-        assert!((mean_y - 20.0).abs() < EPSILON);
+        assert!((mean_y - 20.0).abs() < f64::EPSILON);
     }
 
     #[test]
@@ -64,6 +63,6 @@ mod tests {
     fn test_mean_by_single_element() {
         let numbers = vec![(5, 10)];
         let mean = mean_by(&numbers, |&(x, _)| x as f64);
-        assert!((mean - 5.0).abs() < EPSILON);
+        assert!((mean - 5.0).abs() < f64::EPSILON);
     }
 }

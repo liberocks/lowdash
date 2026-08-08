@@ -151,9 +151,9 @@ mod tests {
 
     #[test]
     fn test_replace_all_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 1.0];
-        let new_nan = std::f64::NAN;
-        let result = replace_all(&float_collection, std::f64::NAN, new_nan);
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 1.0];
+        let new_nan = f64::NAN;
+        let result = replace_all(&float_collection, f64::NAN, new_nan);
         // Since NaN != NaN, no replacements should occur
         assert_eq!(result.len(), 4);
         // Each NaN remains unchanged

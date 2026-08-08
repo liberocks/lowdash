@@ -146,7 +146,7 @@ mod tests {
 
     #[test]
     fn test_filter_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
         let predicate = |x: &f64, _| x.is_nan();
         let result = filter(&float_collection, predicate);
         assert_eq!(result.len(), 2);

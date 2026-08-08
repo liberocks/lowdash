@@ -22,10 +22,14 @@ where
 {
     let mut counts = HashMap::with_capacity(collection.len());
     let mut order = Vec::with_capacity(collection.len());
+    let mut max_count = usize::from(!collection.is_empty());
 
     for item in collection {
         match counts.entry(item.clone()) {
-            Entry::Occupied(mut entry) => *entry.get_mut() += 1,
+            Entry::Occupied(mut entry) => {
+                *entry.get_mut() += 1;
+                max_count = max_count.max(*entry.get());
+            }
             Entry::Vacant(entry) => {
                 entry.insert(1);
                 order.push(item);
@@ -33,7 +37,6 @@ where
         }
     }
 
-    let max_count = counts.values().copied().max().unwrap_or(0);
     order
         .into_iter()
         .filter(|item| counts.get(*item).copied() == Some(max_count))

@@ -146,6 +146,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_max_with_floating_points() {
         let collection = vec![3.14, 2.71, -1.0, 0.0];
         let result = max(&collection);
@@ -153,6 +154,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_max_with_f32() {
         let collection = vec![3.14f32, 2.71, -1.0, 0.0];
         let result = max(&collection);
@@ -160,6 +162,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_max_with_f64() {
         let collection = vec![3.14f64, 2.71, -1.0, 0.0];
         let result = max(&collection);
@@ -175,7 +178,7 @@ mod tests {
 
     #[test]
     fn test_max_collection_with_nan() {
-        let collection = vec![std::f64::NAN, 2.0, 3.0];
+        let collection = vec![f64::NAN, 2.0, 3.0];
         let result = max(&collection);
         // Since NaN comparisons are always false, the maximum should be 3.0
         assert_eq!(result, Some(3.0));
@@ -183,7 +186,7 @@ mod tests {
 
     #[test]
     fn test_max_all_nan() {
-        let collection = vec![std::f64::NAN, std::f64::NAN];
+        let collection = vec![f64::NAN, f64::NAN];
         let result = max(&collection);
         assert!(result.unwrap().is_nan());
     }

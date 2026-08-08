@@ -28,8 +28,7 @@ where
         return collection.to_vec();
     }
 
-    let excluded_keys: std::collections::HashSet<K> =
-        excluded.iter().map(|item| iteratee(item)).collect();
+    let excluded_keys: std::collections::HashSet<K> = excluded.iter().map(&iteratee).collect();
     let mut result = Vec::with_capacity(collection.len());
 
     for item in collection {

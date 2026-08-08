@@ -36,7 +36,7 @@ where
 
     // Sort entries in ascending key order for deterministic behavior.
     let mut entries: Vec<(&K1, &V1)> = map.iter().collect();
-    entries.sort_by(|(a, _), (b, _)| a.cmp(b));
+    entries.sort_by_key(|(a, _)| *a);
 
     for (k1, v1) in entries {
         let (k2, v2) = iteratee(k1, v1);
@@ -73,7 +73,7 @@ mod tests {
         let mut map = HashMap::new();
         map.insert("a", 1);
         map.insert("A", 2); // Both "a" and "A" will transform to "A"
-        let transformed = map_entries(&map, |k, v| (k.to_uppercase(), v.clone()));
+        let transformed = map_entries(&map, |k, v| (k.to_uppercase(), *v));
         // Since keys are sorted in ascending order, "A" comes before "a"
         // After transformation, "A" is inserted first with value 2, then "A" is inserted again with value 1
         // The final value for "A" should be 1

@@ -4,8 +4,8 @@
 /// `None` for mismatched lengths, nonfinite input, or a distance that cannot be
 /// represented by `f64`. Equal empty points return `Some(0.0)`.
 ///
-/// Each coordinate difference is accumulated with `f64::hypot`, which avoids
-/// unnecessary intermediate overflow.
+/// Coordinate differences are accumulated with a scaled sum of squares, which
+/// avoids unnecessary intermediate overflow.
 ///
 /// # Complexity
 ///
@@ -24,20 +24,39 @@ pub fn euclidean_distance(p: &[f64], q: &[f64]) -> Option<f64> {
         return None;
     }
 
-    let mut distance = 0.0_f64;
+    let mut scale = 0.0_f64;
+    let mut scaled_sum = 0.0_f64;
     for (&left, &right) in p.iter().zip(q) {
         if !left.is_finite() || !right.is_finite() {
             return None;
         }
 
-        let difference = left - right;
+        let left_magnitude = left.abs();
+        let right_magnitude = right.abs();
+        let difference = if left.is_sign_positive() == right.is_sign_positive() {
+            (left_magnitude - right_magnitude).abs()
+        } else {
+            left_magnitude + right_magnitude
+        };
         if !difference.is_finite() {
             return None;
         }
 
-        distance = distance.hypot(difference);
+        if difference == 0.0 {
+            continue;
+        }
+
+        if difference > scale {
+            let ratio = scale / difference;
+            scaled_sum = 1.0 + scaled_sum * ratio * ratio;
+            scale = difference;
+        } else {
+            let ratio = difference / scale;
+            scaled_sum += ratio * ratio;
+        }
     }
 
+    let distance = scale * scaled_sum.sqrt();
     distance.is_finite().then_some(distance)
 }
 

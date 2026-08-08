@@ -298,7 +298,7 @@ mod tests {
     #[test]
     fn test_partition_by_with_optionals() {
         let collection = vec![Some(1), None, Some(2), Some(1), None, Some(3), Some(2)];
-        let partitions = partition_by(&collection, |x| x.clone());
+        let partitions = partition_by(&collection, |x| *x);
         assert_eq!(
             partitions,
             vec![
@@ -312,7 +312,7 @@ mod tests {
 
     #[test]
     fn test_partition_by_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4, std::f64::NAN];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4, f64::NAN];
         let partitions = partition_by(&float_collection, |x| x.is_nan());
 
         // Keep NaN and non-NaN values in separate groups.

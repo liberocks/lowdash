@@ -80,7 +80,7 @@ mod tests {
         let mut second = HashMap::new();
         second.insert("a", 2);
 
-        let merged = assign_with(&[first, second], |_, _, incoming| incoming.clone());
+        let merged = assign_with(&[first, second], |_, _, incoming| *incoming);
 
         assert_eq!(merged.get("a"), Some(&2));
     }
@@ -105,14 +105,14 @@ mod tests {
     #[test]
     fn handles_empty_and_non_overlapping_maps() {
         let empty: Vec<HashMap<&str, i32>> = Vec::new();
-        assert!(assign_with(&empty, |_, _, incoming| incoming.clone()).is_empty());
+        assert!(assign_with(&empty, |_, _, incoming| *incoming).is_empty());
 
         let mut first = HashMap::new();
         first.insert("a", 1);
         let mut second = HashMap::new();
         second.insert("b", 2);
 
-        let merged = assign_with(&[first, second], |_, _, incoming| incoming.clone());
+        let merged = assign_with(&[first, second], |_, _, incoming| *incoming);
         assert_eq!(merged.len(), 2);
         assert_eq!(merged.get("a"), Some(&1));
         assert_eq!(merged.get("b"), Some(&2));

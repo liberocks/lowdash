@@ -174,7 +174,7 @@ mod tests {
 
     #[test]
     fn test_shuffle_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
         let shuffled = shuffle(&float_collection);
         assert_eq!(shuffled.len(), float_collection.len());
         // Since NaN != NaN, we check the count of NaNs

@@ -22,7 +22,7 @@ where
     }
 
     let mut sorted = values.to_vec();
-    sorted.sort();
+    sorted.sort_unstable();
     Some(sorted[(sorted.len() - 1) / 2].clone())
 }
 

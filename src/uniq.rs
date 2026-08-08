@@ -220,7 +220,7 @@ mod tests {
 
     #[test]
     fn test_uniq_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, std::f64::INFINITY, std::f64::NAN, 1.0];
+        let float_collection = vec![f64::NAN, f64::INFINITY, f64::NAN, 1.0];
         let unique_floats = uniq(&float_collection);
         // Note: NaN != NaN, so each NaN is considered unique
         assert_eq!(unique_floats.len(), 4);

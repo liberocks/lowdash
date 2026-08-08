@@ -57,6 +57,13 @@
 - Added `least_common_multiple` for checked least common multiples.
 - Added `permutation_count` for checked ordered selection counts.
 
+### Changed
+- Improved `difference_by`, `mode`, `modes`, `median_low`, and `zip_longest` with lower-overhead collection paths.
+- Improved `euclidean_distance`, `sample_variance`, `population_standard_deviation`, `covariance`, `correlation`, and `linear_regression` with fused or scaled numeric accumulation.
+- Improved `geometric_mean`, `floating_sum`, `sum_products`, `harmonic_mean`, and `integer_square_root` through specialized numeric fast paths.
+- Reduced setup overhead for `parallel_map`, `parallel_for_each`, `parallel_reduce`, `parallel_find_map`, and `parallel_try_map` on small and one-worker inputs.
+- Improved `assign_with` and `kernel_density_sample` by reducing intermediate allocation and repeated random sampling work.
+
 ## [0.7.0] 2026-08-02
 ### Added
 - Added stable `sort_by` and `sort_by_key` collection sorting functions.

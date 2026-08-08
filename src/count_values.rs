@@ -246,19 +246,19 @@ mod tests {
     #[test]
     fn test_count_values_with_nan_floats() {
         let float_collection = vec![
-            common::Float(std::f64::NAN),
-            common::Float(std::f64::INFINITY),
-            common::Float(std::f64::NAN),
+            common::Float(f64::NAN),
+            common::Float(f64::INFINITY),
+            common::Float(f64::NAN),
             common::Float(1.0),
         ];
         let result = count_values(&float_collection);
         let mut expected = HashMap::new();
-        expected.insert(common::Float(std::f64::NAN), 2);
-        expected.insert(common::Float(std::f64::INFINITY), 1);
+        expected.insert(common::Float(f64::NAN), 2);
+        expected.insert(common::Float(f64::INFINITY), 1);
         expected.insert(common::Float(1.0), 1);
         // Note: HashMap treats different NaN representations as distinct keys
-        assert_eq!(result.get(&common::Float(std::f64::NAN)), Some(&2));
-        assert_eq!(result.get(&common::Float(std::f64::INFINITY)), Some(&1));
+        assert_eq!(result.get(&common::Float(f64::NAN)), Some(&2));
+        assert_eq!(result.get(&common::Float(f64::INFINITY)), Some(&1));
         assert_eq!(result.get(&common::Float(1.0)), Some(&1));
     }
 }

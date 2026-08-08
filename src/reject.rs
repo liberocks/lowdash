@@ -43,7 +43,7 @@ mod tests {
     fn test_reject_with_index() {
         let collection = vec!["a", "b", "c", "d"];
         // Reject items at even indices
-        let predicate = |_: &&str, index: usize| index % 2 == 0;
+        let predicate = |_: &&str, index: usize| index.is_multiple_of(2);
         let result = reject(&collection, predicate);
         assert_eq!(result, vec![&"b", &"d"]);
     }

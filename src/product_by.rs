@@ -104,7 +104,7 @@ mod tests {
     #[test]
     fn test_product_by_with_negative_numbers() {
         let numbers = vec![-2, 3, -4];
-        let result = product_by(&numbers, |x| x * 1);
+        let result = product_by(&numbers, |x| *x);
         assert_eq!(result, 24);
     }
 

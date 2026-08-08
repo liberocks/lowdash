@@ -184,8 +184,8 @@ mod tests {
 
     #[test]
     fn test_fill_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::INFINITY];
-        let filled = fill(&float_collection, std::f64::NAN);
+        let float_collection = vec![f64::NAN, 2.2, f64::INFINITY];
+        let filled = fill(&float_collection, f64::NAN);
         assert_eq!(filled.len(), float_collection.len());
         for &value in &filled {
             assert!(value.is_nan());

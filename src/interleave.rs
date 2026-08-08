@@ -108,9 +108,9 @@ mod tests {
 
     #[test]
     fn test_interleave_integers() {
-        let a = vec![1, 2, 3];
-        let b = vec![4, 5, 6, 7];
-        let c = vec![8, 9];
+        let a = [1, 2, 3];
+        let b = [4, 5, 6, 7];
+        let c = [8, 9];
 
         let result = interleave(&[&a[..], &b[..], &c[..]]);
         assert_eq!(result, vec![1, 4, 8, 2, 5, 9, 3, 6, 7]);
@@ -118,9 +118,9 @@ mod tests {
 
     #[test]
     fn test_interleave_strings() {
-        let a = vec!["a".to_string(), "b".to_string()];
-        let b = vec!["c".to_string()];
-        let c = vec!["d".to_string(), "e".to_string(), "f".to_string()];
+        let a = ["a".to_string(), "b".to_string()];
+        let b = ["c".to_string()];
+        let c = ["d".to_string(), "e".to_string(), "f".to_string()];
 
         let result = interleave(&[&a[..], &b[..], &c[..]]);
         assert_eq!(result, vec!["a", "c", "d", "b", "e", "f"]);
@@ -128,7 +128,7 @@ mod tests {
 
     #[test]
     fn test_interleave_with_structs() {
-        let group1 = vec![
+        let group1 = [
             Person {
                 name: "Alice".to_string(),
                 age: 25,
@@ -139,12 +139,12 @@ mod tests {
             },
         ];
 
-        let group2 = vec![Person {
+        let group2 = [Person {
             name: "Carol".to_string(),
             age: 35,
         }];
 
-        let group3 = vec![
+        let group3 = [
             Person {
                 name: "Dave".to_string(),
                 age: 40,
@@ -194,7 +194,7 @@ mod tests {
     #[test]
     fn test_interleave_with_empty_collections() {
         let a: Vec<i32> = vec![];
-        let b = vec![1, 2, 3];
+        let b = [1, 2, 3];
         let c: Vec<i32> = vec![];
 
         let result = interleave(&[&a[..], &b[..], &c[..]]);
@@ -213,7 +213,7 @@ mod tests {
 
     #[test]
     fn test_interleave_single_collection() {
-        let a = vec![1, 2, 3, 4, 5];
+        let a = [1, 2, 3, 4, 5];
 
         let result = interleave(&[&a[..]]);
         assert_eq!(result, vec![1, 2, 3, 4, 5]);
@@ -221,9 +221,9 @@ mod tests {
 
     #[test]
     fn test_interleave_multiple_collections_same_length() {
-        let a = vec![1, 2];
-        let b = vec![3, 4];
-        let c = vec![5, 6];
+        let a = [1, 2];
+        let b = [3, 4];
+        let c = [5, 6];
 
         let result = interleave(&[&a[..], &b[..], &c[..]]);
         assert_eq!(result, vec![1, 3, 5, 2, 4, 6]);
@@ -231,9 +231,9 @@ mod tests {
 
     #[test]
     fn test_interleave_with_optionals() {
-        let a = vec![Some(1), Some(2)];
-        let b = vec![None, Some(3), None];
-        let c = vec![Some(4)];
+        let a = [Some(1), Some(2)];
+        let b = [None, Some(3), None];
+        let c = [Some(4)];
 
         let result = interleave(&[&a[..], &b[..], &c[..]]);
         assert_eq!(result, vec![Some(1), None, Some(4), Some(2), Some(3), None]);
@@ -241,9 +241,9 @@ mod tests {
 
     #[test]
     fn test_interleave_with_floats() {
-        let a = vec![1.1, 2.2];
-        let b = vec![3.3, 4.4, 5.5];
-        let c = vec![6.6];
+        let a = [1.1, 2.2];
+        let b = [3.3, 4.4, 5.5];
+        let c = [6.6];
 
         let result = interleave(&[&a[..], &b[..], &c[..]]);
         assert_eq!(result, vec![1.1, 3.3, 6.6, 2.2, 4.4, 5.5]);
@@ -251,16 +251,16 @@ mod tests {
 
     #[test]
     fn test_interleave_with_nan_floats() {
-        let a = vec![std::f64::NAN, 2.2];
-        let b = vec![std::f64::INFINITY, std::f64::NAN];
-        let c = vec![1.1];
+        let a = [f64::NAN, 2.2];
+        let b = [f64::INFINITY, f64::NAN];
+        let c = [1.1];
 
         let interleaved = interleave(&[&a[..], &b[..], &c[..]]);
         assert_eq!(interleaved.len(), 5);
         assert!(interleaved[0].is_nan());
         assert!(interleaved[1].is_infinite());
-        assert!((interleaved[2] - 1.1).abs() < std::f64::EPSILON);
-        assert!((interleaved[3] - 2.2).abs() < std::f64::EPSILON);
+        assert!((interleaved[2] - 1.1).abs() < f64::EPSILON);
+        assert!((interleaved[3] - 2.2).abs() < f64::EPSILON);
         assert!(interleaved[4].is_nan());
     }
 }

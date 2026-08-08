@@ -21,7 +21,7 @@ pub fn integer_square_root(n: u128) -> u128 {
         return n;
     }
 
-    let shift = (128 - n.leading_zeros() + 1) / 2;
+    let shift = (128 - n.leading_zeros()).div_ceil(2);
     let mut root = 1_u128 << shift;
 
     loop {

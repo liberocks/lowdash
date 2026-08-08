@@ -3,6 +3,7 @@ use criterion::Criterion;
 use lowdash as ld;
 use std::hint::black_box;
 
+#[allow(clippy::approx_constant)]
 pub fn benchmark_fill(c: &mut Criterion) {
     let ints = support::int_vec(4_096);
     c.bench_function("fill/int_vec/7", |b| {

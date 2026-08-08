@@ -187,7 +187,7 @@ mod tests {
     #[test]
     fn test_key_by_with_optionals() {
         let collection = vec![Some(1), None, Some(2), Some(1), None, Some(3), Some(2)];
-        let map = key_by(&collection, |&x| x.clone());
+        let map = key_by(&collection, |&x| x);
         let mut expected = HashMap::new();
         expected.insert(Some(1), Some(1)); // Last occurrence
         expected.insert(None, None); // Last occurrence

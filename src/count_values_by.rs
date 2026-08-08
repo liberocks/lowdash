@@ -169,7 +169,7 @@ mod tests {
     #[test]
     fn test_count_values_by_with_optionals() {
         let collection = vec![Some(1), None, Some(2), Some(1), None, Some(3), Some(2)];
-        let result = count_values_by(&collection, |x| x.clone());
+        let result = count_values_by(&collection, |x| *x);
         let mut expected = HashMap::new();
         expected.insert(Some(1), 2);
         expected.insert(None, 2);
@@ -181,7 +181,7 @@ mod tests {
     #[test]
     fn test_count_values_by_with_identity_mapper() {
         let chars = vec!['a', 'b', 'a', 'c', 'b', 'd'];
-        let result = count_values_by(&chars, |x| x.clone());
+        let result = count_values_by(&chars, |x| *x);
         let mut expected = HashMap::new();
         expected.insert('a', 2);
         expected.insert('b', 2);

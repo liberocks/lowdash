@@ -213,7 +213,7 @@ mod tests {
         let result_negatives = max_by(&negative_floats, |a, b| a > b);
         assert_eq!(result_negatives, Some(-0.5));
 
-        let all_nan = vec![std::f64::NAN, std::f64::NAN];
+        let all_nan = vec![f64::NAN, f64::NAN];
         let result_all_nan = max_by(&all_nan, |a, b| a > b);
         // The first NaN will remain as max since NaN > NaN is false
         // Hence, the result should be the first NaN

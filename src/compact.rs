@@ -208,15 +208,9 @@ mod tests {
 
     #[test]
     fn test_compact_with_custom_default() {
-        #[derive(Debug, PartialEq, Clone)]
+        #[derive(Debug, PartialEq, Clone, Default)]
         struct CustomDefault {
             value: u32,
-        }
-
-        impl Default for CustomDefault {
-            fn default() -> Self {
-                CustomDefault { value: 0 }
-            }
         }
 
         let collection = vec![
