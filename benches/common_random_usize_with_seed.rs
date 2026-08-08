@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_common_random_usize_with_seed(c: &mut Criterion) {
     c.bench_function("common_random_usize_with_seed/10000", |b| {

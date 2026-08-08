@@ -143,7 +143,7 @@ mod zip;
 
 fn custom_criterion() -> Criterion {
     Criterion::default()
-        .output_directory(std::path::Path::new("./report"))
+        .output_directory(std::path::Path::new("./report/time"))
         .sample_size(100)
         .measurement_time(std::time::Duration::from_secs(7))
 }

@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_slice_to_map(c: &mut Criterion) {
     let people_increasing = support::people(4_096);

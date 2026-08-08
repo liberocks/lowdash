@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_repeat(c: &mut Criterion) {
     c.bench_function("repeat/2048/7", |b| {
