@@ -1,6 +1,7 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 
 mod assign;
+mod assign_with;
 mod associate;
 mod camel_case;
 mod capitalize;
@@ -161,6 +162,7 @@ fn all_benches(c: &mut Criterion) {
     common_ceil_log2::benchmark_common_ceil_log2(c);
     common_random_u64::benchmark_common_random_u64(c);
     assign::benchmark_assign(c);
+    assign_with::benchmark_assign_with(c);
     associate::benchmark_associate(c);
     camel_case::benchmark_camel_case(c);
     capitalize::benchmark_capitalize(c);
