@@ -120,6 +120,7 @@ mod permutation;
 mod pick_by;
 mod pick_by_keys;
 mod pick_by_values;
+mod population_standard_deviation;
 mod product;
 mod product_by;
 mod quantiles;
@@ -301,6 +302,7 @@ fn all_benches(c: &mut Criterion) {
     parallel_try_map::benchmark_parallel_try_map(c);
     parallel_reduce::benchmark_parallel_reduce(c);
     percentile::benchmark_percentile(c);
+    population_standard_deviation::benchmark_population_standard_deviation(c);
     permutation::benchmark_permutation(c);
     pick_by::benchmark_pick_by(c);
     pick_by_keys::benchmark_pick_by_keys(c);
