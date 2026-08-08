@@ -174,6 +174,7 @@ Utility functions for math:
 - [floating_sum](#floating_sum)
 - [euclidean_distance](#euclidean_distance)
 - [euclidean_norm](#euclidean_norm)
+- [sum_products](#sum_products)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
@@ -4055,6 +4056,16 @@ Empty input returns `0.0`; NaN and infinity follow IEEE-754 propagation.
 use lowdash::euclidean_norm;
 
 assert_eq!(euclidean_norm(&[3.0, 4.0]), 5.0);
+```
+
+### sum_products
+Calculates a compensated sum of pairwise products for equal-length slices.
+Returns `None` for a length mismatch and `Some(0.0)` for empty slices.
+
+```rust
+use lowdash::sum_products;
+
+assert_eq!(sum_products(&[1.0, 2.0], &[3.0, 4.0]), Some(11.0));
 ```
 
 ### weighted_mean
