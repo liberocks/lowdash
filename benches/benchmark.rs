@@ -67,6 +67,7 @@ mod foreach_while;
 mod from_entries;
 mod from_pairs;
 mod geometric_mean;
+mod greatest_common_divisor;
 mod group_by;
 mod harmonic_mean;
 mod has_key;
@@ -259,6 +260,7 @@ fn all_benches(c: &mut Criterion) {
     from_pairs::benchmark_from_pairs(c);
     geometric_mean::benchmark_geometric_mean(c);
     group_by::benchmark_group_by(c);
+    greatest_common_divisor::benchmark_greatest_common_divisor(c);
     harmonic_mean::benchmark_harmonic_mean(c);
     has_key::benchmark_has_key(c);
     index_of::benchmark_index_of(c);

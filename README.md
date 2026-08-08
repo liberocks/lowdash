@@ -193,6 +193,7 @@ Utility functions for math:
 - [combination](#combination)
 - [combination_count](#combination_count)
 - [factorial](#factorial)
+- [greatest_common_divisor](#greatest_common_divisor)
 - [duration_between](#duration_between)
 
 Concurrency utilities:
@@ -3684,6 +3685,16 @@ Returns `None` when the result overflows `u128`.
 use lowdash::factorial;
 
 assert_eq!(factorial(5), Some(120));
+```
+
+### greatest_common_divisor
+Calculates the greatest common divisor of a collection using the Euclidean algorithm.
+An empty collection returns `0`.
+
+```rust
+use lowdash::greatest_common_divisor;
+
+assert_eq!(greatest_common_divisor(&[48, 18, 30]), 6);
 ```
 
 ### duration_between
