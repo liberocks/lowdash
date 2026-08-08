@@ -32,6 +32,7 @@
 - Added `geometric_mean` for log-space geometric means.
 - Added `harmonic_mean` for scaled reciprocal means.
 - Added `median_low` for lower-middle selection.
+- Added `median_high` for upper-middle selection.
 
 ## [0.7.0] 2026-08-02
 ### Added

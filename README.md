@@ -175,6 +175,7 @@ Utility functions for math:
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
 - [median_low](#median_low)
+- [median_high](#median_high)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3982,6 +3983,15 @@ Returns the lower middle value from a sorted copy of the input.
 use lowdash::median_low;
 
 assert_eq!(median_low(&[1, 4, 2, 3]), Some(2));
+```
+
+### median_high
+Returns the upper middle value from a sorted copy of the input.
+
+```rust
+use lowdash::median_high;
+
+assert_eq!(median_high(&[1, 4, 2, 3]), Some(3));
 ```
 
 ## Acknowledgement
