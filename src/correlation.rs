@@ -11,7 +11,8 @@
 /// ```rust
 /// use lowdash::correlation;
 ///
-/// assert_eq!(correlation(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(1.0));
+/// let result = correlation(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]).unwrap();
+/// assert!((result - 1.0).abs() < 1e-12);
 /// ```
 pub fn correlation(x: &[f64], y: &[f64]) -> Option<f64> {
     if x.len() < 2 || x.len() != y.len() {
