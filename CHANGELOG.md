@@ -49,6 +49,7 @@
 - Added `product_with_start` for caller-specified product seeds.
 - Added `is_close` for relative and absolute floating-point comparisons.
 - Added `kernel_density_estimate` for Gaussian density estimation.
+- Added `kernel_density_sample` for deterministic Gaussian KDE samples.
 - Added `combination_count` for checked binomial coefficients.
 - Added `factorial` for checked factorial values.
 - Added `greatest_common_divisor` for Euclidean greatest common divisors.
