@@ -24,7 +24,7 @@ pub fn words(str_input: &str) -> Vec<String> {
         return Vec::new();
     }
 
-    let mut words = Vec::new();
+    let mut words = Vec::with_capacity(str_input.len() / 2 + 1);
     let mut current_word = String::new();
     let mut prev_char = '\0';
 
