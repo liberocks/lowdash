@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.0] 2026-08-08
+### Added
+- Added `take` for selecting the first items from a collection.
+
 ## [0.7.0] 2026-08-02
 ### Added
 - Added stable `sort_by` and `sort_by_key` collection sorting functions.

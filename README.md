@@ -93,6 +93,7 @@ Utility functions for array:
 - [slice_to_map](#slice_to_map)
 - [splice](#splice)
 - [subset](#subset)
+- [take](#take)
 - [zip](#zip)
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
@@ -2285,6 +2286,15 @@ let numbers = vec![1, 2, 3, 1, 4];
 let result = take_while(&numbers, |number| *number < 3);
 
 assert_eq!(result, vec![1, 2]);
+```
+
+### take
+Returns the first `n` items from a collection.
+
+```rust
+use lowdash::take;
+
+assert_eq!(take(&[1, 2, 3, 4], 2), vec![1, 2]);
 ```
 
 ### drop_by_index
