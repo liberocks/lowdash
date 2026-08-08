@@ -43,6 +43,7 @@
 - Added `correlation` for stable Pearson coefficients.
 - Added `linear_regression` for ordinary least-squares fits.
 - Added `combination_count` for checked binomial coefficients.
+- Added `factorial` for checked factorial values.
 
 ## [0.7.0] 2026-08-02
 ### Added
