@@ -19,6 +19,8 @@ pub fn harmonic_mean(values: &[f64]) -> Option<f64> {
     }
 
     let mut minimum = f64::INFINITY;
+    let mut reciprocal_sum = 0.0;
+    let mut compensation = 0.0;
     for &value in values {
         if !value.is_finite() || value < 0.0 {
             return None;
@@ -26,13 +28,19 @@ pub fn harmonic_mean(values: &[f64]) -> Option<f64> {
         if value == 0.0 {
             return Some(0.0);
         }
-        minimum = minimum.min(value);
-    }
 
-    let mut reciprocal_sum = 0.0;
-    let mut compensation = 0.0;
-    for &value in values {
-        let reciprocal = minimum / value;
+        let reciprocal = if minimum.is_infinite() {
+            minimum = value;
+            1.0
+        } else if value < minimum {
+            let scale = value / minimum;
+            reciprocal_sum *= scale;
+            compensation *= scale;
+            minimum = value;
+            1.0
+        } else {
+            minimum / value
+        };
         let next = reciprocal_sum + reciprocal;
         if reciprocal_sum.abs() >= reciprocal.abs() {
             compensation += (reciprocal_sum - next) + reciprocal;
