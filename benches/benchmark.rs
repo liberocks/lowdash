@@ -72,6 +72,7 @@ mod group_by;
 mod harmonic_mean;
 mod has_key;
 mod index_of;
+mod integer_square_root;
 mod interleave;
 mod interpolate;
 mod intersection;
@@ -264,6 +265,7 @@ fn all_benches(c: &mut Criterion) {
     harmonic_mean::benchmark_harmonic_mean(c);
     has_key::benchmark_has_key(c);
     index_of::benchmark_index_of(c);
+    integer_square_root::benchmark_integer_square_root(c);
     interleave::benchmark_interleave(c);
     interpolate::benchmark_interpolate(c);
     intersection::benchmark_intersection(c);

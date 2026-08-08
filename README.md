@@ -194,6 +194,7 @@ Utility functions for math:
 - [combination_count](#combination_count)
 - [factorial](#factorial)
 - [greatest_common_divisor](#greatest_common_divisor)
+- [integer_square_root](#integer_square_root)
 - [duration_between](#duration_between)
 
 Concurrency utilities:
@@ -3695,6 +3696,16 @@ An empty collection returns `0`.
 use lowdash::greatest_common_divisor;
 
 assert_eq!(greatest_common_divisor(&[48, 18, 30]), 6);
+```
+
+### integer_square_root
+Returns the exact floor of a number's square root using integer-only binary search.
+It is safe for the full `u128` range.
+
+```rust
+use lowdash::integer_square_root;
+
+assert_eq!(integer_square_root(17), 4);
 ```
 
 ### duration_between
