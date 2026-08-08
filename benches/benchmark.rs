@@ -166,6 +166,7 @@ mod subset;
 mod substring;
 mod sum;
 mod sum_by;
+mod sum_products;
 mod support;
 mod symmetric_difference;
 mod take;
@@ -364,6 +365,7 @@ fn all_benches(c: &mut Criterion) {
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
+    sum_products::benchmark_sum_products(c);
     symmetric_difference::benchmark_symmetric_difference(c);
     take::benchmark_take(c);
     take_right::benchmark_take_right(c);
