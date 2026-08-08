@@ -78,6 +78,7 @@ Utility functions for array:
 - [max_by](#max_by)
 - [min](#min)
 - [min_by](#min_by)
+- [min_by_key](#min_by_key)
 - [nth](#nth)
 - [partition_by](#partition_by)
 - [reduce](#reduce)
@@ -3780,6 +3781,15 @@ Splits pairs into two vectors while preserving their order.
 use lowdash::unzip;
 
 assert_eq!(unzip(&[("a", 1), ("b", 2)]), (vec!["a", "b"], vec![1, 2]));
+```
+
+### min_by_key
+Returns the first item with the smallest value produced by a key function.
+
+```rust
+use lowdash::min_by_key;
+
+assert_eq!(min_by_key(&["long", "short"], |word| word.len()), Some("short"));
 ```
 
 ## Acknowledgement
