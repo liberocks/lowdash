@@ -148,6 +148,7 @@ mod value_or;
 mod values;
 mod words;
 mod zip;
+mod zip_longest;
 
 fn custom_criterion() -> Criterion {
     Criterion::default()
@@ -304,6 +305,7 @@ fn all_benches(c: &mut Criterion) {
     values::benchmark_values(c);
     words::benchmark_words(c);
     zip::benchmark_zip(c);
+    zip_longest::benchmark_zip_longest(c);
 }
 
 criterion_group! {

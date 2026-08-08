@@ -141,6 +141,7 @@ mod value_or;
 mod values;
 mod words;
 mod zip;
+mod zip_longest;
 
 pub use assign::assign;
 pub use assign_with::assign_with;
@@ -285,3 +286,4 @@ pub use value_or::value_or;
 pub use values::values;
 pub use words::words;
 pub use zip::zip;
+pub use zip_longest::zip_longest;
