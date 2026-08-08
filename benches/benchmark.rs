@@ -86,6 +86,7 @@ mod last_or;
 mod last_or_empty;
 mod latest;
 mod latest_by;
+mod linear_regression;
 mod map;
 mod map_entries;
 mod map_keys;
@@ -274,6 +275,7 @@ fn all_benches(c: &mut Criterion) {
     last_or_empty::benchmark_last_or_empty(c);
     latest::benchmark_latest(c);
     latest_by::benchmark_latest_by(c);
+    linear_regression::benchmark_linear_regression(c);
     map::benchmark_map(c);
     map_entries::benchmark_map_entries(c);
     map_keys::benchmark_map_keys(c);

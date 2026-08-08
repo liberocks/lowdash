@@ -176,6 +176,7 @@ Utility functions for math:
 - [harmonic_mean](#harmonic_mean)
 - [covariance](#covariance)
 - [correlation](#correlation)
+- [linear_regression](#linear_regression)
 - [median_low](#median_low)
 - [median_high](#median_high)
 - [median_grouped](#median_grouped)
@@ -4073,6 +4074,15 @@ Calculates the Pearson coefficient for finite, nonconstant paired data.
 use lowdash::correlation;
 
 assert_eq!(correlation(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(1.0));
+```
+
+### linear_regression
+Returns the ordinary least-squares slope and intercept for valid paired data.
+
+```rust
+use lowdash::linear_regression;
+
+assert_eq!(linear_regression(&[1.0, 2.0], &[3.0, 5.0]), Some((2.0, 1.0)));
 ```
 
 ## Acknowledgement
