@@ -162,6 +162,7 @@ mod unzip;
 mod value_or;
 mod values;
 mod variance;
+mod weighted_mean;
 mod windows;
 mod words;
 mod zip;
@@ -335,6 +336,7 @@ fn all_benches(c: &mut Criterion) {
     unzip::benchmark_unzip(c);
     value_or::benchmark_value_or(c);
     variance::benchmark_variance(c);
+    weighted_mean::benchmark_weighted_mean(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
     windows::benchmark_windows(c);
