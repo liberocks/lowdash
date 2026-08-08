@@ -29,6 +29,7 @@ Utility functions for array:
 - [count_values_by](#count_values_by)
 - [difference](#difference)
 - [difference_by](#difference_by)
+- [symmetric_difference](#symmetric_difference)
 - [drop](#drop)
 - [drop_right](#drop_right)
 - [drop_right_while](#drop_right_while)
@@ -3760,6 +3761,15 @@ use lowdash::union_by;
 
 let groups = vec![vec![11, 12], vec![2, 13]];
 assert_eq!(union_by(&groups, |number| *number % 10), vec![11, 12]);
+```
+
+### symmetric_difference
+Returns unique values that appear in exactly one input, preserving first appearance order.
+
+```rust
+use lowdash::symmetric_difference;
+
+assert_eq!(symmetric_difference(&[1, 2, 2], &[2, 3]), vec![1, 3]);
 ```
 
 ## Acknowledgement
