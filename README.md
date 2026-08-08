@@ -108,6 +108,7 @@ Utility functions for array:
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
 - [times](#times)
+- [windows](#windows)
 - [zip_longest](#zip_longest)
 - [unzip](#unzip)
 - [uniq](#uniq)
@@ -3829,6 +3830,15 @@ let mut map = HashMap::new();
 map.insert("a", 1);
 map.insert("b", 1);
 assert_eq!(invert_grouped(&map)[&1].len(), 2);
+```
+
+### windows
+Returns overlapping windows of a requested size.
+
+```rust
+use lowdash::windows;
+
+assert_eq!(windows(&[1, 2, 3], 2), vec![vec![1, 2], vec![2, 3]]);
 ```
 
 ## Acknowledgement

@@ -154,6 +154,7 @@ mod uniq_values;
 mod unzip;
 mod value_or;
 mod values;
+mod windows;
 mod words;
 mod zip;
 mod zip_longest;
@@ -320,6 +321,7 @@ fn all_benches(c: &mut Criterion) {
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
+    windows::benchmark_windows(c);
     zip::benchmark_zip(c);
     zip_longest::benchmark_zip_longest(c);
 }
