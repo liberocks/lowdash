@@ -178,6 +178,9 @@ Utility functions for math:
 - [combination](#combination)
 - [duration_between](#duration_between)
 
+Concurrency utilities:
+- [parallel_map](#parallel_map)
+
 
 ### camel_case
 Converts a string to camelCase.
@@ -3859,6 +3862,17 @@ Calculates population variance in one pass and returns `None` for empty input.
 use lowdash::variance;
 
 assert_eq!(variance(&[1.0, 2.0, 3.0]), Some(2.0 / 3.0));
+```
+
+### parallel_map
+Maps items concurrently over ordered contiguous chunks and provides each global index.
+
+```rust
+use lowdash::parallel_map;
+use std::num::NonZeroUsize;
+
+let result = parallel_map(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| value * 2);
+assert_eq!(result, vec![2, 4, 6]);
 ```
 
 ## Acknowledgement
