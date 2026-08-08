@@ -33,6 +33,14 @@ where
     }
 
     let worker_count = workers.get().min(collection.len());
+    if worker_count == 1 || collection.len() <= worker_count.saturating_mul(2) {
+        return collection
+            .iter()
+            .enumerate()
+            .map(|(index, item)| iteratee(item, index))
+            .collect();
+    }
+
     let chunk_size =
         collection.len() / worker_count + usize::from(collection.len() % worker_count != 0);
     let (partials, panic_payload) = thread::scope(|scope| {
