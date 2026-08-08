@@ -9,6 +9,8 @@ permissions:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
 env:
   RUST_BACKTRACE: 1
   RUST_LOG: "cargo_tarpaulin=trace,llvm_profparser=trace"
