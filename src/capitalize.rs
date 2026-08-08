@@ -19,7 +19,10 @@ pub fn capitalize(str_input: &str) -> String {
     match chars.next() {
         None => String::new(),
         Some(first) => {
-            first.to_uppercase().collect::<String>() + chars.as_str().to_lowercase().as_str()
+            let mut result = String::with_capacity(str_input.len());
+            result.extend(first.to_uppercase());
+            result.push_str(&chars.as_str().to_lowercase());
+            result
         }
     }
 }
