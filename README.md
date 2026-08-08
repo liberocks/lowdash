@@ -78,6 +78,7 @@ Utility functions for array:
 - [partition_by](#partition_by)
 - [reduce](#reduce)
 - [reduce_right](#reduce_right)
+- [scan](#scan)
 - [reject](#reject)
 - [reject_map](#reject_map)
 - [repeat](#repeat)
@@ -3674,6 +3675,15 @@ assert_eq!(chunk_by(&[1, 1, 2, 1], |number| *number), vec![
     vec![2],
     vec![1],
 ]);
+```
+
+### scan
+Returns the intermediate accumulator after each item, without returning the initial value.
+
+```rust
+use lowdash::scan;
+
+assert_eq!(scan(&[1, 2, 3], |sum, number, _| sum + number, 0), vec![1, 3, 6]);
 ```
 
 ## Acknowledgement
