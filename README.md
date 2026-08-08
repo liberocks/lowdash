@@ -173,6 +173,7 @@ Utility functions for math:
 - [floating_mean](#floating_mean)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
+- [harmonic_mean](#harmonic_mean)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3962,6 +3963,15 @@ Calculates a log-space geometric mean for nonnegative finite values.
 use lowdash::geometric_mean;
 
 assert_eq!(geometric_mean(&[1.0, 4.0, 16.0]), Some(4.0));
+```
+
+### harmonic_mean
+Calculates a scaled reciprocal mean for nonnegative finite values.
+
+```rust
+use lowdash::harmonic_mean;
+
+assert_eq!(harmonic_mean(&[1.0, 3.0]), Some(1.5));
 ```
 
 ## Acknowledgement
