@@ -178,6 +178,7 @@ Utility functions for math:
 - [median_high](#median_high)
 - [median_grouped](#median_grouped)
 - [mode](#mode)
+- [quantiles](#quantiles)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -4012,6 +4013,15 @@ Returns the first encountered most common value, or `None` for empty input.
 use lowdash::mode;
 
 assert_eq!(mode(&[1, 2, 2, 3]), Some(2));
+```
+
+### quantiles
+Returns inclusive linearly interpolated cut points using the existing percentile convention.
+
+```rust
+use lowdash::quantiles;
+
+assert_eq!(quantiles(&[1.0, 2.0, 3.0, 4.0, 5.0], 4), Some(vec![2.0, 3.0, 4.0]));
 ```
 
 ## Acknowledgement
