@@ -19,4 +19,16 @@ pub fn benchmark_parallel_for_each(c: &mut Criterion) {
             });
         })
     });
+
+    let tiny: Vec<i32> = (0..128).collect();
+    let tiny_workers = NonZeroUsize::new(128).unwrap();
+    let tiny_calls = Arc::new(AtomicUsize::new(0));
+    c.bench_function("parallel_for_each/worker_per_item", |b| {
+        b.iter(|| {
+            let calls = Arc::clone(&tiny_calls);
+            ld::parallel_for_each(black_box(&tiny), black_box(tiny_workers), move |_, _| {
+                calls.fetch_add(1, Ordering::Relaxed);
+            });
+        })
+    });
 }
