@@ -47,7 +47,10 @@ where
     // Count using references into the cached keys Vec
     let mut counts: HashMap<&U, usize> = HashMap::new();
     for key in &keys {
-        *counts.entry(key).or_insert(0) += 1;
+        let count = counts.entry(key).or_insert(0);
+        if *count < 2 {
+            *count += 1;
+        }
     }
 
     // Collect items whose keys appear exactly once
