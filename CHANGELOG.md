@@ -46,6 +46,7 @@
 - Added `factorial` for checked factorial values.
 - Added `greatest_common_divisor` for Euclidean greatest common divisors.
 - Added `integer_square_root` for exact integer floor square roots.
+- Added `least_common_multiple` for checked least common multiples.
 
 ## [0.7.0] 2026-08-02
 ### Added
