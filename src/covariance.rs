@@ -15,16 +15,15 @@ pub fn covariance(x: &[f64], y: &[f64]) -> Option<f64> {
     if x.len() < 2 || x.len() != y.len() {
         return None;
     }
-    if x.iter().chain(y).any(|value| !value.is_finite()) {
-        return None;
-    }
-
     let mut count = 0.0;
     let mut mean_x = 0.0;
     let mut mean_y = 0.0;
     let mut co_moment = 0.0;
 
     for (&value_x, &value_y) in x.iter().zip(y) {
+        if !value_x.is_finite() || !value_y.is_finite() {
+            return None;
+        }
         count += 1.0;
         let difference_x = value_x - mean_x;
         mean_x += difference_x / count;
