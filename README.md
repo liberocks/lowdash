@@ -172,6 +172,7 @@ Utility functions for math:
 - [mean_by](#mean_by)
 - [floating_mean](#floating_mean)
 - [weighted_mean](#weighted_mean)
+- [geometric_mean](#geometric_mean)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3952,6 +3953,15 @@ Calculates a weighted mean when values and nonnegative weights are valid.
 use lowdash::weighted_mean;
 
 assert_eq!(weighted_mean(&[1.0, 3.0], &[1.0, 3.0]), Some(2.5));
+```
+
+### geometric_mean
+Calculates a log-space geometric mean for nonnegative finite values.
+
+```rust
+use lowdash::geometric_mean;
+
+assert_eq!(geometric_mean(&[1.0, 4.0, 16.0]), Some(4.0));
 ```
 
 ## Acknowledgement
