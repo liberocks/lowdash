@@ -5,7 +5,7 @@
 [![Contributors](https://img.shields.io/github/contributors/liberocks/lowdash)](https://github.com/liberocks/lowdash/graphs/contributors)
 [![License](https://img.shields.io/github/license/liberocks/lowdash)](./LICENSE)
 
-**liberocks/lowdash** is a Lodash inspired utility library to manipulate array and object
+**liberocks/lowdash** is a highly optimized utility library inspired by Lodash for Rust
 
 ## Installation
 ```bash
