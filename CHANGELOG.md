@@ -33,6 +33,7 @@
 - Added `harmonic_mean` for scaled reciprocal means.
 - Added `median_low` for lower-middle selection.
 - Added `median_high` for upper-middle selection.
+- Added `median_grouped` for grouped-data median estimates.
 
 ## [0.7.0] 2026-08-02
 ### Added

@@ -176,6 +176,7 @@ Utility functions for math:
 - [harmonic_mean](#harmonic_mean)
 - [median_low](#median_low)
 - [median_high](#median_high)
+- [median_grouped](#median_grouped)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3992,6 +3993,15 @@ Returns the upper middle value from a sorted copy of the input.
 use lowdash::median_high;
 
 assert_eq!(median_high(&[1, 4, 2, 3]), Some(3));
+```
+
+### median_grouped
+Estimates a median from sorted class-midpoint observations and a fixed interval.
+
+```rust
+use lowdash::median_grouped;
+
+assert_eq!(median_grouped(&[5.0], 2.0), Some(5.0));
 ```
 
 ## Acknowledgement
