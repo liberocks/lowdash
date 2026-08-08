@@ -178,6 +178,7 @@ Utility functions for math:
 - [sum_products](#sum_products)
 - [is_close](#is_close)
 - [kernel_density_estimate](#kernel_density_estimate)
+- [kernel_density_sample](#kernel_density_sample)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
@@ -4100,6 +4101,17 @@ use lowdash::kernel_density_estimate;
 
 let estimate = kernel_density_estimate(&[0.0], 1.0).unwrap();
 assert!((estimate(0.0) - 0.39894228).abs() < 1.0e-7);
+```
+
+### kernel_density_sample
+Draws deterministic approximate Gaussian KDE samples using a non-cryptographic seed.
+The same input and seed produce the same output.
+
+```rust
+use lowdash::kernel_density_sample;
+
+let samples = kernel_density_sample(&[0.0, 1.0], 0.25, 3, 42).unwrap();
+assert_eq!(samples.len(), 3);
 ```
 
 ### weighted_mean
