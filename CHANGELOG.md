@@ -36,6 +36,7 @@
 - Added `median_grouped` for grouped-data median estimates.
 - Added `mode` for selecting the first most common value.
 - Added `quantiles` for inclusive interpolated cut points.
+- Added `sample_variance` for corrected one-pass variance.
 
 ## [0.7.0] 2026-08-02
 ### Added

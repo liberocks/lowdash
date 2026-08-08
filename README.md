@@ -180,6 +180,7 @@ Utility functions for math:
 - [mode](#mode)
 - [quantiles](#quantiles)
 - [variance](#variance)
+- [sample_variance](#sample_variance)
 - [percentile](#percentile)
 - [median](#median)
 - [interpolate](#interpolate)
@@ -4022,6 +4023,15 @@ Returns inclusive linearly interpolated cut points using the existing percentile
 use lowdash::quantiles;
 
 assert_eq!(quantiles(&[1.0, 2.0, 3.0, 4.0, 5.0], 4), Some(vec![2.0, 3.0, 4.0]));
+```
+
+### sample_variance
+Calculates sample variance with an `n - 1` divisor and validates finite input.
+
+```rust
+use lowdash::sample_variance;
+
+assert_eq!(sample_variance(&[1.0, 2.0, 3.0]), Some(1.0));
 ```
 
 ## Acknowledgement
