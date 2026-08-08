@@ -52,7 +52,7 @@ pub fn flat_map<T, R, F>(collection: &[T], iteratee: F) -> Vec<R>
 where
     F: Fn(&T, usize) -> Vec<R>,
 {
-    let mut result = Vec::new();
+    let mut result = Vec::with_capacity(collection.len().saturating_mul(2));
     for (index, item) in collection.iter().enumerate() {
         let mapped_items = iteratee(item, index);
         result.extend(mapped_items);
