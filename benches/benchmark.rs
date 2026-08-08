@@ -122,6 +122,7 @@ mod pick_by_keys;
 mod pick_by_values;
 mod product;
 mod product_by;
+mod quantiles;
 mod random_string;
 mod range;
 mod range_from;
@@ -304,6 +305,7 @@ fn all_benches(c: &mut Criterion) {
     pick_by_values::benchmark_pick_by_values(c);
     product::benchmark_product(c);
     product_by::benchmark_product_by(c);
+    quantiles::benchmark_quantiles(c);
     random_string::benchmark_random_string(c);
     range::benchmark_range(c);
     range_from::benchmark_range_from(c);
