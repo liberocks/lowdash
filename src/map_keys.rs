@@ -54,7 +54,7 @@ mod tests {
         let mut map = HashMap::new();
         map.insert("a", 1);
         map.insert("b", 2);
-        let transformed = map_keys(&map, |&v, &k| format!("key_{}", k));
+        let transformed = map_keys(&map, |&_, &k| format!("key_{}", k));
         assert_eq!(transformed.get("key_a"), Some(&1));
         assert_eq!(transformed.get("key_b"), Some(&2));
     }
@@ -62,7 +62,7 @@ mod tests {
     #[test]
     fn test_map_keys_empty() {
         let map: HashMap<&str, i32> = HashMap::new();
-        let transformed = map_keys(&map, |&v, &k| k.len());
+        let transformed = map_keys(&map, |&_, &k| k.len());
         assert!(transformed.is_empty());
     }
 
@@ -71,7 +71,7 @@ mod tests {
         let mut map = HashMap::new();
         map.insert("a", 1);
         map.insert("A", 2); // Both keys become "a".
-        let transformed = map_keys(&map, |&v, k| k.to_lowercase());
+        let transformed = map_keys(&map, |&_, k| k.to_lowercase());
         // Descending order makes "A" overwrite "a".
         assert_eq!(transformed.get("a"), Some(&2));
     }
