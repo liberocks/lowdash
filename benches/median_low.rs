@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_median_low(c: &mut Criterion) {
     let values: Vec<i32> = (0..4_096).rev().collect();

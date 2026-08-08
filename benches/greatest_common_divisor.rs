@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_greatest_common_divisor(c: &mut Criterion) {
     let values = [48_u64, 18, 30, 42, 66];

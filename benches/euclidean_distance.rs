@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_euclidean_distance(c: &mut Criterion) {
     let p: Vec<f64> = (0..4_096).map(|value| value as f64 / 3.0).collect();

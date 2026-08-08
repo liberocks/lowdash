@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_min_by_key(c: &mut Criterion) {
     let people = support::people(4_096);

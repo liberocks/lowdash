@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_is_close(c: &mut Criterion) {
     c.bench_function("is_close/relative", |b| {

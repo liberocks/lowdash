@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_product_with_start(c: &mut Criterion) {
     let values = vec![1.0001_f64; 4_096];

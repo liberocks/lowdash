@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_assign_with(c: &mut Criterion) {
     let small = support::numeric_maps(8, 256);

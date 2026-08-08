@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_unzip(c: &mut Criterion) {
     let pairs: Vec<(i32, support::Person)> = support::int_vec(4_096)

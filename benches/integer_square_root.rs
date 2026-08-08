@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_integer_square_root(c: &mut Criterion) {
     c.bench_function("integer_square_root/u128-max", |b| {
