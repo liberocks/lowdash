@@ -173,6 +173,7 @@ Utility functions for math:
 - [floating_mean](#floating_mean)
 - [floating_sum](#floating_sum)
 - [euclidean_distance](#euclidean_distance)
+- [euclidean_norm](#euclidean_norm)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
@@ -4044,6 +4045,16 @@ Returns `None` for mismatched lengths, nonfinite values, or a nonfinite result.
 use lowdash::euclidean_distance;
 
 assert_eq!(euclidean_distance(&[0.0, 0.0], &[3.0, 4.0]), Some(5.0));
+```
+
+### euclidean_norm
+Calculates an N-dimensional Euclidean norm with scaled sum-of-squares accumulation.
+Empty input returns `0.0`; NaN and infinity follow IEEE-754 propagation.
+
+```rust
+use lowdash::euclidean_norm;
+
+assert_eq!(euclidean_norm(&[3.0, 4.0]), 5.0);
 ```
 
 ### weighted_mean
