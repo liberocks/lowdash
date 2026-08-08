@@ -5,7 +5,7 @@
 [![Contributors](https://img.shields.io/github/contributors/liberocks/lowdash)](https://github.com/liberocks/lowdash/graphs/contributors)
 [![License](https://img.shields.io/github/license/liberocks/lowdash)](./LICENSE)
 
-**liberocks/lowdash** is a highly optimized utility library inspired by Lodash for Rust
+**liberocks/lowdash** is a highly optimized utility library inspired by Lodash for Rust with zero dependencies
 
 ## Installation
 ```bash
