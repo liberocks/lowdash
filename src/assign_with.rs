@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{hash_map::Entry, HashMap};
 use std::hash::Hash;
 
 /// Merges maps with a resolver for duplicate keys.
@@ -38,11 +38,14 @@ where
 
     for map in maps {
         for (key, incoming) in map {
-            if let Some(existing) = result.get(key) {
-                let resolved = resolver(key, existing, incoming);
-                result.insert(key.clone(), resolved);
-            } else {
-                result.insert(key.clone(), incoming.clone());
+            match result.entry(key.clone()) {
+                Entry::Occupied(mut entry) => {
+                    let resolved = resolver(entry.key(), entry.get(), incoming);
+                    entry.insert(resolved);
+                }
+                Entry::Vacant(entry) => {
+                    entry.insert(incoming.clone());
+                }
             }
         }
     }
