@@ -34,12 +34,11 @@ where
 {
     let mut result = BTreeMap::new();
 
-    // Collect and sort the keys in ascending order for deterministic behavior
-    let mut keys: Vec<&K1> = map.keys().collect();
-    keys.sort(); // Sort in ascending order. Use keys.sort_by(|a, b| b.cmp(a)) for descending.
+    // Sort entries in ascending key order for deterministic behavior.
+    let mut entries: Vec<(&K1, &V1)> = map.iter().collect();
+    entries.sort_by(|(a, _), (b, _)| a.cmp(b));
 
-    for k1 in keys {
-        let v1 = &map[k1];
+    for (k1, v1) in entries {
         let (k2, v2) = iteratee(k1, v1);
         result.insert(k2, v2);
     }
