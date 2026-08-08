@@ -192,6 +192,7 @@ Utility functions for math:
 - [permutation](#permutation)
 - [combination](#combination)
 - [combination_count](#combination_count)
+- [factorial](#factorial)
 - [duration_between](#duration_between)
 
 Concurrency utilities:
@@ -3673,6 +3674,16 @@ Returns `Some(0)` when `k` exceeds `n` and `None` when the result overflows `u12
 use lowdash::combination_count;
 
 assert_eq!(combination_count(5, 2), Some(10));
+```
+
+### factorial
+Computes a factorial with checked `u128` arithmetic.
+Returns `None` when the result overflows `u128`.
+
+```rust
+use lowdash::factorial;
+
+assert_eq!(factorial(5), Some(120));
 ```
 
 ### duration_between
