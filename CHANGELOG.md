@@ -40,6 +40,7 @@
 - Added `standard_deviation` for sample standard deviation.
 - Added `population_standard_deviation` for population standard deviation.
 - Added `covariance` for stable sample covariance.
+- Added `correlation` for stable Pearson coefficients.
 
 ## [0.7.0] 2026-08-02
 ### Added
