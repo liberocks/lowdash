@@ -26,17 +26,22 @@ pub fn chunk_string(str_input: &str, size: i32) -> Vec<String> {
         return vec![String::from("")];
     }
 
-    let chars: Vec<char> = str_input.chars().collect();
     let size = size as usize;
+    let mut result = Vec::with_capacity(str_input.len() / size + 1);
+    let mut chunk_start = 0;
+    let mut chunk_len = 0;
 
-    if size >= chars.len() {
-        return vec![str_input.to_string()];
+    for (byte_index, _) in str_input.char_indices() {
+        if chunk_len == size {
+            result.push(str_input[chunk_start..byte_index].to_owned());
+            chunk_start = byte_index;
+            chunk_len = 0;
+        }
+        chunk_len += 1;
     }
 
-    chars
-        .chunks(size)
-        .map(|chunk| chunk.iter().collect::<String>())
-        .collect()
+    result.push(str_input[chunk_start..].to_owned());
+    result
 }
 
 #[cfg(test)]
