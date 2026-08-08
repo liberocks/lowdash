@@ -86,6 +86,7 @@ mod is_close;
 mod is_sorted;
 mod is_sorted_by_key;
 mod kebab_case;
+mod kernel_density_estimate;
 mod key_by;
 mod keys;
 mod last;
@@ -287,6 +288,7 @@ fn all_benches(c: &mut Criterion) {
     is_sorted::benchmark_is_sorted(c);
     is_sorted_by_key::benchmark_is_sorted_by_key(c);
     kebab_case::benchmark_kebab_case(c);
+    kernel_density_estimate::benchmark_kernel_density_estimate(c);
     key_by::benchmark_key_by(c);
     keys::benchmark_keys(c);
     last::benchmark_last(c);
