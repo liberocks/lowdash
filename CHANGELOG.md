@@ -24,6 +24,7 @@
 - Added `variance` for stable population variance calculations.
 - Added `parallel_map` for ordered concurrent mapping.
 - Added `parallel_try_map` for ordered concurrent fallible mapping.
+- Added `parallel_for_each` for concurrent side-effect callbacks.
 
 ## [0.7.0] 2026-08-02
 ### Added
