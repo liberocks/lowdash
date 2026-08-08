@@ -65,6 +65,7 @@ mod index_of;
 mod interleave;
 mod interpolate;
 mod intersection;
+mod intersection_by;
 mod invert;
 mod is_sorted;
 mod is_sorted_by_key;
@@ -221,6 +222,7 @@ fn all_benches(c: &mut Criterion) {
     interleave::benchmark_interleave(c);
     interpolate::benchmark_interpolate(c);
     intersection::benchmark_intersection(c);
+    intersection_by::benchmark_intersection_by(c);
     invert::benchmark_invert(c);
     is_sorted::benchmark_is_sorted(c);
     is_sorted_by_key::benchmark_is_sorted_by_key(c);
