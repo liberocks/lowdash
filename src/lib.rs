@@ -1,6 +1,7 @@
 pub mod common;
 
 mod assign;
+mod assign_with;
 mod associate;
 mod camel_case;
 mod capitalize;
@@ -140,6 +141,7 @@ mod words;
 mod zip;
 
 pub use assign::assign;
+pub use assign_with::assign_with;
 pub use associate::associate;
 pub use camel_case::camel_case;
 pub use capitalize::capitalize;
