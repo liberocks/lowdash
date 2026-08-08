@@ -41,6 +41,7 @@
 - Added `population_standard_deviation` for population standard deviation.
 - Added `covariance` for stable sample covariance.
 - Added `correlation` for stable Pearson coefficients.
+- Added `linear_regression` for ordinary least-squares fits.
 
 ## [0.7.0] 2026-08-02
 ### Added
