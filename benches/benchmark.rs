@@ -135,6 +135,7 @@ mod pick_by_values;
 mod population_standard_deviation;
 mod product;
 mod product_by;
+mod product_with_start;
 mod quantiles;
 mod random_string;
 mod range;
@@ -334,6 +335,7 @@ fn all_benches(c: &mut Criterion) {
     pick_by_values::benchmark_pick_by_values(c);
     product::benchmark_product(c);
     product_by::benchmark_product_by(c);
+    product_with_start::benchmark_product_with_start(c);
     quantiles::benchmark_quantiles(c);
     random_string::benchmark_random_string(c);
     range::benchmark_range(c);
