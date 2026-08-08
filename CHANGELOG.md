@@ -29,6 +29,7 @@
 - Added `parallel_reduce` for chunked concurrent reductions.
 - Added `floating_mean` for compensated floating-point means.
 - Added `weighted_mean` for validated weighted averages.
+- Added `geometric_mean` for log-space geometric means.
 
 ## [0.7.0] 2026-08-02
 ### Added
