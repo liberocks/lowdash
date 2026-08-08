@@ -147,6 +147,7 @@ mod uniq;
 mod uniq_by;
 mod uniq_keys;
 mod uniq_values;
+mod unzip;
 mod value_or;
 mod values;
 mod words;
@@ -307,6 +308,7 @@ fn all_benches(c: &mut Criterion) {
     uniq_values::benchmark_uniq_values(c);
     union::benchmark_union(c);
     union_by::benchmark_union_by(c);
+    unzip::benchmark_unzip(c);
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
