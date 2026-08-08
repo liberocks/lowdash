@@ -31,7 +31,20 @@ where
         return Vec::new();
     }
 
-    // Fisher-Yates shuffle on indices to avoid cloning all elements
+    if sample_size == 1 {
+        let seed1 = SystemTime::now()
+            .duration_since(SystemTime::UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_nanos() as u64;
+
+        let seed2 = std::time::Instant::now().elapsed().as_nanos() as u64;
+
+        let seed = seed1 ^ seed2;
+        let idx = common::random_usize_with_seed(size, seed);
+        return vec![collection[idx].clone()];
+    }
+
+    // Fisher-Yates shuffle on indices to avoid cloning all elements.
     let mut indices: Vec<usize> = (0..size).collect();
     let mut results = Vec::with_capacity(sample_size);
 
