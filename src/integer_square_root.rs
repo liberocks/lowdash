@@ -1,11 +1,11 @@
 /// Returns the exact floor of the square root of `n`.
 ///
-/// The search uses integer division instead of multiplying candidate values,
-/// so it is safe for every `u128` input, including `u128::MAX`.
+/// Newton iteration uses integer division instead of multiplying candidate
+/// values, so it is safe for every `u128` input, including `u128::MAX`.
 ///
 /// # Complexity
 ///
-/// Runs in `O(log(u128::MAX))` time and `O(1)` space.
+/// Runs in `O(log(log(n)))` time and `O(1)` space.
 ///
 /// # Examples
 ///
@@ -21,19 +21,16 @@ pub fn integer_square_root(n: u128) -> u128 {
         return n;
     }
 
-    let mut low = 1_u128;
-    let mut high = 1_u128 << 64;
+    let shift = (128 - n.leading_zeros() + 1) / 2;
+    let mut root = 1_u128 << shift;
 
-    while low + 1 < high {
-        let middle = low + (high - low) / 2;
-        if middle <= n / middle {
-            low = middle;
-        } else {
-            high = middle;
+    loop {
+        let next = (root + n / root) / 2;
+        if next >= root {
+            return root;
         }
+        root = next;
     }
-
-    low
 }
 
 #[cfg(test)]
