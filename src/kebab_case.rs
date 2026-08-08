@@ -22,7 +22,8 @@ pub fn kebab_case(str_input: &str) -> String {
     }
 
     let mut result = String::with_capacity(str_input.len());
-    let mut current_word = String::new();
+    let mut in_word = false;
+    let mut needs_separator = false;
     let mut prev_char = ' ';
 
     for c in str_input.chars() {
@@ -32,33 +33,29 @@ pub fn kebab_case(str_input: &str) -> String {
                 || prev_char == '-'
                 || prev_char == '_')
         {
-            if !current_word.is_empty() {
-                if !result.is_empty() {
-                    result.push('-');
-                }
-                result.push_str(&current_word.to_lowercase());
-                current_word.clear();
+            if in_word {
+                needs_separator = true;
             }
-            current_word.push(c);
+            if needs_separator && !result.is_empty() {
+                result.push('-');
+                needs_separator = false;
+            }
+            result.extend(c.to_lowercase());
+            in_word = true;
         } else if c.is_whitespace() || c == '-' || c == '_' {
-            if !current_word.is_empty() {
-                if !result.is_empty() {
-                    result.push('-');
-                }
-                result.push_str(&current_word.to_lowercase());
-                current_word.clear();
+            if in_word {
+                needs_separator = true;
+                in_word = false;
             }
         } else {
-            current_word.push(c);
+            if needs_separator && !result.is_empty() {
+                result.push('-');
+                needs_separator = false;
+            }
+            result.extend(c.to_lowercase());
+            in_word = true;
         }
         prev_char = c;
-    }
-
-    if !current_word.is_empty() {
-        if !result.is_empty() {
-            result.push('-');
-        }
-        result.push_str(&current_word.to_lowercase());
     }
 
     result
