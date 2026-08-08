@@ -179,6 +179,7 @@ Utility functions for math:
 - [duration_between](#duration_between)
 
 Concurrency utilities:
+- [parallel_for_each](#parallel_for_each)
 - [parallel_map](#parallel_map)
 - [parallel_try_map](#parallel_try_map)
 
@@ -3887,6 +3888,18 @@ let result = parallel_try_map(&[1, 2], NonZeroUsize::new(2).unwrap(), |value, in
     if index == 1 { Err("bad") } else { Ok(value * 2) }
 });
 assert_eq!(result, Err("bad"));
+```
+
+### parallel_for_each
+Runs a callback concurrently without allocating an output collection.
+
+```rust
+use lowdash::parallel_for_each;
+use std::num::NonZeroUsize;
+
+parallel_for_each(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| {
+    let _ = value;
+});
 ```
 
 ## Acknowledgement

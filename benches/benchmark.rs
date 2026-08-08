@@ -101,6 +101,7 @@ mod nth;
 mod omit_by;
 mod omit_by_keys;
 mod omit_by_values;
+mod parallel_for_each;
 mod parallel_map;
 mod parallel_try_map;
 mod partition_by;
@@ -275,6 +276,7 @@ fn all_benches(c: &mut Criterion) {
     partition_by::benchmark_partition_by(c);
     pascal_case::benchmark_pascal_case(c);
     parallel_map::benchmark_parallel_map(c);
+    parallel_for_each::benchmark_parallel_for_each(c);
     parallel_try_map::benchmark_parallel_try_map(c);
     percentile::benchmark_percentile(c);
     permutation::benchmark_permutation(c);
