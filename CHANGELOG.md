@@ -13,6 +13,7 @@
 - Added `zip_longest` for pairing collections of different lengths.
 - Added `cartesian_product` for left-major pair generation.
 - Added `union_by` for key-based collection unions.
+- Added `symmetric_difference` for stable exclusive values.
 
 ## [0.7.0] 2026-08-02
 ### Added

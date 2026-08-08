@@ -134,6 +134,7 @@ mod substring;
 mod sum;
 mod sum_by;
 mod support;
+mod symmetric_difference;
 mod take;
 mod take_right;
 mod take_right_while;
@@ -293,6 +294,7 @@ fn all_benches(c: &mut Criterion) {
     substring::benchmark_substring(c);
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
+    symmetric_difference::benchmark_symmetric_difference(c);
     take::benchmark_take(c);
     take_right::benchmark_take_right(c);
     take_right_while::benchmark_take_right_while(c);
