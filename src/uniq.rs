@@ -46,12 +46,10 @@ pub fn uniq<T>(collection: &[T]) -> Vec<T>
 where
     T: PartialEq + Clone,
 {
-    let mut seen = Vec::with_capacity(collection.len());
     let mut result = Vec::with_capacity(collection.len());
 
     for item in collection {
-        if !seen.contains(item) {
-            seen.push(item.clone());
+        if !result.contains(item) {
             result.push(item.clone());
         }
     }
