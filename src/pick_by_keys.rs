@@ -31,7 +31,7 @@ where
     K: std::cmp::Eq + std::hash::Hash + Clone,
     V: Clone,
 {
-    let mut result = std::collections::HashMap::new();
+    let mut result = std::collections::HashMap::with_capacity(keys.len());
     for key in keys {
         if let Some(value) = map.get(key) {
             result.insert(key.clone(), value.clone());
