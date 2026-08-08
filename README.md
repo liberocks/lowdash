@@ -21,6 +21,7 @@ Utility functions for array:
 - [associate](#associate)
 - [chunk](#chunk)
 - [chunk_by](#chunk_by)
+- [cartesian_product](#cartesian_product)
 - [compact](#compact)
 - [count](#count)
 - [count_by](#count_by)
@@ -3733,6 +3734,20 @@ use lowdash::zip_longest;
 assert_eq!(zip_longest(&[1, 2], &['a']), vec![
     (Some(1), Some('a')),
     (Some(2), None),
+]);
+```
+
+### cartesian_product
+Returns every pair from two collections in left-major order.
+
+```rust
+use lowdash::cartesian_product;
+
+assert_eq!(cartesian_product(&[1, 2], &['a', 'b']), vec![
+    (1, 'a'),
+    (1, 'b'),
+    (2, 'a'),
+    (2, 'b'),
 ]);
 ```
 
