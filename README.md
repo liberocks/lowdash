@@ -182,6 +182,7 @@ Utility functions for math:
 - [variance](#variance)
 - [sample_variance](#sample_variance)
 - [standard_deviation](#standard_deviation)
+- [population_standard_deviation](#population_standard_deviation)
 - [percentile](#percentile)
 - [median](#median)
 - [interpolate](#interpolate)
@@ -4042,6 +4043,16 @@ Returns the sample standard deviation, or `None` when fewer than two values are 
 use lowdash::standard_deviation;
 
 assert!((standard_deviation(&[1.0, 2.0, 3.0]).unwrap() - 1.0).abs() < 1e-12);
+```
+
+### population_standard_deviation
+Returns the square root of population variance, or `None` for invalid input.
+
+```rust
+use lowdash::population_standard_deviation;
+
+assert!((population_standard_deviation(&[1.0, 2.0, 3.0]).unwrap()
+    - (2.0_f64 / 3.0).sqrt()).abs() < 1e-12);
 ```
 
 ## Acknowledgement
