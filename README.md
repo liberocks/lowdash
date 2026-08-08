@@ -43,6 +43,7 @@ Utility functions for array:
 - [find_index_of](#find_index_of)
 - [find_key](#find_key)
 - [find_key_by](#find_key_by)
+- [find_last](#find_last)
 - [find_last_index_of](#find_last_index_of)
 - [find_or_else](#find_or_else)
 - [find_uniques](#find_uniques)
@@ -3650,6 +3651,15 @@ Returns the final items from a collection in their original order.
 use lowdash::take_right;
 
 assert_eq!(take_right(&[1, 2, 3, 4], 2), vec![3, 4]);
+```
+
+### find_last
+Finds the last item that matches a predicate by scanning from the end.
+
+```rust
+use lowdash::find_last;
+
+assert_eq!(find_last(&[1, 2, 3, 2], |number| *number == 2), Some(&2));
 ```
 
 ## Acknowledgement
