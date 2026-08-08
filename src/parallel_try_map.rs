@@ -40,6 +40,20 @@ where
     }
 
     let worker_count = workers.get().min(collection.len());
+    if worker_count == 1 {
+        let mut result = Vec::with_capacity(collection.len());
+        let mut first_error = None;
+        for (index, item) in collection.iter().enumerate() {
+            match iteratee(item, index) {
+                Ok(value) if first_error.is_none() => result.push(value),
+                Ok(_) => {}
+                Err(error) if first_error.is_none() => first_error = Some(error),
+                Err(_) => {}
+            }
+        }
+        return first_error.map_or(Ok(result), Err);
+    }
+
     let chunk_size =
         collection.len() / worker_count + usize::from(collection.len() % worker_count != 0);
     let (partials, panic_payload) = thread::scope(|scope| {
