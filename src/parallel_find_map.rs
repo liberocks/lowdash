@@ -144,6 +144,15 @@ mod tests {
     }
 
     #[test]
+    fn handles_one_worker_without_spawning() {
+        let result = parallel_find_map(&[0, 1, 2], workers(1), |value, index| {
+            (*value > 0).then_some(index)
+        });
+
+        assert_eq!(result, Some(1));
+    }
+
+    #[test]
     fn supports_owned_custom_results() {
         #[derive(Debug, PartialEq)]
         struct Match {

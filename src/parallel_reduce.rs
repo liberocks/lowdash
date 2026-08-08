@@ -163,6 +163,19 @@ mod tests {
     }
 
     #[test]
+    fn handles_one_worker_without_spawning() {
+        let result = parallel_reduce(
+            &[1, 2, 3],
+            workers(1),
+            || 0,
+            |sum, value, index| sum + *value + index as i32,
+            |left, right| left + right,
+        );
+
+        assert_eq!(result, 9);
+    }
+
+    #[test]
     fn supports_owned_custom_accumulators() {
         let result = parallel_reduce(
             &["a", "b", "c"],

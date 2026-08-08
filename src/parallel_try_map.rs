@@ -170,6 +170,23 @@ mod tests {
     }
 
     #[test]
+    fn handles_one_worker_and_runs_callbacks_after_errors() {
+        let calls = Arc::new(AtomicUsize::new(0));
+        let callback_calls = Arc::clone(&calls);
+        let result = parallel_try_map(&[1, 2, 3], workers(1), move |value, index| {
+            callback_calls.fetch_add(1, Ordering::SeqCst);
+            if index == 1 {
+                Err(*value)
+            } else {
+                Ok(*value)
+            }
+        });
+
+        assert_eq!(result, Err(2));
+        assert_eq!(calls.load(Ordering::SeqCst), 3);
+    }
+
+    #[test]
     fn supports_owned_custom_results_and_errors() {
         #[derive(Debug, PartialEq)]
         struct Label(String);
