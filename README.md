@@ -179,6 +179,7 @@ Utility functions for math:
 - [duration_between](#duration_between)
 
 Concurrency utilities:
+- [parallel_find_map](#parallel_find_map)
 - [parallel_for_each](#parallel_for_each)
 - [parallel_map](#parallel_map)
 - [parallel_try_map](#parallel_try_map)
@@ -3900,6 +3901,19 @@ use std::num::NonZeroUsize;
 parallel_for_each(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| {
     let _ = value;
 });
+```
+
+### parallel_find_map
+Finds the lowest-index matching result independently of thread completion order.
+
+```rust
+use lowdash::parallel_find_map;
+use std::num::NonZeroUsize;
+
+let result = parallel_find_map(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| {
+    (*value > 1).then_some(value * 10)
+});
+assert_eq!(result, Some(20));
 ```
 
 ## Acknowledgement
