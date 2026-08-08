@@ -49,7 +49,10 @@ where
 
     // Count occurrences
     for item in collection {
-        *counts.entry(item).or_insert(0) += 1;
+        let count = counts.entry(item).or_insert(0);
+        if *count < 2 {
+            *count += 1;
+        }
     }
 
     // Collect items that appear exactly once
