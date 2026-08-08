@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::hash::Hash;
 
 /// Returns the first encountered value with the highest frequency.
@@ -18,7 +19,16 @@ pub fn mode<T>(values: &[T]) -> Option<T>
 where
     T: Eq + Hash + Clone,
 {
-    crate::modes::modes(values).into_iter().next()
+    let mut counts = HashMap::with_capacity(values.len());
+    for value in values {
+        *counts.entry(value.clone()).or_insert(0) += 1;
+    }
+
+    let max_count = counts.values().copied().max()?;
+    values
+        .iter()
+        .find(|value| counts.get(*value) == Some(&max_count))
+        .cloned()
 }
 
 #[cfg(test)]
