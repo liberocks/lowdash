@@ -19,21 +19,21 @@ pub fn geometric_mean(values: &[f64]) -> Option<f64> {
     }
 
     let mut has_zero = false;
+    let mut mean_log = 0.0;
+    let mut count = 0.0;
     for &value in values {
         if !value.is_finite() || value < 0.0 {
             return None;
         }
-        has_zero |= value == 0.0;
+        if value == 0.0 {
+            has_zero = true;
+        } else if !has_zero {
+            count += 1.0;
+            mean_log += (value.ln() - mean_log) / count;
+        }
     }
     if has_zero {
         return Some(0.0);
-    }
-
-    let mut mean_log = 0.0;
-    let mut count = 0.0;
-    for &value in values {
-        count += 1.0;
-        mean_log += (value.ln() - mean_log) / count;
     }
 
     Some(mean_log.exp())
