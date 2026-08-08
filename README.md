@@ -146,6 +146,7 @@ Utility functions for object manipulation:
 - [uniq_keys](#uniq_keys)
 - [uniq_values](#uniq_values)
 - [union](#union)
+- [union_by](#union_by)
 - [value_or](#value_or)
 - [values](#values)
 
@@ -3749,6 +3750,16 @@ assert_eq!(cartesian_product(&[1, 2], &['a', 'b']), vec![
     (2, 'a'),
     (2, 'b'),
 ]);
+```
+
+### union_by
+Returns the first item for each generated key across all collections.
+
+```rust
+use lowdash::union_by;
+
+let groups = vec![vec![11, 12], vec![2, 13]];
+assert_eq!(union_by(&groups, |number| *number % 10), vec![11, 12]);
 ```
 
 ## Acknowledgement
