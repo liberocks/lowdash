@@ -128,6 +128,7 @@ mod sum;
 mod sum_by;
 mod support;
 mod take;
+mod take_right;
 mod take_right_while;
 mod take_while;
 mod times;
@@ -277,6 +278,7 @@ fn all_benches(c: &mut Criterion) {
     sum::benchmark_sum(c);
     sum_by::benchmark_sum_by(c);
     take::benchmark_take(c);
+    take_right::benchmark_take_right(c);
     take_right_while::benchmark_take_right_while(c);
     take_while::benchmark_take_while(c);
     times::benchmark_times(c);

@@ -94,6 +94,7 @@ Utility functions for array:
 - [splice](#splice)
 - [subset](#subset)
 - [take](#take)
+- [take_right](#take_right)
 - [zip](#zip)
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
@@ -3640,6 +3641,15 @@ let one_day = Duration::from_secs(86_400);
 let day_later = epoch + one_day;
 // Difference in days
 assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
+```
+
+### take_right
+Returns the final items from a collection in their original order.
+
+```rust
+use lowdash::take_right;
+
+assert_eq!(take_right(&[1, 2, 3, 4], 2), vec![3, 4]);
 ```
 
 ## Acknowledgement
