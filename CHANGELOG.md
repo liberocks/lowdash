@@ -6,6 +6,7 @@
 - Added `take_right` for selecting the final items from a collection.
 - Added `find_last` for reverse predicate searches.
 - Added `chunk_by` for grouping adjacent runs by key.
+- Added `scan` for collecting intermediate accumulators.
 
 ## [0.7.0] 2026-08-02
 ### Added

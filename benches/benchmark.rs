@@ -116,6 +116,7 @@ mod replace_all;
 mod reverse;
 mod sample;
 mod samples;
+mod scan;
 mod shuffle;
 mod slice;
 mod slice_to_map;
@@ -269,6 +270,7 @@ fn all_benches(c: &mut Criterion) {
     reverse::benchmark_reverse(c);
     sample::benchmark_sample(c);
     samples::benchmark_samples(c);
+    scan::benchmark_scan(c);
     shuffle::benchmark_shuffle(c);
     some::benchmark_some(c);
     sort_by::benchmark_sort_by(c);
