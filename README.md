@@ -121,6 +121,7 @@ Utility functions for string manipulation:
 
 Utility functions for object manipulation:
 - [assign](#assign)
+- [assign_with](#assign_with)
 - [entries](#entries)
 - [from_entries](#from_entries)
 - [from_pairs](#from_pairs)
@@ -3684,6 +3685,21 @@ Returns the intermediate accumulator after each item, without returning the init
 use lowdash::scan;
 
 assert_eq!(scan(&[1, 2, 3], |sum, number, _| sum + number, 0), vec![1, 3, 6]);
+```
+
+### assign_with
+Merges maps with a callback for resolving duplicate keys.
+
+```rust
+use lowdash::assign_with;
+use std::collections::HashMap;
+
+let mut first = HashMap::new();
+first.insert("count", 2);
+let mut second = HashMap::new();
+second.insert("count", 3);
+let result = assign_with(&[first, second], |_, old, new| old + new);
+assert_eq!(result["count"], 5);
 ```
 
 ## Acknowledgement
