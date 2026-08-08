@@ -25,6 +25,8 @@ pub fn floating_sum(values: &[f64]) -> f64 {
     let mut has_positive_infinity = false;
     let mut has_negative_infinity = false;
     let mut maximum_magnitude = 0.0_f64;
+    let mut sum = 0.0;
+    let mut compensation = 0.0;
 
     for &value in values {
         if value.is_nan() {
@@ -36,6 +38,13 @@ pub fn floating_sum(values: &[f64]) -> f64 {
             has_negative_infinity = true;
         } else {
             maximum_magnitude = maximum_magnitude.max(value.abs());
+            let next = sum + value;
+            if sum.abs() >= value.abs() {
+                compensation += (sum - next) + value;
+            } else {
+                compensation += (value - next) + sum;
+            }
+            sum = next;
         }
     }
 
@@ -52,7 +61,7 @@ pub fn floating_sum(values: &[f64]) -> f64 {
         return 0.0;
     }
 
-    let result = compensated_sum(values, 1.0);
+    let result = sum + compensation;
     if result.is_finite() {
         result
     } else {
