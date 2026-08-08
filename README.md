@@ -172,6 +172,7 @@ Utility functions for math:
 - [mean_by](#mean_by)
 - [floating_mean](#floating_mean)
 - [floating_sum](#floating_sum)
+- [euclidean_distance](#euclidean_distance)
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
@@ -4033,6 +4034,16 @@ Empty input returns `0.0`; `NaN` and mixed infinities follow IEEE-754 propagatio
 use lowdash::floating_sum;
 
 assert_eq!(floating_sum(&[1.0, 2.0, 3.0]), 6.0);
+```
+
+### euclidean_distance
+Calculates the Euclidean distance between equal-length finite points.
+Returns `None` for mismatched lengths, nonfinite values, or a nonfinite result.
+
+```rust
+use lowdash::euclidean_distance;
+
+assert_eq!(euclidean_distance(&[0.0, 0.0], &[3.0, 4.0]), Some(5.0));
 ```
 
 ### weighted_mean
