@@ -40,6 +40,7 @@ mod earliest_by;
 mod ellipsis;
 mod entries;
 mod euclidean_distance;
+mod euclidean_norm;
 mod every;
 mod factorial;
 mod fill;
@@ -238,6 +239,7 @@ fn all_benches(c: &mut Criterion) {
     every::benchmark_every(c);
     entries::benchmark_entries(c);
     euclidean_distance::benchmark_euclidean_distance(c);
+    euclidean_norm::benchmark_euclidean_norm(c);
     fill::benchmark_fill(c);
     factorial::benchmark_factorial(c);
     filter::benchmark_filter(c);

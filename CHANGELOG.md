@@ -44,6 +44,7 @@
 - Added `linear_regression` for ordinary least-squares fits.
 - Added `floating_sum` for compensated floating-point summation.
 - Added `euclidean_distance` for stable finite-point distances.
+- Added `euclidean_norm` for overflow-resistant vector norms.
 - Added `combination_count` for checked binomial coefficients.
 - Added `factorial` for checked factorial values.
 - Added `greatest_common_divisor` for Euclidean greatest common divisors.
