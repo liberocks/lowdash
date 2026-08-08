@@ -14,6 +14,7 @@
 - Added `cartesian_product` for left-major pair generation.
 - Added `union_by` for key-based collection unions.
 - Added `symmetric_difference` for stable exclusive values.
+- Added `unzip` for splitting pairs into two collections.
 
 ## [0.7.0] 2026-08-02
 ### Added

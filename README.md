@@ -107,6 +107,7 @@ Utility functions for array:
 - [take_while](#take_while)
 - [times](#times)
 - [zip_longest](#zip_longest)
+- [unzip](#unzip)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
 - [drop_by_index](#drop_by_index)
@@ -3770,6 +3771,15 @@ Returns unique values that appear in exactly one input, preserving first appeara
 use lowdash::symmetric_difference;
 
 assert_eq!(symmetric_difference(&[1, 2, 2], &[2, 3]), vec![1, 3]);
+```
+
+### unzip
+Splits pairs into two vectors while preserving their order.
+
+```rust
+use lowdash::unzip;
+
+assert_eq!(unzip(&[("a", 1), ("b", 2)]), (vec!["a", "b"], vec![1, 2]));
 ```
 
 ## Acknowledgement
