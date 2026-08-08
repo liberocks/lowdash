@@ -62,6 +62,7 @@ mod first_or_empty;
 mod flat_map;
 mod flatten;
 mod floating_mean;
+mod floating_sum;
 mod foreach;
 mod foreach_while;
 mod from_entries;
@@ -257,6 +258,7 @@ fn all_benches(c: &mut Criterion) {
     flat_map::benchmark_flat_map(c);
     flatten::benchmark_flatten(c);
     floating_mean::benchmark_floating_mean(c);
+    floating_sum::benchmark_floating_sum(c);
     foreach::benchmark_foreach(c);
     foreach_while::benchmark_foreach_while(c);
     from_entries::benchmark_from_entries(c);
