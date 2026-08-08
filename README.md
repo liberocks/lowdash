@@ -181,6 +181,7 @@ Utility functions for math:
 - [quantiles](#quantiles)
 - [variance](#variance)
 - [sample_variance](#sample_variance)
+- [standard_deviation](#standard_deviation)
 - [percentile](#percentile)
 - [median](#median)
 - [interpolate](#interpolate)
@@ -4032,6 +4033,15 @@ Calculates sample variance with an `n - 1` divisor and validates finite input.
 use lowdash::sample_variance;
 
 assert_eq!(sample_variance(&[1.0, 2.0, 3.0]), Some(1.0));
+```
+
+### standard_deviation
+Returns the sample standard deviation, or `None` when fewer than two values are available.
+
+```rust
+use lowdash::standard_deviation;
+
+assert!((standard_deviation(&[1.0, 2.0, 3.0]).unwrap() - 1.0).abs() < 1e-12);
 ```
 
 ## Acknowledgement

@@ -37,6 +37,7 @@
 - Added `mode` for selecting the first most common value.
 - Added `quantiles` for inclusive interpolated cut points.
 - Added `sample_variance` for corrected one-pass variance.
+- Added `standard_deviation` for sample standard deviation.
 
 ## [0.7.0] 2026-08-02
 ### Added
