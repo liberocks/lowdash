@@ -33,7 +33,7 @@ where
     V: Eq + Hash + Clone,
 {
     let value_set: HashSet<V> = values.iter().cloned().collect();
-    let mut result = HashMap::new();
+    let mut result = HashMap::with_capacity(map.len());
     for (k, v) in map.iter() {
         if !value_set.contains(v) {
             result.insert(k.clone(), v.clone());
