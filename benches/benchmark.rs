@@ -82,6 +82,7 @@ mod intersection;
 mod intersection_by;
 mod invert;
 mod invert_grouped;
+mod is_close;
 mod is_sorted;
 mod is_sorted_by_key;
 mod kebab_case;
@@ -282,6 +283,7 @@ fn all_benches(c: &mut Criterion) {
     intersection_by::benchmark_intersection_by(c);
     invert::benchmark_invert(c);
     invert_grouped::benchmark_invert_grouped(c);
+    is_close::benchmark_is_close(c);
     is_sorted::benchmark_is_sorted(c);
     is_sorted_by_key::benchmark_is_sorted_by_key(c);
     kebab_case::benchmark_kebab_case(c);
