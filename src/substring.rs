@@ -26,29 +26,41 @@
 /// assert_eq!(substring(&s, 0, 10), "HelloWorld");
 /// ```
 pub fn substring(str_input: &str, offset: i32, length: u32) -> String {
-    let size = str_input.chars().count();
-
-    let idx = if offset < 0 {
-        let new_offset = size as i32 + offset;
-        if new_offset < 0 {
-            0
-        } else {
-            new_offset as usize
-        }
-    } else {
-        offset as usize
-    };
-
-    if idx >= size {
+    if length == 0 {
         return String::new();
     }
 
-    str_input
-        .chars()
-        .skip(idx)
-        .filter(|&c| c != '\x00')
-        .take(length as usize)
-        .collect()
+    let start = if offset < 0 {
+        let from_end = offset.unsigned_abs() as usize;
+        if from_end == 0 {
+            0
+        } else {
+            str_input
+                .char_indices()
+                .rev()
+                .nth(from_end - 1)
+                .map(|(index, _)| index)
+                .unwrap_or(0)
+        }
+    } else {
+        match str_input.char_indices().nth(offset as usize) {
+            Some((index, _)) => index,
+            None => return String::new(),
+        }
+    };
+
+    let mut result = String::with_capacity(length as usize);
+    let mut count = 0;
+    for character in str_input[start..].chars() {
+        if character != '\x00' {
+            result.push(character);
+            count += 1;
+            if count == length {
+                break;
+            }
+        }
+    }
+    result
 }
 
 #[cfg(test)]
