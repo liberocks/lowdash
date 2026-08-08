@@ -8,6 +8,7 @@
 - Added `chunk_by` for grouping adjacent runs by key.
 - Added `scan` for collecting intermediate accumulators.
 - Added `assign_with` for resolver-based map merging.
+- Added `difference_by` for key-based collection differences.
 
 ## [0.7.0] 2026-08-02
 ### Added
