@@ -62,18 +62,25 @@ where
         return None;
     }
 
-    let mut earliest = collection[0].clone();
-    let mut earliest_time = iteratee(&earliest);
+    let first = collection[0].clone();
+    let mut earliest_time = iteratee(&first);
+    let mut earliest = &collection[0];
+    let mut found_later = false;
 
     for item in &collection[1..] {
         let item_time = iteratee(item);
         if item_time < earliest_time {
-            earliest = item.clone();
+            earliest = item;
+            found_later = true;
             earliest_time = item_time;
         }
     }
 
-    Some(earliest)
+    if found_later {
+        Some(earliest.clone())
+    } else {
+        Some(first)
+    }
 }
 
 #[cfg(test)]
