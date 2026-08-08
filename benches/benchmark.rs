@@ -23,6 +23,7 @@ mod count;
 mod count_by;
 mod count_values;
 mod count_values_by;
+mod defaults;
 mod difference;
 mod difference_by;
 mod drop;
@@ -187,6 +188,7 @@ fn all_benches(c: &mut Criterion) {
     count_by::benchmark_count_by(c);
     count_values::benchmark_count_values(c);
     count_values_by::benchmark_count_values_by(c);
+    defaults::benchmark_defaults(c);
     difference::benchmark_difference(c);
     difference_by::benchmark_difference_by(c);
     drop::benchmark_drop(c);
