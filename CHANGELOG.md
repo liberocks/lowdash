@@ -28,6 +28,7 @@
 - Added `parallel_find_map` for ordered concurrent searches.
 - Added `parallel_reduce` for chunked concurrent reductions.
 - Added `floating_mean` for compensated floating-point means.
+- Added `weighted_mean` for validated weighted averages.
 
 ## [0.7.0] 2026-08-02
 ### Added

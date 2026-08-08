@@ -171,6 +171,7 @@ Utility functions for math:
 - [mean](#mean)
 - [mean_by](#mean_by)
 - [floating_mean](#floating_mean)
+- [weighted_mean](#weighted_mean)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3942,6 +3943,15 @@ Calculates a compensated floating-point mean and returns `None` for empty input.
 use lowdash::floating_mean;
 
 assert_eq!(floating_mean(&[1.0, 2.0, 3.0]), Some(2.0));
+```
+
+### weighted_mean
+Calculates a weighted mean when values and nonnegative weights are valid.
+
+```rust
+use lowdash::weighted_mean;
+
+assert_eq!(weighted_mean(&[1.0, 3.0], &[1.0, 3.0]), Some(2.5));
 ```
 
 ## Acknowledgement
