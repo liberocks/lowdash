@@ -42,6 +42,7 @@ mod find_duplicates_by;
 mod find_index_of;
 mod find_key;
 mod find_key_by;
+mod find_last;
 mod find_last_index_of;
 mod find_or_else;
 mod find_uniques;
@@ -193,6 +194,7 @@ fn all_benches(c: &mut Criterion) {
     find_index_of::benchmark_find_index_of(c);
     find_key::benchmark_find_key(c);
     find_key_by::benchmark_find_key_by(c);
+    find_last::benchmark_find_last(c);
     find_last_index_of::benchmark_find_last_index_of(c);
     find_or_else::benchmark_find_or_else(c);
     find_uniques::benchmark_find_uniques(c);
