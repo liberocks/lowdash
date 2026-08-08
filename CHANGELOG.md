@@ -56,8 +56,6 @@
 - Added `integer_square_root` for exact integer floor square roots.
 - Added `least_common_multiple` for checked least common multiples.
 - Added `permutation_count` for checked ordered selection counts.
-
-### Changed
 - Improved `difference_by`, `mode`, `modes`, `median_low`, and `zip_longest` with lower-overhead collection paths.
 - Improved `euclidean_distance`, `sample_variance`, `population_standard_deviation`, `covariance`, `correlation`, and `linear_regression` with fused or scaled numeric accumulation.
 - Improved `geometric_mean`, `floating_sum`, `sum_products`, `harmonic_mean`, and `integer_square_root` through specialized numeric fast paths.
