@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_flatten(c: &mut Criterion) {
     let nested = support::nested_vecs(128, 32);

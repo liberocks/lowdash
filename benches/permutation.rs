@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_permutation(c: &mut Criterion) {
     let items = vec![1, 2, 3, 4, 5, 6, 7];

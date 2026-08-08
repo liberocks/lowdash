@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_common_is_collection_float(c: &mut Criterion) {
     let floats = support::boxed_float_any(1_024);
