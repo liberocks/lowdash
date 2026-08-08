@@ -14,14 +14,26 @@
 /// assert!((result.unwrap() - (2.0_f64 / 3.0).sqrt()).abs() < 1e-12);
 /// ```
 pub fn population_standard_deviation(values: &[f64]) -> Option<f64> {
-    if values.iter().any(|value| !value.is_finite()) {
+    if values.is_empty() {
         return None;
     }
 
-    crate::variance::variance(values).and_then(|variance| {
-        let result = variance.sqrt();
-        result.is_finite().then_some(result)
-    })
+    let mut count = 0.0;
+    let mut mean = 0.0;
+    let mut sum_squared_differences = 0.0;
+    for &value in values {
+        if !value.is_finite() {
+            return None;
+        }
+        count += 1.0;
+        let difference_from_mean = value - mean;
+        mean += difference_from_mean / count;
+        let updated_difference = value - mean;
+        sum_squared_differences += difference_from_mean * updated_difference;
+    }
+
+    let result = (sum_squared_differences / count).sqrt();
+    result.is_finite().then_some(result)
 }
 
 #[cfg(test)]
