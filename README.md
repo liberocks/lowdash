@@ -191,6 +191,7 @@ Utility functions for math:
 - [interpolate](#interpolate)
 - [permutation](#permutation)
 - [combination](#combination)
+- [combination_count](#combination_count)
 - [duration_between](#duration_between)
 
 Concurrency utilities:
@@ -3662,6 +3663,16 @@ let result = combination(&items, 2);
 assert_eq!(result.len(), 6);
 // One possible combination: [2, 3]
 assert!(result.contains(&vec![2, 3]));
+```
+
+### combination_count
+Counts unordered selections without repetition.
+Returns `Some(0)` when `k` exceeds `n` and `None` when the result overflows `u128`.
+
+```rust
+use lowdash::combination_count;
+
+assert_eq!(combination_count(5, 2), Some(10));
 ```
 
 ### duration_between
