@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_clamp(c: &mut Criterion) {
     c.bench_function("clamp/i32/within", |b| {

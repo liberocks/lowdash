@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_is_sorted_by_key(c: &mut Criterion) {
     let increasing: Vec<support::Person> = (0..4_096)

@@ -1,5 +1,6 @@
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_nearest_power_of_two(c: &mut Criterion) {
     c.bench_function("nearest_power_of_two/65537", |b| {

@@ -1,6 +1,7 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::Criterion;
 use lowdash as ld;
+use std::hint::black_box;
 
 pub fn benchmark_drop_by_index(c: &mut Criterion) {
     let indexes = vec![1, 3, 5, 8, 13, 21, 34, 55, 89, 144];
