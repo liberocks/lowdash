@@ -5,6 +5,7 @@ mod assign_with;
 mod associate;
 mod camel_case;
 mod capitalize;
+mod cartesian_product;
 mod char_length;
 mod chunk;
 mod chunk_by;
@@ -169,6 +170,7 @@ fn all_benches(c: &mut Criterion) {
     associate::benchmark_associate(c);
     camel_case::benchmark_camel_case(c);
     capitalize::benchmark_capitalize(c);
+    cartesian_product::benchmark_cartesian_product(c);
     char_length::benchmark_char_length(c);
     chunk::benchmark_chunk(c);
     chunk_by::benchmark_chunk_by(c);
