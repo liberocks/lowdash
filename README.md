@@ -190,6 +190,7 @@ Utility functions for math:
 - [median](#median)
 - [interpolate](#interpolate)
 - [permutation](#permutation)
+- [permutation_count](#permutation_count)
 - [combination](#combination)
 - [combination_count](#combination_count)
 - [factorial](#factorial)
@@ -3654,6 +3655,16 @@ let result = permutation(&items, 2);
 // Expected permutations: [ [1,2], [1,3], [2,1], [2,3], [3,1], [3,2] ]
 assert_eq!(result.len(), 6);
 assert!(result.contains(&vec![2, 1]));
+```
+
+### permutation_count
+Counts ordered selections without repetition.
+Returns `Some(0)` when `k` exceeds `n` and `None` when the result overflows `u128`.
+
+```rust
+use lowdash::permutation_count;
+
+assert_eq!(permutation_count(5, 2), Some(20));
 ```
 
 ### combination
