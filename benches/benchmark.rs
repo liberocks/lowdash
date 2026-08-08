@@ -137,6 +137,7 @@ mod replace;
 mod replace_all;
 mod reverse;
 mod sample;
+mod sample_variance;
 mod samples;
 mod scan;
 mod shuffle;
@@ -321,6 +322,7 @@ fn all_benches(c: &mut Criterion) {
     reverse::benchmark_reverse(c);
     sample::benchmark_sample(c);
     samples::benchmark_samples(c);
+    sample_variance::benchmark_sample_variance(c);
     scan::benchmark_scan(c);
     shuffle::benchmark_shuffle(c);
     some::benchmark_some(c);
