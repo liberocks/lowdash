@@ -37,12 +37,13 @@ pub fn filter<'a, T, F>(collection: &'a [T], predicate: F) -> Vec<&'a T>
 where
     F: Fn(&'a T, usize) -> bool,
 {
-    collection
-        .iter()
-        .enumerate()
-        .filter(|(index, item)| predicate(item, *index))
-        .map(|(_, item)| item)
-        .collect()
+    let mut result = Vec::with_capacity(collection.len());
+    for (index, item) in collection.iter().enumerate() {
+        if predicate(item, index) {
+            result.push(item);
+        }
+    }
+    result
 }
 
 #[cfg(test)]
