@@ -62,6 +62,7 @@ mod foreach;
 mod foreach_while;
 mod from_entries;
 mod from_pairs;
+mod geometric_mean;
 mod group_by;
 mod has_key;
 mod index_of;
@@ -238,6 +239,7 @@ fn all_benches(c: &mut Criterion) {
     foreach_while::benchmark_foreach_while(c);
     from_entries::benchmark_from_entries(c);
     from_pairs::benchmark_from_pairs(c);
+    geometric_mean::benchmark_geometric_mean(c);
     group_by::benchmark_group_by(c);
     has_key::benchmark_has_key(c);
     index_of::benchmark_index_of(c);
