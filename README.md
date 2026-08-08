@@ -170,6 +170,7 @@ Utility functions for math:
 - [product_by](#product_by)
 - [mean](#mean)
 - [mean_by](#mean_by)
+- [floating_mean](#floating_mean)
 - [variance](#variance)
 - [percentile](#percentile)
 - [median](#median)
@@ -3932,6 +3933,15 @@ let result = parallel_reduce(
     |left, right| left + right,
 );
 assert_eq!(result, 6);
+```
+
+### floating_mean
+Calculates a compensated floating-point mean and returns `None` for empty input.
+
+```rust
+use lowdash::floating_mean;
+
+assert_eq!(floating_mean(&[1.0, 2.0, 3.0]), Some(2.0));
 ```
 
 ## Acknowledgement
