@@ -24,6 +24,8 @@ pub fn sum_products(p: &[f64], q: &[f64]) -> Option<f64> {
     let mut has_positive_infinity = false;
     let mut has_negative_infinity = false;
     let mut maximum_magnitude = 0.0_f64;
+    let mut sum = 0.0;
+    let mut compensation = 0.0;
 
     for (&left, &right) in p.iter().zip(q) {
         let product = left * right;
@@ -36,6 +38,13 @@ pub fn sum_products(p: &[f64], q: &[f64]) -> Option<f64> {
             has_negative_infinity = true;
         } else {
             maximum_magnitude = maximum_magnitude.max(product.abs());
+            let next = sum + product;
+            if sum.abs() >= product.abs() {
+                compensation += (sum - next) + product;
+            } else {
+                compensation += (product - next) + sum;
+            }
+            sum = next;
         }
     }
 
@@ -52,7 +61,7 @@ pub fn sum_products(p: &[f64], q: &[f64]) -> Option<f64> {
         return Some(0.0);
     }
 
-    let result = compensated_product_sum(p, q, 1.0);
+    let result = sum + compensation;
     if result.is_finite() {
         Some(result)
     } else {
