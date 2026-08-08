@@ -104,6 +104,7 @@ Utility functions for array:
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
 - [times](#times)
+- [zip_longest](#zip_longest)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
 - [drop_by_index](#drop_by_index)
@@ -3721,6 +3722,18 @@ use lowdash::intersection_by;
 
 let groups = vec![vec![11, 12], vec![2, 12], vec![22, 32]];
 assert_eq!(intersection_by(&groups, |number| *number % 10), vec![12]);
+```
+
+### zip_longest
+Pairs two collections, using `None` when one side has no item at an index.
+
+```rust
+use lowdash::zip_longest;
+
+assert_eq!(zip_longest(&[1, 2], &['a']), vec![
+    (Some(1), Some('a')),
+    (Some(2), None),
+]);
 ```
 
 ## Acknowledgement
