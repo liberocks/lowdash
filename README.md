@@ -61,6 +61,7 @@ Utility functions for array:
 - [index_of](#index_of)
 - [interleave](#interleave)
 - [intersection](#intersection)
+- [intersection_by](#intersection_by)
 - [is_sorted](#is_sorted)
 - [is_sorted_by_key](#is_sorted_by_key)
 - [key_by](#key_by)
@@ -3710,6 +3711,16 @@ Returns items whose generated keys are absent from another collection, preservin
 use lowdash::difference_by;
 
 assert_eq!(difference_by(&[11, 12, 13], &[2], |number| *number % 10), vec![11, 13]);
+```
+
+### intersection_by
+Returns the first item for each key shared by every collection.
+
+```rust
+use lowdash::intersection_by;
+
+let groups = vec![vec![11, 12], vec![2, 12], vec![22, 32]];
+assert_eq!(intersection_by(&groups, |number| *number % 10), vec![12]);
 ```
 
 ## Acknowledgement

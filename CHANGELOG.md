@@ -9,6 +9,7 @@
 - Added `scan` for collecting intermediate accumulators.
 - Added `assign_with` for resolver-based map merging.
 - Added `difference_by` for key-based collection differences.
+- Added `intersection_by` for key-based collection intersections.
 
 ## [0.7.0] 2026-08-02
 ### Added
