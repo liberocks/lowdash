@@ -27,6 +27,7 @@
 - Added `parallel_for_each` for concurrent side-effect callbacks.
 - Added `parallel_find_map` for ordered concurrent searches.
 - Added `parallel_reduce` for chunked concurrent reductions.
+- Added `floating_mean` for compensated floating-point means.
 
 ## [0.7.0] 2026-08-02
 ### Added
