@@ -12,6 +12,7 @@
 - Added `intersection_by` for key-based collection intersections.
 - Added `zip_longest` for pairing collections of different lengths.
 - Added `cartesian_product` for left-major pair generation.
+- Added `union_by` for key-based collection unions.
 
 ## [0.7.0] 2026-08-02
 ### Added

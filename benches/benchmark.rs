@@ -141,6 +141,7 @@ mod take_while;
 mod times;
 mod to_pairs;
 mod union;
+mod union_by;
 mod uniq;
 mod uniq_by;
 mod uniq_keys;
@@ -303,6 +304,7 @@ fn all_benches(c: &mut Criterion) {
     uniq_keys::benchmark_uniq_keys(c);
     uniq_values::benchmark_uniq_values(c);
     union::benchmark_union(c);
+    union_by::benchmark_union_by(c);
     value_or::benchmark_value_or(c);
     values::benchmark_values(c);
     words::benchmark_words(c);
