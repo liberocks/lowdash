@@ -27,6 +27,7 @@ Utility functions for array:
 - [count_values](#count_values)
 - [count_values_by](#count_values_by)
 - [difference](#difference)
+- [difference_by](#difference_by)
 - [drop](#drop)
 - [drop_right](#drop_right)
 - [drop_right_while](#drop_right_while)
@@ -3700,6 +3701,15 @@ let mut second = HashMap::new();
 second.insert("count", 3);
 let result = assign_with(&[first, second], |_, old, new| old + new);
 assert_eq!(result["count"], 5);
+```
+
+### difference_by
+Returns items whose generated keys are absent from another collection, preserving duplicates.
+
+```rust
+use lowdash::difference_by;
+
+assert_eq!(difference_by(&[11, 12, 13], &[2], |number| *number % 10), vec![11, 13]);
 ```
 
 ## Acknowledgement
