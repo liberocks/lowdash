@@ -174,6 +174,7 @@ Utility functions for math:
 - [weighted_mean](#weighted_mean)
 - [geometric_mean](#geometric_mean)
 - [harmonic_mean](#harmonic_mean)
+- [covariance](#covariance)
 - [median_low](#median_low)
 - [median_high](#median_high)
 - [median_grouped](#median_grouped)
@@ -4053,6 +4054,15 @@ use lowdash::population_standard_deviation;
 
 assert!((population_standard_deviation(&[1.0, 2.0, 3.0]).unwrap()
     - (2.0_f64 / 3.0).sqrt()).abs() < 1e-12);
+```
+
+### covariance
+Calculates sample covariance for equal-length finite inputs.
+
+```rust
+use lowdash::covariance;
+
+assert_eq!(covariance(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(2.0));
 ```
 
 ## Acknowledgement
