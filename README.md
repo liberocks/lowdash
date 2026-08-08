@@ -76,6 +76,7 @@ Utility functions for array:
 - [map](#map)
 - [max](#max)
 - [max_by](#max_by)
+- [max_by_key](#max_by_key)
 - [min](#min)
 - [min_by](#min_by)
 - [min_by_key](#min_by_key)
@@ -3790,6 +3791,15 @@ Returns the first item with the smallest value produced by a key function.
 use lowdash::min_by_key;
 
 assert_eq!(min_by_key(&["long", "short"], |word| word.len()), Some("short"));
+```
+
+### max_by_key
+Returns the first item with the largest value produced by a key function.
+
+```rust
+use lowdash::max_by_key;
+
+assert_eq!(max_by_key(&["a", "longer"], |word| word.len()), Some("longer"));
 ```
 
 ## Acknowledgement
