@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_standard_deviation(c: &mut Criterion) {
     let values: Vec<f64> = (0..4_096).map(|value| value as f64 / 3.0).collect();

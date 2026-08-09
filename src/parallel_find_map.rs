@@ -45,8 +45,8 @@ where
         return result;
     }
 
-    let chunk_size = collection.len() / worker_count
-        + usize::from(!collection.len().is_multiple_of(worker_count));
+    let chunk_size =
+        collection.len() / worker_count + usize::from(collection.len() % worker_count != 0);
     let (partials, panic_payload) = thread::scope(|scope| {
         let mut handles = Vec::with_capacity(worker_count);
         let iteratee = &iteratee;

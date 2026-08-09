@@ -62,6 +62,12 @@
 - Reduced setup overhead for `parallel_map`, `parallel_for_each`, `parallel_reduce`, `parallel_find_map`, and `parallel_try_map` on small and one-worker inputs.
 - Improved `assign_with` and `kernel_density_sample` by reducing intermediate allocation and repeated random sampling work.
 
+### Fixed
+- Preserved the contextual Unicode lowercasing behavior of `snake_case` and `kebab_case` from 0.7.0 while retaining direct output for ASCII input.
+- Bounded `substring`'s output allocation by the available input bytes to avoid oversized reservations for large lengths.
+- Limited `pick_by_keys` and `pick_by_values` reservations to the source map size.
+- Declared Rust 1.63 as the minimum supported compiler version and kept the benchmark suite compatible with it.
+
 ## [0.7.0] 2026-08-02
 ### Added
 - Added stable `sort_by` and `sort_by_key` collection sorting functions.

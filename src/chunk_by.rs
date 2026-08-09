@@ -23,8 +23,9 @@ where
     K: PartialEq,
     F: FnMut(&T) -> K,
 {
-    let Some(first) = collection.first() else {
-        return Vec::new();
+    let first = match collection.first() {
+        Some(first) => first,
+        None => return Vec::new(),
     };
 
     let mut result = Vec::new();

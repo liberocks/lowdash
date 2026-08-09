@@ -49,7 +49,8 @@ pub fn substring(str_input: &str, offset: i32, length: u32) -> String {
         }
     };
 
-    let mut result = String::with_capacity(length as usize);
+    let capacity = (length as usize).min(str_input.len() - start);
+    let mut result = String::with_capacity(capacity);
     let mut count = 0;
     for character in str_input[start..].chars() {
         if character != '\x00' {
@@ -155,5 +156,12 @@ mod tests {
         let s = "Short";
         let result = substring(s, 0, 100);
         assert_eq!(result, "Short");
+    }
+
+    #[test]
+    fn test_substring_large_length_does_not_overallocate() {
+        let result = substring("Short", 0, u32::MAX);
+        assert_eq!(result, "Short");
+        assert!(result.capacity() <= "Short".len());
     }
 }

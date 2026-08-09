@@ -1,7 +1,7 @@
 use crate::support;
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_cartesian_product(c: &mut Criterion) {
     let left = support::int_vec(128);

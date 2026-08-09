@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_least_common_multiple(c: &mut Criterion) {
     let values = [12_u64, 18, 30, 42];

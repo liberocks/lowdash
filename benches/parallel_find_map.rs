@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 use std::num::NonZeroUsize;
 
 pub fn benchmark_parallel_find_map(c: &mut Criterion) {

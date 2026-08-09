@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_product(c: &mut Criterion) {
     let ints: Vec<f64> = (0..128).map(|i| 1.0 + (i % 5) as f64 / 100.0).collect();

@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_common_is_floats(c: &mut Criterion) {
     c.bench_function("common_is_floats/f64", |b| {

@@ -21,8 +21,9 @@ where
     F: Fn(&T) -> K,
     Slice: AsRef<[T]>,
 {
-    let Some(first) = collections.first().map(AsRef::as_ref) else {
-        return Vec::new();
+    let first = match collections.first().map(AsRef::as_ref) {
+        Some(first) => first,
+        None => return Vec::new(),
     };
 
     if first.is_empty() {

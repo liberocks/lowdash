@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_common_ceil_log2(c: &mut Criterion) {
     c.bench_function("common_ceil_log2/65537", |b| {

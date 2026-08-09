@@ -32,7 +32,7 @@ where
     V: std::cmp::Eq + std::hash::Hash + Clone,
 {
     let value_set: std::collections::HashSet<V> = values.iter().cloned().collect();
-    let mut result = std::collections::HashMap::with_capacity(values.len());
+    let mut result = std::collections::HashMap::with_capacity(values.len().min(map.len()));
     for (k, v) in map.iter() {
         if value_set.contains(v) {
             result.insert(k.clone(), v.clone());

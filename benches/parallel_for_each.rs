@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 use std::num::NonZeroUsize;
 use std::sync::{
     atomic::{AtomicUsize, Ordering},

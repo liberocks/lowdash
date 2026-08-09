@@ -1,7 +1,7 @@
 use crate::support;
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_zip(c: &mut Criterion) {
     let numbers = support::int_vec(4_096);

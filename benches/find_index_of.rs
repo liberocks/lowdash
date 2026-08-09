@@ -1,7 +1,7 @@
 use crate::support;
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_find_index_of(c: &mut Criterion) {
     let ints: Vec<i32> = (0..4_096).collect();

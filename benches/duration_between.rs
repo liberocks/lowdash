@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_duration_between(c: &mut Criterion) {
     let start = std::time::UNIX_EPOCH + std::time::Duration::from_secs(1_000);

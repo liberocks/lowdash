@@ -1,7 +1,7 @@
 use crate::support;
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 #[allow(clippy::approx_constant)]
 pub fn benchmark_fill(c: &mut Criterion) {

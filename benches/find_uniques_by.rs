@@ -1,7 +1,7 @@
 use crate::support;
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_find_uniques_by(c: &mut Criterion) {
     let people_increasing = support::people(4_096);

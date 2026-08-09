@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_take_right(c: &mut Criterion) {
     let small: Vec<i32> = (0..128).collect();

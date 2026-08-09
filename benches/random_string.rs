@@ -1,6 +1,6 @@
+use criterion::black_box;
 use criterion::Criterion;
 use lowdash as ld;
-use std::hint::black_box;
 
 pub fn benchmark_random_string(c: &mut Criterion) {
     c.bench_function("random_string/64", |b| {
