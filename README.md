@@ -22,6 +22,7 @@ Utility functions for collections:
 - [chunk](#chunk)
 - [chunk_by](#chunk_by)
 - [compact](#compact)
+- [contains_all](#contains_all)
 - [count](#count)
 - [count_by](#count_by)
 - [count_values](#count_values)
@@ -2662,6 +2663,16 @@ use lowdash::cut;
 
 let result = cut(&[1, 2, 3, 4], &[2, 3]);
 assert_eq!(result, Some((&[1][..], &[4][..])));
+```
+
+### contains_all
+Returns `true` when every value in a subset occurs in a collection.
+
+```rust
+use lowdash::contains_all;
+
+assert!(contains_all(&[1, 2, 3, 4], &[2, 4]));
+assert!(!contains_all(&[1, 2, 3, 4], &[2, 5]));
 ```
 
 ### subset
