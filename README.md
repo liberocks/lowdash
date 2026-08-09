@@ -61,6 +61,7 @@ Utility functions for collections:
 - [intersection_by](#intersection_by)
 - [is_sorted](#is_sorted)
 - [is_sorted_by_key](#is_sorted_by_key)
+- [is_uniq](#is_uniq)
 - [last](#last)
 - [last_index_of](#last_index_of)
 - [last_or](#last_or)
@@ -2903,6 +2904,16 @@ let floats = vec![
 ];
 let result = is_sorted_by_key(&floats, |item| item.0);
 assert_eq!(result, true);
+```
+
+### is_uniq
+Returns `true` when every item occurs at most once.
+
+```rust
+use lowdash::is_uniq;
+
+assert!(is_uniq(&[1, 2, 3]));
+assert!(!is_uniq(&[1, 2, 1]));
 ```
 
 ### sort_by_key

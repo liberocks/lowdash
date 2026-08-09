@@ -85,6 +85,7 @@ mod invert_grouped;
 mod is_close;
 mod is_sorted;
 mod is_sorted_by_key;
+mod is_uniq;
 mod kebab_case;
 mod kernel_density_estimate;
 mod kernel_density_sample;
@@ -288,6 +289,7 @@ fn all_benches(c: &mut Criterion) {
     is_close::benchmark_is_close(c);
     is_sorted::benchmark_is_sorted(c);
     is_sorted_by_key::benchmark_is_sorted_by_key(c);
+    is_uniq::benchmark_is_uniq(c);
     kebab_case::benchmark_kebab_case(c);
     kernel_density_estimate::benchmark_kernel_density_estimate(c);
     kernel_density_sample::benchmark_kernel_density_sample(c);
