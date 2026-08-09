@@ -24,6 +24,7 @@ Utility functions for collections:
 - [compact](#compact)
 - [contains_all](#contains_all)
 - [contains_any](#contains_any)
+- [contains_none](#contains_none)
 - [count](#count)
 - [count_by](#count_by)
 - [count_values](#count_values)
@@ -2684,6 +2685,16 @@ use lowdash::contains_any;
 
 assert!(contains_any(&[1, 2, 3, 4], &[0, 2]));
 assert!(!contains_any(&[1, 2, 3, 4], &[0, 5]));
+```
+
+### contains_none
+Returns `true` when no value in a subset occurs in a collection.
+
+```rust
+use lowdash::contains_none;
+
+assert!(contains_none(&[1, 2, 3, 4], &[0, 5]));
+assert!(!contains_none(&[1, 2, 3, 4], &[0, 2]));
 ```
 
 ### subset
