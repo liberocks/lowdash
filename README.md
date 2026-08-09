@@ -23,6 +23,7 @@ Utility functions for collections:
 - [chunk_by](#chunk_by)
 - [compact](#compact)
 - [contains_all](#contains_all)
+- [contains_any](#contains_any)
 - [count](#count)
 - [count_by](#count_by)
 - [count_values](#count_values)
@@ -2673,6 +2674,16 @@ use lowdash::contains_all;
 
 assert!(contains_all(&[1, 2, 3, 4], &[2, 4]));
 assert!(!contains_all(&[1, 2, 3, 4], &[2, 5]));
+```
+
+### contains_any
+Returns `true` when at least one value in a subset occurs in a collection.
+
+```rust
+use lowdash::contains_any;
+
+assert!(contains_any(&[1, 2, 3, 4], &[0, 2]));
+assert!(!contains_any(&[1, 2, 3, 4], &[0, 5]));
 ```
 
 ### subset
