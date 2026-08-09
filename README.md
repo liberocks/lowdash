@@ -33,6 +33,7 @@ Utility functions for collections:
 - [drop_right](#drop_right)
 - [drop_right_while](#drop_right_while)
 - [drop_while](#drop_while)
+- [elements_match](#elements_match)
 - [every](#every)
 - [fill](#fill)
 - [filter](#filter)
@@ -1697,6 +1698,17 @@ let numbers = vec![1, 2, 2, 3, 4];
 let result = difference(&numbers, &[2, 4]);
 
 assert_eq!(result, vec![1, 3]);
+```
+
+### elements_match
+Checks whether two collections contain the same values with the same
+multiplicities, regardless of order.
+
+```rust
+use lowdash::elements_match;
+
+assert!(elements_match(&[1, 2, 1], &[1, 1, 2]));
+assert!(!elements_match(&[1, 2], &[1, 1]));
 ```
 
 ### group_by
