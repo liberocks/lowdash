@@ -1,4 +1,5 @@
-use criterion::{black_box, Criterion};
+use criterion::black_box;
+use criterion::Criterion;
 use lowdash as ld;
 
 pub fn benchmark_find_last_index_of(c: &mut Criterion) {

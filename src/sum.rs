@@ -26,7 +26,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f64::EPSILON;
 
     #[test]
     fn test_sum_integers() {
@@ -38,10 +37,10 @@ mod tests {
     #[test]
     fn test_sum_floats() {
         let result: f64 = sum(&[1.1, 2.2, 3.3]);
-        assert!((result - 6.6).abs() < EPSILON);
+        assert!((result - 6.6).abs() < f64::EPSILON);
 
         let result: f64 = sum(&[-1.5, 2.5, -3.5]);
-        assert!((result - (-2.5)).abs() < EPSILON);
+        assert!((result - (-2.5)).abs() < f64::EPSILON);
     }
 
     #[test]
@@ -51,6 +50,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_sum_single_element() {
         assert_eq!(sum(&[42]), 42);
         assert_eq!(sum(&[3.14]), 3.14);

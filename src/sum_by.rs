@@ -30,7 +30,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f64::EPSILON;
 
     #[test]
     fn test_sum_by_integers() {
@@ -50,7 +49,7 @@ mod tests {
     fn test_sum_by_floats() {
         let numbers: Vec<f64> = vec![1.5, 2.5, 3.5];
         let result = sum_by(&numbers, |&x| x * 2.0);
-        assert!((result - 15.0).abs() < EPSILON);
+        assert!((result - 15.0).abs() < f64::EPSILON);
     }
 
     #[test]
@@ -86,7 +85,7 @@ mod tests {
     fn test_sum_by_with_type_conversion() {
         let numbers = vec![1, 2, 3, 4, 5];
         let result = sum_by(&numbers, |&x| x as f64 / 2.0);
-        assert!((result - 7.5).abs() < EPSILON);
+        assert!((result - 7.5).abs() < f64::EPSILON);
     }
 
     #[test]
@@ -114,6 +113,6 @@ mod tests {
         let total_cost = sum_by(&items, |item| item.quantity as f64 * item.price);
 
         println!("Total cost: {}", total_cost);
-        assert!((total_cost - 62.25).abs() < EPSILON);
+        assert!((total_cost - 62.25).abs() < f64::EPSILON);
     }
 }

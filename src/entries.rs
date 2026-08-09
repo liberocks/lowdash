@@ -86,10 +86,10 @@ mod tests {
 
         // Since HashMap does not guarantee order, we need to sort both vectors before comparison
         let mut sorted_result = result.clone();
-        sorted_result.sort_by(|a, b| a.key.cmp(&b.key));
+        sorted_result.sort_by(|a, b| a.key.cmp(b.key));
 
         let mut sorted_expected = expected.clone();
-        sorted_expected.sort_by(|a, b| a.key.cmp(&b.key));
+        sorted_expected.sort_by(|a, b| a.key.cmp(b.key));
 
         assert_eq!(sorted_result, sorted_expected);
     }
@@ -124,10 +124,10 @@ mod tests {
 
         // Sort for comparison
         let mut sorted_result = result.clone();
-        sorted_result.sort_by(|a, b| a.key.cmp(&b.key));
+        sorted_result.sort_by_key(|a| a.key);
 
         let mut sorted_expected = expected.clone();
-        sorted_expected.sort_by(|a, b| a.key.cmp(&b.key));
+        sorted_expected.sort_by_key(|a| a.key);
 
         assert_eq!(sorted_result, sorted_expected);
     }
@@ -157,10 +157,10 @@ mod tests {
 
         // Since HashMap does not guarantee order, sort before comparison
         let mut sorted_result = result.clone();
-        sorted_result.sort_by(|a, b| a.key.cmp(&b.key));
+        sorted_result.sort_by(|a, b| a.key.cmp(b.key));
 
         let mut sorted_expected = expected.clone();
-        sorted_expected.sort_by(|a, b| a.key.cmp(&b.key));
+        sorted_expected.sort_by(|a, b| a.key.cmp(b.key));
 
         assert_eq!(sorted_result, sorted_expected);
     }

@@ -285,7 +285,7 @@ mod tests {
 
     #[test]
     fn test_chunk_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4, 5.5];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4, 5.5];
         let chunks = chunk(&float_collection, 2);
         assert_eq!(chunks.len(), 3);
         assert_eq!(chunks[0].len(), 2);

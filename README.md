@@ -5,7 +5,7 @@
 [![Contributors](https://img.shields.io/github/contributors/liberocks/lowdash)](https://github.com/liberocks/lowdash/graphs/contributors)
 [![License](https://img.shields.io/github/license/liberocks/lowdash)](./LICENSE)
 
-**liberocks/lowdash** is a highly optimized utility library inspired by Lodash for Rust
+**liberocks/lowdash** is a highly optimized utility library inspired by Lodash for Rust with zero dependencies
 
 ## Installation
 ```bash
@@ -17,21 +17,28 @@ This library has no dependencies outside the Rust standard library.
 ## Documentation
 You can find the generated documentation [here](https://docs.rs/lowdash)
 
-Utility functions for array:
-- [associate](#associate)
+Utility functions for collections:
+- [cartesian_product](#cartesian_product)
 - [chunk](#chunk)
+- [chunk_by](#chunk_by)
 - [compact](#compact)
+- [contains_all](#contains_all)
+- [contains_any](#contains_any)
+- [contains_none](#contains_none)
 - [count](#count)
 - [count_by](#count_by)
 - [count_values](#count_values)
 - [count_values_by](#count_values_by)
+- [cut](#cut)
 - [difference](#difference)
+- [difference_by](#difference_by)
 - [drop](#drop)
+- [drop_by_index](#drop_by_index)
 - [drop_right](#drop_right)
 - [drop_right_while](#drop_right_while)
 - [drop_while](#drop_while)
-- [earliest](#earliest)
-- [earliest_by](#earliest_by)
+- [elements_match](#elements_match)
+- [elements_match_by](#elements_match_by)
 - [every](#every)
 - [fill](#fill)
 - [filter](#filter)
@@ -41,8 +48,7 @@ Utility functions for array:
 - [find_duplicates](#find_duplicates)
 - [find_duplicates_by](#find_duplicates_by)
 - [find_index_of](#find_index_of)
-- [find_key](#find_key)
-- [find_key_by](#find_key_by)
+- [find_last](#find_last)
 - [find_last_index_of](#find_last_index_of)
 - [find_or_else](#find_or_else)
 - [find_uniques](#find_uniques)
@@ -55,23 +61,26 @@ Utility functions for array:
 - [foreach](#foreach)
 - [foreach_while](#foreach_while)
 - [group_by](#group_by)
+- [group_by_map](#group_by_map)
 - [index_of](#index_of)
 - [interleave](#interleave)
 - [intersection](#intersection)
+- [intersection_by](#intersection_by)
 - [is_sorted](#is_sorted)
 - [is_sorted_by_key](#is_sorted_by_key)
-- [key_by](#key_by)
+- [is_uniq](#is_uniq)
+- [is_uniq_by](#is_uniq_by)
 - [last](#last)
 - [last_index_of](#last_index_of)
 - [last_or](#last_or)
 - [last_or_empty](#last_or_empty)
-- [latest](#latest)
-- [latest_by](#latest_by)
 - [map](#map)
 - [max](#max)
 - [max_by](#max_by)
+- [max_by_key](#max_by_key)
 - [min](#min)
 - [min_by](#min_by)
+- [min_by_key](#min_by_key)
 - [nth](#nth)
 - [partition_by](#partition_by)
 - [reduce](#reduce)
@@ -85,23 +94,67 @@ Utility functions for array:
 - [reverse](#reverse)
 - [sample](#sample)
 - [samples](#samples)
+- [scan](#scan)
 - [shuffle](#shuffle)
 - [some](#some)
 - [sort_by](#sort_by)
 - [sort_by_key](#sort_by_key)
 - [slice](#slice)
-- [slice_to_map](#slice_to_map)
+- [sliding](#sliding)
 - [splice](#splice)
 - [subset](#subset)
-- [zip](#zip)
+- [symmetric_difference](#symmetric_difference)
+- [take](#take)
+- [take_right](#take_right)
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
 - [times](#times)
+- [trim](#trim)
+- [trim_end](#trim_end)
+- [trim_start](#trim_start)
+- [union](#union)
+- [union_by](#union_by)
+- [unzip](#unzip)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
-- [drop_by_index](#drop_by_index)
+- [uniq_map](#uniq_map)
+- [windows](#windows)
+- [zip](#zip)
+- [zip_longest](#zip_longest)
 
-Utility functions for string manipulation:
+Utility functions for maps:
+- [assign](#assign)
+- [assign_with](#assign_with)
+- [associate](#associate)
+- [defaults](#defaults)
+- [entries](#entries)
+- [find_key](#find_key)
+- [find_key_by](#find_key_by)
+- [from_entries](#from_entries)
+- [from_pairs](#from_pairs)
+- [has_key](#has_key)
+- [invert](#invert)
+- [invert_grouped](#invert_grouped)
+- [key_by](#key_by)
+- [keys](#keys)
+- [map_entries](#map_entries)
+- [map_keys](#map_keys)
+- [map_to_slice](#map_to_slice)
+- [map_values](#map_values)
+- [omit_by](#omit_by)
+- [omit_by_keys](#omit_by_keys)
+- [omit_by_values](#omit_by_values)
+- [pick_by](#pick_by)
+- [pick_by_keys](#pick_by_keys)
+- [pick_by_values](#pick_by_values)
+- [slice_to_map](#slice_to_map)
+- [to_pairs](#to_pairs)
+- [uniq_keys](#uniq_keys)
+- [uniq_values](#uniq_values)
+- [value_or](#value_or)
+- [values](#values)
+
+Utility functions for strings:
 - [camel_case](#camel_case)
 - [capitalize](#capitalize)
 - [char_length](#char_length)
@@ -114,49 +167,70 @@ Utility functions for string manipulation:
 - [substring](#substring)
 - [words](#words)
 
-Utility functions for object manipulation:
-- [assign](#assign)
-- [entries](#entries)
-- [from_entries](#from_entries)
-- [from_pairs](#from_pairs)
-- [has_key](#has_key)
-- [invert](#invert)
-- [keys](#keys)
-- [map_entries](#map_entries)
-- [map_keys](#map_keys)
-- [map_to_slice](#map_to_slice)
-- [map_values](#map_values)
-- [omit_by](#omit_by)
-- [omit_by_keys](#omit_by_keys)
-- [omit_by_values](#omit_by_values)
-- [pick_by](#pick_by)
-- [pick_by_keys](#pick_by_keys)
-- [pick_by_values](#pick_by_values)
-- [to_pairs](#to_pairs)
-- [uniq_keys](#uniq_keys)
-- [uniq_values](#uniq_values)
-- [union](#union)
-- [value_or](#value_or)
-- [values](#values)
-
-Utility functions for math:
-- [nearest_power_of_two](#nearest_power_of_two)
-- [range](#range)
-- [range_from](#range_from)
-- [range_with_step](#range_with_step)
+Utility functions for numeric and combinatoric operations:
 - [clamp](#clamp)
-- [sum](#sum)
-- [sum_by](#sum_by)
+- [combination](#combination)
+- [combination_count](#combination_count)
+- [factorial](#factorial)
+- [greatest_common_divisor](#greatest_common_divisor)
+- [integer_square_root](#integer_square_root)
+- [interpolate](#interpolate)
+- [least_common_multiple](#least_common_multiple)
+- [nearest_power_of_two](#nearest_power_of_two)
+- [permutation](#permutation)
+- [permutation_count](#permutation_count)
 - [product](#product)
 - [product_by](#product_by)
+- [product_with_start](#product_with_start)
+- [range](#range)
+- [range_from](#range_from)
+- [range_with_steps](#range_with_steps)
+- [sum](#sum)
+- [sum_by](#sum_by)
+
+Utility functions for statistics and floating-point operations:
+- [correlation](#correlation)
+- [covariance](#covariance)
+- [euclidean_distance](#euclidean_distance)
+- [euclidean_norm](#euclidean_norm)
+- [floating_mean](#floating_mean)
+- [floating_sum](#floating_sum)
+- [geometric_mean](#geometric_mean)
+- [harmonic_mean](#harmonic_mean)
+- [is_close](#is_close)
+- [kernel_density_estimate](#kernel_density_estimate)
+- [kernel_density_sample](#kernel_density_sample)
+- [linear_regression](#linear_regression)
 - [mean](#mean)
 - [mean_by](#mean_by)
-- [percentile](#percentile)
 - [median](#median)
-- [interpolate](#interpolate)
-- [permutation](#permutation)
-- [combination](#combination)
+- [median_grouped](#median_grouped)
+- [median_high](#median_high)
+- [median_low](#median_low)
+- [mode](#mode)
+- [modes](#modes)
+- [percentile](#percentile)
+- [population_standard_deviation](#population_standard_deviation)
+- [quantiles](#quantiles)
+- [sample_variance](#sample_variance)
+- [standard_deviation](#standard_deviation)
+- [sum_products](#sum_products)
+- [variance](#variance)
+- [weighted_mean](#weighted_mean)
+
+Utility functions for time:
 - [duration_between](#duration_between)
+- [earliest](#earliest)
+- [earliest_by](#earliest_by)
+- [latest](#latest)
+- [latest_by](#latest_by)
+
+Concurrency utilities:
+- [parallel_find_map](#parallel_find_map)
+- [parallel_for_each](#parallel_for_each)
+- [parallel_map](#parallel_map)
+- [parallel_reduce](#parallel_reduce)
+- [parallel_try_map](#parallel_try_map)
 
 
 ### camel_case
@@ -1611,6 +1685,16 @@ assert_eq!(unique_people, vec![
 ]);
 ```
 
+### uniq_map
+Maps each item and keeps only the first occurrence of every mapped value.
+
+```rust
+use lowdash::uniq_map;
+
+let names = ["Ada", "Ada", "Linus"];
+assert_eq!(uniq_map(&names, |name, _| name.len()), vec![3, 5]);
+```
+
 ### difference
 Returns the items from one collection that are not in another collection.
 
@@ -1623,6 +1707,30 @@ let numbers = vec![1, 2, 2, 3, 4];
 let result = difference(&numbers, &[2, 4]);
 
 assert_eq!(result, vec![1, 3]);
+```
+
+### elements_match
+Checks whether two collections contain the same values with the same
+multiplicities, regardless of order.
+
+```rust
+use lowdash::elements_match;
+
+assert!(elements_match(&[1, 2, 1], &[1, 1, 2]));
+assert!(!elements_match(&[1, 2], &[1, 1]));
+```
+
+### elements_match_by
+Compares key multiplicities between two collections without considering item
+order.
+
+```rust
+use lowdash::elements_match_by;
+
+let left = [(1, "a"), (2, "b"), (1, "c")];
+let right = [(1, "x"), (1, "y"), (2, "z")];
+
+assert!(elements_match_by(&left, &right, |item| item.0));
 ```
 
 ### group_by
@@ -1663,6 +1771,19 @@ assert_eq!(grouped.get(&25), Some(&vec![
 assert_eq!(grouped.get(&30), Some(&vec![
     Person { name: "Bob".to_string(), age: 30 },
 ]));
+```
+
+### group_by_map
+Maps each item to a key-value pair and groups the values by key.
+
+```rust
+use lowdash::group_by_map;
+
+let numbers = [1, 2, 3, 4];
+let grouped = group_by_map(&numbers, |number| (number % 2, number * 10));
+
+assert_eq!(grouped.get(&0), Some(&vec![20, 40]));
+assert_eq!(grouped.get(&1), Some(&vec![10, 30]));
 ```
 
 ### chunk
@@ -2287,6 +2408,15 @@ let result = take_while(&numbers, |number| *number < 3);
 assert_eq!(result, vec![1, 2]);
 ```
 
+### take
+Returns the first `n` items from a collection.
+
+```rust
+use lowdash::take;
+
+assert_eq!(take(&[1, 2, 3, 4], 2), vec![1, 2]);
+```
+
 ### drop_by_index
 Removes elements from a collection at the specified indices.
 Supports negative indices which count from the end of the collection.
@@ -2409,7 +2539,7 @@ let count_alice = count(&people, Person { name: "Alice".to_string(), age: 25 });
 assert_eq!(count_alice, 2);
 ```
 
-### count_by 
+### count_by
 Counts the number of elements in a collection that satisfy a given predicate.
 
 ```rust
@@ -2524,6 +2654,47 @@ expected.insert(3, 2);
 expected.insert(4, 1);
 expected.insert(5, 1);
 assert_eq!(result, expected);
+```
+
+### cut
+Splits a collection around the first separator and returns borrowed slices
+without the separator.
+
+```rust
+use lowdash::cut;
+
+let result = cut(&[1, 2, 3, 4], &[2, 3]);
+assert_eq!(result, Some((&[1][..], &[4][..])));
+```
+
+### contains_all
+Returns `true` when every value in a subset occurs in a collection.
+
+```rust
+use lowdash::contains_all;
+
+assert!(contains_all(&[1, 2, 3, 4], &[2, 4]));
+assert!(!contains_all(&[1, 2, 3, 4], &[2, 5]));
+```
+
+### contains_any
+Returns `true` when at least one value in a subset occurs in a collection.
+
+```rust
+use lowdash::contains_any;
+
+assert!(contains_any(&[1, 2, 3, 4], &[0, 2]));
+assert!(!contains_any(&[1, 2, 3, 4], &[0, 5]));
+```
+
+### contains_none
+Returns `true` when no value in a subset occurs in a collection.
+
+```rust
+use lowdash::contains_none;
+
+assert!(contains_none(&[1, 2, 3, 4], &[0, 5]));
+assert!(!contains_none(&[1, 2, 3, 4], &[0, 2]));
 ```
 
 ### subset
@@ -2834,6 +3005,26 @@ let floats = vec![
 ];
 let result = is_sorted_by_key(&floats, |item| item.0);
 assert_eq!(result, true);
+```
+
+### is_uniq
+Returns `true` when every item occurs at most once.
+
+```rust
+use lowdash::is_uniq;
+
+assert!(is_uniq(&[1, 2, 3]));
+assert!(!is_uniq(&[1, 2, 1]));
+```
+
+### is_uniq_by
+Returns `true` when every item produces a distinct key.
+
+```rust
+use lowdash::is_uniq_by;
+
+let records = [(1, "first"), (2, "second"), (1, "duplicate")];
+assert!(!is_uniq_by(&records, |record| record.0));
 ```
 
 ### sort_by_key
@@ -3376,7 +3567,7 @@ let result = range_from(5, -3);
 assert_eq!(result, vec![5, 4, 3]);
 ```
 
-### range_with_step
+### range_with_steps
 Generate a range of numbers from start to end (exclusive) with a specified step.
 
 ```rust
@@ -3492,6 +3683,16 @@ let total_area = product_by(&rectangles, |r| r.width * r.height);
 assert_eq!(total_area, 120.0); // (2*3) * (4*5)
 ```
 
+### product_with_start
+Multiplies each value by a caller-provided starting value.
+Empty input returns the starting value unchanged.
+
+```rust
+use lowdash::product_with_start;
+
+assert_eq!(product_with_start(&[2, 3, 4], 10), 240);
+```
+
 ### mean
 Calculates the arithmetic mean of a collection of numbers.
 If the collection is empty, returns zero.
@@ -3600,6 +3801,16 @@ assert_eq!(result.len(), 6);
 assert!(result.contains(&vec![2, 1]));
 ```
 
+### permutation_count
+Counts ordered selections without repetition.
+Returns `Some(0)` when `k` exceeds `n` and `None` when the result overflows `u128`.
+
+```rust
+use lowdash::permutation_count;
+
+assert_eq!(permutation_count(5, 2), Some(20));
+```
+
 ### combination
 Finds all combinations of k elements from a collection.
 
@@ -3611,6 +3822,56 @@ let result = combination(&items, 2);
 assert_eq!(result.len(), 6);
 // One possible combination: [2, 3]
 assert!(result.contains(&vec![2, 3]));
+```
+
+### combination_count
+Counts unordered selections without repetition.
+Returns `Some(0)` when `k` exceeds `n` and `None` when the result overflows `u128`.
+
+```rust
+use lowdash::combination_count;
+
+assert_eq!(combination_count(5, 2), Some(10));
+```
+
+### factorial
+Computes a factorial with checked `u128` arithmetic.
+Returns `None` when the result overflows `u128`.
+
+```rust
+use lowdash::factorial;
+
+assert_eq!(factorial(5), Some(120));
+```
+
+### greatest_common_divisor
+Calculates the greatest common divisor of a collection using the Euclidean algorithm.
+An empty collection returns `0`.
+
+```rust
+use lowdash::greatest_common_divisor;
+
+assert_eq!(greatest_common_divisor(&[48, 18, 30]), 6);
+```
+
+### integer_square_root
+Returns the exact floor of a number's square root using integer-only binary search.
+It is safe for the full `u128` range.
+
+```rust
+use lowdash::integer_square_root;
+
+assert_eq!(integer_square_root(17), 4);
+```
+
+### least_common_multiple
+Calculates the least common multiple with checked `u64` arithmetic.
+An empty collection returns `Some(1)` and any zero returns `Some(0)`.
+
+```rust
+use lowdash::least_common_multiple;
+
+assert_eq!(least_common_multiple(&[4, 6, 8]), Some(24));
 ```
 
 ### duration_between
@@ -3630,6 +3891,521 @@ let one_day = Duration::from_secs(86_400);
 let day_later = epoch + one_day;
 // Difference in days
 assert_eq!(duration_between(epoch, day_later, DurationUnit::Days), 1);
+```
+
+### take_right
+Returns the final items from a collection in their original order.
+
+```rust
+use lowdash::take_right;
+
+assert_eq!(take_right(&[1, 2, 3, 4], 2), vec![3, 4]);
+```
+
+### find_last
+Finds the last item that matches a predicate by scanning from the end.
+
+```rust
+use lowdash::find_last;
+
+assert_eq!(find_last(&[1, 2, 3, 2], |number| *number == 2), Some(&2));
+```
+
+### chunk_by
+Groups adjacent items with the same generated key.
+
+```rust
+use lowdash::chunk_by;
+
+assert_eq!(chunk_by(&[1, 1, 2, 1], |number| *number), vec![
+    vec![1, 1],
+    vec![2],
+    vec![1],
+]);
+```
+
+### scan
+Returns the intermediate accumulator after each item, without returning the initial value.
+
+```rust
+use lowdash::scan;
+
+assert_eq!(scan(&[1, 2, 3], |sum, number, _| sum + number, 0), vec![1, 3, 6]);
+```
+
+### assign_with
+Merges maps with a callback for resolving duplicate keys.
+
+```rust
+use lowdash::assign_with;
+use std::collections::HashMap;
+
+let mut first = HashMap::new();
+first.insert("count", 2);
+let mut second = HashMap::new();
+second.insert("count", 3);
+let result = assign_with(&[first, second], |_, old, new| old + new);
+assert_eq!(result["count"], 5);
+```
+
+### difference_by
+Returns items whose generated keys are absent from another collection, preserving duplicates.
+
+```rust
+use lowdash::difference_by;
+
+assert_eq!(difference_by(&[11, 12, 13], &[2], |number| *number % 10), vec![11, 13]);
+```
+
+### intersection_by
+Returns the first item for each key shared by every collection.
+
+```rust
+use lowdash::intersection_by;
+
+let groups = vec![vec![11, 12], vec![2, 12], vec![22, 32]];
+assert_eq!(intersection_by(&groups, |number| *number % 10), vec![12]);
+```
+
+### zip_longest
+Pairs two collections, using `None` when one side has no item at an index.
+
+```rust
+use lowdash::zip_longest;
+
+assert_eq!(zip_longest(&[1, 2], &['a']), vec![
+    (Some(1), Some('a')),
+    (Some(2), None),
+]);
+```
+
+### cartesian_product
+Returns every pair from two collections in left-major order.
+
+```rust
+use lowdash::cartesian_product;
+
+assert_eq!(cartesian_product(&[1, 2], &['a', 'b']), vec![
+    (1, 'a'),
+    (1, 'b'),
+    (2, 'a'),
+    (2, 'b'),
+]);
+```
+
+### union_by
+Returns the first item for each generated key across all collections.
+
+```rust
+use lowdash::union_by;
+
+let groups = vec![vec![11, 12], vec![2, 13]];
+assert_eq!(union_by(&groups, |number| *number % 10), vec![11, 12]);
+```
+
+### symmetric_difference
+Returns unique values that appear in exactly one input, preserving first appearance order.
+
+```rust
+use lowdash::symmetric_difference;
+
+assert_eq!(symmetric_difference(&[1, 2, 2], &[2, 3]), vec![1, 3]);
+```
+
+### unzip
+Splits pairs into two vectors while preserving their order.
+
+```rust
+use lowdash::unzip;
+
+assert_eq!(unzip(&[("a", 1), ("b", 2)]), (vec!["a", "b"], vec![1, 2]));
+```
+
+### min_by_key
+Returns the first item with the smallest value produced by a key function.
+
+```rust
+use lowdash::min_by_key;
+
+assert_eq!(min_by_key(&["long", "short"], |word| word.len()), Some("short"));
+```
+
+### max_by_key
+Returns the first item with the largest value produced by a key function.
+
+```rust
+use lowdash::max_by_key;
+
+assert_eq!(max_by_key(&["a", "longer"], |word| word.len()), Some("longer"));
+```
+
+### defaults
+Combines maps while keeping the first value for each duplicate key.
+
+```rust
+use lowdash::defaults;
+use std::collections::HashMap;
+
+let mut first = HashMap::new();
+first.insert("mode", "safe");
+let mut fallback = HashMap::new();
+fallback.insert("mode", "fast");
+assert_eq!(defaults(&[first, fallback])["mode"], "safe");
+```
+
+### invert_grouped
+Groups all keys by their values instead of discarding repeated values.
+
+```rust
+use lowdash::invert_grouped;
+use std::collections::HashMap;
+
+let mut map = HashMap::new();
+map.insert("a", 1);
+map.insert("b", 1);
+assert_eq!(invert_grouped(&map)[&1].len(), 2);
+```
+
+### windows
+Returns overlapping windows of a requested size.
+
+```rust
+use lowdash::windows;
+
+assert_eq!(windows(&[1, 2, 3], 2), vec![vec![1, 2], vec![2, 3]]);
+```
+
+### sliding
+Returns full-size windows separated by a configurable step. Trailing partial
+windows are omitted.
+
+```rust
+use lowdash::sliding;
+
+assert_eq!(
+    sliding(&[1, 2, 3, 4, 5], 3, 2),
+    vec![vec![1, 2, 3], vec![3, 4, 5]],
+);
+```
+
+### trim
+Removes leading and trailing values that occur in a cutset and returns a
+borrowed slice.
+
+```rust
+use lowdash::trim;
+
+assert_eq!(trim(&[0, 1, 2, 0, 3, 0], &[0, 1]), &[2, 0, 3][..]);
+```
+
+### trim_end
+Removes trailing values from a cutset and returns a borrowed slice.
+
+```rust
+use lowdash::trim_end;
+
+assert_eq!(trim_end(&[0, 1, 2, 0, 3, 0], &[0, 3]), &[0, 1, 2][..]);
+```
+
+### trim_start
+Removes leading values from a cutset and returns a borrowed slice.
+
+```rust
+use lowdash::trim_start;
+
+assert_eq!(trim_start(&[0, 1, 2, 0, 3], &[0, 1]), &[2, 0, 3][..]);
+```
+
+### modes
+Returns the most frequent values, keeping ties in first-appearance order.
+
+```rust
+use lowdash::modes;
+
+assert_eq!(modes(&[1, 2, 2, 3, 3]), vec![2, 3]);
+```
+
+### variance
+Calculates population variance in one pass and returns `None` for empty input.
+
+```rust
+use lowdash::variance;
+
+assert_eq!(variance(&[1.0, 2.0, 3.0]), Some(2.0 / 3.0));
+```
+
+### parallel_map
+Maps items concurrently over ordered contiguous chunks and provides each global index.
+
+```rust
+use lowdash::parallel_map;
+use std::num::NonZeroUsize;
+
+let result = parallel_map(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| value * 2);
+assert_eq!(result, vec![2, 4, 6]);
+```
+
+### parallel_try_map
+Maps concurrently and returns the first error by input order; other callbacks are not cancelled.
+
+```rust
+use lowdash::parallel_try_map;
+use std::num::NonZeroUsize;
+
+let result = parallel_try_map(&[1, 2], NonZeroUsize::new(2).unwrap(), |value, index| {
+    if index == 1 { Err("bad") } else { Ok(value * 2) }
+});
+assert_eq!(result, Err("bad"));
+```
+
+### parallel_for_each
+Runs a callback concurrently without allocating an output collection.
+
+```rust
+use lowdash::parallel_for_each;
+use std::num::NonZeroUsize;
+
+parallel_for_each(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| {
+    let _ = value;
+});
+```
+
+### parallel_find_map
+Finds the lowest-index matching result independently of thread completion order.
+
+```rust
+use lowdash::parallel_find_map;
+use std::num::NonZeroUsize;
+
+let result = parallel_find_map(&[1, 2, 3], NonZeroUsize::new(2).unwrap(), |value, _| {
+    (*value > 1).then_some(value * 10)
+});
+assert_eq!(result, Some(20));
+```
+
+### parallel_reduce
+Reduces contiguous chunks concurrently and combines partial results in chunk order.
+
+```rust
+use lowdash::parallel_reduce;
+use std::num::NonZeroUsize;
+
+let result = parallel_reduce(
+    &[1, 2, 3],
+    NonZeroUsize::new(2).unwrap(),
+    || 0,
+    |sum, value, _| sum + value,
+    |left, right| left + right,
+);
+assert_eq!(result, 6);
+```
+
+### floating_mean
+Calculates a compensated floating-point mean and returns `None` for empty input.
+
+```rust
+use lowdash::floating_mean;
+
+assert_eq!(floating_mean(&[1.0, 2.0, 3.0]), Some(2.0));
+```
+
+### floating_sum
+Calculates an accurately compensated floating-point sum.
+Empty input returns `0.0`; `NaN` and mixed infinities follow IEEE-754 propagation.
+
+```rust
+use lowdash::floating_sum;
+
+assert_eq!(floating_sum(&[1.0, 2.0, 3.0]), 6.0);
+```
+
+### euclidean_distance
+Calculates the Euclidean distance between equal-length finite points.
+Returns `None` for mismatched lengths, nonfinite values, or a nonfinite result.
+
+```rust
+use lowdash::euclidean_distance;
+
+assert_eq!(euclidean_distance(&[0.0, 0.0], &[3.0, 4.0]), Some(5.0));
+```
+
+### euclidean_norm
+Calculates an N-dimensional Euclidean norm with scaled sum-of-squares accumulation.
+Empty input returns `0.0`; NaN and infinity follow IEEE-754 propagation.
+
+```rust
+use lowdash::euclidean_norm;
+
+assert_eq!(euclidean_norm(&[3.0, 4.0]), 5.0);
+```
+
+### sum_products
+Calculates a compensated sum of pairwise products for equal-length slices.
+Returns `None` for a length mismatch and `Some(0.0)` for empty slices.
+
+```rust
+use lowdash::sum_products;
+
+assert_eq!(sum_products(&[1.0, 2.0], &[3.0, 4.0]), Some(11.0));
+```
+
+### is_close
+Compares floating-point values using relative and absolute tolerances.
+Negative or nonfinite tolerances return `false`.
+
+```rust
+use lowdash::is_close;
+
+assert!(is_close(100.0, 101.0, 0.01, 0.0));
+```
+
+### kernel_density_estimate
+Builds a Gaussian kernel density estimate whose closure owns a copy of the data.
+Construction validates finite nonempty data and a positive finite bandwidth.
+
+```rust
+use lowdash::kernel_density_estimate;
+
+let estimate = kernel_density_estimate(&[0.0], 1.0).unwrap();
+assert!((estimate(0.0) - 0.39894228).abs() < 1.0e-7);
+```
+
+### kernel_density_sample
+Draws deterministic approximate Gaussian KDE samples using a non-cryptographic seed.
+The same input and seed produce the same output.
+
+```rust
+use lowdash::kernel_density_sample;
+
+let samples = kernel_density_sample(&[0.0, 1.0], 0.25, 3, 42).unwrap();
+assert_eq!(samples.len(), 3);
+```
+
+### weighted_mean
+Calculates a weighted mean when values and nonnegative weights are valid.
+
+```rust
+use lowdash::weighted_mean;
+
+assert_eq!(weighted_mean(&[1.0, 3.0], &[1.0, 3.0]), Some(2.5));
+```
+
+### geometric_mean
+Calculates a log-space geometric mean for nonnegative finite values.
+
+```rust
+use lowdash::geometric_mean;
+
+assert_eq!(geometric_mean(&[1.0, 4.0, 16.0]), Some(4.0));
+```
+
+### harmonic_mean
+Calculates a scaled reciprocal mean for nonnegative finite values.
+
+```rust
+use lowdash::harmonic_mean;
+
+assert_eq!(harmonic_mean(&[1.0, 3.0]), Some(1.5));
+```
+
+### median_low
+Returns the lower middle value from a sorted copy of the input.
+
+```rust
+use lowdash::median_low;
+
+assert_eq!(median_low(&[1, 4, 2, 3]), Some(2));
+```
+
+### median_high
+Returns the upper middle value from a sorted copy of the input.
+
+```rust
+use lowdash::median_high;
+
+assert_eq!(median_high(&[1, 4, 2, 3]), Some(3));
+```
+
+### median_grouped
+Estimates a median from sorted class-midpoint observations and a fixed interval.
+
+```rust
+use lowdash::median_grouped;
+
+assert_eq!(median_grouped(&[5.0], 2.0), Some(5.0));
+```
+
+### mode
+Returns the first encountered most common value, or `None` for empty input.
+
+```rust
+use lowdash::mode;
+
+assert_eq!(mode(&[1, 2, 2, 3]), Some(2));
+```
+
+### quantiles
+Returns inclusive linearly interpolated cut points using the existing percentile convention.
+
+```rust
+use lowdash::quantiles;
+
+assert_eq!(quantiles(&[1.0, 2.0, 3.0, 4.0, 5.0], 4), Some(vec![2.0, 3.0, 4.0]));
+```
+
+### sample_variance
+Calculates sample variance with an `n - 1` divisor and validates finite input.
+
+```rust
+use lowdash::sample_variance;
+
+assert_eq!(sample_variance(&[1.0, 2.0, 3.0]), Some(1.0));
+```
+
+### standard_deviation
+Returns the sample standard deviation, or `None` when fewer than two values are available.
+
+```rust
+use lowdash::standard_deviation;
+
+assert!((standard_deviation(&[1.0, 2.0, 3.0]).unwrap() - 1.0).abs() < 1e-12);
+```
+
+### population_standard_deviation
+Returns the square root of population variance, or `None` for invalid input.
+
+```rust
+use lowdash::population_standard_deviation;
+
+assert!((population_standard_deviation(&[1.0, 2.0, 3.0]).unwrap()
+    - (2.0_f64 / 3.0).sqrt()).abs() < 1e-12);
+```
+
+### covariance
+Calculates sample covariance for equal-length finite inputs.
+
+```rust
+use lowdash::covariance;
+
+assert_eq!(covariance(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(2.0));
+```
+
+### correlation
+Calculates the Pearson coefficient for finite, nonconstant paired data.
+
+```rust
+use lowdash::correlation;
+
+assert_eq!(correlation(&[1.0, 2.0, 3.0], &[2.0, 4.0, 6.0]), Some(1.0));
+```
+
+### linear_regression
+Returns the ordinary least-squares slope and intercept for valid paired data.
+
+```rust
+use lowdash::linear_regression;
+
+assert_eq!(linear_regression(&[1.0, 2.0], &[3.0, 5.0]), Some((2.0, 1.0)));
 ```
 
 ## Acknowledgement

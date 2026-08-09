@@ -1,6 +1,8 @@
-use criterion::{black_box, Criterion};
+use criterion::black_box;
+use criterion::Criterion;
 use lowdash as ld;
 
+#[allow(clippy::approx_constant)]
 pub fn benchmark_clamp(c: &mut Criterion) {
     c.bench_function("clamp/i32/within", |b| {
         b.iter(|| ld::clamp(black_box(123_i32), black_box(-10_i32), black_box(90_i32)))

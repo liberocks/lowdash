@@ -155,7 +155,7 @@ mod tests {
 
     #[test]
     fn test_repeat_by_with_nan_floats() {
-        let nan = std::f64::NAN;
+        let nan = f64::NAN;
         let filled = repeat_by(2, |_| nan);
         assert_eq!(filled.len(), 2);
         for value in filled {

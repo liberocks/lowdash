@@ -60,7 +60,7 @@ use std::cmp::Ordering;
 /// ```rust
 /// use lowdash::is_sorted;
 ///
-/// let floats = vec![1.1, std::f64::NAN, 3.3];
+/// let floats = vec![1.1, f64::NAN, 3.3];
 /// // Note: Any comparison with NaN returns false, so the slice is not considered sorted.
 /// assert_eq!(is_sorted(&floats), false);
 /// ```
@@ -90,37 +90,37 @@ mod tests {
     #[test]
     fn test_is_sorted_empty() {
         let empty: Vec<i32> = vec![];
-        assert_eq!(is_sorted(&empty), true);
+        assert!(is_sorted(&empty));
     }
 
     #[test]
     fn test_is_sorted_single_element() {
         let single = vec![1];
-        assert_eq!(is_sorted(&single), true);
+        assert!(is_sorted(&single));
     }
 
     #[test]
     fn test_is_sorted_already_sorted() {
         let numbers = vec![1, 2, 3, 4, 5];
-        assert_eq!(is_sorted(&numbers), true);
+        assert!(is_sorted(&numbers));
     }
 
     #[test]
     fn test_is_sorted_not_sorted() {
         let numbers = vec![1, 3, 2, 4, 5];
-        assert_eq!(is_sorted(&numbers), false);
+        assert!(!is_sorted(&numbers));
     }
 
     #[test]
     fn test_is_sorted_with_duplicates_sorted() {
         let numbers = vec![1, 2, 2, 3, 4, 4, 5];
-        assert_eq!(is_sorted(&numbers), true);
+        assert!(is_sorted(&numbers));
     }
 
     #[test]
     fn test_is_sorted_with_duplicates_not_sorted() {
         let numbers = vec![1, 2, 2, 1, 4, 5];
-        assert_eq!(is_sorted(&numbers), false);
+        assert!(!is_sorted(&numbers));
     }
 
     #[test]
@@ -139,7 +139,7 @@ mod tests {
                 age: 35,
             },
         ];
-        assert_eq!(is_sorted(&people), true);
+        assert!(is_sorted(&people));
     }
 
     #[test]
@@ -158,56 +158,56 @@ mod tests {
                 age: 25,
             },
         ];
-        assert_eq!(is_sorted(&people), false);
+        assert!(!is_sorted(&people));
     }
 
     #[test]
     fn test_is_sorted_floats_sorted() {
         let floats = vec![1.1, 2.2, 3.3, 4.4, 5.5];
-        assert_eq!(is_sorted(&floats), true);
+        assert!(is_sorted(&floats));
     }
 
     #[test]
     fn test_is_sorted_floats_not_sorted() {
         let floats = vec![1.1, 3.3, 2.2, 4.4];
-        assert_eq!(is_sorted(&floats), false);
+        assert!(!is_sorted(&floats));
     }
 
     #[test]
     fn test_is_sorted_floats_with_nan() {
-        let floats = vec![1.1, std::f64::NAN, 3.3];
+        let floats = vec![1.1, f64::NAN, 3.3];
         // Any comparison with NaN returns false, so the slice is not considered sorted.
-        assert_eq!(is_sorted(&floats), false);
+        assert!(!is_sorted(&floats));
     }
 
     #[test]
     fn test_is_sorted_floats_with_infinity() {
-        let floats = vec![1.1, 2.2, std::f64::INFINITY, 4.4];
+        let floats = vec![1.1, 2.2, f64::INFINITY, 4.4];
         // Since Infinity > 4.4, the slice is not sorted.
-        assert_eq!(is_sorted(&floats), false);
+        assert!(!is_sorted(&floats));
     }
 
     #[test]
     fn test_is_sorted_characters_sorted() {
         let chars = vec!['a', 'b', 'c', 'd', 'e'];
-        assert_eq!(is_sorted(&chars), true);
+        assert!(is_sorted(&chars));
     }
 
     #[test]
     fn test_is_sorted_characters_not_sorted() {
         let chars = vec!['a', 'c', 'b', 'd'];
-        assert_eq!(is_sorted(&chars), false);
+        assert!(!is_sorted(&chars));
     }
 
     #[test]
     fn test_is_sorted_with_optionals_sorted() {
         let collection = vec![Some(1), Some(2), Some(3)];
-        assert_eq!(is_sorted(&collection), true);
+        assert!(is_sorted(&collection));
     }
 
     #[test]
     fn test_is_sorted_with_optionals_not_sorted() {
         let collection = vec![Some(1), Some(3), Some(2)];
-        assert_eq!(is_sorted(&collection), false);
+        assert!(!is_sorted(&collection));
     }
 }

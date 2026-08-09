@@ -171,7 +171,7 @@ mod tests {
         let collection = vec![Some(1), None, Some(2), Some(3), None];
         // Collect values where the item is Some
         let result = reject_map(&collection, |item, _| {
-            (item.clone().unwrap_or(0), item.is_none())
+            ((*item).unwrap_or(0), item.is_none())
         });
         assert_eq!(result, vec![1, 2, 3]);
     }

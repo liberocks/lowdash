@@ -113,42 +113,42 @@ mod tests {
     fn test_is_sorted_by_key_empty_collection() {
         let empty: Vec<i32> = vec![];
         let result = is_sorted_by_key(&empty, |&x| x);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_single_element() {
         let single = vec![1];
         let result = is_sorted_by_key(&single, |&x| x);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_already_sorted() {
         let numbers = vec![1, 2, 3, 4, 5];
         let result = is_sorted_by_key(&numbers, |&x| x);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_not_sorted() {
         let numbers = vec![1, 3, 2, 4, 5];
         let result = is_sorted_by_key(&numbers, |&x| x);
-        assert_eq!(result, false);
+        assert!(!result);
     }
 
     #[test]
     fn test_is_sorted_by_key_with_duplicates_sorted() {
         let numbers = vec![1, 2, 2, 3, 4, 4, 5];
         let result = is_sorted_by_key(&numbers, |&x| x);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_with_duplicates_not_sorted() {
         let numbers = vec![1, 2, 2, 1, 4, 5];
         let result = is_sorted_by_key(&numbers, |&x| x);
-        assert_eq!(result, false);
+        assert!(!result);
     }
 
     #[test]
@@ -168,7 +168,7 @@ mod tests {
             },
         ];
         let result = is_sorted_by_key(&people, |p| p.age);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
@@ -188,7 +188,7 @@ mod tests {
             },
         ];
         let result = is_sorted_by_key(&people, |p| p.age);
-        assert_eq!(result, false);
+        assert!(!result);
     }
 
     #[test]
@@ -212,7 +212,7 @@ mod tests {
             },
         ];
         let result = is_sorted_by_key(&people, |p| (p.age, p.name.clone()));
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
@@ -232,29 +232,29 @@ mod tests {
             },
         ];
         let result = is_sorted_by_key(&people, |p| (p.age, p.name.clone()));
-        assert_eq!(result, true); // This is correct since (25, "Alice") <= (25, "Carol") <= (30, "Bob")
+        assert!(result); // This is correct since (25, "Alice") <= (25, "Carol") <= (30, "Bob")
     }
 
     #[test]
     fn test_is_sorted_by_key_floats_sorted() {
         let floats = vec![1.1, 2.2, 3.3, 4.4, 5.5];
         let result = is_sorted_by_key(&floats, |&x| x);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_floats_not_sorted() {
         let floats = vec![1.1, 3.3, 2.2, 4.4];
         let result = is_sorted_by_key(&floats, |&x| x);
-        assert_eq!(result, false);
+        assert!(!result);
     }
 
     #[test]
     fn test_is_sorted_by_key_with_nan_floats_sorted() {
-        let floats = vec![std::f64::NAN, std::f64::NAN, std::f64::NAN];
+        let floats = vec![f64::NAN, f64::NAN, f64::NAN];
         // Comparisons involving NaN always return false, so the function should return false
         let result = is_sorted_by_key(&floats, |&x| x);
-        assert_eq!(result, false); // Ensure the function returns false
+        assert!(!result); // Ensure the function returns false
     }
 
     #[test]
@@ -269,22 +269,22 @@ mod tests {
             BoxedNumber { value: Some(2) },
             BoxedNumber { value: Some(3) },
         ];
-        let result = is_sorted_by_key(&collection, |bn| bn.value.clone().unwrap());
-        assert_eq!(result, true);
+        let result = is_sorted_by_key(&collection, |bn| bn.value.unwrap());
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_with_optionals_sorted() {
         let collection = vec![Some(1), Some(2), Some(3), Some(4)];
         let result = is_sorted_by_key(&collection, |&x| x.unwrap());
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn test_is_sorted_by_key_with_optionals_not_sorted() {
         let collection = vec![Some(1), Some(3), Some(2), Some(4)];
         let result = is_sorted_by_key(&collection, |&x| x.unwrap());
-        assert_eq!(result, false);
+        assert!(!result);
     }
 
     #[test]
@@ -292,7 +292,7 @@ mod tests {
         let words = vec!["apple", "banana", "cherry", "date"];
         // Sort by the length of the string
         let result = is_sorted_by_key(&words, |word| word.len());
-        assert_eq!(result, false); // Updated expectation to false
+        assert!(!result); // Updated expectation to false
     }
 
     #[test]
@@ -300,7 +300,7 @@ mod tests {
         let words = vec!["fig", "date", "apple", "banana", "cherry"];
         // Sort by the length of the string
         let result = is_sorted_by_key(&words, |word| word.len());
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
@@ -308,6 +308,6 @@ mod tests {
         let words = vec!["apple", "banana", "fig", "date"];
         // Sort by the length of the string
         let result = is_sorted_by_key(&words, |word| word.len());
-        assert_eq!(result, false);
+        assert!(!result);
     }
 }

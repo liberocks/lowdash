@@ -1,7 +1,9 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::black_box;
+use criterion::Criterion;
 use lowdash as ld;
 
+#[allow(clippy::approx_constant)]
 pub fn benchmark_fill(c: &mut Criterion) {
     let ints = support::int_vec(4_096);
     c.bench_function("fill/int_vec/7", |b| {

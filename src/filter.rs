@@ -37,12 +37,13 @@ pub fn filter<'a, T, F>(collection: &'a [T], predicate: F) -> Vec<&'a T>
 where
     F: Fn(&'a T, usize) -> bool,
 {
-    collection
-        .iter()
-        .enumerate()
-        .filter(|(index, item)| predicate(item, *index))
-        .map(|(_, item)| item)
-        .collect()
+    let mut result = Vec::with_capacity(collection.len());
+    for (index, item) in collection.iter().enumerate() {
+        if predicate(item, index) {
+            result.push(item);
+        }
+    }
+    result
 }
 
 #[cfg(test)]
@@ -145,7 +146,7 @@ mod tests {
 
     #[test]
     fn test_filter_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
         let predicate = |x: &f64, _| x.is_nan();
         let result = filter(&float_collection, predicate);
         assert_eq!(result.len(), 2);

@@ -32,18 +32,32 @@
 /// ```
 pub fn ellipsis(s: &str, length: usize) -> String {
     let trimmed = s.trim();
-    let trimmed_len = trimmed.chars().count();
-
-    if trimmed_len > length {
-        if trimmed_len < 3 || length < 3 {
-            return "...".to_string();
-        }
-        let trunc_length = length.saturating_sub(3);
-        let truncated: String = trimmed.chars().take(trunc_length).collect();
-        truncated + "..."
-    } else {
-        trimmed.to_string()
+    if length <= 3 {
+        let trimmed_len = trimmed.chars().count();
+        return if trimmed_len > length {
+            "...".to_string()
+        } else {
+            trimmed.to_string()
+        };
     }
+
+    let trunc_length = length.saturating_sub(3);
+    let mut trunc_end = None;
+
+    for (index, (byte_index, _)) in trimmed.char_indices().enumerate() {
+        if index == trunc_length {
+            trunc_end = Some(byte_index);
+        }
+        if index == length {
+            let end = trunc_end.expect("truncation boundary must exist");
+            let mut result = String::with_capacity(end.saturating_add(3));
+            result.push_str(&trimmed[..end]);
+            result.push_str("...");
+            return result;
+        }
+    }
+
+    trimmed.to_owned()
 }
 
 #[cfg(test)]

@@ -11,6 +11,27 @@ permissions:
   contents: read
 
 jobs:
+  compiler-comparison:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.63.0
+      - uses: Swatinem/rust-cache@v2
+      - name: benchmark on Rust 1.63
+        run: cargo +1.63.0 bench --bench benchmark -- 'snake_case|kebab_case|substring' --noplot --save-baseline rust-1.63
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - name: benchmark on stable Rust
+        run: cargo +stable bench --bench benchmark -- 'snake_case|kebab_case|substring' --noplot --baseline rust-1.63 | tee compiler-comparison.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: compiler-comparison
+          path: compiler-comparison.txt
+          retention-days: 90
+
   benchmark:
     runs-on: ubuntu-latest
     strategy:

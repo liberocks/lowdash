@@ -172,7 +172,7 @@ pub fn numeric_maps(map_count: usize, items_per_map: usize) -> Vec<HashMap<Strin
         .collect()
 }
 
-pub fn map_refs<'a>(maps: &'a [HashMap<String, i32>]) -> Vec<&'a HashMap<String, i32>> {
+pub fn map_refs(maps: &[HashMap<String, i32>]) -> Vec<&HashMap<String, i32>> {
     maps.iter().collect()
 }
 

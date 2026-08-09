@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.8.0] 2026-08-09
+### Added
+- Added collection traversal and partitioning helpers: `take`, `take_right`, `find_last`, `chunk_by`, `scan`, `windows`, `sliding`, and `cut`.
+- Added collection comparison and membership helpers: `difference_by`, `intersection_by`, `union_by`, `symmetric_difference`, `elements_match`, `elements_match_by`, `contains_all`, `contains_any`, and `contains_none`.
+- Added collection grouping, uniqueness, trimming, pairing, and keyed selection helpers: `is_uniq`, `is_uniq_by`, `uniq_map`, `group_by_map`, `trim`, `trim_start`, `trim_end`, `zip_longest`, `cartesian_product`, `unzip`, `min_by_key`, and `max_by_key`.
+- Added map helpers: `assign_with`, `defaults`, and `invert_grouped`.
+- Added concurrent helpers: `parallel_map`, `parallel_try_map`, `parallel_for_each`, `parallel_find_map`, and `parallel_reduce`.
+- Added statistical helpers: `floating_mean`, `weighted_mean`, `geometric_mean`, `harmonic_mean`, `median_low`, `median_high`, `median_grouped`, `mode`, `modes`, `quantiles`, `variance`, `sample_variance`, `standard_deviation`, `population_standard_deviation`, `covariance`, `correlation`, and `linear_regression`.
+- Added numeric and floating-point helpers: `floating_sum`, `euclidean_distance`, `euclidean_norm`, `sum_products`, `product_with_start`, and `is_close`.
+- Added kernel density estimation and deterministic sampling with `kernel_density_estimate` and `kernel_density_sample`.
+- Added checked number-theory helpers: `combination_count`, `factorial`, `greatest_common_divisor`, `integer_square_root`, `least_common_multiple`, and `permutation_count`.
+
+### Changed
+- Reduced allocation, cloning, and lookup overhead across collection and map helpers, including `combination`, `flat_map`, `filter`, `reject`, `uniq`, `values`, `uniq_keys`, `drop_by_index`, `map_entries`, `omit_by_values`, `pick_by_keys`, `pick_by_values`, `find_uniques`, `find_uniques_by`, `find_duplicates_by`, `earliest_by`, and `samples`.
+- Improved string utility throughput for `chunk_string`, `ellipsis`, `substring`, `capitalize`, `words`, `camel_case`, `kebab_case`, and `snake_case` through direct output and boundary scanning.
+- Added hashed-key lookup to `difference_by`; improved `mode`, `modes`, `median_low`, and `zip_longest` with lower-overhead collection paths; and improved numeric accumulation with fused validation, scaling, and specialized fast paths.
+- Reduced setup overhead for concurrent helpers on small or one-worker inputs, while reducing intermediate allocation in `assign_with` and repeated sampling work in `kernel_density_sample`.
+- Expanded benchmark coverage, compiler comparisons, timing compatibility, and benchmark result reporting.
+- Reorganized and expanded the README function index and refreshed package metadata, including the zero-dependency description.
+
+### Fixed
+- Preserved the contextual Unicode lowercasing behavior of `snake_case` and `kebab_case` from 0.7.0 while retaining direct output for ASCII input.
+- Bounded `substring` output allocation and limited `pick_by_keys` and `pick_by_values` reservations to the source map size.
+- Corrected the `correlation` and `union_by` documentation examples.
+
+### Compatibility
+- Declared compiler version 1.63 as the minimum supported version, pinned benchmark-only dependencies for it, and added build and v0.7.0 API compatibility checks.
+
+### Security
+- Restricted workflow token permissions to the minimum read-only access required.
+
+### Testing
+- Added regression coverage for optimized concurrent paths and benchmarks for the new utilities.
+
 ## [0.7.0] 2026-08-02
 ### Added
 - Added stable `sort_by` and `sort_by_key` collection sorting functions.

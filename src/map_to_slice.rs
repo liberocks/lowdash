@@ -61,7 +61,7 @@ mod tests {
         let mut map = HashMap::new();
         map.insert(1, "one");
         map.insert(2, "two");
-        let transformed = map_to_slice(&map, |k, v| v.len());
+        let transformed = map_to_slice(&map, |_, v| v.len());
         assert!(transformed.contains(&3));
         assert!(transformed.contains(&3));
     }

@@ -1,5 +1,6 @@
 use crate::support;
-use criterion::{black_box, Criterion};
+use criterion::black_box;
+use criterion::Criterion;
 use lowdash as ld;
 
 pub fn benchmark_is_sorted(c: &mut Criterion) {

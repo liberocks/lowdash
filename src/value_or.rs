@@ -61,6 +61,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_value_or_with_floats() {
         let mut map = HashMap::new();
         map.insert("pi", 3.14);

@@ -185,7 +185,7 @@ mod tests {
 
     #[test]
     fn test_count_by_with_nan_floats() {
-        let float_collection = vec![std::f64::NAN, 2.2, std::f64::NAN, 4.4];
+        let float_collection = vec![f64::NAN, 2.2, f64::NAN, 4.4];
         // Count NaN values
         let count_nan = count_by(&float_collection, |&x| x.is_nan());
         // Note: In Rust, NaN != NaN, so each is considered unique

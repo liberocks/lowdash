@@ -147,6 +147,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_min_with_floating_points() {
         let collection = vec![3.14, 2.71, -1.0, 0.0];
         let result = min(&collection);
@@ -154,6 +155,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_min_with_f32() {
         let collection = vec![3.14f32, 2.71, -1.0, 0.0];
         let result = min(&collection);
@@ -161,6 +163,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)]
     fn test_min_with_f64() {
         let collection = vec![3.14f64, 2.71, -1.0, 0.0];
         let result = min(&collection);
@@ -176,7 +179,7 @@ mod tests {
 
     #[test]
     fn test_min_collection_with_nan() {
-        let collection = vec![std::f64::NAN, 2.0, 3.0];
+        let collection = vec![f64::NAN, 2.0, 3.0];
         let result = min(&collection);
         // Since NaN comparisons are always false, the minimum should be 2.0
         assert_eq!(result, Some(2.0));
@@ -184,7 +187,7 @@ mod tests {
 
     #[test]
     fn test_min_all_nan() {
-        let collection = vec![std::f64::NAN, std::f64::NAN];
+        let collection = vec![f64::NAN, f64::NAN];
         let result = min(&collection);
         assert!(result.unwrap().is_nan());
     }

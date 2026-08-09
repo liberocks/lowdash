@@ -42,14 +42,14 @@ where
     U: Eq + std::hash::Hash,
     F: Fn(&T) -> U,
 {
-    use std::collections::HashMap;
+    use std::collections::HashSet;
 
-    let mut seen: HashMap<U, bool> = HashMap::new();
+    let mut seen = HashSet::new();
     let mut result = Vec::new();
 
     for item in collection {
         let key = iteratee(item);
-        if seen.insert(key, true).unwrap_or(false) {
+        if !seen.insert(key) {
             result.push(item.clone());
         }
     }

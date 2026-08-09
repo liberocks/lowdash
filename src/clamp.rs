@@ -65,13 +65,13 @@ mod tests {
 
     #[test]
     fn test_clamp_with_nan_value() {
-        let result = clamp(std::f64::NAN, 0.0, 10.0);
+        let result = clamp(f64::NAN, 0.0, 10.0);
         assert!(result.is_nan());
     }
 
     #[test]
     fn test_clamp_with_nan_min() {
-        let result = clamp(5.0, std::f64::NAN, 10.0);
+        let result = clamp(5.0, f64::NAN, 10.0);
         assert!(!result.is_nan());
     }
 }

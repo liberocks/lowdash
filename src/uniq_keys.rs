@@ -30,7 +30,8 @@ where
     K: Clone + std::cmp::Eq + std::hash::Hash,
 {
     let mut seen = std::collections::HashSet::new();
-    let mut result = Vec::new();
+    let capacity = maps.iter().map(|map| map.len()).sum();
+    let mut result = Vec::with_capacity(capacity);
 
     for map in maps {
         for key in map.keys() {

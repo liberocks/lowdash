@@ -24,16 +24,37 @@ pub fn combination<T: Clone>(items: &[T], k: usize) -> Vec<Vec<T>> {
     if k > items.len() {
         return vec![];
     }
-    let mut result = Vec::new();
-    for i in 0..=items.len() - k {
-        let rest_combinations = combination(&items[i + 1..], k - 1);
-        for mut comb in rest_combinations {
-            let mut entry = Vec::with_capacity(k);
-            entry.push(items[i].clone());
-            entry.append(&mut comb);
-            result.push(entry);
+
+    fn backtrack<T: Clone>(
+        items: &[T],
+        start: usize,
+        k: usize,
+        current: &mut Vec<T>,
+        result: &mut Vec<Vec<T>>,
+    ) {
+        if current.len() == k {
+            result.push(current.clone());
+            return;
+        }
+
+        let remaining = k - current.len();
+        let end = items.len() - remaining;
+        for index in start..=end {
+            current.push(items[index].clone());
+            backtrack(items, index + 1, k, current, result);
+            current.pop();
         }
     }
+
+    let choose = k.min(items.len() - k);
+    let capacity = (1..=choose).try_fold(1usize, |count, index| {
+        count
+            .checked_mul(items.len() - choose + index)?
+            .checked_div(index)
+    });
+    let mut result = capacity.map_or_else(Vec::new, Vec::with_capacity);
+    let mut current = Vec::with_capacity(k);
+    backtrack(items, 0, k, &mut current, &mut result);
     result
 }
 
@@ -67,9 +88,17 @@ mod tests {
         let items = vec![1, 2, 3, 4];
         let result = combination(&items, 2);
         // Expected combinations.
-        assert_eq!(result.len(), 6);
-        assert!(result.contains(&vec![1, 2]));
-        assert!(result.contains(&vec![2, 4]));
+        assert_eq!(
+            result,
+            vec![
+                vec![1, 2],
+                vec![1, 3],
+                vec![1, 4],
+                vec![2, 3],
+                vec![2, 4],
+                vec![3, 4]
+            ]
+        );
     }
 
     #[test]

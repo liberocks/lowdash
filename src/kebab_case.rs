@@ -21,6 +21,61 @@ pub fn kebab_case(str_input: &str) -> String {
         return String::new();
     }
 
+    if str_input.is_ascii() {
+        kebab_case_ascii(str_input)
+    } else {
+        kebab_case_unicode(str_input)
+    }
+}
+
+fn kebab_case_ascii(str_input: &str) -> String {
+    let mut result = String::with_capacity(str_input.len());
+    let mut in_word = false;
+    let mut needs_separator = false;
+    let mut prev_char = b' ';
+
+    for c in str_input.bytes() {
+        if c.is_ascii_uppercase()
+            && (prev_char.is_ascii_lowercase()
+                || prev_char == b' '
+                || prev_char == b'-'
+                || prev_char == b'_')
+        {
+            if in_word {
+                needs_separator = true;
+            }
+            if needs_separator && !result.is_empty() {
+                result.push('-');
+                needs_separator = false;
+            }
+            result.push(c.to_ascii_lowercase() as char);
+            in_word = true;
+        } else if is_ascii_whitespace(c) || c == b'-' || c == b'_' {
+            if in_word {
+                needs_separator = true;
+                in_word = false;
+            }
+        } else {
+            if needs_separator && !result.is_empty() {
+                result.push('-');
+                needs_separator = false;
+            }
+            result.push(c.to_ascii_lowercase() as char);
+            in_word = true;
+        }
+        prev_char = c;
+    }
+
+    result
+}
+
+fn is_ascii_whitespace(c: u8) -> bool {
+    matches!(c, b' ' | b'\t' | b'\n' | b'\x0b' | b'\x0c' | b'\r')
+}
+
+// Unicode lowercasing can depend on the surrounding word, so retain the
+// whole-word conversion used by 0.7 for non-ASCII input.
+fn kebab_case_unicode(str_input: &str) -> String {
     let mut result = String::with_capacity(str_input.len());
     let mut current_word = String::new();
     let mut prev_char = ' ';
@@ -139,6 +194,12 @@ mod tests {
     }
 
     #[test]
+    fn test_unicode_contextual_lowercase() {
+        assert_eq!(kebab_case("ὈΔΥΣΣΕΎΣ"), "ὀδυσσεύς");
+        assert_eq!(kebab_case("ὈΔΥΣΣΕΎΣ ἈΘΗΝΑ"), "ὀδυσσεύς-ἀθηνα");
+    }
+
+    #[test]
     fn test_leading_separators() {
         assert_eq!(kebab_case("--hello-world"), "hello-world");
         assert_eq!(kebab_case("  foo-bar"), "foo-bar");
@@ -174,5 +235,10 @@ mod tests {
         assert_eq!(kebab_case("hello-World"), "hello-world");
         assert_eq!(kebab_case("hello_World"), "hello-world");
         assert_eq!(kebab_case("hello World"), "hello-world");
+    }
+
+    #[test]
+    fn test_ascii_vertical_tab_separator() {
+        assert_eq!(kebab_case("hello\x0bWorld"), "hello-world");
     }
 }

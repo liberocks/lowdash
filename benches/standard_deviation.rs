@@ -1,0 +1,10 @@
+use criterion::black_box;
+use criterion::Criterion;
+use lowdash as ld;
+
+pub fn benchmark_standard_deviation(c: &mut Criterion) {
+    let values: Vec<f64> = (0..4_096).map(|value| value as f64 / 3.0).collect();
+    c.bench_function("standard_deviation/large", |b| {
+        b.iter(|| ld::standard_deviation(black_box(&values)))
+    });
+}
