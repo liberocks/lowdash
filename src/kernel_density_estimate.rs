@@ -96,4 +96,11 @@ mod tests {
         assert!(estimate(f64::NAN).is_nan());
         assert!(estimate(f64::INFINITY).is_nan());
     }
+
+    #[test]
+    fn returns_zero_when_all_kernels_underflow() {
+        let estimate = kernel_density_estimate(&[0.0], 1.0).unwrap();
+
+        assert_eq!(estimate(f64::MAX), 0.0);
+    }
 }

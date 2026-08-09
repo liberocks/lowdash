@@ -36,13 +36,7 @@ pub fn combination_count(n: u64, k: u64) -> Option<u128> {
         numerator /= common;
         denominator /= common;
 
-        let common = greatest_common_divisor(result, denominator);
-        result = result.checked_div(common)?;
-        denominator /= common;
-
-        if denominator != 1 {
-            return None;
-        }
+        result = cancel_denominator(result, &mut denominator)?;
 
         result = result.checked_mul(numerator)?;
     }
@@ -57,6 +51,18 @@ fn greatest_common_divisor(mut left: u128, mut right: u128) -> u128 {
         right = remainder;
     }
     left
+}
+
+fn cancel_denominator(result: u128, denominator: &mut u128) -> Option<u128> {
+    let common = greatest_common_divisor(result, *denominator);
+    let result = result.checked_div(common)?;
+    *denominator /= common;
+
+    if *denominator != 1 {
+        return None;
+    }
+
+    Some(result)
 }
 
 #[cfg(test)]
@@ -92,5 +98,12 @@ mod tests {
     #[test]
     fn test_combination_count_overflow() {
         assert_eq!(combination_count(u64::MAX, 3), None);
+    }
+
+    #[test]
+    fn rejects_an_uncancelled_denominator() {
+        let mut denominator = 2;
+
+        assert_eq!(cancel_denominator(1, &mut denominator), None);
     }
 }

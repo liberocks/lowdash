@@ -95,11 +95,15 @@ mod tests {
     fn does_not_call_the_extractor_for_an_empty_excluded_collection() {
         let calls = Cell::new(0);
         let numbers = [1, 2, 3];
-
-        let result = difference_by(&numbers, &[], |number| {
+        let iteratee = &|number: &i32| {
             calls.set(calls.get() + 1);
             *number
-        });
+        };
+
+        assert_eq!(difference_by(&numbers, &[4], iteratee), numbers.to_vec());
+        calls.set(0);
+
+        let result = difference_by(&numbers, &[], iteratee);
 
         assert_eq!(result, numbers);
         assert_eq!(calls.get(), 0);

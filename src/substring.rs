@@ -31,17 +31,7 @@ pub fn substring(str_input: &str, offset: i32, length: u32) -> String {
     }
 
     let start = if offset < 0 {
-        let from_end = offset.unsigned_abs() as usize;
-        if from_end == 0 {
-            0
-        } else {
-            str_input
-                .char_indices()
-                .rev()
-                .nth(from_end - 1)
-                .map(|(index, _)| index)
-                .unwrap_or(0)
-        }
+        negative_offset_start(str_input, offset.unsigned_abs() as usize)
     } else {
         match str_input.char_indices().nth(offset as usize) {
             Some((index, _)) => index,
@@ -62,6 +52,19 @@ pub fn substring(str_input: &str, offset: i32, length: u32) -> String {
         }
     }
     result
+}
+
+fn negative_offset_start(str_input: &str, from_end: usize) -> usize {
+    if from_end == 0 {
+        0
+    } else {
+        str_input
+            .char_indices()
+            .rev()
+            .nth(from_end - 1)
+            .map(|(index, _)| index)
+            .unwrap_or(0)
+    }
 }
 
 #[cfg(test)]
@@ -163,5 +166,10 @@ mod tests {
         let result = substring("Short", 0, u32::MAX);
         assert_eq!(result, "Short");
         assert!(result.capacity() <= "Short".len());
+    }
+
+    #[test]
+    fn handles_a_zero_distance_from_the_end() {
+        assert_eq!(negative_offset_start("hello", 0), 0);
     }
 }

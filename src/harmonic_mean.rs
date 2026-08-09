@@ -89,4 +89,11 @@ mod tests {
 
         assert!((result - 1.0e-308).abs() < f64::EPSILON);
     }
+
+    #[test]
+    fn rescales_when_values_decrease() {
+        let result = harmonic_mean(&[8.0, 4.0, 2.0]).unwrap();
+
+        assert!((result - 24.0 / 7.0).abs() < 1.0e-12);
+    }
 }

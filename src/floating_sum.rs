@@ -123,4 +123,10 @@ mod tests {
         assert_eq!(floating_sum(&[f64::NEG_INFINITY, -1.0]), f64::NEG_INFINITY);
         assert!(floating_sum(&[f64::INFINITY, f64::NEG_INFINITY]).is_nan());
     }
+
+    #[test]
+    fn handles_nonempty_zero_values_and_skips_nonfinite_values_in_fallback() {
+        assert_eq!(floating_sum(&[0.0, -0.0]), 0.0);
+        assert_eq!(compensated_sum(&[1.0, f64::INFINITY, 2.0], 1.0), 3.0);
+    }
 }

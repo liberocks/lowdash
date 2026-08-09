@@ -101,4 +101,9 @@ mod tests {
 
         assert!((result - 4.0).abs() < 1e-12);
     }
+
+    #[test]
+    fn rejects_finite_products_that_overflow() {
+        assert_eq!(weighted_mean(&[f64::MAX], &[2.0]), None);
+    }
 }

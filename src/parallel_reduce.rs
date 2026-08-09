@@ -134,16 +134,20 @@ mod tests {
     fn calls_initial_once_for_empty_input() {
         let calls = Arc::new(AtomicUsize::new(0));
         let initial_calls = Arc::clone(&calls);
-        let result = parallel_reduce(
-            &[] as &[i32],
-            workers(8),
-            move || {
-                initial_calls.fetch_add(1, Ordering::SeqCst);
-                42
-            },
-            |sum, value, _| sum + *value,
-            |left, right| left + right,
+        let initial = move || {
+            initial_calls.fetch_add(1, Ordering::SeqCst);
+            42
+        };
+        let fold = &|sum, value: &i32, _| sum + *value;
+        let combine = |left, right| left + right;
+
+        assert_eq!(
+            parallel_reduce(&[1, 2, 3, 4, 5], workers(2), &initial, fold, &combine),
+            99
         );
+        calls.store(0, Ordering::SeqCst);
+
+        let result = parallel_reduce(&[] as &[i32], workers(8), &initial, fold, &combine);
 
         assert_eq!(result, 42);
         assert_eq!(calls.load(Ordering::SeqCst), 1);
@@ -164,12 +168,24 @@ mod tests {
 
     #[test]
     fn handles_one_worker_without_spawning() {
+        let combine = |left, right| left + right;
+        assert_eq!(
+            parallel_reduce(
+                &[1, 2, 3, 4, 5],
+                workers(2),
+                || 0,
+                |sum, value, _| sum + *value,
+                &combine,
+            ),
+            15
+        );
+
         let result = parallel_reduce(
             &[1, 2, 3],
             workers(1),
             || 0,
             |sum, value, index| sum + *value + index as i32,
-            |left, right| left + right,
+            &combine,
         );
 
         assert_eq!(result, 9);
@@ -197,6 +213,18 @@ mod tests {
 
     #[test]
     fn resumes_fold_panics_after_joining_threads() {
+        let combine = |left, right| left + right;
+        assert_eq!(
+            parallel_reduce(
+                &[1, 2, 3, 4, 5],
+                workers(2),
+                || 0,
+                |sum, value, _| sum + *value,
+                &combine,
+            ),
+            15
+        );
+
         let panic = catch_unwind(AssertUnwindSafe(|| {
             let _ = parallel_reduce(
                 &[1, 2, 3],
@@ -208,7 +236,7 @@ mod tests {
                     }
                     sum + *value
                 },
-                |left, right| left + right,
+                &combine,
             );
         }))
         .expect_err("fold panic should be resumed");

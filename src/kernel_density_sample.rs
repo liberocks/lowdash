@@ -134,6 +134,27 @@ mod tests {
     }
 
     #[test]
+    fn samples_from_a_single_value() {
+        let samples = kernel_density_sample(&[5.0], 1.0, 4, 42).unwrap();
+
+        assert_eq!(samples.len(), 4);
+        assert!(samples.iter().all(|sample| sample.is_finite()));
+    }
+
+    #[cfg(target_pointer_width = "64")]
+    #[test]
+    fn rejects_out_of_range_index_candidates() {
+        let upper = (1usize << 63) + 1;
+        let threshold = upper.wrapping_neg() % upper;
+        let mut first_candidate = Lcg::new(0);
+
+        assert!(first_candidate.next_u64() < threshold as u64);
+
+        let mut random = Lcg::new(0);
+        assert!(random.index_below(upper) < upper);
+    }
+
+    #[test]
     fn test_kernel_density_sample_rejects_invalid_input() {
         assert!(kernel_density_sample(&[], 1.0, 1, 42).is_none());
         assert!(kernel_density_sample(&[0.0, f64::NAN], 1.0, 1, 42).is_none());

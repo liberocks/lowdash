@@ -173,9 +173,9 @@ mod tests {
     fn handles_one_worker_and_runs_callbacks_after_errors() {
         let calls = Arc::new(AtomicUsize::new(0));
         let callback_calls = Arc::clone(&calls);
-        let result = parallel_try_map(&[1, 2, 3], workers(1), move |value, index| {
+        let result = parallel_try_map(&[1, 2, 3, 4], workers(1), move |value, index| {
             callback_calls.fetch_add(1, Ordering::SeqCst);
-            if index == 1 {
+            if index == 1 || index == 3 {
                 Err(*value)
             } else {
                 Ok(*value)
@@ -183,7 +183,7 @@ mod tests {
         });
 
         assert_eq!(result, Err(2));
-        assert_eq!(calls.load(Ordering::SeqCst), 3);
+        assert_eq!(calls.load(Ordering::SeqCst), 4);
     }
 
     #[test]

@@ -131,11 +131,23 @@ mod tests {
     #[test]
     fn test_sum_products_infinity_and_nan_behavior() {
         assert_eq!(sum_products(&[f64::INFINITY], &[1.0]), Some(f64::INFINITY));
+        assert_eq!(
+            sum_products(&[f64::NEG_INFINITY], &[1.0]),
+            Some(f64::NEG_INFINITY)
+        );
         assert!(sum_products(&[f64::INFINITY], &[0.0]).unwrap().is_nan());
         assert!(
             sum_products(&[f64::INFINITY, f64::NEG_INFINITY], &[1.0, 1.0])
                 .unwrap()
                 .is_nan()
+        );
+    }
+
+    #[test]
+    fn skips_nonfinite_products_in_fallback() {
+        assert_eq!(
+            compensated_product_sum(&[1.0, f64::INFINITY, 2.0], &[1.0, 1.0, 1.0], 1.0),
+            3.0
         );
     }
 }
