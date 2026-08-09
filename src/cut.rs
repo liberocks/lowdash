@@ -23,10 +23,20 @@ where
         return Some((&collection[..0], collection));
     }
 
-    collection
-        .windows(separator.len())
-        .position(|window| window == separator)
-        .map(|index| (&collection[..index], &collection[index + separator.len()..]))
+    if separator.len() > collection.len() {
+        return None;
+    }
+
+    let last_start = collection.len() - separator.len();
+    for index in 0..=last_start {
+        if collection[index] == separator[0]
+            && collection[index + 1..index + separator.len()] == separator[1..]
+        {
+            return Some((&collection[..index], &collection[index + separator.len()..]));
+        }
+    }
+
+    None
 }
 
 #[cfg(test)]

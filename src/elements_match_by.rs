@@ -30,18 +30,17 @@ where
     let mut matched = vec![false; right_keys.len()];
 
     for left_key in &left_keys {
-        let mut match_index = None;
-
-        for (index, right_key) in right_keys.iter().enumerate() {
-            if !matched[index] && left_key == right_key {
-                match_index = Some(index);
+        let mut index = 0;
+        while index < right_keys.len() {
+            if !matched[index] && left_key == &right_keys[index] {
                 break;
             }
+            index += 1;
         }
 
-        let Some(index) = match_index else {
+        if index == right_keys.len() {
             return false;
-        };
+        }
         matched[index] = true;
     }
 

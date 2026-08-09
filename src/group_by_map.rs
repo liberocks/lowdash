@@ -24,7 +24,7 @@ where
     K: Eq + Hash,
     F: Fn(&T) -> (K, V),
 {
-    let mut result: HashMap<K, Vec<V>> = HashMap::with_capacity(collection.len());
+    let mut result: HashMap<K, Vec<V>> = HashMap::new();
 
     for item in collection {
         let (key, value) = transform(item);

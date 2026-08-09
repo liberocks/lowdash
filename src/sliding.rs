@@ -34,10 +34,14 @@ where
     }
 
     let last_start = collection.len() - size;
-    (0..=last_start)
-        .step_by(step)
-        .map(|start| collection[start..start + size].to_vec())
-        .collect()
+    let count = last_start / step + 1;
+    let mut result = Vec::with_capacity(count);
+
+    for start in (0..=last_start).step_by(step) {
+        result.push(collection[start..start + size].to_vec());
+    }
+
+    result
 }
 
 #[cfg(test)]

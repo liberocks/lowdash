@@ -17,8 +17,8 @@ pub fn is_uniq<T>(collection: &[T]) -> bool
 where
     T: PartialEq,
 {
-    for (index, item) in collection.iter().enumerate() {
-        if collection[..index].contains(item) {
+    for index in 1..collection.len() {
+        if collection[..index].contains(&collection[index]) {
             return false;
         }
     }

@@ -24,18 +24,17 @@ where
     let mut matched = vec![false; right.len()];
 
     for item in left {
-        let mut match_index = None;
-
-        for (index, candidate) in right.iter().enumerate() {
-            if !matched[index] && item == candidate {
-                match_index = Some(index);
+        let mut index = 0;
+        while index < right.len() {
+            if !matched[index] && item == &right[index] {
                 break;
             }
+            index += 1;
         }
 
-        let Some(index) = match_index else {
+        if index == right.len() {
             return false;
-        };
+        }
         matched[index] = true;
     }
 
