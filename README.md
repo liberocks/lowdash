@@ -96,6 +96,7 @@ Utility functions for collections:
 - [sort_by](#sort_by)
 - [sort_by_key](#sort_by_key)
 - [slice](#slice)
+- [sliding](#sliding)
 - [splice](#splice)
 - [subset](#subset)
 - [symmetric_difference](#symmetric_difference)
@@ -4024,6 +4025,19 @@ Returns overlapping windows of a requested size.
 use lowdash::windows;
 
 assert_eq!(windows(&[1, 2, 3], 2), vec![vec![1, 2], vec![2, 3]]);
+```
+
+### sliding
+Returns full-size windows separated by a configurable step. Trailing partial
+windows are omitted.
+
+```rust
+use lowdash::sliding;
+
+assert_eq!(
+    sliding(&[1, 2, 3, 4, 5], 3, 2),
+    vec![vec![1, 2, 3], vec![3, 4, 5]],
+);
 ```
 
 ### modes
