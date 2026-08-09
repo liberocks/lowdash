@@ -186,6 +186,7 @@ mod union_by;
 mod uniq;
 mod uniq_by;
 mod uniq_keys;
+mod uniq_map;
 mod uniq_values;
 mod unzip;
 mod value_or;
@@ -387,6 +388,7 @@ fn all_benches(c: &mut Criterion) {
     to_pairs::benchmark_to_pairs(c);
     uniq::benchmark_uniq(c);
     uniq_by::benchmark_uniq_by(c);
+    uniq_map::benchmark_uniq_map(c);
     uniq_keys::benchmark_uniq_keys(c);
     uniq_values::benchmark_uniq_values(c);
     union::benchmark_union(c);

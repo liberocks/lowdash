@@ -106,6 +106,7 @@ Utility functions for collections:
 - [unzip](#unzip)
 - [uniq](#uniq)
 - [uniq_by](#uniq_by)
+- [uniq_map](#uniq_map)
 - [windows](#windows)
 - [zip](#zip)
 - [zip_longest](#zip_longest)
@@ -1671,6 +1672,16 @@ assert_eq!(unique_people, vec![
     Person { name: "Bob".to_string(), age: 30 },
     Person { name: "Carol".to_string(), age: 35 },
 ]);
+```
+
+### uniq_map
+Maps each item and keeps only the first occurrence of every mapped value.
+
+```rust
+use lowdash::uniq_map;
+
+let names = ["Ada", "Ada", "Linus"];
+assert_eq!(uniq_map(&names, |name, _| name.len()), vec![3, 5]);
 ```
 
 ### difference
