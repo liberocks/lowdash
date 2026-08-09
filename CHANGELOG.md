@@ -1,72 +1,38 @@
 # Changelog
 
-## [0.8.0] 2026-08-08
+## [0.8.0] 2026-08-09
 ### Added
-- Added `take` for selecting the first items from a collection.
-- Added `take_right` for selecting the final items from a collection.
-- Added `find_last` for reverse predicate searches.
-- Added `chunk_by` for grouping adjacent runs by key.
-- Added `scan` for collecting intermediate accumulators.
-- Added `assign_with` for resolver-based map merging.
-- Added `difference_by` for key-based collection differences.
-- Added `intersection_by` for key-based collection intersections.
-- Added `zip_longest` for pairing collections of different lengths.
-- Added `cartesian_product` for left-major pair generation.
-- Added `union_by` for key-based collection unions.
-- Added `symmetric_difference` for stable exclusive values.
-- Added `unzip` for splitting pairs into two collections.
-- Added `min_by_key` for selecting the first minimum keyed item.
-- Added `max_by_key` for selecting the first maximum keyed item.
-- Added `defaults` for first-value-wins map merging.
-- Added `invert_grouped` for grouping all keys by value.
-- Added `windows` for producing overlapping collection windows.
-- Added `modes` for finding most frequent values.
-- Added `variance` for stable population variance calculations.
-- Added `parallel_map` for ordered concurrent mapping.
-- Added `parallel_try_map` for ordered concurrent fallible mapping.
-- Added `parallel_for_each` for concurrent side-effect callbacks.
-- Added `parallel_find_map` for ordered concurrent searches.
-- Added `parallel_reduce` for chunked concurrent reductions.
-- Added `floating_mean` for compensated floating-point means.
-- Added `weighted_mean` for validated weighted averages.
-- Added `geometric_mean` for log-space geometric means.
-- Added `harmonic_mean` for scaled reciprocal means.
-- Added `median_low` for lower-middle selection.
-- Added `median_high` for upper-middle selection.
-- Added `median_grouped` for grouped-data median estimates.
-- Added `mode` for selecting the first most common value.
-- Added `quantiles` for inclusive interpolated cut points.
-- Added `sample_variance` for corrected one-pass variance.
-- Added `standard_deviation` for sample standard deviation.
-- Added `population_standard_deviation` for population standard deviation.
-- Added `covariance` for stable sample covariance.
-- Added `correlation` for stable Pearson coefficients.
-- Added `linear_regression` for ordinary least-squares fits.
-- Added `floating_sum` for compensated floating-point summation.
-- Added `euclidean_distance` for stable finite-point distances.
-- Added `euclidean_norm` for overflow-resistant vector norms.
-- Added `sum_products` for compensated pairwise product sums.
-- Added `product_with_start` for caller-specified product seeds.
-- Added `is_close` for relative and absolute floating-point comparisons.
-- Added `kernel_density_estimate` for Gaussian density estimation.
-- Added `kernel_density_sample` for deterministic Gaussian KDE samples.
-- Added `combination_count` for checked binomial coefficients.
-- Added `factorial` for checked factorial values.
-- Added `greatest_common_divisor` for Euclidean greatest common divisors.
-- Added `integer_square_root` for exact integer floor square roots.
-- Added `least_common_multiple` for checked least common multiples.
-- Added `permutation_count` for checked ordered selection counts.
-- Improved `difference_by`, `mode`, `modes`, `median_low`, and `zip_longest` with lower-overhead collection paths.
-- Improved `euclidean_distance`, `sample_variance`, `population_standard_deviation`, `covariance`, `correlation`, and `linear_regression` with fused or scaled numeric accumulation.
-- Improved `geometric_mean`, `floating_sum`, `sum_products`, `harmonic_mean`, and `integer_square_root` through specialized numeric fast paths.
-- Reduced setup overhead for `parallel_map`, `parallel_for_each`, `parallel_reduce`, `parallel_find_map`, and `parallel_try_map` on small and one-worker inputs.
-- Improved `assign_with` and `kernel_density_sample` by reducing intermediate allocation and repeated random sampling work.
+- Added collection traversal and partitioning helpers: `take`, `take_right`, `find_last`, `chunk_by`, `scan`, `windows`, `sliding`, and `cut`.
+- Added collection comparison and membership helpers: `difference_by`, `intersection_by`, `union_by`, `symmetric_difference`, `elements_match`, `elements_match_by`, `contains_all`, `contains_any`, and `contains_none`.
+- Added collection grouping, uniqueness, trimming, pairing, and keyed selection helpers: `is_uniq`, `is_uniq_by`, `uniq_map`, `group_by_map`, `trim`, `trim_start`, `trim_end`, `zip_longest`, `cartesian_product`, `unzip`, `min_by_key`, and `max_by_key`.
+- Added map helpers: `assign_with`, `defaults`, and `invert_grouped`.
+- Added concurrent helpers: `parallel_map`, `parallel_try_map`, `parallel_for_each`, `parallel_find_map`, and `parallel_reduce`.
+- Added statistical helpers: `floating_mean`, `weighted_mean`, `geometric_mean`, `harmonic_mean`, `median_low`, `median_high`, `median_grouped`, `mode`, `modes`, `quantiles`, `variance`, `sample_variance`, `standard_deviation`, `population_standard_deviation`, `covariance`, `correlation`, and `linear_regression`.
+- Added numeric and floating-point helpers: `floating_sum`, `euclidean_distance`, `euclidean_norm`, `sum_products`, `product_with_start`, and `is_close`.
+- Added kernel density estimation and deterministic sampling with `kernel_density_estimate` and `kernel_density_sample`.
+- Added checked number-theory helpers: `combination_count`, `factorial`, `greatest_common_divisor`, `integer_square_root`, `least_common_multiple`, and `permutation_count`.
+
+### Changed
+- Reduced allocation, cloning, and lookup overhead across collection and map helpers, including `combination`, `flat_map`, `filter`, `reject`, `uniq`, `values`, `uniq_keys`, `drop_by_index`, `map_entries`, `omit_by_values`, `pick_by_keys`, `pick_by_values`, `find_uniques`, `find_uniques_by`, `find_duplicates_by`, `earliest_by`, and `samples`.
+- Improved string utility throughput for `chunk_string`, `ellipsis`, `substring`, `capitalize`, `words`, `camel_case`, `kebab_case`, and `snake_case` through direct output and boundary scanning.
+- Added hashed-key lookup to `difference_by`; improved `mode`, `modes`, `median_low`, and `zip_longest` with lower-overhead collection paths; and improved numeric accumulation with fused validation, scaling, and specialized fast paths.
+- Reduced setup overhead for concurrent helpers on small or one-worker inputs, while reducing intermediate allocation in `assign_with` and repeated sampling work in `kernel_density_sample`.
+- Expanded benchmark coverage, compiler comparisons, timing compatibility, and benchmark result reporting.
+- Reorganized and expanded the README function index and refreshed package metadata, including the zero-dependency description.
 
 ### Fixed
 - Preserved the contextual Unicode lowercasing behavior of `snake_case` and `kebab_case` from 0.7.0 while retaining direct output for ASCII input.
-- Bounded `substring`'s output allocation by the available input bytes to avoid oversized reservations for large lengths.
-- Limited `pick_by_keys` and `pick_by_values` reservations to the source map size.
-- Declared Rust 1.63 as the minimum supported compiler version and kept the benchmark suite compatible with it.
+- Bounded `substring` output allocation and limited `pick_by_keys` and `pick_by_values` reservations to the source map size.
+- Corrected the `correlation` and `union_by` documentation examples.
+
+### Compatibility
+- Declared compiler version 1.63 as the minimum supported version, pinned benchmark-only dependencies for it, and added build and v0.7.0 API compatibility checks.
+
+### Security
+- Restricted workflow token permissions to the minimum read-only access required.
+
+### Testing
+- Added regression coverage for optimized concurrent paths and benchmarks for the new utilities.
 
 ## [0.7.0] 2026-08-02
 ### Added
