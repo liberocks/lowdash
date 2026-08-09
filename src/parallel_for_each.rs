@@ -88,13 +88,13 @@ mod tests {
     fn processes_every_item_and_passes_global_indices() {
         let seen = Arc::new(Mutex::new(Vec::new()));
         let callback_seen = Arc::clone(&seen);
-        parallel_for_each(&[10, 20, 30, 40], workers(2), move |value, index| {
+        parallel_for_each(&[10, 20, 30, 40, 50], workers(2), move |value, index| {
             callback_seen.lock().unwrap().push((*value, index));
         });
 
         let mut seen = Arc::try_unwrap(seen).unwrap().into_inner().unwrap();
         seen.sort_unstable_by_key(|(_, index)| *index);
-        assert_eq!(seen, vec![(10, 0), (20, 1), (30, 2), (40, 3)]);
+        assert_eq!(seen, vec![(10, 0), (20, 1), (30, 2), (40, 3), (50, 4)]);
     }
 
     #[test]
@@ -102,9 +102,14 @@ mod tests {
         let calls = Arc::new(AtomicUsize::new(0));
         let callback_calls = Arc::clone(&calls);
         let empty: [i32; 0] = [];
-        parallel_for_each(&empty, workers(4), move |_, _| {
+        let callback = move |_: &i32, _: usize| {
             callback_calls.fetch_add(1, Ordering::SeqCst);
-        });
+        };
+        parallel_for_each(&[1, 2, 3, 4, 5], workers(2), &callback);
+        assert_eq!(calls.load(Ordering::SeqCst), 5);
+        calls.store(0, Ordering::SeqCst);
+
+        parallel_for_each(&empty, workers(4), &callback);
         assert_eq!(calls.load(Ordering::SeqCst), 0);
 
         let calls = Arc::new(AtomicUsize::new(0));
@@ -137,8 +142,8 @@ mod tests {
         let completed = Arc::new(AtomicUsize::new(0));
         let callback_completed = Arc::clone(&completed);
         let panic = catch_unwind(AssertUnwindSafe(|| {
-            parallel_for_each(&[1, 2, 3, 4], workers(2), move |value, _| {
-                if *value == 2 {
+            parallel_for_each(&[1, 2, 3, 4, 5], workers(2), move |value, _| {
+                if *value == 2 || *value == 4 {
                     panic!("parallel for each panic");
                 }
                 callback_completed.fetch_add(1, Ordering::SeqCst);

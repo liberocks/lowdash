@@ -25,10 +25,7 @@ where
         return Vec::new();
     }
 
-    let mut result = match left.len().checked_mul(right.len()) {
-        Some(capacity) => Vec::with_capacity(capacity),
-        None => Vec::new(),
-    };
+    let mut result = result_with_capacity(left.len(), right.len());
 
     for left_item in left {
         for right_item in right {
@@ -37,6 +34,13 @@ where
     }
 
     result
+}
+
+fn result_with_capacity<T, U>(left_len: usize, right_len: usize) -> Vec<(T, U)> {
+    match left_len.checked_mul(right_len) {
+        Some(capacity) => Vec::with_capacity(capacity),
+        None => Vec::new(),
+    }
 }
 
 #[cfg(test)]
@@ -67,6 +71,13 @@ mod tests {
             cartesian_product(&[1, 1], &[2, 2]),
             vec![(1, 2), (1, 2), (1, 2), (1, 2)]
         );
+    }
+
+    #[test]
+    fn guards_capacity_calculation_overflow() {
+        let result = result_with_capacity::<u8, u8>(usize::MAX, 2);
+
+        assert!(result.is_empty());
     }
 
     #[test]

@@ -178,6 +178,11 @@ mod tests {
     }
 
     #[test]
+    fn keeps_a_trailing_uppercase_acronym_together() {
+        assert_eq!(words("ABC"), vec!["ABC".to_string()]);
+    }
+
+    #[test]
     fn test_acronym_before_word() {
         let result = words("XMLParser");
         assert_eq!(result, vec!["XML", "Parser"]);

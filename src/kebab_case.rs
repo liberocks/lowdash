@@ -87,36 +87,30 @@ fn kebab_case_unicode(str_input: &str) -> String {
                 || prev_char == '-'
                 || prev_char == '_')
         {
-            if !current_word.is_empty() {
-                if !result.is_empty() {
-                    result.push('-');
-                }
-                result.push_str(&current_word.to_lowercase());
-                current_word.clear();
-            }
+            append_unicode_word(&mut result, &mut current_word);
             current_word.push(c);
         } else if c.is_whitespace() || c == '-' || c == '_' {
-            if !current_word.is_empty() {
-                if !result.is_empty() {
-                    result.push('-');
-                }
-                result.push_str(&current_word.to_lowercase());
-                current_word.clear();
-            }
+            append_unicode_word(&mut result, &mut current_word);
         } else {
             current_word.push(c);
         }
         prev_char = c;
     }
 
-    if !current_word.is_empty() {
-        if !result.is_empty() {
-            result.push('-');
-        }
-        result.push_str(&current_word.to_lowercase());
-    }
+    append_unicode_word(&mut result, &mut current_word);
 
     result
+}
+
+fn append_unicode_word(result: &mut String, current_word: &mut String) {
+    if current_word.is_empty() {
+        return;
+    }
+    if !result.is_empty() {
+        result.push('-');
+    }
+    result.push_str(&current_word.to_lowercase());
+    current_word.clear();
 }
 
 #[cfg(test)]
@@ -197,6 +191,11 @@ mod tests {
     fn test_unicode_contextual_lowercase() {
         assert_eq!(kebab_case("ὈΔΥΣΣΕΎΣ"), "ὀδυσσεύς");
         assert_eq!(kebab_case("ὈΔΥΣΣΕΎΣ ἈΘΗΝΑ"), "ὀδυσσεύς-ἀθηνα");
+    }
+
+    #[test]
+    fn test_unicode_word_boundaries() {
+        assert_eq!(kebab_case("éclair déjàVu fin"), "éclair-déjà-vu-fin");
     }
 
     #[test]

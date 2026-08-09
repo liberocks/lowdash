@@ -95,11 +95,11 @@ mod tests {
 
     #[test]
     fn preserves_order_and_passes_global_indices() {
-        let result = parallel_map(&[10, 20, 30, 40], workers(2), |value, index| {
+        let result = parallel_map(&[10, 20, 30, 40, 50], workers(2), |value, index| {
             (*value, index)
         });
 
-        assert_eq!(result, vec![(10, 0), (20, 1), (30, 2), (40, 3)]);
+        assert_eq!(result, vec![(10, 0), (20, 1), (30, 2), (40, 3), (50, 4)]);
     }
 
     #[test]
@@ -150,8 +150,8 @@ mod tests {
     #[test]
     fn resumes_callback_panics() {
         let panic = catch_unwind(AssertUnwindSafe(|| {
-            parallel_map(&[1, 2, 3], workers(2), |value, _| {
-                if *value == 2 {
+            parallel_map(&[1, 2, 3, 4, 5], workers(2), |value, _| {
+                if *value == 2 || *value == 4 {
                     panic!("parallel map panic");
                 }
                 *value
