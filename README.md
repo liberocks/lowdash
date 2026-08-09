@@ -62,6 +62,7 @@ Utility functions for collections:
 - [is_sorted](#is_sorted)
 - [is_sorted_by_key](#is_sorted_by_key)
 - [is_uniq](#is_uniq)
+- [is_uniq_by](#is_uniq_by)
 - [last](#last)
 - [last_index_of](#last_index_of)
 - [last_or](#last_or)
@@ -2914,6 +2915,16 @@ use lowdash::is_uniq;
 
 assert!(is_uniq(&[1, 2, 3]));
 assert!(!is_uniq(&[1, 2, 1]));
+```
+
+### is_uniq_by
+Returns `true` when every item produces a distinct key.
+
+```rust
+use lowdash::is_uniq_by;
+
+let records = [(1, "first"), (2, "second"), (1, "duplicate")];
+assert!(!is_uniq_by(&records, |record| record.0));
 ```
 
 ### sort_by_key
