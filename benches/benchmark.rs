@@ -187,6 +187,7 @@ mod take_while;
 mod times;
 mod to_pairs;
 mod trim;
+mod trim_start;
 mod union;
 mod union_by;
 mod uniq;
@@ -398,6 +399,7 @@ fn all_benches(c: &mut Criterion) {
     times::benchmark_times(c);
     to_pairs::benchmark_to_pairs(c);
     trim::benchmark_trim(c);
+    trim_start::benchmark_trim_start(c);
     uniq::benchmark_uniq(c);
     uniq_by::benchmark_uniq_by(c);
     uniq_map::benchmark_uniq_map(c);

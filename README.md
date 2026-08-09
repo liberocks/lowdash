@@ -107,6 +107,7 @@ Utility functions for collections:
 - [take_while](#take_while)
 - [times](#times)
 - [trim](#trim)
+- [trim_start](#trim_start)
 - [union](#union)
 - [union_by](#union_by)
 - [unzip](#unzip)
@@ -4061,6 +4062,15 @@ borrowed slice.
 use lowdash::trim;
 
 assert_eq!(trim(&[0, 1, 2, 0, 3, 0], &[0, 1]), &[2, 0, 3][..]);
+```
+
+### trim_start
+Removes leading values from a cutset and returns a borrowed slice.
+
+```rust
+use lowdash::trim_start;
+
+assert_eq!(trim_start(&[0, 1, 2, 0, 3], &[0, 1]), &[2, 0, 3][..]);
 ```
 
 ### modes
