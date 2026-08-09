@@ -72,6 +72,7 @@ mod from_pairs;
 mod geometric_mean;
 mod greatest_common_divisor;
 mod group_by;
+mod group_by_map;
 mod harmonic_mean;
 mod has_key;
 mod index_of;
@@ -277,6 +278,7 @@ fn all_benches(c: &mut Criterion) {
     from_pairs::benchmark_from_pairs(c);
     geometric_mean::benchmark_geometric_mean(c);
     group_by::benchmark_group_by(c);
+    group_by_map::benchmark_group_by_map(c);
     greatest_common_divisor::benchmark_greatest_common_divisor(c);
     harmonic_mean::benchmark_harmonic_mean(c);
     has_key::benchmark_has_key(c);
