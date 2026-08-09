@@ -26,6 +26,7 @@ Utility functions for collections:
 - [count_by](#count_by)
 - [count_values](#count_values)
 - [count_values_by](#count_values_by)
+- [cut](#cut)
 - [difference](#difference)
 - [difference_by](#difference_by)
 - [drop](#drop)
@@ -2647,6 +2648,17 @@ expected.insert(3, 2);
 expected.insert(4, 1);
 expected.insert(5, 1);
 assert_eq!(result, expected);
+```
+
+### cut
+Splits a collection around the first separator and returns borrowed slices
+without the separator.
+
+```rust
+use lowdash::cut;
+
+let result = cut(&[1, 2, 3, 4], &[2, 3]);
+assert_eq!(result, Some((&[1][..], &[4][..])));
 ```
 
 ### subset
