@@ -55,6 +55,7 @@ Utility functions for collections:
 - [foreach](#foreach)
 - [foreach_while](#foreach_while)
 - [group_by](#group_by)
+- [group_by_map](#group_by_map)
 - [index_of](#index_of)
 - [interleave](#interleave)
 - [intersection](#intersection)
@@ -1736,6 +1737,19 @@ assert_eq!(grouped.get(&25), Some(&vec![
 assert_eq!(grouped.get(&30), Some(&vec![
     Person { name: "Bob".to_string(), age: 30 },
 ]));
+```
+
+### group_by_map
+Maps each item to a key-value pair and groups the values by key.
+
+```rust
+use lowdash::group_by_map;
+
+let numbers = [1, 2, 3, 4];
+let grouped = group_by_map(&numbers, |number| (number % 2, number * 10));
+
+assert_eq!(grouped.get(&0), Some(&vec![20, 40]));
+assert_eq!(grouped.get(&1), Some(&vec![10, 30]));
 ```
 
 ### chunk
