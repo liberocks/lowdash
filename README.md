@@ -106,6 +106,7 @@ Utility functions for collections:
 - [take_right_while](#take_right_while)
 - [take_while](#take_while)
 - [times](#times)
+- [trim](#trim)
 - [union](#union)
 - [union_by](#union_by)
 - [unzip](#unzip)
@@ -4050,6 +4051,16 @@ assert_eq!(
     sliding(&[1, 2, 3, 4, 5], 3, 2),
     vec![vec![1, 2, 3], vec![3, 4, 5]],
 );
+```
+
+### trim
+Removes leading and trailing values that occur in a cutset and returns a
+borrowed slice.
+
+```rust
+use lowdash::trim;
+
+assert_eq!(trim(&[0, 1, 2, 0, 3, 0], &[0, 1]), &[2, 0, 3][..]);
 ```
 
 ### modes
