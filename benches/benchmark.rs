@@ -38,6 +38,7 @@ mod duration_between;
 mod earliest;
 mod earliest_by;
 mod elements_match;
+mod elements_match_by;
 mod ellipsis;
 mod entries;
 mod euclidean_distance;
@@ -246,6 +247,7 @@ fn all_benches(c: &mut Criterion) {
     elements_match::benchmark_elements_match(c);
     earliest::benchmark_earliest(c);
     earliest_by::benchmark_earliest_by(c);
+    elements_match_by::benchmark_elements_match_by(c);
     ellipsis::benchmark_ellipsis(c);
     every::benchmark_every(c);
     entries::benchmark_entries(c);

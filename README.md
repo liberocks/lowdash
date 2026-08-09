@@ -34,6 +34,7 @@ Utility functions for collections:
 - [drop_right_while](#drop_right_while)
 - [drop_while](#drop_while)
 - [elements_match](#elements_match)
+- [elements_match_by](#elements_match_by)
 - [every](#every)
 - [fill](#fill)
 - [filter](#filter)
@@ -1709,6 +1710,19 @@ use lowdash::elements_match;
 
 assert!(elements_match(&[1, 2, 1], &[1, 1, 2]));
 assert!(!elements_match(&[1, 2], &[1, 1]));
+```
+
+### elements_match_by
+Compares key multiplicities between two collections without considering item
+order.
+
+```rust
+use lowdash::elements_match_by;
+
+let left = [(1, "a"), (2, "b"), (1, "c")];
+let right = [(1, "x"), (1, "y"), (2, "z")];
+
+assert!(elements_match_by(&left, &right, |item| item.0));
 ```
 
 ### group_by
