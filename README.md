@@ -107,6 +107,7 @@ Utility functions for collections:
 - [take_while](#take_while)
 - [times](#times)
 - [trim](#trim)
+- [trim_end](#trim_end)
 - [trim_start](#trim_start)
 - [union](#union)
 - [union_by](#union_by)
@@ -4062,6 +4063,15 @@ borrowed slice.
 use lowdash::trim;
 
 assert_eq!(trim(&[0, 1, 2, 0, 3, 0], &[0, 1]), &[2, 0, 3][..]);
+```
+
+### trim_end
+Removes trailing values from a cutset and returns a borrowed slice.
+
+```rust
+use lowdash::trim_end;
+
+assert_eq!(trim_end(&[0, 1, 2, 0, 3, 0], &[0, 3]), &[0, 1, 2][..]);
 ```
 
 ### trim_start
