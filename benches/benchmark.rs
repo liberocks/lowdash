@@ -26,6 +26,7 @@ mod count_by;
 mod count_values;
 mod count_values_by;
 mod covariance;
+mod cut;
 mod defaults;
 mod difference;
 mod difference_by;
@@ -236,6 +237,7 @@ fn all_benches(c: &mut Criterion) {
     count_by::benchmark_count_by(c);
     count_values::benchmark_count_values(c);
     count_values_by::benchmark_count_values_by(c);
+    cut::benchmark_cut(c);
     defaults::benchmark_defaults(c);
     difference::benchmark_difference(c);
     difference_by::benchmark_difference_by(c);
