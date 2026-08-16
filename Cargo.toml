@@ -13,7 +13,7 @@ rust-version = "1.63"
 autobenches = false
 
 [dev-dependencies]
-criterion = { version = "=0.4.0", default-features = false, features = ["cargo_bench_support", "html_reports"] }
+criterion = { version = "=0.4.0", default-features = false, features = ["cargo_bench_support", "html_reports", "plotters"] }
 # Keep the benchmark-only dependency graph buildable on the declared MSRV.
 serde = "=1.0.147"
 serde_derive = "=1.0.147"
