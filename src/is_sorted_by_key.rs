@@ -3,6 +3,8 @@ use std::cmp::Ordering;
 /// Returns `true` when keys from `iteratee` are in non-decreasing order.
 /// Incomparable keys, including `NaN`, return `false`.
 ///
+/// The iteratee is called once per visited item.
+///
 /// **Time Complexity:** O(n), where `n` is the collection length.
 ///
 /// # Arguments
@@ -87,13 +89,14 @@ where
         return true;
     }
 
-    for i in 0..collection.len() - 1 {
-        let current_key = iteratee(&collection[i]);
-        let next_key = iteratee(&collection[i + 1]);
-        match current_key.partial_cmp(&next_key) {
+    let mut previous_key = iteratee(&collection[0]);
+    for item in &collection[1..] {
+        let next_key = iteratee(item);
+        match previous_key.partial_cmp(&next_key) {
             Some(Ordering::Greater) | None => return false,
-            Some(Ordering::Less) | Some(Ordering::Equal) => continue,
+            Some(Ordering::Less) | Some(Ordering::Equal) => {}
         }
+        previous_key = next_key;
     }
 
     true
@@ -102,6 +105,7 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::cell::Cell;
 
     #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
     struct Person {
@@ -149,6 +153,18 @@ mod tests {
         let numbers = vec![1, 2, 2, 1, 4, 5];
         let result = is_sorted_by_key(&numbers, |&x| x);
         assert!(!result);
+    }
+
+    #[test]
+    fn calls_iteratee_once_per_visited_item() {
+        let calls = Cell::new(0);
+        let numbers = [1, 2, 3, 4];
+
+        assert!(is_sorted_by_key(&numbers, |number| {
+            calls.set(calls.get() + 1);
+            *number
+        }));
+        assert_eq!(calls.get(), numbers.len());
     }
 
     #[test]
