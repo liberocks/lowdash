@@ -37,9 +37,17 @@ where
     }
 
     if left.len() > right.len() {
-        result.extend(left[common_length..].iter().map(|item| (Some(item.clone()), None)));
+        result.extend(
+            left[common_length..]
+                .iter()
+                .map(|item| (Some(item.clone()), None)),
+        );
     } else {
-        result.extend(right[common_length..].iter().map(|item| (None, Some(item.clone()))));
+        result.extend(
+            right[common_length..]
+                .iter()
+                .map(|item| (None, Some(item.clone()))),
+        );
     }
 
     result
