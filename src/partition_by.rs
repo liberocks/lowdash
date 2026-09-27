@@ -73,8 +73,8 @@ where
     K: Eq + Hash,
     F: Fn(&T) -> K,
 {
-    let mut seen: HashMap<K, usize> = HashMap::new();
-    let mut result: Vec<Vec<T>> = Vec::new();
+    let mut seen: HashMap<K, usize> = HashMap::with_capacity(collection.len().min(16));
+    let mut result: Vec<Vec<T>> = Vec::with_capacity(collection.len().min(16));
 
     for item in collection {
         let key = iteratee(item);
@@ -83,7 +83,9 @@ where
         } else {
             let index = result.len();
             seen.insert(key, index);
-            result.push(vec![item.clone()]);
+            let mut group = Vec::with_capacity(4);
+            group.push(item.clone());
+            result.push(group);
         }
     }
 
