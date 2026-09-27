@@ -1,5 +1,3 @@
-use crate::pascal_case;
-
 /// Converts a string to `camelCase` using word boundaries.
 ///
 /// # Arguments
@@ -22,17 +20,28 @@ pub fn camel_case(str_input: &str) -> String {
         return String::new();
     }
 
-    let pascal = pascal_case(str_input);
-    let mut chars = pascal.chars();
-    match chars.next() {
-        None => String::new(),
-        Some(first) => {
-            let mut result = String::with_capacity(pascal.len());
-            result.extend(first.to_lowercase());
-            result.push_str(chars.as_str());
-            result
+    let mut result = String::with_capacity(str_input.len());
+    let mut in_word = false;
+    let mut has_first_character = false;
+
+    for c in str_input.chars() {
+        if c.is_whitespace() || c == '-' || c == '_' {
+            in_word = false;
+        } else if !in_word {
+            let first = c.to_uppercase().next().unwrap_or(c);
+            if has_first_character {
+                result.push(first);
+            } else {
+                result.extend(first.to_lowercase());
+                has_first_character = true;
+            }
+            in_word = true;
+        } else {
+            result.push(c);
         }
     }
+
+    result
 }
 
 #[cfg(test)]
@@ -97,6 +106,20 @@ mod tests {
     #[test]
     fn test_unicode_characters() {
         assert_eq!(camel_case("hello_世界"), "hello世界");
+    }
+
+    #[test]
+    fn preserves_unicode_case_expansion_behavior() {
+        for input in ["İSTANBUL", "ßeta", "ὈΔΥΣΣΕΎΣ", "___éclair"] {
+            let pascal = crate::pascal_case::pascal_case(input);
+            let mut chars = pascal.chars();
+            let first = chars.next().expect("sample has a word");
+            let mut expected = String::with_capacity(pascal.len());
+            expected.extend(first.to_lowercase());
+            expected.push_str(chars.as_str());
+
+            assert_eq!(camel_case(input), expected);
+        }
     }
 
     #[test]
