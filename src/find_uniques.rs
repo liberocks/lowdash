@@ -45,7 +45,7 @@ where
 {
     use std::collections::HashMap;
 
-    let mut counts = HashMap::new();
+    let mut counts = HashMap::with_capacity(collection.len().min(128));
 
     // Count occurrences
     for item in collection {
