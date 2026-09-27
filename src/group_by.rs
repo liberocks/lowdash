@@ -62,7 +62,7 @@ where
     U: Eq + Hash + Clone,
     F: Fn(&T) -> U,
 {
-    let mut result: HashMap<U, Vec<T>> = HashMap::new();
+    let mut result: HashMap<U, Vec<T>> = HashMap::with_capacity(collection.len().min(16));
 
     for item in collection {
         let key = iteratee(item);
