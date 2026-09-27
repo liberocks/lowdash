@@ -19,9 +19,36 @@ pub fn mode<T>(values: &[T]) -> Option<T>
 where
     T: Eq + Hash + Clone,
 {
+    if std::mem::size_of::<T>() <= std::mem::size_of::<usize>() {
+        return mode_owned(values);
+    }
+
+    mode_borrowed(values)
+}
+
+fn mode_owned<T>(values: &[T]) -> Option<T>
+where
+    T: Eq + Hash + Clone,
+{
     let mut counts = HashMap::with_capacity(values.len());
     for value in values {
         *counts.entry(value.clone()).or_insert(0) += 1;
+    }
+
+    let max_count = counts.values().copied().max()?;
+    values
+        .iter()
+        .find(|value| counts.get(*value) == Some(&max_count))
+        .cloned()
+}
+
+fn mode_borrowed<T>(values: &[T]) -> Option<T>
+where
+    T: Eq + Hash + Clone,
+{
+    let mut counts: HashMap<&T, usize> = HashMap::with_capacity(values.len());
+    for value in values {
+        *counts.entry(value).or_insert(0) += 1;
     }
 
     let max_count = counts.values().copied().max()?;
