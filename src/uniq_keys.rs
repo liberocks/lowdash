@@ -29,8 +29,8 @@ pub fn uniq_keys<K, V>(maps: &[&std::collections::HashMap<K, V>]) -> Vec<K>
 where
     K: Clone + std::cmp::Eq + std::hash::Hash,
 {
-    let mut seen = std::collections::HashSet::new();
     let capacity = maps.iter().map(|map| map.len()).sum();
+    let mut seen = std::collections::HashSet::with_capacity(capacity);
     let mut result = Vec::with_capacity(capacity);
 
     for map in maps {
