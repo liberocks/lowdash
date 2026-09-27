@@ -33,10 +33,21 @@ where
     let mut seen = std::collections::HashSet::new();
     let mut result = Vec::new();
 
-    for map in maps {
-        for value in map.values() {
-            if seen.insert(value.clone()) {
-                result.push(value.clone());
+    if std::mem::size_of::<V>() <= std::mem::size_of::<usize>() {
+        for map in maps {
+            for value in map.values() {
+                if seen.insert(value.clone()) {
+                    result.push(value.clone());
+                }
+            }
+        }
+    } else {
+        let mut seen: std::collections::HashSet<&V> = std::collections::HashSet::new();
+        for map in maps {
+            for value in map.values() {
+                if seen.insert(value) {
+                    result.push(value.clone());
+                }
             }
         }
     }
