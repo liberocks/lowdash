@@ -47,8 +47,9 @@ where
     use std::collections::hash_map::Entry;
     use std::collections::HashMap;
 
-    let mut seen: HashMap<&T, bool> = HashMap::new();
-    let mut result = Vec::new();
+    let capacity = collection.len().min(128);
+    let mut seen: HashMap<&T, bool> = HashMap::with_capacity(capacity);
+    let mut result = Vec::with_capacity(capacity);
 
     for item in collection {
         match seen.entry(item) {
