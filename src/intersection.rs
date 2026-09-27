@@ -38,7 +38,12 @@ where
         return Vec::new();
     }
 
-    let mut result = Vec::new();
+    let capacity = collections[1..]
+        .iter()
+        .fold(first.len(), |capacity, collection| {
+            capacity.min(collection.as_ref().len())
+        });
+    let mut result = Vec::with_capacity(capacity);
     for item in first {
         if result.contains(item) {
             continue;
