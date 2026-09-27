@@ -10,4 +10,9 @@ pub fn benchmark_trim(c: &mut Criterion) {
     c.bench_function("trim/defaulty_int_vec", |b| {
         b.iter(|| ld::trim(black_box(&values), black_box(&cutset)))
     });
+
+    let all_cutset = vec![0; 4_096];
+    c.bench_function("trim/all_cutset", |b| {
+        b.iter(|| ld::trim(black_box(&all_cutset), black_box(&cutset)))
+    });
 }

@@ -17,20 +17,18 @@ pub fn trim<'a, T>(collection: &'a [T], cutset: &[T]) -> &'a [T]
 where
     T: PartialEq,
 {
-    let start = collection
-        .iter()
-        .position(|item| !cutset.contains(item))
-        .unwrap_or(collection.len());
-    let end = collection
-        .iter()
-        .rposition(|item| !cutset.contains(item))
-        .map_or(0, |index| index + 1);
+    let mut start = 0;
+    let mut end = collection.len();
 
-    if start >= end {
-        &collection[..0]
-    } else {
-        &collection[start..end]
+    while start < end && cutset.contains(&collection[start]) {
+        start += 1;
     }
+
+    while start < end && cutset.contains(&collection[end - 1]) {
+        end -= 1;
+    }
+
+    &collection[start..end]
 }
 
 #[cfg(test)]
