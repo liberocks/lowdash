@@ -15,21 +15,26 @@ autobenches = false
 [dev-dependencies]
 criterion = { version = "=0.4.0", default-features = false, features = ["cargo_bench_support", "html_reports", "plotters"] }
 # Keep the benchmark-only dependency graph buildable on the declared MSRV.
-serde = "=1.0.229"
-serde_derive = "=1.0.220"
-serde_json = "=1.0.151"
-ryu = "=1.0.23"
+serde = "=1.0.147"
+serde_derive = "=1.0.147"
+# serde_json 1.0.151 requires Rust 1.71.
+serde_json = "=1.0.85"
+ryu = "=1.0.11"
 libc = "=0.2.137"
 proc-macro2 = "=1.0.103"
-quote = "=1.0.47"
+# quote 1.0.47 requires Rust 1.71.
+quote = "=1.0.37"
 unicode-ident = "=1.0.3"
-regex = "=1.13.1"
+# regex 1.13.1 requires Rust 1.65.
+regex = "=1.6.0"
 itoa = "=1.0.3"
-half = "=2.7.1"
-clap = "=4.6.6"
-textwrap = "=0.16.2"
-smawk = "=0.3.3"
-clap_lex = "=1.0.0"
+# half 2.7.1 requires Rust 1.81, so keep the MSRV-compatible release.
+half = "=2.1.0"
+# Keep the Rust 1.63 benchmark on the last validated Clap 3 release.
+clap = "=3.1.18"
+# textwrap 0.16.2 requires Rust 1.70.
+textwrap = "=0.15.2"
+# smawk 0.3.3 moved to edition 2024, which Cargo 1.63 cannot parse.
 smawk = "=0.3.2"
 unicode-width = "=0.1.10"
 
