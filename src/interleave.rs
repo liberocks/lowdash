@@ -71,13 +71,13 @@ where
     Slice: AsRef<[T]>,
     T: Clone,
 {
-    let (max_size, total_size) = collections.iter().fold(
-        (0, 0),
-        |(max_size, total_size), collection| {
-            let size = collection.as_ref().len();
-            (max_size.max(size), total_size + size)
-        },
-    );
+    let (max_size, total_size) =
+        collections
+            .iter()
+            .fold((0, 0), |(max_size, total_size), collection| {
+                let size = collection.as_ref().len();
+                (max_size.max(size), total_size + size)
+            });
 
     if max_size == 0 {
         return Vec::new();
