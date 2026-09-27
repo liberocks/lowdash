@@ -30,7 +30,7 @@ clap = "=4.6.6"
 # Keep the MSRV benchmark on a clap_lex release whose manifest uses edition 2021.
 clap_lex = "=1.0.0"
 textwrap = "=0.15.2"
-smawk = "=0.3.3"
+smawk = "=0.3.2"
 unicode-width = "=0.1.10"
 
 [[bench]]
