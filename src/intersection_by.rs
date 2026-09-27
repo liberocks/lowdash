@@ -30,8 +30,9 @@ where
         return Vec::new();
     }
 
-    let mut seen_keys = Vec::new();
-    let mut result = Vec::new();
+    let capacity = first.len().min(128);
+    let mut seen_keys = Vec::with_capacity(capacity);
+    let mut result = Vec::with_capacity(capacity);
 
     for item in first {
         let key = iteratee(item);
