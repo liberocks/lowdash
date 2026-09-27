@@ -45,7 +45,7 @@ where
     let keys: Vec<U> = collection.iter().map(iteratee).collect();
 
     // Count using references into the cached keys Vec
-    let mut counts: HashMap<&U, usize> = HashMap::new();
+    let mut counts: HashMap<&U, usize> = HashMap::with_capacity(keys.len().min(64));
     for key in &keys {
         let count = counts.entry(key).or_insert(0);
         if *count < 2 {
