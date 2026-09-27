@@ -1,6 +1,6 @@
 [package]
 name = "lowdash"
-version = "0.8.0"
+version = "0.9.0"
 authors = ["Tirtadwipa Manunggal <tirtadwipa.manunggal@gmail.com>"]
 description = "A highly optimized utility library inspired by Lodash for Rust with zero dependencies"
 repository = "https://github.com/liberocks/lowdash"

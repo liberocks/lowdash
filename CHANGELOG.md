@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.0] 2026-09-27
+### Changed
+- Improved performance in `median_high`, `modes`, `mode`, `is_sorted_by_key`, `uniq_values`, `find_duplicates_by`, `find_uniques_by`, `interleave`, `trim`, `chunk_by`, `find_duplicates`, `uniq_keys`, `count_values`, `intersection`, `group_by`, `zip_longest`, `intersection_by`, `find_uniques`, `partition_by`, and `camel_case`.
+- Captured before-and-after Criterion snapshots for each optimization.
+
 ## [0.8.0] 2026-08-09
 ### Added
 - Added collection traversal and partitioning helpers: `take`, `take_right`, `find_last`, `chunk_by`, `scan`, `windows`, `sliding`, and `cut`.
