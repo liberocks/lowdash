@@ -45,7 +45,7 @@ where
     use std::collections::HashSet;
 
     let mut seen = HashSet::new();
-    let mut result = Vec::new();
+    let mut result = Vec::with_capacity(collection.len());
 
     for item in collection {
         let key = iteratee(item);
