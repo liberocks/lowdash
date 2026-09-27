@@ -30,9 +30,24 @@ where
     }
 
     let mut result = Vec::with_capacity(length);
+    let common_length = left.len().min(right.len());
 
-    for index in 0..length {
-        result.push((left.get(index).cloned(), right.get(index).cloned()));
+    for (left, right) in left[..common_length].iter().zip(&right[..common_length]) {
+        result.push((Some(left.clone()), Some(right.clone())));
+    }
+
+    if left.len() > right.len() {
+        result.extend(
+            left[common_length..]
+                .iter()
+                .map(|item| (Some(item.clone()), None)),
+        );
+    } else {
+        result.extend(
+            right[common_length..]
+                .iter()
+                .map(|item| (None, Some(item.clone()))),
+        );
     }
 
     result
