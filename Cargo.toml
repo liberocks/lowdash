@@ -25,7 +25,7 @@ quote = "=1.0.47"
 unicode-ident = "=1.0.3"
 regex = "=1.6.0"
 itoa = "=1.0.3"
-half = "=2.1.0"
+half = "=2.7.1"
 clap = "=4.6.6"
 # Keep the MSRV benchmark on a clap_lex release whose manifest uses edition 2021.
 clap_lex = "=1.0.0"
