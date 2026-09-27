@@ -30,7 +30,8 @@ where
 
     let mut result = Vec::new();
     let mut current_key = iteratee(first);
-    let mut current_group = vec![first.clone()];
+    let mut current_group = Vec::with_capacity(4);
+    current_group.push(first.clone());
 
     for item in &collection[1..] {
         let key = iteratee(item);
@@ -38,7 +39,8 @@ where
             current_group.push(item.clone());
         } else {
             result.push(current_group);
-            current_group = vec![item.clone()];
+            current_group = Vec::with_capacity(4);
+            current_group.push(item.clone());
             current_key = key;
         }
     }
