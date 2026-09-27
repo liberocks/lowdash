@@ -71,7 +71,7 @@ pub fn count_values<T>(collection: &[T]) -> HashMap<T, usize>
 where
     T: Hash + Eq + Clone,
 {
-    let mut counts: HashMap<&T, usize> = HashMap::new();
+    let mut counts: HashMap<&T, usize> = HashMap::with_capacity(collection.len().min(128));
     for item in collection {
         *counts.entry(item).or_insert(0) += 1;
     }
