@@ -113,15 +113,10 @@ mod tests {
         for input in ["İSTANBUL", "ßeta", "ὈΔΥΣΣΕΎΣ", "___éclair"] {
             let pascal = crate::pascal_case::pascal_case(input);
             let mut chars = pascal.chars();
-            let expected = match chars.next() {
-                None => String::new(),
-                Some(first) => {
-                    let mut result = String::with_capacity(pascal.len());
-                    result.extend(first.to_lowercase());
-                    result.push_str(chars.as_str());
-                    result
-                }
-            };
+            let first = chars.next().expect("sample has a word");
+            let mut expected = String::with_capacity(pascal.len());
+            expected.extend(first.to_lowercase());
+            expected.push_str(chars.as_str());
 
             assert_eq!(camel_case(input), expected);
         }
