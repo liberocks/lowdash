@@ -16,7 +16,7 @@ autobenches = false
 criterion = { version = "=0.4.0", default-features = false, features = ["cargo_bench_support", "html_reports", "plotters"] }
 # Keep the benchmark-only dependency graph buildable on the declared MSRV.
 serde = "=1.0.220"
-serde_derive = "=1.0.220"
+serde_derive = "=1.0.229"
 serde_json = "=1.0.151"
 ryu = "=1.0.23"
 libc = "=0.2.137"
