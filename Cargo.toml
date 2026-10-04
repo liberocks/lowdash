@@ -33,7 +33,7 @@ half = "=2.1.0"
 # Keep the Rust 1.63 benchmark on the last validated Clap 3 release.
 clap = "=3.1.18"
 # textwrap 0.16.2 requires Rust 1.70.
-textwrap = "=0.15.2"
+textwrap = "=0.16.4"
 # smawk 0.3.3 moved to edition 2024, which Cargo 1.63 cannot parse.
 smawk = "=0.3.2"
 unicode-width = "=0.1.10"
