@@ -31,7 +31,7 @@ itoa = "=1.0.3"
 # half 2.7.1 requires Rust 1.81, so keep the MSRV-compatible release.
 half = "=2.1.0"
 # Keep the Rust 1.63 benchmark on the last validated Clap 3 release.
-clap = "=3.1.18"
+clap = "=4.6.7"
 # textwrap 0.16.2 requires Rust 1.70.
 textwrap = "=0.15.2"
 # smawk 0.3.3 moved to edition 2024, which Cargo 1.63 cannot parse.
